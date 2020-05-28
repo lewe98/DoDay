@@ -10,7 +10,39 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, World!")
+        TabView {
+            HeuteView()
+            .tabItem {
+                VStack {
+                    Image(systemName: "flag")
+                    Text("Heute")
+                }
+            }.tag(0)
+            
+            UebersichtView()
+            .tabItem {
+                VStack {
+                    Image(systemName: "square.split.1x2")
+                    Text("Übersicht")
+                }
+            }.tag(1)
+            
+            FreundeView()
+            .tabItem {
+                VStack {
+                    Image(systemName: "rectangle.stack.person.crop.fill")
+                    Text("Freunde")
+                }
+            }.tag(2)
+            
+            EinstellungenView()
+            .tabItem {
+                VStack {
+                    Image(systemName: "slider.horizontal.3")
+                    Text("Einstellungen")
+                }
+            }.tag(3)
+        }
     }
 }
 
