@@ -20,6 +20,8 @@
 		E947540B2480384D0039B853 /* UebersichtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E947540A2480384D0039B853 /* UebersichtView.swift */; };
 		E947540D248038610039B853 /* FreundeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E947540C248038610039B853 /* FreundeView.swift */; };
 		E947540F2480386F0039B853 /* EinstellungenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E947540E2480386F0039B853 /* EinstellungenView.swift */; };
+		E94754112480DB840039B853 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94754102480DB840039B853 /* UserModel.swift */; };
+		E989532124813CB7008093D0 /* AufgabeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E989532024813CB7008093D0 /* AufgabeModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,8 @@
 		E947540A2480384D0039B853 /* UebersichtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UebersichtView.swift; sourceTree = "<group>"; };
 		E947540C248038610039B853 /* FreundeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreundeView.swift; sourceTree = "<group>"; };
 		E947540E2480386F0039B853 /* EinstellungenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EinstellungenView.swift; sourceTree = "<group>"; };
+		E94754102480DB840039B853 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		E989532024813CB7008093D0 /* AufgabeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AufgabeModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,8 @@
 				E947540A2480384D0039B853 /* UebersichtView.swift */,
 				E947540C248038610039B853 /* FreundeView.swift */,
 				E947540E2480386F0039B853 /* EinstellungenView.swift */,
+				E94754102480DB840039B853 /* UserModel.swift */,
+				E989532024813CB7008093D0 /* AufgabeModel.swift */,
 			);
 			path = iTask;
 			sourceTree = "<group>";
@@ -287,8 +293,10 @@
 				E947540F2480386F0039B853 /* EinstellungenView.swift in Sources */,
 				B90A8841247DD7D600B59892 /* AppDelegate.swift in Sources */,
 				E947540D248038610039B853 /* FreundeView.swift in Sources */,
+				E989532124813CB7008093D0 /* AufgabeModel.swift in Sources */,
 				B90A8848247DD7D600B59892 /* ContentView.swift in Sources */,
 				E947540B2480384D0039B853 /* UebersichtView.swift in Sources */,
+				E94754112480DB840039B853 /* UserModel.swift in Sources */,
 				B90A8843247DD7D600B59892 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
