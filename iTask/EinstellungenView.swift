@@ -9,9 +9,10 @@
 import SwiftUI
 
 struct EinstellungenView: View {
-    @State private var erinnerungEigeneAktiviert = false
-    @State private var erinnerungFreundeAbgeschlossenAktiviert = false
-    @State private var erinnerungFreundeProblemeAktiviert = false
+    @ObservedObject var einstellungen = Einstellungen()
+    /*@State private var erinnerungEigeneAktiviert = UserDefaults.standard.bool(forKey: "erinnerungEigeneAktiviert")
+    @State private var erinnerungFreundeAbgeschlossenAktiviert = UserDefaults.standard.bool(forKey: "erinnerungFreundeAbgeschlossenAktiviert")
+    @State private var erinnerungFreundeProblemeAktiviert = UserDefaults.standard.bool(forKey: "erinnerungFreundeProblemeAktiviert")*/
     
     var body: some View {
         VStack(alignment: .leading,spacing: 12) {
@@ -24,7 +25,7 @@ struct EinstellungenView: View {
                 Section {
                     HStack {
                         // TODO: Hier Erinnerung wirklich togglen
-                        Toggle(isOn: $erinnerungEigeneAktiviert) {
+                        Toggle(isOn: $einstellungen.erinnerungEigeneAktiviert) {
                             VStack(alignment: .leading) {
                                 Text("Meine Erinnerung")
                                     .font(.headline)
@@ -43,11 +44,11 @@ struct EinstellungenView: View {
             Form {
                 Section(header: Text("INFORMIERE MICH, WENN FREUNDE...")) {
                     List {
-                      Toggle(isOn: $erinnerungFreundeAbgeschlossenAktiviert) {
+                      Toggle(isOn: $einstellungen.erinnerungFreundeAbgeschlossenAktiviert) {
                             Text("Aufgaben abgeschlossen haben")
                             .font(.headline)
                         }
-                        Toggle(isOn: $erinnerungFreundeProblemeAktiviert) {
+                        Toggle(isOn: $einstellungen.erinnerungFreundeProblemeAktiviert) {
                             Text("Probleme mit Aufgaben haben")
                             .font(.headline)
                         }
