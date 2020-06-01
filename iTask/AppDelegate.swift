@@ -6,16 +6,28 @@
 //  Copyright © 2020 Julian Hermanspahn. All rights reserved.
 //
 
+import UserNotifications
 import UIKit
 import CoreData
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Notifications
+        UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound,. badge]) { (granted, error) in
+            if granted {
+                print("Notifications duerfen gesendet werden.")
+            } else {
+                print("Notifications wurden nicht erlaubt.")
+            }
+        }
+        
         return true
     }
 
