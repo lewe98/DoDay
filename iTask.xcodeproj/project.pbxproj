@@ -3,10 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A145AEED24813C31005047D4 /* AktuellFirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A145AEEC24813C31005047D4 /* AktuellFirstView.swift */; };
+		A145AEEF2481428D005047D4 /* AufgabeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A145AEEE2481428D005047D4 /* AufgabeDetail.swift */; };
+		A145AEF1248144C9005047D4 /* AktuellSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A145AEF0248144C9005047D4 /* AktuellSecondView.swift */; };
+		A1959E0E2483F21F00B6B12E /* Additives_diagramm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1959E0D2483F21F00B6B12E /* Additives_diagramm.swift */; };
+		A1959E1C2484003500B6B12E /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = A1959E1B2484003500B6B12E /* SwiftUICharts */; };
+		A1959E1F248404A600B6B12E /* PieSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1959E1E248404A600B6B12E /* PieSlice.swift */; };
+		A1959E21248404EE00B6B12E /* PieChartRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1959E20248404EE00B6B12E /* PieChartRow.swift */; };
 		B90A8841247DD7D600B59892 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90A8840247DD7D600B59892 /* AppDelegate.swift */; };
 		B90A8843247DD7D600B59892 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90A8842247DD7D600B59892 /* SceneDelegate.swift */; };
 		B90A8846247DD7D600B59892 /* iTask.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B90A8844247DD7D600B59892 /* iTask.xcdatamodeld */; };
@@ -40,6 +47,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A145AEEC24813C31005047D4 /* AktuellFirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AktuellFirstView.swift; sourceTree = "<group>"; };
+		A145AEEE2481428D005047D4 /* AufgabeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AufgabeDetail.swift; sourceTree = "<group>"; };
+		A145AEF0248144C9005047D4 /* AktuellSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AktuellSecondView.swift; sourceTree = "<group>"; };
+		A1959E0D2483F21F00B6B12E /* Additives_diagramm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Additives_diagramm.swift; sourceTree = "<group>"; };
+		A1959E1E248404A600B6B12E /* PieSlice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieSlice.swift; sourceTree = "<group>"; };
+		A1959E20248404EE00B6B12E /* PieChartRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartRow.swift; sourceTree = "<group>"; };
 		B90A883D247DD7D600B59892 /* iTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B90A8840247DD7D600B59892 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B90A8842247DD7D600B59892 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1959E1C2484003500B6B12E /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +100,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A145AEEB24813C15005047D4 /* BodyViews */ = {
+			isa = PBXGroup;
+			children = (
+				A145AEEC24813C31005047D4 /* AktuellFirstView.swift */,
+				A145AEF0248144C9005047D4 /* AktuellSecondView.swift */,
+				A145AEEE2481428D005047D4 /* AufgabeDetail.swift */,
+				A1959E0D2483F21F00B6B12E /* Additives_diagramm.swift */,
+			);
+			path = BodyViews;
+			sourceTree = "<group>";
+		};
+		A1959E1D2484047800B6B12E /* PieChart */ = {
+			isa = PBXGroup;
+			children = (
+				A1959E1E248404A600B6B12E /* PieSlice.swift */,
+				A1959E20248404EE00B6B12E /* PieChartRow.swift */,
+			);
+			path = PieChart;
+			sourceTree = "<group>";
+		};
 		B90A8834247DD7D600B59892 = {
 			isa = PBXGroup;
 			children = (
@@ -109,6 +143,8 @@
 		B90A883F247DD7D600B59892 /* iTask */ = {
 			isa = PBXGroup;
 			children = (
+				A1959E1D2484047800B6B12E /* PieChart */,
+				A145AEEB24813C15005047D4 /* BodyViews */,
 				B90A8840247DD7D600B59892 /* AppDelegate.swift */,
 				B90A8842247DD7D600B59892 /* SceneDelegate.swift */,
 				B90A8847247DD7D600B59892 /* ContentView.swift */,
@@ -167,6 +203,9 @@
 			dependencies = (
 			);
 			name = iTask;
+			packageProductDependencies = (
+				A1959E1B2484003500B6B12E /* SwiftUICharts */,
+			);
 			productName = iTask;
 			productReference = B90A883D247DD7D600B59892 /* iTask.app */;
 			productType = "com.apple.product-type.application";
@@ -239,6 +278,9 @@
 				Base,
 			);
 			mainGroup = B90A8834247DD7D600B59892;
+			packageReferences = (
+				A1959E1A2484003500B6B12E /* XCRemoteSwiftPackageReference "ChartView" */,
+			);
 			productRefGroup = B90A883E247DD7D600B59892 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -282,8 +324,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A145AEF1248144C9005047D4 /* AktuellSecondView.swift in Sources */,
+				A145AEEF2481428D005047D4 /* AufgabeDetail.swift in Sources */,
+				A1959E1F248404A600B6B12E /* PieSlice.swift in Sources */,
 				E9475409248038380039B853 /* HeuteView.swift in Sources */,
 				B90A8846247DD7D600B59892 /* iTask.xcdatamodeld in Sources */,
+				A145AEED24813C31005047D4 /* AktuellFirstView.swift in Sources */,
+				A1959E21248404EE00B6B12E /* PieChartRow.swift in Sources */,
+				A1959E0E2483F21F00B6B12E /* Additives_diagramm.swift in Sources */,
 				E947540F2480386F0039B853 /* EinstellungenView.swift in Sources */,
 				B90A8841247DD7D600B59892 /* AppDelegate.swift in Sources */,
 				E947540D248038610039B853 /* FreundeView.swift in Sources */,
@@ -456,7 +504,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iTask/Preview Content\"";
-				DEVELOPMENT_TEAM = SPBX3MNX7J;
+				DEVELOPMENT_TEAM = CCK3QY84MX;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iTask/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
@@ -464,7 +512,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.julian-hermanspahn.iTask";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.lewe-lorenzen.iTask";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -477,7 +525,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iTask/Preview Content\"";
-				DEVELOPMENT_TEAM = SPBX3MNX7J;
+				DEVELOPMENT_TEAM = CCK3QY84MX;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iTask/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
@@ -485,7 +533,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.julian-hermanspahn.iTask";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.lewe-lorenzen.iTask";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -497,8 +545,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SPBX3MNX7J;
+				DEVELOPMENT_TEAM = CCK3QY84MX;
 				INFOPLIST_FILE = iTaskTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -519,8 +568,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SPBX3MNX7J;
+				DEVELOPMENT_TEAM = CCK3QY84MX;
 				INFOPLIST_FILE = iTaskTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -541,7 +591,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SPBX3MNX7J;
+				DEVELOPMENT_TEAM = CCK3QY84MX;
 				INFOPLIST_FILE = iTaskUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -550,6 +600,7 @@
 					"@loader_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "de.julian-hermanspahn.iTaskUITests";
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = "de.lewe-lorenzen.iTask";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -562,7 +613,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SPBX3MNX7J;
+				DEVELOPMENT_TEAM = CCK3QY84MX;
 				INFOPLIST_FILE = iTaskUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -571,6 +622,7 @@
 					"@loader_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "de.julian-hermanspahn.iTaskUITests";
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = "de.lewe-lorenzen.iTask";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -618,6 +670,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A1959E1A2484003500B6B12E /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A1959E1B2484003500B6B12E /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A1959E1A2484003500B6B12E /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		B90A8844247DD7D600B59892 /* iTask.xcdatamodeld */ = {
