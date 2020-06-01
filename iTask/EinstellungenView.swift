@@ -10,105 +10,74 @@ import SwiftUI
 
 struct EinstellungenView: View {
     @ObservedObject var einstellungen = Einstellungen()
-    /*@State private var erinnerungEigeneAktiviert = UserDefaults.standard.bool(forKey: "erinnerungEigeneAktiviert")
-    @State private var erinnerungFreundeAbgeschlossenAktiviert = UserDefaults.standard.bool(forKey: "erinnerungFreundeAbgeschlossenAktiviert")
-    @State private var erinnerungFreundeProblemeAktiviert = UserDefaults.standard.bool(forKey: "erinnerungFreundeProblemeAktiviert")*/
     
     var body: some View {
-        VStack(alignment: .leading,spacing: 12) {
-            
-            Text("Einstellungen").fontWeight(.heavy).font(.largeTitle)
-            .padding(.horizontal)
-            .padding(.top,92)
-            
-            Form {
-                Section {
-                    HStack {
-                        // TODO: Hier Erinnerung wirklich togglen
-                        Toggle(isOn: $einstellungen.erinnerungEigeneAktiviert) {
-                            VStack(alignment: .leading) {
-                                Text("Meine Erinnerung")
-                                    .font(.headline)
-                                Text("Täglich um 8:00 Uhr")
-                                    .font(.callout)
-                                    .foregroundColor(Color.gray)
-                            }
+        NavigationView {
+            VStack() {
+                Form {
+                    Section(header: Text("NEUE AUFGABEN")) {
+                            Toggle(isOn: $einstellungen.erinnerungEigeneAktiviert) {
+                                    Text("Tägliche Erinnerung erhalten")
+                        }
+                            DatePicker("Uhrzeit wählen", selection: $einstellungen.erinnerungZeitDate, displayedComponents: .hourAndMinute)
+                    }
+                
+                    Section(header: Text("AKTIVITÄTEN DEINER FREUNDE")) {
+                        // TODO: Serverseitig einstellen
+                          Toggle(isOn: $einstellungen.erinnerungFreundeAktiviert) {
+                                Text("Updates deiner Freunde erhalten")
                         }
                     }
-                }
-            }
-            .frame(height: 100.0)
-            .padding(.bottom, 15)
-            
-            
-            Form {
-                Section(header: Text("INFORMIERE MICH, WENN FREUNDE...")) {
-                    List {
-                      Toggle(isOn: $einstellungen.erinnerungFreundeAbgeschlossenAktiviert) {
-                            Text("Aufgaben abgeschlossen haben")
-                            .font(.headline)
-                        }
-                        Toggle(isOn: $einstellungen.erinnerungFreundeProblemeAktiviert) {
-                            Text("Probleme mit Aufgaben haben")
-                            .font(.headline)
-                        }
-                    }
-                }
-            }
-            .frame(height: 150.0)
 
-            Form {
-                Section {
-                    HStack {
+                    Section {
+                        HStack {
+                            Spacer()
+                            Button(action: {
+                                // TODO: Funktion einfuegen
+                                print("Aufgabe einreichen tapped")
+                            }) {
+                                Text("Eigene Aufgabe einreichen")
+                            }
+                            Spacer()
+                        }
+                    }
+                    
+                    Section {
+                        HStack {
+                            Spacer()
+                            Button(action: {
+                                // TODO: Funktion einfuegen
+                                print("Statistik zurücksetzen tapped")
+                            }) {
+                                Text("Statistik zurücksetzen")
+                                    .foregroundColor(.red)
+                            }
+                            Spacer()
+                        }
+                    }
+                    
+                    HStack{
+                        Button(action: {
+                            // TODO: Funktion einfuegen
+                            print("Impressum tapped")
+                        }) {
+                            Text("Impressum")
+                                .foregroundColor(.gray)
+                        }
                         Spacer()
                         Button(action: {
                             // TODO: Funktion einfuegen
-                            print("Aufgabe einreichen tapped")
+                            print("Datenschutz tapped")
                         }) {
-                            Text("Aufgabe einreichen")
+                            Text("Datenschutz")
+                                .foregroundColor(.gray)
                         }
-                        Spacer()
-                    }
-                }
-                Section {
-                    HStack {
-                        Spacer()
-                        Button(action: {
-                            // TODO: Funktion einfuegen
-                            print("Statistik zurücksetzen tapped")
-                        }) {
-                            Text("Statistik zurücksetzen")
-                                .foregroundColor(.red)
-                        }
-                        Spacer()
-                    }
+                    }.listRowBackground(Color(UIColor.secondarySystemBackground))
                 }
             }
-            .frame(height: 200.0)
-            
-            Spacer()
-            
-            HStack{
-                Button(action: {
-                    // TODO: Funktion einfuegen
-                    print("Imoressum tapped")
-                }) {
-                    Text("Impressum")
-                        .foregroundColor(.gray)
-                }
-                Spacer()
-                Button(action: {
-                    // TODO: Funktion einfuegen
-                    print("Datenschutz tapped")
-                }) {
-                    Text("Datenschutz")
-                        .foregroundColor(.gray)
-                }
-            }.padding(.horizontal)
-            Spacer()
+            .background(Color(UIColor.secondarySystemBackground))
+            .navigationBarTitle(Text("Einstellungen"))
         }
-        .background(Color(UIColor.secondarySystemBackground))
-            .edgesIgnoringSafeArea([.top, .bottom])
     }
 }
 
