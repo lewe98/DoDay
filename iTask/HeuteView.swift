@@ -9,8 +9,25 @@
 import SwiftUI
 
 struct HeuteView: View {
+    var aufgabeInArbeit = false
     var body: some View {
-        Text("Heute")
+        switch aufgabeInArbeit {
+        case true:
+            return AnyView(
+                NavigationView {
+                   AktuellFirstView(Aufgabe1: "Sprich mit einer dir fremden Person", Aufgabe2: "Gehe 10.000 Schritte Zu Fuß")
+                    .navigationBarTitle(Text("Aktuell"))
+                }
+            )
+        case false:
+            return
+                AnyView(
+                NavigationView {
+                   AktuellSecondView(Aufgabe: "Sprich mit einer dir fremden Person")
+                    .navigationBarTitle(Text("Aktuell"))
+                }
+            )
+        }
     }
 }
 

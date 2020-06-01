@@ -19,7 +19,7 @@ struct ContentView: View {
                 }
             }.tag(0)
             
-            UebersichtView()
+            UebersichtView(erfolgreicheAufgabeFolge: 7, erledigteAufgaben: 4, vergangeneAufgaben: [VergangeneAufgabe(aufgabe: "Ich bin unterwegs", erledigt: true)])
             .tabItem {
                 VStack {
                     Image(systemName: "square.split.1x2")
