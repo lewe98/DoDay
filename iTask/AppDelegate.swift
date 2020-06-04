@@ -6,17 +6,21 @@
 //  Copyright © 2020 Julian Hermanspahn. All rights reserved.
 //
 
-import UserNotifications
 import UIKit
 import CoreData
+import Firebase
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
-
-
+    var window: UIWindow?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Firebase
+        FirebaseApp.configure()
         
         // Notifications
         UNUserNotificationCenter.current().delegate = self

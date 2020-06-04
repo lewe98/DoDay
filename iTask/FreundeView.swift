@@ -10,10 +10,11 @@ import SwiftUI
 
 struct FreundeView: View {
     @State var kopierenText = "Kopieren"
-    //MARK: Muss irgendwo anders definiert werden
-    let currUser = UserModel(id: "LgUZK2f", name: "Thomas Raab", aufgabe: 2, aktueller_streak: 3, letztes_erledigt_datum: "2020-05-29", anzahl_benachrichtigungen: 0)
     
-    let currAufgabe = AufgabeModel(id: 1, text: "Sprich mit einer fremden Person", text_dp: "Spricht mit einer fremden Person", detailtext: "Fördere deine Sozialkompetenz, indem du mit einer Person sprichst, mit der du vorher noch nie gesprochen hast. Zum Beispiel dein Postbote, jemand beim Einkaufen usw.", kategorie: "Social", autor: "admin", ausgespielt: 1, erledigt: 0, abgelehnt: 0, aufgeschoben: 0)
+    //MARK: Muss irgendwo anders definiert werden
+    let currUser = User(abgelehnt: [3, 5], aktueller_streak: 5, anzahl_benachrichtigungen: 1, aufgabe: 17, aufgeschoben: [8], erledigt: [9, 28], freunde: ["fkr93k", "fsl93"], freundes_id: "kd93k", id: "fkd90wlödlf9", letztes_erledigt_datum: Date(), vorname: "Thomas", nachname: "Raab")
+    
+    let currAufgabe = Aufgabe(abgelehnt: 22, aufgeschoben: 23, ausgespielt: 24, autor: "iTask", erledigt: 8, id: 12, kategorie: "Social", text: "Sprich mit einer fremden Person", text_detail: "Fördere deine Sozialkompetenz, indem du mit einer Person sprichst, mit der du vorher noch nie gesprochen hast. Zum Beispiel dein Postbote, jemand beim Einkaufen usw.", text_dp: "Spricht mit einer fremden Person")
     
     var body: some View {
         NavigationView {
@@ -46,7 +47,7 @@ struct FreundeView: View {
                         List {
                             HStack {
                                 VStack(alignment: .leading) {
-                                    Text(currUser.name)
+                                    Text(currUser.vorname + " " + currUser.nachname)
                                     Text(currAufgabe.text_dp)
                                         .font(.callout)
                                         .foregroundColor(Color.gray)
@@ -57,7 +58,7 @@ struct FreundeView: View {
                             }
                             HStack {
                                 VStack(alignment: .leading) {
-                                    Text(currUser.name)
+                                    Text(currUser.vorname  + " " + currUser.nachname)
                                     Text(currAufgabe.text_dp)
                                         .font(.callout)
                                         .foregroundColor(Color.gray)
