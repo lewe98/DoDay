@@ -10,6 +10,9 @@ import SwiftUI
 
 struct EinstellungenView: View {
     @ObservedObject var einstellungen = Einstellungen()
+    @State var showingImpressum = false
+    @State var showingDatenschutz = false
+    @State var showingAufgabeEinreichen = false
     
     var body: some View {
         NavigationView {
@@ -33,10 +36,12 @@ struct EinstellungenView: View {
                         HStack {
                             Spacer()
                             Button(action: {
-                                // TODO: Funktion einfuegen
-                                print("Aufgabe einreichen tapped")
+                                self.showingAufgabeEinreichen.toggle()
                             }) {
                                 Text("Eigene Aufgabe einreichen")
+                            }
+                            .sheet(isPresented: $showingAufgabeEinreichen) {
+                            AufgabeEinreichenView()
                             }
                             Spacer()
                         }
@@ -57,21 +62,25 @@ struct EinstellungenView: View {
                     }
                     
                     HStack{
-                        Button(action: {
-                            // TODO: Funktion einfuegen
-                            print("Impressum tapped")
-                        }) {
-                            Text("Impressum")
-                                .foregroundColor(.gray)
-                        }
+                        Text("Impressum")
+                            .foregroundColor(.gray)
+                            .padding(.leading)
+                            .onTapGesture {
+                            self.showingImpressum.toggle()
+                            }
+                            .sheet(isPresented: $showingImpressum) {
+                                ImpressumWebview()
+                            }
                         Spacer()
-                        Button(action: {
-                            // TODO: Funktion einfuegen
-                            print("Datenschutz tapped")
-                        }) {
-                            Text("Datenschutz")
-                                .foregroundColor(.gray)
-                        }
+                        Text("Datenschutz")
+                            .foregroundColor(.gray)
+                            .padding(.trailing)
+                            .onTapGesture {
+                                self.showingDatenschutz.toggle()
+                            }
+                            .sheet(isPresented: $showingDatenschutz) {
+                                DatenschutzWebview()
+                            }
                     }.listRowBackground(Color(UIColor.secondarySystemBackground))
                 }
             }

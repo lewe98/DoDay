@@ -90,9 +90,14 @@ struct FreundeView: View {
     func kopiereId() -> Void {
         // TODO: Richtige Variable kopieren
         UIPasteboard.general.string = self.currUser.id
-        self.kopierenText = "erfolgreich kopiert!"
+        withAnimation(.linear(duration: 0.25), {
+            self.kopierenText = "erfolgreich kopiert!"
+        })
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-            self.kopierenText = "Kopieren"
+            withAnimation(.linear(duration: 0.25), {
+                self.kopierenText = "Kopieren"
+            })
         }
     }
 }
