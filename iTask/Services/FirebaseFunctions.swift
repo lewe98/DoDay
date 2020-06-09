@@ -13,11 +13,94 @@ class FirebaseFunctions: ObservableObject{
     
     let db = Firestore.firestore()
     
+    
+    @Published var registered: Bool = false
     @Published var aufgaben = [Aufgabe]()
     @Published var users = [User]()
     // @Published var datum = [Aufgaben_zuletzt_bearbeitet]()
     
     
+    func checkUUID(id: String) {
+        db.collection("users").whereField("id", isEqualTo: id)
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                    self.registered = false
+                } else {
+                    for document in querySnapshot!.documents {
+                        print("\(document.documentID) => \(document.data())")
+                    }
+                    self.registered = true
+                }
+        }
+    }
+    
+    func registerUser(id: String, vorname: String){
+        
+        let user = User(
+            abgelehnt: [],
+            aktueller_streak: 0,
+            anzahl_benachrichtigungen: 0,
+            aufgabe: 0,
+            aufgeschoben: [],
+            erledigt: [],
+            freunde: [],
+            freundes_id: randomString(length: 8),
+            id: id,
+            letztes_erledigt_datum: Date(),
+            vorname: vorname)
+        
+        db.collection("users").whereField("freundes_id", isEqualTo: user.freundes_id)
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                    self.setUser(user: user)
+                } else {
+                    for document in querySnapshot!.documents {
+                        print("\(document.documentID) => \(document.data())")
+                        self.registerUser(id: user.id, vorname: user.vorname)
+                    }
+                }
+        }
+    }
+    
+    func setUser(user: User){
+        db.collection("users").document(user.id).setData([
+            "abgelehnt": user.abgelehnt,
+            "aktueller_streak": user.aktueller_streak,
+            "anzahl_benachrichtigungen": user.anzahl_benachrichtigungen,
+            "aufgabe": user.aufgabe,
+            "aufgeschoben": user.aufgeschoben,
+            "erledigt": user.erledigt,
+            "freunde": user.freunde,
+            "freundes_id": user.freundes_id,
+            "id": user.id,
+            // "letztes_erledigt_datum": Timestamp(date: user.letztes_erledigt_datum),
+            "vorname": user.vorname
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+    }
+    
+    func getCurrUser(id: String) {
+        db.collection("users").document(id).getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                print("Document data: \(dataDescription)")
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
+    
+    func randomString(length: Int) -> String {
+      let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+      return String((0..<length).map{ _ in letters.randomElement()! })
+    }
     
     func fetchTasks(completionHandler: @escaping (Aufgabe?, Error?) -> ()) {
         db.collection("aufgaben").addSnapshotListener { (querySnapshot, error) in
@@ -88,7 +171,6 @@ class FirebaseFunctions: ObservableObject{
                 let id = data["id"] as? String ?? UIDevice.current.identifierForVendor!.uuidString
                 let letztes_erledigt_datum = data["letztes_erledigt_datum"] as? Date ?? Date()
                 let vorname = data["vorname"] as? String ?? "<kein Vorname>"
-                let nachname = data["nachname"] as? String ?? "<kein Nachname"
                 
                 let user = User(
                     abgelehnt: abgelehnt,
@@ -100,8 +182,7 @@ class FirebaseFunctions: ObservableObject{
                     freunde: freunde,
                     freundes_id: freundes_id,
                     id: id, letztes_erledigt_datum: letztes_erledigt_datum,
-                    vorname: vorname,
-                    nachname: nachname)
+                    vorname: vorname)
                 
                 completionHandler(user, nil)
                 return user

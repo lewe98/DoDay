@@ -12,6 +12,7 @@ struct ContentView: View {
     
     // @ObservedObject var coreDataFunctions = CoreDataFunctions()
     @ObservedObject var firebaseFunctions = FirebaseFunctions()
+    @State var registered = FirebaseFunctions().registered
     @State var deletedCoreDataEntries: Bool = false
 
 
@@ -28,40 +29,44 @@ struct ContentView: View {
     ) var tasksCoreData: FetchedResults<Aufgaben>
     
     
-    
+    @ViewBuilder
     var body: some View {
-        TabView {
-            HeuteView()
-            .tabItem {
-                VStack {
-                    Image(systemName: "flag")
-                    Text("Heute")
-                }
-            }.tag(0)
-            
-            UebersichtView(erfolgreicheAufgabeFolge: 7, erledigteAufgaben: 4, vergangeneAufgaben: [VergangeneAufgabe(aufgabe: "Ich bin unterwegs", erledigt: true)])
-            .tabItem {
-                VStack {
-                    Image(systemName: "square.split.1x2")
-                    Text("Übersicht")
-                }
-            }.tag(1)
-            
-            FreundeView()
-            .tabItem {
-                VStack {
-                    Image(systemName: "rectangle.stack.person.crop.fill")
-                    Text("Freunde")
-                }
-            }.tag(2)
-            
-            EinstellungenView()
-            .tabItem {
-                VStack {
-                    Image(systemName: "slider.horizontal.3")
-                    Text("Einstellungen")
-                }
-            }.tag(3)
+        if registered {
+            TabView {
+                HeuteView()
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "flag")
+                            Text("Heute")
+                        }
+                }.tag(0)
+                
+                UebersichtView(erfolgreicheAufgabeFolge: 7, erledigteAufgaben: 4, vergangeneAufgaben: [VergangeneAufgabe(aufgabe: "Ich bin unterwegs", erledigt: true)])
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "square.split.1x2")
+                            Text("Übersicht")
+                        }
+                }.tag(1)
+                
+                FreundeView()
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "rectangle.stack.person.crop.fill")
+                            Text("Freunde")
+                        }
+                }.tag(2)
+                
+                EinstellungenView()
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "slider.horizontal.3")
+                            Text("Einstellungen")
+                        }
+                }.tag(3)
+            }
+        } else {
+            Register()
         }
     }
     

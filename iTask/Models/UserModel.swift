@@ -20,5 +20,4 @@ struct User: Identifiable {
     var id: String
     var letztes_erledigt_datum: Date
     var vorname: String
-    var nachname: String
 }

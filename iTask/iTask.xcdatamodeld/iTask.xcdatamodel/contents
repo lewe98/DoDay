@@ -23,7 +23,6 @@
         <attribute name="freundes_id" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="letztes_erledigt_datum" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="nachname" optional="YES" attributeType="String"/>
         <attribute name="vorname" optional="YES" attributeType="String"/>
     </entity>
     <entity name="Zuletzt_bearbeitet" representedClassName="Zuletzt_bearbeitet" syncable="YES" codeGenerationType="class">
@@ -32,7 +31,7 @@
     </entity>
     <elements>
         <element name="Aufgaben" positionX="-63" positionY="-18" width="128" height="193"/>
-        <element name="Users" positionX="-54" positionY="-9" width="128" height="223"/>
+        <element name="Users" positionX="-54" positionY="-9" width="128" height="208"/>
         <element name="Zuletzt_bearbeitet" positionX="-36" positionY="9" width="128" height="73"/>
     </elements>
 </model>

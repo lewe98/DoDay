@@ -22,6 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Firebase
         FirebaseApp.configure()
         
+        // Check if registered
+        let uuid = UIDevice.current.identifierForVendor?.uuidString
+        FirebaseFunctions().checkUUID(id: uuid!)
+        
         // Notifications
         UNUserNotificationCenter.current().delegate = self
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound,. badge]) { (granted, error) in
