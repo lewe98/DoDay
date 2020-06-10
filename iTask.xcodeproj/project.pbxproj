@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		409252862156C2DED3A66D95 /* Pods_iTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B746D01E53C4081687C032 /* Pods_iTask.framework */; };
+		A1108F4924913FAA00066826 /* NavigationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1108F4824913FAA00066826 /* NavigationConfigurator.swift */; };
 		A145AEED24813C31005047D4 /* AktuellFirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A145AEEC24813C31005047D4 /* AktuellFirstView.swift */; };
 		A145AEEF2481428D005047D4 /* AufgabeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A145AEEE2481428D005047D4 /* AufgabeDetail.swift */; };
 		A145AEF1248144C9005047D4 /* AktuellSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A145AEF0248144C9005047D4 /* AktuellSecondView.swift */; };
@@ -62,6 +63,7 @@
 		14B746D01E53C4081687C032 /* Pods_iTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FF8A4C279B3964146712DA4 /* Pods-iTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iTask.release.xcconfig"; path = "Target Support Files/Pods-iTask/Pods-iTask.release.xcconfig"; sourceTree = "<group>"; };
 		81D03BC2F2E86E0F336E2233 /* Pods-iTask.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iTask.debug.xcconfig"; path = "Target Support Files/Pods-iTask/Pods-iTask.debug.xcconfig"; sourceTree = "<group>"; };
+		A1108F4824913FAA00066826 /* NavigationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConfigurator.swift; sourceTree = "<group>"; };
 		A145AEEC24813C31005047D4 /* AktuellFirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AktuellFirstView.swift; sourceTree = "<group>"; };
 		A145AEEE2481428D005047D4 /* AufgabeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AufgabeDetail.swift; sourceTree = "<group>"; };
 		A145AEF0248144C9005047D4 /* AktuellSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AktuellSecondView.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				A145AEF0248144C9005047D4 /* AktuellSecondView.swift */,
 				A145AEEE2481428D005047D4 /* AufgabeDetail.swift */,
 				A1959E0D2483F21F00B6B12E /* Additives_diagramm.swift */,
+				A1108F4824913FAA00066826 /* NavigationConfigurator.swift */,
 			);
 			path = BodyViews;
 			sourceTree = "<group>";
@@ -461,6 +464,7 @@
 				E9DA9B46248BC7A700D5C0F8 /* DatenschutzWebview.swift in Sources */,
 				B90A8846247DD7D600B59892 /* iTask.xcdatamodeld in Sources */,
 				A145AEED24813C31005047D4 /* AktuellFirstView.swift in Sources */,
+				A1108F4924913FAA00066826 /* NavigationConfigurator.swift in Sources */,
 				E9DA9B48248BC7BE00D5C0F8 /* AufgabeEinreichenView.swift in Sources */,
 				A1959E21248404EE00B6B12E /* PieChartRow.swift in Sources */,
 				A1959E0E2483F21F00B6B12E /* Additives_diagramm.swift in Sources */,

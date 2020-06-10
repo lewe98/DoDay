@@ -13,9 +13,15 @@ struct AufgabeDetail: View {
     var body: some View {
         ZStack {
             
-            RoundedRectangle(cornerRadius: 20)
-                .foregroundColor(Color(UIColor .secondarySystemFill))
-            Text(Aufgabe).padding(30)
+            RoundedRectangle(cornerRadius: 40)
+                .shadow(color: .gray, radius: 20, x: 0, y: 5)
+                .foregroundColor(.white)
+                
+                //.foregroundColor(Color(UIColor .secondarySystemFill))
+            Text(Aufgabe).lineLimit(nil)
+            .multilineTextAlignment(.center)
+                .foregroundColor(.blue).font(.title)
+                .padding(30)
             }.frame(height: 150)
             .padding()
     }
@@ -23,6 +29,6 @@ struct AufgabeDetail: View {
 
 struct AufgabeDetail_Previews: PreviewProvider {
     static var previews: some View {
-        AufgabeDetail(Aufgabe: "Laufe 20 Treppen, dann Laufe 20 Treppen, Laufe 20 Treppen,Laufe 20")
+        AufgabeDetail(Aufgabe: "Gib Jemandem ein Kompliment.")
     }
 }

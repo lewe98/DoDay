@@ -8,15 +8,23 @@
 
 import SwiftUI
 
+
 struct HeuteView: View {
-    var aufgabeInArbeit = false
+    init() {
+        // UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.red]
+        // UINavigationBar.appearance().titleTextAttributes = [.strokeColor: UIColor .systemGroupedBackground]
+     
+        UINavigationBar.appearance().backgroundColor =  UIColor.systemGroupedBackground
+        
+    }
+    var aufgabeInArbeit = true
     var body: some View {
         switch aufgabeInArbeit {
         case true:
             return AnyView(
                 NavigationView {
                    AktuellFirstView(Aufgabe1: "Sprich mit einer dir fremden Person", Aufgabe2: "Gehe 10.000 Schritte Zu Fuß")
-                    .navigationBarTitle(Text("Aktuell"))
+                    .navigationBarTitle(Text("Aktuell")).navigationBarHidden(false)
                 }
             )
         case false:
@@ -26,7 +34,9 @@ struct HeuteView: View {
                    AktuellSecondView(Aufgabe: "Sprich mit einer dir fremden Person")
                     .navigationBarTitle(Text("Aktuell"))
                 }
+                    .background(Color(UIColor .systemGroupedBackground))
             )
+            
         }
     }
 }
