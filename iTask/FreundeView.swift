@@ -23,7 +23,7 @@ struct FreundeView: View {
             Form {
                 Section(header: Text("DEIN FREUNDESCODE")) {
                     HStack {
-                        // TODO: Korrekte Variable ausgeben
+                        // TODO: Korrekte Variable dynamisch ausgeben
                         Text(currUser.id)
                         Spacer()
                         Button(action: {
