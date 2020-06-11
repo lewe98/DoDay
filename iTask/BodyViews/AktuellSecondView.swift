@@ -13,8 +13,8 @@ struct AktuellSecondView: View {
     var body: some View {
             VStack {
                 Spacer()
-                Text("Du hast dir für heute folgende Aufgabe ausgesucht").font(.headline).padding(.top, 20
-                )
+                Text("Du hast dir für heute folgende Aufgabe ausgesucht.").lineLimit(nil)
+                    .multilineTextAlignment(.center).font(.headline).padding(20)
                 AufgabeDetail(Aufgabe: Aufgabe)
                 Text("Konntest du die Aufgabe erfolgreich erledigen?")
                     .font(.footnote)
