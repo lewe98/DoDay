@@ -12,7 +12,7 @@ import WebKit
 
 struct DatenschutzWebview: UIViewRepresentable {
     
-    var url = "https://ersteweltprobleme.com/einsenden/datenschutz.html"
+    var url = "https://info.frag-was-neues.de/datenschutz-doday.html"
     
     func makeUIView(context: Context) -> WKWebView {
         guard let url = URL(string: self.url) else {

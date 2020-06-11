@@ -13,78 +13,74 @@ struct EinstellungenView: View {
     @State var showingImpressum = false
     @State var showingDatenschutz = false
     @State var showingAufgabeEinreichen = false
-    
+
     var body: some View {
         NavigationView {
-            VStack() {
-                Form {
-                    Section(header: Text("NEUE AUFGABEN")) {
-                            Toggle(isOn: $einstellungen.erinnerungEigeneAktiviert) {
-                                    Text("Tägliche Erinnerung erhalten")
-                        }
-                            DatePicker("Uhrzeit wählen", selection: $einstellungen.erinnerungZeitDate, displayedComponents: .hourAndMinute)
+            Form {
+                Section(header: Text("NEUE AUFGABEN")) {
+                        Toggle(isOn: $einstellungen.erinnerungEigeneAktiviert) {
+                            Text("Täglich eine Erinnerung erhalten")
                     }
-                
-                    Section(header: Text("AKTIVITÄTEN DEINER FREUNDE")) {
-                        // TODO: Serverseitig einstellen
-                          Toggle(isOn: $einstellungen.erinnerungFreundeAktiviert) {
-                                Text("Updates deiner Freunde erhalten")
-                        }
-                    }
-
-                    Section {
-                        HStack {
-                            Spacer()
-                            Button(action: {
-                                self.showingAufgabeEinreichen.toggle()
-                            }) {
-                                Text("Eigene Aufgabe einreichen")
-                            }
-                            .sheet(isPresented: $showingAufgabeEinreichen) {
-                            AufgabeEinreichenView()
-                            }
-                            Spacer()
-                        }
-                    }
-                    
-                    Section {
-                        HStack {
-                            Spacer()
-                            Button(action: {
-                                // TODO: Funktion einfuegen
-                                print("Statistik zurücksetzen tapped")
-                            }) {
-                                Text("Statistik zurücksetzen")
-                                    .foregroundColor(.red)
-                            }
-                            Spacer()
-                        }
-                    }
-                    
-                    HStack{
-                        Text("Impressum")
-                            .foregroundColor(.gray)
-                            .padding(.leading)
-                            .onTapGesture {
-                            self.showingImpressum.toggle()
-                            }
-                            .sheet(isPresented: $showingImpressum) {
-                                ImpressumWebview()
-                            }
-                        Spacer()
-                        Text("Datenschutz")
-                            .foregroundColor(.gray)
-                            .padding(.trailing)
-                            .onTapGesture {
-                                self.showingDatenschutz.toggle()
-                            }
-                            .sheet(isPresented: $showingDatenschutz) {
-                                DatenschutzWebview()
-                            }
-                    }.listRowBackground(Color(UIColor.secondarySystemBackground))
+                        DatePicker("Uhrzeit wählen", selection: $einstellungen.erinnerungZeitDate, displayedComponents: .hourAndMinute)
                 }
+            
+                Section(header: Text("AKTIVITÄTEN DEINER FREUNDE")) {
+                      Toggle(isOn: $einstellungen.erinnerungFreundeAktiviert) {
+                            Text("Updates deiner Freunde erhalten")
+                    }
+                }
+
+                Section {
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            self.showingAufgabeEinreichen.toggle()
+                        }) {
+                            Text("Eigene Aufgabe einreichen")
+                        }
+                        .sheet(isPresented: $showingAufgabeEinreichen) {
+                        AufgabeEinreichenView()
+                        }
+                        Spacer()
+                    }
+                }
+                
+                Section {
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            // TODO: Funktion einfuegen
+                            print("Statistik zurücksetzen tapped")
+                        }) {
+                            Text("Statistik zurücksetzen")
+                                .foregroundColor(.red)
+                        }
+                        Spacer()
+                    }
+                }
+                
+                HStack{
+                    Text("Impressum")
+                        .foregroundColor(.gray)
+                        .padding(.leading)
+                        .onTapGesture {
+                        self.showingImpressum.toggle()
+                        }
+                        .sheet(isPresented: $showingImpressum) {
+                            ImpressumWebview()
+                        }
+                    Spacer()
+                    Text("Datenschutz")
+                        .foregroundColor(.gray)
+                        .padding(.trailing)
+                        .onTapGesture {
+                            self.showingDatenschutz.toggle()
+                        }
+                        .sheet(isPresented: $showingDatenschutz) {
+                            DatenschutzWebview()
+                        }
+                }.listRowBackground(Color(UIColor.secondarySystemBackground))
             }
-            .background(Color(UIColor.secondarySystemBackground))
             .navigationBarTitle(Text("Einstellungen"))
         }
     }
