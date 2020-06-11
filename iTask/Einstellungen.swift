@@ -27,7 +27,7 @@ class Einstellungen: ObservableObject {
     }
     // Timepicker fuer taegliche Erinnerung morgens
     var erinnerungZeit = DateComponents()
-    @Published var erinnerungZeitDate = Date() {
+    @Published var erinnerungZeitDate = UserDefaults.standard.object(forKey: "erinnerungZeitDate") as? Date ?? Date() {
         didSet {
             // Wenn Datum geaendert wurde (Date-Format), ziehe DateComponents raus, speichere sie ab und call die Funktion zum Erinnerung setzen.
             var dateComponentsPulled = DateComponents()
@@ -36,6 +36,7 @@ class Einstellungen: ObservableObject {
             erinnerungZeit = dateComponentsPulled
             UserDefaults.standard.set(erinnerungZeit.hour, forKey: "erinnerungZeitHour")
             UserDefaults.standard.set(erinnerungZeit.minute, forKey: "erinnerungZeitMinute")
+            UserDefaults.standard.set(erinnerungZeitDate, forKey: "erinnerungZeitDate")
             erinnerungEigene()
         }
     }
