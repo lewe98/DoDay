@@ -26,13 +26,31 @@ struct Register: View {
                         HStack {
                             Spacer()
                             Button(action: {
+                                
                                 self.firebaseFunctions.registerUser(id: self.uuid!, vorname: self.vorname)
-                                print(self.vorname)
+                                
+                               
+                                //print(self.vorname)
                             }) {
                                 Text("Jetzt registrieren")
                                     .foregroundColor(.green)
                             }
                             Spacer()
+                            
+                            
+                            
+                            Button(action: {
+                                
+                                self.firebaseFunctions.getCurrUser(id: self.uuid!)
+                                
+                                
+                                //print(self.vorname)
+                            }) {
+                                Text("Current user")
+                                    .foregroundColor(.green)
+                            }
+                            Spacer()
+                            
                         }
                     }
                 }

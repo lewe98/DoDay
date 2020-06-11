@@ -23,6 +23,7 @@ struct FreundeView: View {
         freundes_id: "kd93k",
         id: "fkd90wlödlf9",
         letztes_erledigt_datum: Date(),
+        verbliebene_aufgaben: [],
         vorname: "Thomas")
     
     let currAufgabe = Aufgabe(
