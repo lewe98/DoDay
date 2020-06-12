@@ -227,7 +227,7 @@ class FirebaseFunctions: ObservableObject{
                 print("Error writing document: \(err)")
             } else {
                 print("Document successfully written!")
-            }
+            } 
         }
     }
     
