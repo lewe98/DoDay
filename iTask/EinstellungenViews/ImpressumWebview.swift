@@ -12,7 +12,7 @@ import WebKit
 
 struct ImpressumWebview: UIViewRepresentable {
     
-    var url = "https://ersteweltprobleme.com/impressum.html"
+    var url = "https://info.frag-was-neues.de/impressum.html"
     
     func makeUIView(context: Context) -> WKWebView {
         guard let url = URL(string: self.url) else {

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		409252862156C2DED3A66D95 /* Pods_iTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B746D01E53C4081687C032 /* Pods_iTask.framework */; };
+		A1108F4924913FAA00066826 /* NavigationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1108F4824913FAA00066826 /* NavigationConfigurator.swift */; };
 		A145AEED24813C31005047D4 /* AktuellFirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A145AEEC24813C31005047D4 /* AktuellFirstView.swift */; };
 		A145AEEF2481428D005047D4 /* AufgabeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A145AEEE2481428D005047D4 /* AufgabeDetail.swift */; };
 		A145AEF1248144C9005047D4 /* AktuellSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A145AEF0248144C9005047D4 /* AktuellSecondView.swift */; };
@@ -40,6 +41,7 @@
 		E9DA9B44248BC79500D5C0F8 /* ImpressumWebview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA9B43248BC79500D5C0F8 /* ImpressumWebview.swift */; };
 		E9DA9B46248BC7A700D5C0F8 /* DatenschutzWebview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA9B45248BC7A700D5C0F8 /* DatenschutzWebview.swift */; };
 		E9DA9B48248BC7BE00D5C0F8 /* AufgabeEinreichenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA9B47248BC7BE00D5C0F8 /* AufgabeEinreichenView.swift */; };
+		E9DA9B4A248F8CC900D5C0F8 /* FreundeHinzufuegenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA9B49248F8CC800D5C0F8 /* FreundeHinzufuegenView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,13 +65,14 @@
 		14B746D01E53C4081687C032 /* Pods_iTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FF8A4C279B3964146712DA4 /* Pods-iTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iTask.release.xcconfig"; path = "Target Support Files/Pods-iTask/Pods-iTask.release.xcconfig"; sourceTree = "<group>"; };
 		81D03BC2F2E86E0F336E2233 /* Pods-iTask.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iTask.debug.xcconfig"; path = "Target Support Files/Pods-iTask/Pods-iTask.debug.xcconfig"; sourceTree = "<group>"; };
+		A1108F4824913FAA00066826 /* NavigationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConfigurator.swift; sourceTree = "<group>"; };
 		A145AEEC24813C31005047D4 /* AktuellFirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AktuellFirstView.swift; sourceTree = "<group>"; };
 		A145AEEE2481428D005047D4 /* AufgabeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AufgabeDetail.swift; sourceTree = "<group>"; };
 		A145AEF0248144C9005047D4 /* AktuellSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AktuellSecondView.swift; sourceTree = "<group>"; };
 		A1959E0D2483F21F00B6B12E /* Additives_diagramm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Additives_diagramm.swift; sourceTree = "<group>"; };
 		A1959E1E248404A600B6B12E /* PieSlice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieSlice.swift; sourceTree = "<group>"; };
 		A1959E20248404EE00B6B12E /* PieChartRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartRow.swift; sourceTree = "<group>"; };
-		B90A883D247DD7D600B59892 /* iTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B90A883D247DD7D600B59892 /* DoDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B90A8840247DD7D600B59892 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B90A8842247DD7D600B59892 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B90A8845247DD7D600B59892 /* iTask.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iTask.xcdatamodel; sourceTree = "<group>"; };
@@ -100,6 +103,7 @@
 		E9DA9B43248BC79500D5C0F8 /* ImpressumWebview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpressumWebview.swift; sourceTree = "<group>"; };
 		E9DA9B45248BC7A700D5C0F8 /* DatenschutzWebview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatenschutzWebview.swift; sourceTree = "<group>"; };
 		E9DA9B47248BC7BE00D5C0F8 /* AufgabeEinreichenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AufgabeEinreichenView.swift; sourceTree = "<group>"; };
+		E9DA9B49248F8CC800D5C0F8 /* FreundeHinzufuegenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreundeHinzufuegenView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +148,7 @@
 				A145AEF0248144C9005047D4 /* AktuellSecondView.swift */,
 				A145AEEE2481428D005047D4 /* AufgabeDetail.swift */,
 				A1959E0D2483F21F00B6B12E /* Additives_diagramm.swift */,
+				A1108F4824913FAA00066826 /* NavigationConfigurator.swift */,
 			);
 			path = BodyViews;
 			sourceTree = "<group>";
@@ -182,7 +187,7 @@
 		B90A883E247DD7D600B59892 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B90A883D247DD7D600B59892 /* iTask.app */,
+				B90A883D247DD7D600B59892 /* DoDay.app */,
 				B90A8856247DD7D800B59892 /* iTaskTests.xctest */,
 				B90A8861247DD7D800B59892 /* iTaskUITests.xctest */,
 			);
@@ -212,6 +217,7 @@
 				B90A8844247DD7D600B59892 /* iTask.xcdatamodeld */,
 				E98953222483B753008093D0 /* Einstellungen.swift */,
 				B90A884B247DD7D800B59892 /* Preview Content */,
+				E9DA9B49248F8CC800D5C0F8 /* FreundeHinzufuegenView.swift */,
 			);
 			path = iTask;
 			sourceTree = "<group>";
@@ -293,7 +299,7 @@
 				A1959E1B2484003500B6B12E /* SwiftUICharts */,
 			);
 			productName = iTask;
-			productReference = B90A883D247DD7D600B59892 /* iTask.app */;
+			productReference = B90A883D247DD7D600B59892 /* DoDay.app */;
 			productType = "com.apple.product-type.application";
 		};
 		B90A8855247DD7D800B59892 /* iTaskTests */ = {
@@ -457,6 +463,7 @@
 				A145AEF1248144C9005047D4 /* AktuellSecondView.swift in Sources */,
 				A145AEEF2481428D005047D4 /* AufgabeDetail.swift in Sources */,
 				A1959E1F248404A600B6B12E /* PieSlice.swift in Sources */,
+				E9DA9B4A248F8CC900D5C0F8 /* FreundeHinzufuegenView.swift in Sources */,
 				B9568C2D24892464005E6DD8 /* AufgabeModel.swift in Sources */,
 				E9475409248038380039B853 /* HeuteView.swift in Sources */,
 				E9DA9B44248BC79500D5C0F8 /* ImpressumWebview.swift in Sources */,
@@ -465,6 +472,7 @@
 				E9DA9B46248BC7A700D5C0F8 /* DatenschutzWebview.swift in Sources */,
 				B90A8846247DD7D600B59892 /* iTask.xcdatamodeld in Sources */,
 				A145AEED24813C31005047D4 /* AktuellFirstView.swift in Sources */,
+				A1108F4924913FAA00066826 /* NavigationConfigurator.swift in Sources */,
 				E9DA9B48248BC7BE00D5C0F8 /* AufgabeEinreichenView.swift in Sources */,
 				A1959E21248404EE00B6B12E /* PieChartRow.swift in Sources */,
 				A1959E0E2483F21F00B6B12E /* Additives_diagramm.swift in Sources */,
@@ -645,18 +653,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iTask/Preview Content\"";
-				DEVELOPMENT_TEAM = CCK3QY84MX;
+				DEVELOPMENT_TEAM = HWXUX3TS4F;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iTask/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.lewe-lorenzen.iTask";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.thomas-raab.DoDay";
+				PRODUCT_NAME = DoDay;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -667,18 +675,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iTask/Preview Content\"";
-				DEVELOPMENT_TEAM = CCK3QY84MX;
+				DEVELOPMENT_TEAM = HWXUX3TS4F;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iTask/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.lewe-lorenzen.iTask";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.thomas-raab.DoDay";
+				PRODUCT_NAME = DoDay;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
