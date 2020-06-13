@@ -23,7 +23,7 @@
         <attribute name="freundes_id" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="letztes_erledigt_datum" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="nachname" optional="YES" attributeType="String"/>
+        <attribute name="verbliebene_aufgaben" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData"/>
         <attribute name="vorname" optional="YES" attributeType="String"/>
     </entity>
     <entity name="Zuletzt_bearbeitet" representedClassName="Zuletzt_bearbeitet" syncable="YES" codeGenerationType="class">
