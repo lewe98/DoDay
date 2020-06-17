@@ -8,11 +8,14 @@
 
 import Foundation
 import Firebase
+import Combine
+import SwiftUI
 
 class FirebaseFunctions: ObservableObject{
     
     let db = Firestore.firestore()
-    
+    // MARK: - registered Variable
+    // unten in Zeil 151 wird sie auf true gesetzt (nachdem bei Firebase ein User erstellt und auch lokal gespeichert wurde)
     @Published var registered: Bool = false
     @Published var aufgaben = [Aufgabe]()
     @Published var users = [User]()
@@ -103,6 +106,7 @@ class FirebaseFunctions: ObservableObject{
                 print("Error writing document: \(err)")
             } else {
                 print("Document successfully written!")
+                self.getCurrUser(id: user.id)
             }
         }
     }
@@ -142,7 +146,11 @@ class FirebaseFunctions: ObservableObject{
                 self.curUser.vorname = vorname
                 
                 print("current user: ", self.curUser)
-                
+                // MARK: - Hier wird die Variable true gesetzt
+                print("\n \n \n REGISTERED DAVOR: \(self.registered)")
+                self.registered = true
+                print("REGISTERED DANACH: \(self.registered) \n \n \n ")
+
                 /*
                  let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
                  print("Document data: \(dataDescription)")

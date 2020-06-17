@@ -7,16 +7,28 @@
 //
 
 import SwiftUI
+import Foundation
+
+extension Bool {
+    mutating func toggle() {
+        self = !self
+    }
+}
+var testtext = "nope"
+public var registered: Bool = false
 
 struct ContentView: View {
     
+
     // @ObservedObject var coreDataFunctions = CoreDataFunctions()
     @ObservedObject var firebaseFunctions = FirebaseFunctions()
-    @State var registered = FirebaseFunctions().registered
+    @ObservedObject var einstellungen = Einstellungen()
+    @EnvironmentObject var functions: FirebaseFunctions
+    @State var istRegistered = FirebaseFunctions().registered
     @State var deletedCoreDataEntries: Bool = false
-
-
-
+    @State var testtextinnen = testtext
+    let uuid = UIDevice.current.identifierForVendor?.uuidString
+    
     @Environment (\.managedObjectContext) var managedObjectContext
     @FetchRequest(
         entity: Aufgaben.entity(),
@@ -31,7 +43,33 @@ struct ContentView: View {
     
     @ViewBuilder
     var body: some View {
-        if registered {
+            // MARK: - Diese 5 Texte sollten sich eigentlich auch live updaten - das passiert aber nicht. Sie sind gleichzeitig buttons, um die verschiedenen registered Variablen zu togglen
+            // MARK: - registered Variable in diesem ContentView. Togglen mit Tap auf diesen Text funktioniert auch
+        Text("istRegistered ist: \(self.istRegistered.description)")
+            .onTapGesture {
+                registered.toggle()
+        }
+        // MARK: - registered Variable in den firebaseFunctions.
+        Text("registered firebasefunctions ist: \(firebaseFunctions.registered.description)")
+            .onTapGesture {
+                self.firebaseFunctions.registered.toggle()
+        }
+        // MARK: - registered Variable in den firebaseFunctions, aber auf deine Art, Samuel, also mit EnvironmentObject "functions"
+        Text("registered functions ist: \(functions.registered.description)")
+            .onTapGesture {
+                self.functions.registered.toggle()
+        }
+        // MARK: - registered Variable aus Einstellungen.swift. Arbeitet eigentlich mit UserDefaults...
+        Text("registered einstellungen ist: \(einstellungen.userIstRegistriert.description)")
+            .onTapGesture {
+                Einstellungen().userIstRegistriert.toggle()
+        }
+        // MARK: - Hier noch mal als print, weil ich dachte: Vielleicht ist ja der View nur nicht neu gerendert. Aber auch der Print funktioniert nicht (die Variable ist hier einfach nie geupdatet).
+        Text("FUNCTIONS REGISTERED AUSGEBEN")
+            .onTapGesture {
+                print("HIER IST DIE AUSGABE VON FUNCTIONS.REGISTERED: \(self.functions.registered)")
+        }
+        if self.functions.registered {
             TabView {
                 HeuteView()
                     .tabItem {
@@ -64,6 +102,9 @@ struct ContentView: View {
                             Text("Einstellungen")
                         }
                 }.tag(3)
+            }
+            .onAppear {
+                self.firebaseFunctions.getCurrUser(id: self.uuid!)
             }
         } else {
             Register()
@@ -100,6 +141,11 @@ struct ContentView: View {
      }
      */
     
+    func toggleRegistered() {
+        registered.toggle()
+        testtext = "jo"
+        print("Ja es wurde getoggelt und ist jetzt auf \(self.istRegistered.description) und testtext: \(self.testtextinnen)")
+    }
     
     func reload() {
         /*
