@@ -11,12 +11,12 @@ import Firebase
 import Combine
 import SwiftUI
 
-class FirebaseFunctions: ObservableObject{
-    
+class FirebaseFunctions: ObservableObject {
     let db = Firestore.firestore()
     // MARK: - registered Variable
     // unten in Zeil 151 wird sie auf true gesetzt (nachdem bei Firebase ein User erstellt und auch lokal gespeichert wurde)
-    @Published var registered: Bool = false
+    @EnvironmentObject var einstellungen: Einstellungen
+    // @Published var registered: Bool = false
     @Published var aufgaben = [Aufgabe]()
     @Published var users = [User]()
     @Published var curUser: User = User(
@@ -32,6 +32,16 @@ class FirebaseFunctions: ObservableObject{
         letztes_erledigt_datum: Date(),
         verbliebene_aufgaben: [],
         vorname: "x")
+    // user ist registriert
+    @Published var registered: Bool {
+        didSet {
+            UserDefaults.standard.set(registered, forKey: "registered")
+        }
+    }
+    init() {
+        self.registered = UserDefaults.standard.object(forKey: "registered") as? Bool ?? false
+    }
+    //@Environment (\.managedObjectContext) var managedObjectContext
     
     
     
@@ -106,14 +116,15 @@ class FirebaseFunctions: ObservableObject{
                 print("Error writing document: \(err)")
             } else {
                 print("Document successfully written!")
-                self.getCurrUser(id: user.id)
+                self.getCurrUser()
             }
         }
     }
     
     
     
-    func getCurrUser(id: String) {
+    func getCurrUser() {
+        let id: String = UIDevice.current.identifierForVendor!.uuidString
         db.collection("users").document(id).getDocument { (document, error) in
             if let document = document, document.exists {
                 
@@ -146,10 +157,13 @@ class FirebaseFunctions: ObservableObject{
                 self.curUser.vorname = vorname
                 
                 print("current user: ", self.curUser)
-                // MARK: - Hier wird die Variable true gesetzt
-                print("\n \n \n REGISTERED DAVOR: \(self.registered)")
+            
                 self.registered = true
-                print("REGISTERED DANACH: \(self.registered) \n \n \n ")
+
+                // insert into core data
+                //let entity = Users(context: self.managedObjectContext)
+                
+                
 
                 /*
                  let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
@@ -165,7 +179,7 @@ class FirebaseFunctions: ObservableObject{
     
     
     func randomString(length: Int) -> String {
-        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        let letters = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ123456789"
         return String((0..<length).map{ _ in letters.randomElement()! })
     }
     

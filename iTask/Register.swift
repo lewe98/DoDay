@@ -10,8 +10,8 @@ import SwiftUI
 
 struct Register: View {
     
-    @ObservedObject var firebaseFunctions = FirebaseFunctions()
-    @ObservedObject var einstellungen = Einstellungen()
+    @EnvironmentObject var firebaseFunctions: FirebaseFunctions
+    @EnvironmentObject var einstellungen: Einstellungen
     @State private var vorname: String = ""
     let uuid = UIDevice.current.identifierForVendor?.uuidString
     @State var datenschutzAkzeptiert: Bool = false
@@ -52,38 +52,6 @@ struct Register: View {
                                 }
                                 Spacer()
                             }
-                        }
-                    }
-                    // MARK: - Test-Buttons. Das togglen der firebaseFunctions registered Variable funktioniert auch
-                    Section() {
-                        HStack {
-                            Spacer()
-                            Button(action: {
-                                print("vorher ist registered: \(self.firebaseFunctions.registered)")
-                                self.firebaseFunctions.registered.toggle()
-                                print("nachher ist registered: \(self.firebaseFunctions.registered)")
-
-                            }) {
-                                Text("Firebase Registered auf True setzen")
-                                    .foregroundColor(.green)
-                            }
-                            Spacer()
-                        }
-                    }
-                    // MARK: - Test-Buttons. Das ändern der ContentView Variable aus Register.swift heraus, ist nicht möglich
-                    Section() {
-                        HStack {
-                            Spacer()
-                            Button(action: {
-                                print("contentview vorher ist registered: \(ContentView().istRegistered)")
-                                ContentView().toggleRegistered()
-                                print("contentview nachher ist registered: \(ContentView().istRegistered)")
-
-                            }) {
-                                Text("in contentview auf true setzen")
-                                    .foregroundColor(.green)
-                            }
-                            Spacer()
                         }
                     }
                 }

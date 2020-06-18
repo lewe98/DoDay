@@ -11,13 +11,6 @@ import Foundation
 import Combine
 
 class Einstellungen: ObservableObject {
-    // user ist registriert
-    // MARK: - Auch mal so probiert als Test... in Zeile 52 noch initialisiert
-    @Published var userIstRegistriert: Bool {
-        didSet {
-            UserDefaults.standard.set(userIstRegistriert, forKey: "userIstRegistriert")
-        }
-    }
     // taegliche Erinnerung morgens
     @Published var erinnerungEigeneAktiviert: Bool {
         didSet {
@@ -49,7 +42,6 @@ class Einstellungen: ObservableObject {
     }
     
     init() {
-        self.userIstRegistriert = UserDefaults.standard.object(forKey: "userIstRegistriert") as? Bool ?? false
         // Fuer die taegliche Erinnerung
         var dateComponentsInit = DateComponents()
         dateComponentsInit.hour = 8

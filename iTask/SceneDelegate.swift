@@ -23,13 +23,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
-        // MARK: - environmentObjekt wird mitgegeben. (bzw. zur übergabe vorbereitet... in Zeile 32 dann mitgegeben)
-        let contentView = ContentView().environment(\.managedObjectContext, context).environmentObject(FirebaseFunctions())
+        // environmentObjekt wird mitgegeben. (bzw. zur übergabe vorbereitet... in Zeile 32 dann mitgegeben)
+        let contentView = ContentView().environment(\.managedObjectContext, context).environmentObject(FirebaseFunctions()).environmentObject(Einstellungen())
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            // MARK: - übergabe.
+            // übergabe.
             window.rootViewController = UIHostingController(rootView: contentView)
             self.window = window
             window.makeKeyAndVisible()
