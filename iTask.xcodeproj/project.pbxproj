@@ -33,6 +33,7 @@
 		B9543EF02488FDE1006F75BD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B9543EEF2488FDE0006F75BD /* GoogleService-Info.plist */; };
 		B9568C2D24892464005E6DD8 /* AufgabeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9568C2C24892464005E6DD8 /* AufgabeModel.swift */; };
 		B984C1712490046B00147A71 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = B984C1702490046B00147A71 /* Register.swift */; };
+		B9A720E8249C202C00488233 /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A720E7249C202C00488233 /* Loading.swift */; };
 		E9475409248038380039B853 /* HeuteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9475408248038380039B853 /* HeuteView.swift */; };
 		E947540B2480384D0039B853 /* UebersichtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E947540A2480384D0039B853 /* UebersichtView.swift */; };
 		E947540D248038610039B853 /* FreundeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E947540C248038610039B853 /* FreundeView.swift */; };
@@ -95,6 +96,7 @@
 		B9543EEF2488FDE0006F75BD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B9568C2C24892464005E6DD8 /* AufgabeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AufgabeModel.swift; sourceTree = "<group>"; };
 		B984C1702490046B00147A71 /* Register.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
+		B9A720E7249C202C00488233 /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
 		E9475408248038380039B853 /* HeuteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeuteView.swift; sourceTree = "<group>"; };
 		E947540A2480384D0039B853 /* UebersichtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UebersichtView.swift; sourceTree = "<group>"; };
 		E947540C248038610039B853 /* FreundeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreundeView.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				B90A8842247DD7D600B59892 /* SceneDelegate.swift */,
 				B90A8849247DD7D800B59892 /* Assets.xcassets */,
 				B984C1702490046B00147A71 /* Register.swift */,
+				B9A720E7249C202C00488233 /* Loading.swift */,
 				B90A884E247DD7D800B59892 /* LaunchScreen.storyboard */,
 				B9543EEF2488FDE0006F75BD /* GoogleService-Info.plist */,
 				B90A8851247DD7D800B59892 /* Info.plist */,
@@ -470,6 +473,7 @@
 				B984C1712490046B00147A71 /* Register.swift in Sources */,
 				E98953232483B754008093D0 /* Einstellungen.swift in Sources */,
 				E9DA9B46248BC7A700D5C0F8 /* DatenschutzWebview.swift in Sources */,
+				B9A720E8249C202C00488233 /* Loading.swift in Sources */,
 				B90A8846247DD7D600B59892 /* iTask.xcdatamodeld in Sources */,
 				A145AEED24813C31005047D4 /* AktuellFirstView.swift in Sources */,
 				A1108F4924913FAA00066826 /* NavigationConfigurator.swift in Sources */,
@@ -661,7 +665,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.thomas-raab.DoDay";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.lewe-lorenzen.iTask";
 				PRODUCT_NAME = DoDay;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -683,7 +687,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.thomas-raab.DoDay";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.lewe-lorenzen.iTask";
 				PRODUCT_NAME = DoDay;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

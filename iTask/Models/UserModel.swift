@@ -21,4 +21,36 @@ struct User: Identifiable {
     var letztes_erledigt_datum: Date
     var verbliebene_aufgaben: [Int]
     var vorname: String
+    
+    static func initUserFromDatabase(user: Users) -> User {
+        return User(
+            abgelehnt: user.abgelehnt as! [Int],
+            aktueller_streak: Int(user.aktueller_streak),
+            anzahl_benachrichtigungen: Int(user.anzahl_benachrichtigungen),
+            aufgabe: Int(user.aufgabe),
+            aufgeschoben: user.aufgeschoben as! [Int],
+            erledigt: user.erledigt as! [Int],
+            freunde: user.freunde as! [String],
+            freundes_id: user.freundes_id ?? "<keine Freundes-ID>",
+            id: user.id ?? "<keine ID>",
+            letztes_erledigt_datum: user.letztes_erledigt_datum ?? Date(),
+            verbliebene_aufgaben: user.verbliebene_aufgaben as! [Int],
+            vorname: user.vorname ?? "<kein Vorname>")
+    }
+    
+    static func initCurUserFromDatabase(user: CurUser) -> User {
+        return User(
+            abgelehnt: user.abgelehnt as! [Int],
+            aktueller_streak: Int(user.aktueller_streak),
+            anzahl_benachrichtigungen: Int(user.anzahl_benachrichtigungen),
+            aufgabe: Int(user.aufgabe),
+            aufgeschoben: user.aufgeschoben as! [Int],
+            erledigt: user.erledigt as! [Int],
+            freunde: user.freunde as! [String],
+            freundes_id: user.freundes_id ?? "<keine Freundes-ID>",
+            id: user.id ?? "<keine ID>",
+            letztes_erledigt_datum: user.letztes_erledigt_datum ?? Date(),
+            verbliebene_aufgaben: user.verbliebene_aufgaben as! [Int],
+            vorname: user.vorname ?? "<kein Vorname>")
+    }
 }

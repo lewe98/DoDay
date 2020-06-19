@@ -8,8 +8,10 @@
 
 import UIKit
 import SwiftUI
+import Firebase
+import UserNotifications
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
 
@@ -21,15 +23,40 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Get the managed object context from the shared persistent container.
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
-        // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
-        // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
-        // environmentObjekt wird mitgegeben. (bzw. zur übergabe vorbereitet... in Zeile 32 dann mitgegeben)
-        let contentView = ContentView().environment(\.managedObjectContext, context).environmentObject(FirebaseFunctions()).environmentObject(Einstellungen())
+        // Firebase
+        FirebaseApp.configure()
+        
+        // Notifications
+        UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound,. badge]) { (granted, error) in
+            if granted {
+                print("Notifications duerfen gesendet werden.")
+            } else {
+                print("Notifications wurden nicht erlaubt.")
+            }
+        }
+        
+        let einstellungen = Einstellungen()
+        let coreDataFunctions = CoreDataFunctions()
+        let firebaseFunctions = FirebaseFunctions(
+            einstellungen: einstellungen,
+            coreDataFunctions: coreDataFunctions)
+       
+    
+        // hinzufügen von environmentObjects in der Root View (ContentView())
+        let contentView = ContentView()
+            .environment(\.managedObjectContext, context)
+            .environmentObject(firebaseFunctions)
+            .environmentObject(coreDataFunctions)
 
+       // Check if registered
+       let uuid = UIDevice.current.identifierForVendor?.uuidString
+       firebaseFunctions.checkUUID(id: uuid!)
+        
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            // übergabe.
+            // contentView wird als rootView definiert
             window.rootViewController = UIHostingController(rootView: contentView)
             self.window = window
             window.makeKeyAndVisible()

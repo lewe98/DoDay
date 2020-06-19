@@ -20,7 +20,7 @@ struct Aufgabe: Identifiable {
     var text_detail: String
     var text_dp: String
     
-    static func initFromDatabase(aufgabe: Aufgaben) -> Aufgabe {
+    static func initAufgabeFromDatabase(aufgabe: Aufgaben) -> Aufgabe {
         return Aufgabe(
             abgelehnt: Int(aufgabe.abgelehnt),
             aufgeschoben: Int(aufgabe.aufgeschoben),
