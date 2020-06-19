@@ -21,9 +21,9 @@ struct ContentView: View {
     
     
     //MARK: - TODO: Müssen außerhalb einsehbar sein
-    @State var cdAufgaben = [Aufgabe]()
-    @State var cdUsers = [User]()
-    @State var cdCurUser = [User]()
+    @State public var cdAufgaben = [Aufgabe]()
+    @State public var cdUsers = [User]()
+    @State public var cdCurUser = [User]()
     
     let uuid = UIDevice.current.identifierForVendor?.uuidString
     

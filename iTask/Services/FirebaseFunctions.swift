@@ -51,10 +51,11 @@ class FirebaseFunctions: ObservableObject {
     
     //MARK: - FUNCTIONS
     func checkUUID(id: String) {
+        print("wir sind in checkUUID")
         db.collection("users").whereField("id", isEqualTo: id)
             .getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
+                if (querySnapshot?.documents.count == 0) {
+                    print("Error getting documents!")
                     self.registered = false
                 } else {
                     for _ in querySnapshot!.documents {
