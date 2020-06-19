@@ -13,7 +13,7 @@ struct Register: View {
     @EnvironmentObject var firebaseFunctions: FirebaseFunctions
     @EnvironmentObject var einstellungen: Einstellungen
     @State private var vorname: String = ""
-    let uuid = UIDevice.current.identifierForVendor?.uuidString
+    let uuid = UIDevice.current.identifierForVendor?.uuidString ?? "<keine ID>"
     @State var datenschutzAkzeptiert: Bool = false
     @State var showingDatenschutz = false
     
@@ -45,7 +45,7 @@ struct Register: View {
                             HStack {
                                 Spacer()
                                 Button(action: {
-                                    self.firebaseFunctions.registerUser(id: self.uuid!, vorname: self.vorname)
+                                    self.firebaseFunctions.registerUser(id: self.uuid, vorname: self.vorname)
                                 }) {
                                     Text("Jetzt registrieren")
                                         .foregroundColor(.green)

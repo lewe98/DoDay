@@ -12,11 +12,25 @@ import Combine
 import SwiftUI
 
 class FirebaseFunctions: ObservableObject {
+    
+    //MARK: - VARIABLES
+    
+    init(einstellungen: Einstellungen, coreDataFunctions: CoreDataFunctions) {
+        self.einstellungen = einstellungen
+        self.coreDataFunctions = coreDataFunctions
+        self.registered = UserDefaults.standard.object(forKey: "registered") as? Bool ?? false
+    }
+    
+    let einstellungen: Einstellungen
+    let coreDataFunctions: CoreDataFunctions
+    
     let db = Firestore.firestore()
-    // MARK: - registered Variable
-    // unten in Zeil 151 wird sie auf true gesetzt (nachdem bei Firebase ein User erstellt und auch lokal gespeichert wurde)
-    @EnvironmentObject var einstellungen: Einstellungen
-    // @Published var registered: Bool = false
+    
+    @Published var registered: Bool {
+        didSet {
+            UserDefaults.standard.set(registered, forKey: "registered")
+        }
+    }
     @Published var aufgaben = [Aufgabe]()
     @Published var users = [User]()
     @Published var curUser: User = User(
@@ -32,19 +46,10 @@ class FirebaseFunctions: ObservableObject {
         letztes_erledigt_datum: Date(),
         verbliebene_aufgaben: [],
         vorname: "x")
-    // user ist registriert
-    @Published var registered: Bool {
-        didSet {
-            UserDefaults.standard.set(registered, forKey: "registered")
-        }
-    }
-    init() {
-        self.registered = UserDefaults.standard.object(forKey: "registered") as? Bool ?? false
-    }
-    //@Environment (\.managedObjectContext) var managedObjectContext
     
     
     
+    //MARK: - FUNCTIONS
     func checkUUID(id: String) {
         db.collection("users").whereField("id", isEqualTo: id)
             .getDocuments() { (querySnapshot, err) in
@@ -52,8 +57,9 @@ class FirebaseFunctions: ObservableObject {
                     print("Error getting documents: \(err)")
                     self.registered = false
                 } else {
-                    for document in querySnapshot!.documents {
-                        print("\(document.documentID) => \(document.data())")
+                    for _ in querySnapshot!.documents {
+                        //for document in querySnapshot!.documents {
+                        //print("\(document.documentID) => \(document.data())")
                     }
                     self.registered = true
                 }
@@ -71,7 +77,7 @@ class FirebaseFunctions: ObservableObject {
             aufgeschoben: [],
             erledigt: [],
             freunde: [],
-            freundes_id: randomString(length: 8),
+            freundes_id: generateRandomID(length: 8),
             id: id,
             letztes_erledigt_datum: Date(),
             verbliebene_aufgaben: [],
@@ -116,15 +122,17 @@ class FirebaseFunctions: ObservableObject {
                 print("Error writing document: \(err)")
             } else {
                 print("Document successfully written!")
-                self.getCurrUser()
+                self.getCurrUser { (u, err) in
+                    if u != nil {}
+                }
             }
         }
     }
     
     
     
-    func getCurrUser() {
-        let id: String = UIDevice.current.identifierForVendor!.uuidString
+    func getCurrUser(completionHandler: @escaping (User?, Error?) -> ()) {
+        let id: String = UIDevice.current.identifierForVendor?.uuidString ?? "<keine ID>"
         db.collection("users").document(id).getDocument { (document, error) in
             if let document = document, document.exists {
                 
@@ -138,7 +146,7 @@ class FirebaseFunctions: ObservableObject {
                 let erledigt = data["erledigt"] as? [Int] ?? []
                 let freunde = data["freunde"] as? [String] ?? []
                 let freundes_id = data["freundes_id"] as? String ?? "kein Freundes-ID"
-                let id = data["id"] as? String ?? UIDevice.current.identifierForVendor!.uuidString
+                let id = data["id"] as? String ?? UIDevice.current.identifierForVendor?.uuidString ?? "<keine ID>"
                 let letztes_erledigt_datum = data["letztes_erledigt_datum"] as? Date ?? Date()
                 let verbliebene_aufgaben = data["verbliebene_aufgaben"] as? [Int] ?? []
                 let vorname = data["vorname"] as? String ?? "<kein Vorname>"
@@ -156,19 +164,9 @@ class FirebaseFunctions: ObservableObject {
                 self.curUser.verbliebene_aufgaben = verbliebene_aufgaben
                 self.curUser.vorname = vorname
                 
-                print("current user: ", self.curUser)
-            
                 self.registered = true
-
-                // insert into core data
-                //let entity = Users(context: self.managedObjectContext)
                 
-                
-
-                /*
-                 let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                 print("Document data: \(dataDescription)")
-                 */
+                completionHandler(self.curUser, nil)
                 
             } else {
                 print("Document does not exist")
@@ -178,25 +176,25 @@ class FirebaseFunctions: ObservableObject {
     
     
     
-    func randomString(length: Int) -> String {
+    func generateRandomID(length: Int) -> String {
         let letters = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ123456789"
         return String((0..<length).map{ _ in letters.randomElement()! })
     }
     
     
-
-    func addFriend(user: User, freundID: String) {
-        
-        var newFriendList = user.freunde
+    
+    func addFriend(freundID: String) {
+        var newFriendList = curUser.freunde
         newFriendList.append(freundID)
         
-        db.collection("users").document(user.id).updateData([
+        db.collection("users").document(curUser.id).updateData([
             "freunde": newFriendList
         ]) { err in
             if let err = err {
                 print("Error updating document: \(err)")
             } else {
                 print("Document successfully updated")
+                //MARK: - TODO: In Core Data speichern
             }
         }
     }
@@ -204,7 +202,6 @@ class FirebaseFunctions: ObservableObject {
     
     
     func getAufgabenCollectionSize() -> Int {
-        
         var count: Int = 0
         
         db.collection("aufgaben").getDocuments() { (querySnapshot, err) in
@@ -221,7 +218,6 @@ class FirebaseFunctions: ObservableObject {
                 }
             }
         }
-        
         return count
     }
     
@@ -229,7 +225,6 @@ class FirebaseFunctions: ObservableObject {
     
     
     func addNewAufgabe(text: String, text_detail: String, text_dp: String, kategorie: String){
-        
         let aufgabe = Aufgabe(
             abgelehnt: 0,
             aufgeschoben: 0,
@@ -271,7 +266,6 @@ class FirebaseFunctions: ObservableObject {
     
     func fetchTasks(completionHandler: @escaping (Aufgabe?, Error?) -> ()) {
         db.collection("aufgaben").addSnapshotListener { (querySnapshot, error) in
-            
             guard let documents = querySnapshot?.documents else {
                 print("Error: \(String(describing: error))")
                 completionHandler(nil, error)
@@ -313,7 +307,6 @@ class FirebaseFunctions: ObservableObject {
     }
     
     
-    
     func fetchUsers(completionHandler: @escaping (User?, Error?) -> ()) {
         db.collection("users").addSnapshotListener { (querySnapshot, error) in
             
@@ -335,7 +328,7 @@ class FirebaseFunctions: ObservableObject {
                 let erledigt = data["erledigt"] as? [Int] ?? []
                 let freunde = data["freunde"] as? [String] ?? []
                 let freundes_id = data["freundes_id"] as? String ?? "kein Freundes-ID"
-                let id = data["id"] as? String ?? UIDevice.current.identifierForVendor!.uuidString
+                let id = data["id"] as? String ?? UIDevice.current.identifierForVendor?.uuidString ?? "<keine ID>"
                 let letztes_erledigt_datum = data["letztes_erledigt_datum"] as? Date ?? Date()
                 let verbliebene_aufgaben = data["verbliebene_aufgaben"] as? [Int] ?? []
                 let vorname = data["vorname"] as? String ?? "<kein Vorname>"
@@ -360,5 +353,5 @@ class FirebaseFunctions: ObservableObject {
     }
     
     
-
+    
 }
