@@ -54,7 +54,7 @@ Das Repository mithilfe von Xcode klonen:
 
 Cocoa Pods installieren:
 > Sobald das Repository geklont wurde, alle aktiven Xcode Fenster schließen. 
-> Im Anschluss mithilfe des Terminals in den Projektordner navigieren und ``pod install` ausführen.
+> Im Anschluss mithilfe des Terminals in den Projektordner navigieren und ``pod install`` ausführen.
 > Dadurch werden die in der ``Podfile`` eingetragenen Abhängigkeiten installiert.
 ``
 Das Projekt öffnen:
