@@ -56,7 +56,7 @@ Cocoa Pods installieren:
 > Sobald das Repository geklont wurde, alle aktiven Xcode Fenster schließen. 
 > Im Anschluss mithilfe des Terminals in den Projektordner navigieren und ``pod install`` ausführen.
 > Dadurch werden die in der ``Podfile`` eingetragenen Abhängigkeiten installiert.
-``
+
 Das Projekt öffnen:
 > Durch die Installation der Abhängigkeiten wird eine ``.xcworkspace`` Datei generiert.
 > Diese wird in Zukunft verwendet, um das Projekt zu öffnen.
