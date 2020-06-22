@@ -10,47 +10,48 @@ import SwiftUI
 
 struct Register: View {
     
-    @ObservedObject var firebaseFunctions = FirebaseFunctions()
+    @EnvironmentObject var firebaseFunctions: FirebaseFunctions
+    @EnvironmentObject var einstellungen: Einstellungen
     @State private var vorname: String = ""
-    let uuid = UIDevice.current.identifierForVendor?.uuidString
+    let uuid = UIDevice.current.identifierForVendor?.uuidString ?? "<keine ID>"
+    @State var datenschutzAkzeptiert: Bool = false
+    @State var showingDatenschutz = false
     
     var body: some View {
         NavigationView {
             VStack() {
                 Form {
-                    Section() {
+                    Section(header: Text("WIE HEISST DU?")) {
                         TextField("Dein Vorname", text: $vorname)
                     }
+                    HStack {
+                      Image(systemName: datenschutzAkzeptiert ? "checkmark.circle.fill" : "circle")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .onTapGesture {
+                            self.datenschutzAkzeptiert.toggle()
+                        }
+                      Text("Datenschutzerklärung akzeptieren")
+                        .onTapGesture {
+                            self.showingDatenschutz.toggle()
+                        }
+                        .sheet(isPresented: $showingDatenschutz) {
+                            DatenschutzWebview()
+                        }
+                    }
                 
-                    Section() {
-                        HStack {
-                            Spacer()
-                            Button(action: {
-                                
-                                self.firebaseFunctions.registerUser(id: self.uuid!, vorname: self.vorname)
-                                
-                               
-                                //print(self.vorname)
-                            }) {
-                                Text("Jetzt registrieren")
-                                    .foregroundColor(.green)
+                    if datenschutzAkzeptiert && vorname.count > 1 {
+                        Section() {
+                            HStack {
+                                Spacer()
+                                Button(action: {
+                                    self.firebaseFunctions.registerUser(id: self.uuid, vorname: self.vorname)
+                                }) {
+                                    Text("Jetzt registrieren")
+                                        .foregroundColor(.green)
+                                }
+                                Spacer()
                             }
-                            Spacer()
-                            
-                            
-                            
-                            Button(action: {
-                                
-                                self.firebaseFunctions.getCurrUser(id: self.uuid!)
-                                
-                                
-                                //print(self.vorname)
-                            }) {
-                                Text("Current user")
-                                    .foregroundColor(.green)
-                            }
-                            Spacer()
-                            
                         }
                     }
                 }

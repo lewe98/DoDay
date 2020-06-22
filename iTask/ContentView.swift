@@ -7,17 +7,26 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct ContentView: View {
     
-    // @ObservedObject var coreDataFunctions = CoreDataFunctions()
-    @ObservedObject var firebaseFunctions = FirebaseFunctions()
-    @State var registered = FirebaseFunctions().registered
-    @State var deletedCoreDataEntries: Bool = false
-
-
-
     @Environment (\.managedObjectContext) var managedObjectContext
+    
+    @State var deletedCoreDataTasks: Bool = false
+    @State var deletedCoreDataUsers: Bool = false
+    @State var deletedCoreDataCurUser: Bool = false
+    
+    @State var isLoading: Bool = true
+    
+    
+    //MARK: - TODO: Müssen außerhalb einsehbar sein
+    @State public var cdAufgaben: [Aufgabe] = []
+    @State public var cdUsers: [User] = []
+    @State public var cdCurUser: [User] = []
+    
+    let uuid = UIDevice.current.identifierForVendor?.uuidString
+    
     @FetchRequest(
         entity: Aufgaben.entity(),
         sortDescriptors: [
@@ -28,10 +37,43 @@ struct ContentView: View {
         ]
     ) var tasksCoreData: FetchedResults<Aufgaben>
     
+    @FetchRequest(
+        entity: Users.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(
+                keyPath: \Users.id,
+                ascending: true
+            )
+        ]
+    ) var usersCoreData: FetchedResults<Users>
+    
+    @FetchRequest(
+        entity: CurUser.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(
+                keyPath: \CurUser.id,
+                ascending: true
+            )
+        ]
+    ) var curUserCoreData: FetchedResults<CurUser>
+    
+    @EnvironmentObject var firebaseFunctions: FirebaseFunctions
+    
+    
     
     @ViewBuilder
     var body: some View {
-        if registered {
+        if self.isLoading {
+            Loading().onAppear{
+                self.reload { error in
+                    if let error = error{
+                        print(error)
+                    }
+                }
+                
+            }
+        }
+        else if self.firebaseFunctions.registered {
             TabView {
                 HeuteView()
                     .tabItem {
@@ -66,83 +108,181 @@ struct ContentView: View {
                 }.tag(3)
             }
         } else {
-            Register()
+            Register().onDisappear{
+                self.initCurUser()
+                self.deletedCoreDataCurUser = false
+            }
         }
     }
     
-    
-    /*
-     var body: some View {
-         
-         VStack{
-             NavigationView{
-                 // Daten aus Firebase
-                 List(firebaseFunctions.aufgaben) { (aufgabe: Aufgabe) in
-                     Text(aufgabe.text)
-                 }
-                 .navigationBarTitle("Firebase")
-             }
-             
-             NavigationView{
-                 // Daten aus Core Data
-                 List(self.tasksCoreData.map {
-                     Aufgabe.initFromDatabase(aufgabe: $0)
-                 }, id: \Aufgabe.id) { aufgabe in
-                     Text(aufgabe.text)
-                 }
-                 .navigationBarTitle("Core Data")
-             }
-             
-         }
-         .onAppear() {
-             self.reload()
-         }
-     }
-     */
-    
-    
-    func reload() {
-        /*
-        self.retrieveData.fetchlastEditDate { (datum, error) in
-            if let datum = datum {
-                if datum.aufgaben_zuletzt_bearbeitet as Date > Date() {
-                    */
-        
-                    self.firebaseFunctions.fetchTasks { (aufgabeModel, error) in
-                        if let aufgabe = aufgabeModel {
-                            
-                            if(self.deletedCoreDataEntries == false){
-                                self.deleteAllEntries()
-                                self.deletedCoreDataEntries = true
-                            }
-                            
-                            self.insertIntoCoreData(aufgabe: aufgabe)
-                            
-
-                            
-                        } else if let error = error{
-                            print("Error: \(String(describing: error))")
-                        }
-                    }
-                    
-                //}
+    func initCurUser(){
+        self.firebaseFunctions.getCurrUser { (u, err) in
+            if let user = u {
                 
-            //}
-        //}
+                self.insertCurUserIntoCoreData(user: user) { (nil, error) in
+                    if let error = error{
+                        print(error)
+                    } else {
+                        self.cdCurUser.append(user)
+                        print("CURRENT USER AUS CORE DATA: ", user, self.cdCurUser.count)
+                        
+                    }
+                }
+                
+            } else if let error = err{
+                print("Error: \(String(describing: error))")
+            }
+            
+        }
     }
     
+    func reload(completionHandler: @escaping (Error?) -> ()) {
+        
+        self.isLoading = true
+        
+        self.firebaseFunctions.fetchTasks { (aufgabeModel, error) in
+            if let aufgabe = aufgabeModel {
+                if(self.deletedCoreDataTasks == false) {
+                    self.deleteOldTasks { (error) in
+                        if let error = error{
+                            print(error)
+                        }
+                        self.deletedCoreDataTasks = true
+                    }
+                }
+                self.insertTasksIntoCoreData(aufgabe: aufgabe) { (nil, error) in
+                    if let error = error{
+                        print(error)
+                    } else {
+                        self.cdAufgaben.append(aufgabe)
+                        print("AUFGABE AUS CORE DATA: ", aufgabe, self.cdAufgaben.count)
+                    }
+                }
+            } else if let error = error{
+                print("Error: \(String(describing: error))")
+            }
+            
+        }
+        
+     
+        
+        self.firebaseFunctions.fetchUsers { (userFB, error) in
+            if let user = userFB {
+                
+                if(self.deletedCoreDataUsers == false){
+                    self.deleteOldUsers { (error) in
+                        if let error = error{
+                            print(error)
+                        } else{
+                            self.deletedCoreDataUsers = true
+                        }
+                    }
+                }
+                
+                self.insertUsersIntoCoreData(user: user) { (nil, error) in
+                    if let error = error{
+                        print(error)
+                    } else {
+                        self.cdUsers.append(user)
+                        print("USER AUS CORE DATA: ", user, self.cdUsers.count)
+                    }
+                }
+                
+            } else if let error = error{
+                print("Error: \(String(describing: error))")
+            }
+        }
+        
+        
+        
+        self.deletedCoreDataTasks = false
+        self.deletedCoreDataUsers = false
+        self.isLoading = false
+        completionHandler(nil)
+    }
     
-    
-    public func deleteAllEntries() {
+    func deleteOldTasks(completionHandler: @escaping (Error?) -> ()) {
+        self.cdAufgaben = []
         self.tasksCoreData.forEach { aufgabe in
             self.managedObjectContext.delete(aufgabe)
         }
-        try! self.managedObjectContext.save()
+        try? self.managedObjectContext.save()
+        completionHandler(nil)
+    }
+    
+    func deleteOldUsers(completionHandler: @escaping (Error?) -> ()) {
+        self.cdUsers = []
+        self.usersCoreData.forEach { user in
+            self.managedObjectContext.delete(user)
+        }
+        try? self.managedObjectContext.save()
+        completionHandler(nil)
     }
     
     
     
-    public func insertIntoCoreData(aufgabe: Aufgabe) {
+    func deleteOldCurUser(completionHandler: @escaping (Error?) -> ()) {
+        self.cdCurUser = []
+        self.curUserCoreData.forEach { user in
+            self.managedObjectContext.delete(user)
+        }
+        try? self.managedObjectContext.save()
+        completionHandler(nil)
+    }
+    
+    
+    
+    func insertCurUserIntoCoreData(user: User, completionHandler: @escaping (CurUser?, Error?) -> ()) {
+        self.deleteOldCurUser { (error) in
+            if let error = error{
+                print(error)
+            }
+        }
+        
+        let entity = CurUser(context: self.managedObjectContext)
+        
+        entity.abgelehnt = user.abgelehnt as NSObject
+        entity.aktueller_streak = Int16(user.aktueller_streak)
+        entity.anzahl_benachrichtigungen = Int16(user.anzahl_benachrichtigungen)
+        entity.aufgabe = Int16(user.aufgabe)
+        entity.aufgeschoben = user.aufgeschoben as NSObject
+        entity.erledigt = user.erledigt as NSObject
+        entity.freunde = user.freunde as NSObject
+        entity.freundes_id = user.freundes_id
+        entity.id = user.id
+        entity.letztes_erledigt_datum = user.letztes_erledigt_datum
+        entity.verbliebene_aufgaben = user.verbliebene_aufgaben as NSObject
+        entity.vorname = user.vorname
+        
+        try? self.managedObjectContext.save()
+        completionHandler(entity, nil)
+    }
+    
+    
+    
+    func insertUsersIntoCoreData(user: User, completionHandler: @escaping (Users?, Error?) -> ()) {
+        let entity = Users(context: self.managedObjectContext)
+        
+        entity.abgelehnt = user.abgelehnt as NSObject
+        entity.aktueller_streak = Int16(user.aktueller_streak)
+        entity.anzahl_benachrichtigungen = Int16(user.anzahl_benachrichtigungen)
+        entity.aufgabe = Int16(user.aufgabe)
+        entity.aufgeschoben = user.aufgeschoben as NSObject
+        entity.erledigt = user.erledigt as NSObject
+        entity.freunde = user.freunde as NSObject
+        entity.freundes_id = user.freundes_id
+        entity.id = user.id
+        entity.letztes_erledigt_datum = user.letztes_erledigt_datum
+        entity.verbliebene_aufgaben = user.verbliebene_aufgaben as NSObject
+        entity.vorname = user.vorname
+        
+        try? self.managedObjectContext.save()
+        completionHandler(entity, nil)
+    }
+    
+    
+    
+    func insertTasksIntoCoreData(aufgabe: Aufgabe, completionHandler: @escaping (Aufgaben?, Error?) -> ()) {
         let entity = Aufgaben(context: self.managedObjectContext)
         
         entity.abgelehnt = Int16(aufgabe.abgelehnt)
@@ -156,9 +296,12 @@ struct ContentView: View {
         entity.text_detail = aufgabe.text_detail
         entity.text_dp = aufgabe.text_dp
         
-        try! self.managedObjectContext.save()
+        try? self.managedObjectContext.save()
+        completionHandler(entity, nil)
     }
 }
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

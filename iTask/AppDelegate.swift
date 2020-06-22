@@ -8,34 +8,13 @@
 
 import UIKit
 import CoreData
-import Firebase
-import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
-
-    var window: UIWindow?
+class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-        // Firebase
-        FirebaseApp.configure()
-        
-        // Check if registered
-        let uuid = UIDevice.current.identifierForVendor?.uuidString
-        FirebaseFunctions().checkUUID(id: uuid!)
-        
-        // Notifications
-        UNUserNotificationCenter.current().delegate = self
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound,. badge]) { (granted, error) in
-            if granted {
-                print("Notifications duerfen gesendet werden.")
-            } else {
-                print("Notifications wurden nicht erlaubt.")
-            }
-        }
-        
+    
         return true
     }
 
