@@ -93,6 +93,7 @@ struct ContentView: View {
                 }.tag(1)
                 
                 FreundeView(curUser: $cdCurUser, alleAufgaben: $cdAufgaben, allUsers: $cdUsers, curAufgabe: $curAufgabe)
+                .environmentObject(firebaseFunctions)
                     .tabItem {
                         VStack {
                             Image(systemName: "rectangle.stack.person.crop.fill")

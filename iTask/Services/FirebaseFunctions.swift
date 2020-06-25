@@ -185,21 +185,38 @@ class FirebaseFunctions: ObservableObject {
     
     
     func addFriend(freundID: String) {
-        var newFriendList = curUser.freunde
-        newFriendList.append(freundID)
-        
-        db.collection("users").document(curUser.id).updateData([
-            "freunde": newFriendList
-        ]) { err in
+        print("ADDFRIEND WIRD ERFOLGREICH AUSGELOEST. freundID: \(freundID)")
+        var success: Bool = false
+        /*db.collection("users").getDocuments() { (querySnapshot, err) in
             if let err = err {
-                print("Error updating document: \(err)")
+                print("Error getting users: \(err)")
             } else {
-                print("Document successfully updated")
-                
-                //MARK: - TODO: In Core Data speichern
-            }
-        }
-    }
+                for user in querySnapshot!.documents {
+                    if user.freundes_id == freundID {
+                        success = true
+                        break
+                    }
+                }
+                if success == true {*/
+                    var newFriendList = curUser.freunde
+                    newFriendList.append(freundID)
+                    
+                    db.collection("users").document(curUser.id).updateData([
+                        "freunde": newFriendList
+                    ]) { err in
+                        if let err = err {
+                            print("Error updating document: \(err)")
+                        } else {
+                            print("Document successfully updated")
+                            
+                            //MARK: - TODO: In Core Data speichern
+                        }
+                    }
+                }
+         //   }
+       // }
+    
+   // }
     
     
     

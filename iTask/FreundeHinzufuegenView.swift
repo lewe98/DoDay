@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct FreundeHinzufuegenView: View {
+    @EnvironmentObject var firebaseFunctions: FirebaseFunctions
     @State private var freundesCode: String = ""
     
     var body: some View {
@@ -24,7 +25,8 @@ struct FreundeHinzufuegenView: View {
                             Spacer()
                             Button(action: {
                                 // TODO: Funktion einfuegen
-                                print(self.freundesCode)
+                                
+                                self.firebaseFunctions.addFriend(freundID: self.freundesCode)
                             }) {
                                 Text("Abschicken")
                                     .foregroundColor(.green)

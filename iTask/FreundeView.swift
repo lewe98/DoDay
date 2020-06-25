@@ -40,6 +40,7 @@ struct FreundeView: View {
     @Binding var alleAufgaben: [Aufgabe]
     @Binding var allUsers: [User]
     @Binding var curAufgabe: Aufgabe
+    @EnvironmentObject var firebaseFunctions: FirebaseFunctions
     
     var body: some View {
         NavigationView {
@@ -64,6 +65,11 @@ struct FreundeView: View {
                         }
                         .sheet(isPresented: $showingFreundeHinzufuegen) {
                         FreundeHinzufuegenView()
+                            .environmentObject(self.firebaseFunctions)
+                            /*.onDisappear(ContentView.reload { error in
+                            if let error = error{
+                                print(error)
+                            })*/
                         }
                         Spacer()
                     }
@@ -106,6 +112,7 @@ struct FreundeView: View {
     func updateFreundesListe() {
         print("\n\n\n\n curUser.count ist: \(curUser.count) bzw. der curUser: \n \(curUser)\n\n\n")
         if curUser.count > 0 {
+            self.freundesListe = []
             curUser[0].freunde.forEach {freund in // alle Freunde durchgehen (freundes_id)
                 allUsers.forEach { user in // User rausziehen
                     if user.freundes_id == freund {
