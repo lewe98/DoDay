@@ -18,13 +18,6 @@ class Einstellungen: ObservableObject {
             erinnerungEigene()
         }
     }
-    // Remote Notifications fuer Freundesaktivitaeten
-    @Published var erinnerungFreundeAktiviert: Bool {
-        didSet {
-            UserDefaults.standard.set(erinnerungFreundeAktiviert, forKey: "erinnerungFreundeAktiviert")
-            erinnerungFreunde()
-        }
-    }
     // Timepicker fuer taegliche Erinnerung morgens
     var erinnerungZeit = DateComponents()
     @Published var erinnerungZeitDate = UserDefaults.standard.object(forKey: "erinnerungZeitDate") as? Date ?? Date() {
@@ -49,9 +42,6 @@ class Einstellungen: ObservableObject {
         self.erinnerungEigeneAktiviert = UserDefaults.standard.object(forKey: "erinnerungEigeneAktiviert") as? Bool ?? false
         self.erinnerungZeit.hour = UserDefaults.standard.object(forKey: "erinnerungZeitHour") as? Int ?? dateComponentsInit.hour
         self.erinnerungZeit.minute = UserDefaults.standard.object(forKey: "erinnerungZeitMinute") as? Int ?? dateComponentsInit.minute
-        
-        // Fuer die Freundes-Erinnerungen (Push-Notifications)
-        self.erinnerungFreundeAktiviert = UserDefaults.standard.object(forKey: "erinnerungFreundeAktiviert") as? Bool ?? false
     }
 }
 
@@ -67,15 +57,6 @@ func erinnerungEigene() -> Void {
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     } else {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["ErinnerungEigene"])
-    }
-}
-
-func erinnerungFreunde() -> Void {
-    // prueft ob remote Notifications gewuenscht sind und aktiviert oder deaktiviert diese. Dies muss serversided geschehen.
-    if Einstellungen().erinnerungFreundeAktiviert == true {
-        print("Erinnerungen fuer Freunde sollten jetzt aktiviert sein")
-    } else {
-        print("Erinnerungen fuer Freunde sollten jetzt deaktiviert sein")
     }
 }
 
