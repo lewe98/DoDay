@@ -195,6 +195,7 @@ class FirebaseFunctions: ObservableObject {
                 print("Error updating document: \(err)")
             } else {
                 print("Document successfully updated")
+                
                 //MARK: - TODO: In Core Data speichern
             }
         }

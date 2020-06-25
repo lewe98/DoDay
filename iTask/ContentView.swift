@@ -24,6 +24,7 @@ struct ContentView: View {
     @State public var cdAufgaben: [Aufgabe] = []
     @State public var cdUsers: [User] = []
     @State public var cdCurUser: [User] = []
+    @State public var curAufgabe: Aufgabe = Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "loading", erledigt: 0, id: -1, kategorie: "loading", text: "loading", text_detail: "loading", text_dp: "loading")
     
     let uuid = UIDevice.current.identifierForVendor?.uuidString
     
@@ -91,7 +92,7 @@ struct ContentView: View {
                         }
                 }.tag(1)
                 
-                FreundeView()
+                FreundeView(curUser: $cdCurUser, alleAufgaben: $cdAufgaben, allUsers: $cdUsers, curAufgabe: $curAufgabe)
                     .tabItem {
                         VStack {
                             Image(systemName: "rectangle.stack.person.crop.fill")
@@ -106,11 +107,29 @@ struct ContentView: View {
                             Text("Einstellungen")
                         }
                 }.tag(3)
+            }.onAppear{
+                if self.cdCurUser.count == 0 {
+                    self.initCurUser()
+                    self.deletedCoreDataCurUser = false
+                }
             }
         } else {
             Register().onDisappear{
                 self.initCurUser()
                 self.deletedCoreDataCurUser = false
+            }
+        }
+    }
+    
+    func initCurAufgabe(id: Int) {
+        if let foundAufgabe = cdAufgaben.first(where: {$0.id == id}) {
+            print("\n\n\n\n id ist: \(id) und foundaufgabe ist: \(foundAufgabe)\n\n\n\n")
+           self.curAufgabe = foundAufgabe
+        } else {
+            self.reload { error in
+                if let error = error{
+                    print(error)
+                }
             }
         }
     }
@@ -125,7 +144,8 @@ struct ContentView: View {
                     } else {
                         self.cdCurUser.append(user)
                         print("CURRENT USER AUS CORE DATA: ", user, self.cdCurUser.count)
-                        
+                        print("\n\n\n\n CONTENTVIEW curUser.count ist: \(self.cdCurUser.count) bzw. der curUser: \n \(self.cdCurUser)\n\n\n")
+                        self.initCurAufgabe(id: user.aufgabe)
                     }
                 }
                 
