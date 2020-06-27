@@ -40,8 +40,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
         let coreDataFunctions = CoreDataFunctions()
         let firebaseFunctions = FirebaseFunctions(
             einstellungen: einstellungen,
-            coreDataFunctions: coreDataFunctions)
-       
+            coreDataFunctions: coreDataFunctions)       
     
         // hinzufügen von environmentObjects in der Root View (ContentView())
         let contentView = ContentView()

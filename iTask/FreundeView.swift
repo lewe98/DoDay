@@ -8,27 +8,39 @@
 
 import SwiftUI
 
+struct Freund: Hashable {
+    var vorname: String
+    var erledigt: Int
+    var text_dp: String
+}
+
+
 struct FreundeView: View {
     @State var kopierenText = "Kopieren"
     @State var showingFreundeHerausfordern = false
     @State var showingFreundeHinzufuegen = false
+    @State var freundesListe: [Freund] = []
+    
+    let loadingUser: User = User(
+    abgelehnt: [3, 5],
+    aktueller_streak: 5,
+    anzahl_benachrichtigungen: 1,
+    aufgabe: 17,
+    aufgeschoben: [8],
+    erledigt: [9, 28],
+    freunde: [],
+    freundes_id: "loading",
+    id: "loading",
+    letztes_erledigt_datum: Date(),
+    verbliebene_aufgaben: [9, 1],
+    vorname: "loading")
     
     //MARK: Muss irgendwo anders definiert werden
-    let currUser = User(
-        abgelehnt: [3, 5],
-        aktueller_streak: 5,
-        anzahl_benachrichtigungen: 1,
-        aufgabe: 17,
-        aufgeschoben: [8],
-        erledigt: [9, 28],
-        freunde: ["fkr93k", "fsl93"],
-        freundes_id: "kd93k",
-        id: "fkd90wlödlf9",
-        letztes_erledigt_datum: Date(),
-        verbliebene_aufgaben: [9, 1],
-        vorname: "Thomas")
-    
-    let currAufgabe = Aufgabe(abgelehnt: 22, aufgeschoben: 23, ausgespielt: 24, autor: "iTask", erledigt: 8, id: 12, kategorie: "Social", text: "Sprich mit einer fremden Person", text_detail: "Fördere deine Sozialkompetenz, indem du mit einer Person sprichst, mit der du vorher noch nie gesprochen hast. Zum Beispiel dein Postbote, jemand beim Einkaufen usw.", text_dp: "Spricht mit einer fremden Person")
+    @Binding var curUser: [User]
+    @Binding var alleAufgaben: [Aufgabe]
+    @Binding var allUsers: [User]
+    @Binding var curAufgabe: Aufgabe
+    @EnvironmentObject var firebaseFunctions: FirebaseFunctions
     
     var body: some View {
         NavigationView {
@@ -36,7 +48,7 @@ struct FreundeView: View {
                 Section(header: Text("DEIN FREUNDESCODE")) {
                     HStack {
                         // TODO: Korrekte Variable dynamisch ausgeben
-                        Text(currUser.id)
+                        Text(curUser.count > 0 ? curUser[0].freundes_id : loadingUser.freundes_id)
                         Spacer()
                         Button(action: {
                             self.kopiereId()
@@ -53,34 +65,29 @@ struct FreundeView: View {
                         }
                         .sheet(isPresented: $showingFreundeHinzufuegen) {
                         FreundeHinzufuegenView()
+                            .environmentObject(self.firebaseFunctions)
+                            /*.onDisappear(ContentView.reload { error in
+                            if let error = error{
+                                print(error)
+                            })*/
                         }
                         Spacer()
                     }
                 }
                 
                 Section(header: HStack {Text("FREUNDE"); Spacer(); Text("ERLEDIGTE AUFGABEN")}) {
-                     // TODO: Liste dynamisch fuellen mit for Schleife
-                    List {
+
+                    List(self.freundesListe, id: \.self) {
+                        freund in
                         HStack {
                             VStack(alignment: .leading) {
-                                Text(currUser.vorname)
-                                Text(currAufgabe.text_dp)
+                                Text(freund.vorname)
+                                Text(freund.text_dp)
                                     .font(.callout)
                                     .foregroundColor(Color.gray)
                             }
                             Spacer()
-                            // TODO: Dynamisch machen
-                            Text("6")
-                        }
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text(currUser.vorname)
-                                Text(currAufgabe.text_dp)
-                                    .font(.callout)
-                                    .foregroundColor(Color.gray)
-                            }
-                            Spacer()
-                            Text("22")
+                            Text(String(freund.erledigt))
                         }
                     }
                 }
@@ -97,13 +104,35 @@ struct FreundeView: View {
                     }
                 }
             }
-        .navigationBarTitle(Text("Freunde"))
+            .navigationBarTitle(Text("Freunde"))
+            .onAppear{self.updateFreundesListe()}
         }
+    }
+    
+    func updateFreundesListe() {
+        print("\n\n\n\n curUser.count ist: \(curUser.count) bzw. der curUser: \n \(curUser)\n\n\n")
+        if curUser.count > 0 {
+            self.freundesListe = []
+            curUser[0].freunde.forEach {freund in // alle Freunde durchgehen (freundes_id)
+                allUsers.forEach { user in // User rausziehen
+                    if user.freundes_id == freund {
+                        alleAufgaben.forEach { aufgabe in // Aufgaben rausziehen
+                            if user.aufgabe == aufgabe.id {
+                                self.freundesListe.append(Freund(vorname: user.vorname, erledigt: user.erledigt.count, text_dp: aufgabe.text_dp))
+                            }
+                        }
+                        
+                    }
+                }
+            }
+        } else {
+            self.freundesListe = []
+            }
     }
     
     func kopiereId() -> Void {
         // TODO: Richtige Variable kopieren
-        UIPasteboard.general.string = self.currUser.id
+        UIPasteboard.general.string = curUser.count > 0 ? self.curUser[0].freundes_id : self.loadingUser.freundes_id
         withAnimation(.linear(duration: 0.25), {
             self.kopierenText = "erfolgreich kopiert!"
         })
@@ -117,7 +146,7 @@ struct FreundeView: View {
     
     func freundeHerausfordern() -> Void {
         showingFreundeHerausfordern.toggle()
-        let teilenText = "Könntest du meine heutige DoDay-Aufgabe schaffen?\n\"\(currAufgabe.text)\""
+        let teilenText = "Könntest du meine heutige DoDay-Aufgabe schaffen?\n\"\(curAufgabe.text)\""
         let activityViewController : UIActivityViewController = UIActivityViewController(
             activityItems: [teilenText], applicationActivities: nil)
 
@@ -137,8 +166,21 @@ struct FreundeView: View {
     }
 }
 
-struct FreundeView_Previews: PreviewProvider {
+/*struct FreundeView_Previews: PreviewProvider {
     static var previews: some View {
-        FreundeView()
+        FreundeView(curUser: User(
+        abgelehnt: [3, 5],
+        aktueller_streak: 5,
+        anzahl_benachrichtigungen: 1,
+        aufgabe: 17,
+        aufgeschoben: [8],
+        erledigt: [9, 28],
+        freunde: ["fkr93k", "fsl93"],
+        freundes_id: "kd93k",
+        id: "fkd90wlödlf9",
+        letztes_erledigt_datum: Date(),
+        verbliebene_aufgaben: [9, 1],
+        vorname: "Thomas"),
+        alleAufgaben: [Aufgabe(abgelehnt: 22, aufgeschoben: 23, ausgespielt: 24, autor: "iTask", erledigt: 8, id: 12, kategorie: "Social", text: "Sprich mit einer fremden Person", text_detail: "Fördere deine Sozialkompetenz, indem du mit einer Person sprichst, mit der du vorher noch nie gesprochen hast. Zum Beispiel dein Postbote, jemand beim Einkaufen usw.", text_dp: "Spricht mit einer fremden Person")])
     }
-}
+}*/

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct User: Identifiable {
+struct User: Identifiable, Hashable {
     var abgelehnt: [Int]
     var aktueller_streak: Int
     var anzahl_benachrichtigungen: Int

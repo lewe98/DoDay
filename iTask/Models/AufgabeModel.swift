@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Aufgabe: Identifiable {
+struct Aufgabe: Identifiable, Hashable {
     var abgelehnt: Int
     var aufgeschoben: Int
     var ausgespielt: Int

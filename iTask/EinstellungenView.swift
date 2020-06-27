@@ -23,12 +23,6 @@ struct EinstellungenView: View {
                     }
                         DatePicker("Uhrzeit wählen", selection: $einstellungen.erinnerungZeitDate, displayedComponents: .hourAndMinute)
                 }
-            
-                Section(header: Text("AKTIVITÄTEN DEINER FREUNDE")) {
-                      Toggle(isOn: $einstellungen.erinnerungFreundeAktiviert) {
-                            Text("Updates deiner Freunde erhalten")
-                    }
-                }
 
                 Section {
                     HStack {
