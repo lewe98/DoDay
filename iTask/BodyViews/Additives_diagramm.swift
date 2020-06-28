@@ -2,8 +2,8 @@
 //  additives_diagramm.swift
 //  iTask
 //
-//  Created by Lewe Lorenzen on 30.05.20.
-//  Copyright © 2020 Julian Hermanspahn. All rights reserved.
+//  Created by Julian Hermanspahn, Lewe Lorenzen & Thomas Raab on 30.05.20.
+//  Copyright © 2020 DoDay. All rights reserved.
 //
 
 import SwiftUI

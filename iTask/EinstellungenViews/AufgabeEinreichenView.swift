@@ -2,12 +2,13 @@
 //  AufgabeEinreichenView.swift
 //  iTask
 //
-//  Created by Thomas on 06.06.20.
-//  Copyright © 2020 Julian Hermanspahn. All rights reserved.
+//  Created by Julian Hermanspahn, Lewe Lorenzen & Thomas Raab on 06.06.20.
+//  Copyright © 2020 DoDay. All rights reserved.
 //
 
 import SwiftUI
 
+/// Eine View, die es dem Nutzer erlaubt, einen eigenen Aufgabenvorschlag einzureichen.
 struct AufgabeEinreichenView: View {
     @State private var aufgabe: String = ""
     

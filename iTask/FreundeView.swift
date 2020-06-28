@@ -2,14 +2,14 @@
 //  FreundeView.swift
 //  iTask
 //
-//  Created by Thomas on 28.05.20.
-//  Copyright © 2020 Julian Hermanspahn. All rights reserved.
+//  Created by Julian Hermanspahn, Lewe Lorenzen & Thomas Raab on 28.05.20.
+//  Copyright © 2020 DoDay. All rights reserved.
 //
 
 import SwiftUI
 
 struct Freund: Hashable {
-    var vorname: String
+    var nutzername: String
     var erledigt: Int
     var text_dp: String
 }
@@ -33,7 +33,7 @@ struct FreundeView: View {
     id: "loading",
     letztes_erledigt_datum: Date(),
     verbliebene_aufgaben: [9, 1],
-    vorname: "loading")
+    nutzername: "loading")
     
     //MARK: Muss irgendwo anders definiert werden
     @Binding var curUser: [User]
@@ -81,7 +81,7 @@ struct FreundeView: View {
                         freund in
                         HStack {
                             VStack(alignment: .leading) {
-                                Text(freund.vorname)
+                                Text(freund.nutzername)
                                 Text(freund.text_dp)
                                     .font(.callout)
                                     .foregroundColor(Color.gray)
@@ -118,7 +118,7 @@ struct FreundeView: View {
                     if user.freundes_id == freund {
                         alleAufgaben.forEach { aufgabe in // Aufgaben rausziehen
                             if user.aufgabe == aufgabe.id {
-                                self.freundesListe.append(Freund(vorname: user.vorname, erledigt: user.erledigt.count, text_dp: aufgabe.text_dp))
+                                self.freundesListe.append(Freund(nutzername: user.nutzername, erledigt: user.erledigt.count, text_dp: aufgabe.text_dp))
                             }
                         }
                         
@@ -180,7 +180,7 @@ struct FreundeView: View {
         id: "fkd90wlödlf9",
         letztes_erledigt_datum: Date(),
         verbliebene_aufgaben: [9, 1],
-        vorname: "Thomas"),
+        nutzername: "Thomas"),
         alleAufgaben: [Aufgabe(abgelehnt: 22, aufgeschoben: 23, ausgespielt: 24, autor: "iTask", erledigt: 8, id: 12, kategorie: "Social", text: "Sprich mit einer fremden Person", text_detail: "Fördere deine Sozialkompetenz, indem du mit einer Person sprichst, mit der du vorher noch nie gesprochen hast. Zum Beispiel dein Postbote, jemand beim Einkaufen usw.", text_dp: "Spricht mit einer fremden Person")])
     }
 }*/

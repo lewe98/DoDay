@@ -2,8 +2,8 @@
 //  FirebaseFunctions.swift
 //  iTask
 //
-//  Created by Julian Hermanspahn on 04.06.20.
-//  Copyright © 2020 Julian Hermanspahn. All rights reserved.
+//  Created by Julian Hermanspahn, Lewe Lorenzen & Thomas Raab on 04.06.20.
+//  Copyright © 2020 DoDay. All rights reserved.
 //
 
 import Foundation
@@ -11,28 +11,38 @@ import Firebase
 import Combine
 import SwiftUI
 
+/// Diese Klasse enthält sämtliche Funktionen zur Kommunikation mit dem Firebase Backend.
 class FirebaseFunctions: ObservableObject {
     
-    //MARK: - VARIABLES
     
-    init(einstellungen: Einstellungen, coreDataFunctions: CoreDataFunctions) {
-        self.einstellungen = einstellungen
-        self.coreDataFunctions = coreDataFunctions
-        self.registered = UserDefaults.standard.object(forKey: "registered") as? Bool ?? false
-    }
     
+    // MARK: - VARIABLES
+    
+    
+    
+    /// Die Einstellungen des Users.
     let einstellungen: Einstellungen
+    
+    /// Die Core Data Funktionen.
     let coreDataFunctions: CoreDataFunctions
     
+    /// Die Firebase Datenbank (Firestore).
     let db = Firestore.firestore()
     
+    /// Der Regisitrierungstatus des aktiven Users.
     @Published var registered: Bool {
         didSet {
             UserDefaults.standard.set(registered, forKey: "registered")
         }
     }
+    
+    /// leeres Aufgaben-Array
     @Published var aufgaben = [Aufgabe]()
+    
+    /// leeres User-Array
     @Published var users = [User]()
+    
+    /// vordefiniertes User-Objekt, um den aktiven Nutzer zu speichern
     @Published var curUser: User = User(
         abgelehnt: [],
         aktueller_streak: 0,
@@ -45,11 +55,31 @@ class FirebaseFunctions: ObservableObject {
         id: "x",
         letztes_erledigt_datum: Date(),
         verbliebene_aufgaben: [],
-        vorname: "x")
+        nutzername: "x")
+    
+    
+    
+    //MARK: - INITIALIZER
+    
+    
+    
+    /// Der Initializer übernimmt die Instanzen der Einstellungen- und der CoreDataFunctions-Klasse.
+    /// Außerdem wird die registered-Variable auf ihren Status geprüft.
+    init(einstellungen: Einstellungen, coreDataFunctions: CoreDataFunctions) {
+        self.einstellungen = einstellungen
+        self.coreDataFunctions = coreDataFunctions
+        self.registered = UserDefaults.standard.object(forKey: "registered") as? Bool ?? false
+    }
     
     
     
     //MARK: - FUNCTIONS
+    
+    
+    
+    /// Prüft, ob ein Nutzer bereits registriert ist.
+    ///
+    /// - Parameter id: ID des aktuellen Nutzers
     func checkUUID(id: String) {
         print("wir sind in checkUUID")
         db.collection("users").whereField("id", isEqualTo: id)
@@ -69,7 +99,11 @@ class FirebaseFunctions: ObservableObject {
     
     
     
-    func registerUser(id: String, vorname: String){
+    /// Bereitet ein Nutzerobjekt auf die Registrierung vor und übergibt dieses an die setUser(...) Funktion
+    ///
+    /// - Parameter id: ID des aktuellen Nutzers
+    /// - Parameter nutzername: der vom User ausgewählte Nutzername
+    func registerUser(id: String, nutzername: String){
         let user = User(
             abgelehnt: [],
             aktueller_streak: 0,
@@ -82,7 +116,7 @@ class FirebaseFunctions: ObservableObject {
             id: id,
             letztes_erledigt_datum: Date(),
             verbliebene_aufgaben: [],
-            vorname: vorname)
+            nutzername: nutzername)
         
         setUser(user: user)
         
@@ -96,7 +130,7 @@ class FirebaseFunctions: ObservableObject {
          } else {
          for document in querySnapshot!.documents {
          print("\(document.documentID) => \(document.data())")
-         self.registerUser(id: user.id, vorname: user.vorname)
+         self.registerUser(id: user.id, nutzername: user.nutzername)
          }
          }
          }*/
@@ -104,6 +138,9 @@ class FirebaseFunctions: ObservableObject {
     
     
     
+    /// Registriert einen neuen Nutzer in der Datenbank.
+    ///
+    /// - Parameter user: Nutzer der registriert wird
     func setUser(user: User){
         db.collection("users").document(user.id).setData([
             "abgelehnt": user.abgelehnt,
@@ -117,7 +154,7 @@ class FirebaseFunctions: ObservableObject {
             "id": user.id,
             // "letztes_erledigt_datum": Timestamp(date: user.letztes_erledigt_datum),
             "verbliebene_aufgaben": user.verbliebene_aufgaben,
-            "vorname": user.vorname
+            "nutzername": user.nutzername
         ]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
@@ -132,6 +169,9 @@ class FirebaseFunctions: ObservableObject {
     
     
     
+    /// Funktion, um die Attribute des aktuellen Nutzers zu erhalten
+    ///
+    /// - Parameter completionHandler:completionHandler
     func getCurrUser(completionHandler: @escaping (User?, Error?) -> ()) {
         let id: String = UIDevice.current.identifierForVendor?.uuidString ?? "<keine ID>"
         db.collection("users").document(id).getDocument { (document, error) in
@@ -150,7 +190,7 @@ class FirebaseFunctions: ObservableObject {
                 let id = data["id"] as? String ?? UIDevice.current.identifierForVendor?.uuidString ?? "<keine ID>"
                 let letztes_erledigt_datum = data["letztes_erledigt_datum"] as? Date ?? Date()
                 let verbliebene_aufgaben = data["verbliebene_aufgaben"] as? [Int] ?? []
-                let vorname = data["vorname"] as? String ?? "<kein Vorname>"
+                let nutzername = data["nutzername"] as? String ?? "<kein Nutzername>"
                 
                 self.curUser.abgelehnt = abgelehnt
                 self.curUser.aktueller_streak = aktueller_streak
@@ -163,7 +203,7 @@ class FirebaseFunctions: ObservableObject {
                 self.curUser.id = id
                 self.curUser.letztes_erledigt_datum = letztes_erledigt_datum
                 self.curUser.verbliebene_aufgaben = verbliebene_aufgaben
-                self.curUser.vorname = vorname
+                self.curUser.nutzername = nutzername
                 
                 self.registered = true
                 
@@ -177,6 +217,10 @@ class FirebaseFunctions: ObservableObject {
     
     
     
+    /// Generiert eine zufällige Zeichenkette. Anzahl der Symbole wird durch den Parameter bestimmt.
+    ///
+    /// - Parameter length: Anzahl der Symbole.
+    /// - Returns: Zeichenkette als String.
     func generateRandomID(length: Int) -> String {
         let letters = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ123456789"
         return String((0..<length).map{ _ in letters.randomElement()! })
@@ -184,6 +228,9 @@ class FirebaseFunctions: ObservableObject {
     
     
     
+    /// Fügt eine Person der eigenen Freundesliste hinzu.
+    ///
+    /// - Parameter freundID: ID des zu hinzuzufügenden Freundes.
     func addFriend(freundID: String) {
         print("ADDFRIEND WIRD ERFOLGREICH AUSGELOEST. freundID: \(freundID)")
         var success: Bool = false
@@ -220,6 +267,9 @@ class FirebaseFunctions: ObservableObject {
     
     
     
+       /// Ermittelt die Anzahl aller verfügbaren Aufgaben.
+       ///
+       /// - Returns: Anzahl aller Aufgaben als Integer.
     func getAufgabenCollectionSize() -> Int {
         var count: Int = 0
         
@@ -242,7 +292,12 @@ class FirebaseFunctions: ObservableObject {
     
     
     
-    
+    /// Fügt der Datenbank eine neue Aufgabe hinzu.
+    ///
+    /// - Parameter text: Kurztext
+    /// - Parameter text_detail: Detaillierter Text
+    /// - Parameter text_dp: Text aus der dritten Person
+    /// - Parameter kategorie: Kategorie der Aufgabe
     func addNewAufgabe(text: String, text_detail: String, text_dp: String, kategorie: String){
         let aufgabe = Aufgabe(
             abgelehnt: 0,
@@ -269,6 +324,9 @@ class FirebaseFunctions: ObservableObject {
     
     
     
+    /// Inkremetiert die Anzahl der User, die die Aufgabe erledigt haben
+    ///
+    /// - Parameter aufgabe: Aufgabe die bearbeitet wird
     func incrementErledigt(aufgabe: Aufgabe){
         db.collection("aufgaben").document(String(aufgabe.id)).updateData([
             "erledigt": aufgabe.erledigt + 1
@@ -283,6 +341,9 @@ class FirebaseFunctions: ObservableObject {
     
     
     
+    /// Funktion, um alle verfügbaren Aufgaben zu erhalten.
+    ///
+    /// - Parameter completionHandler: completionHandler
     func fetchTasks(completionHandler: @escaping (Aufgabe?, Error?) -> ()) {
         db.collection("aufgaben").addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
@@ -326,6 +387,10 @@ class FirebaseFunctions: ObservableObject {
     }
     
     
+    
+    /// Funktion, um alle verfügbaren User zu erhalten.
+    ///
+    /// - Parameter completionHandler: completionHandler
     func fetchUsers(completionHandler: @escaping (User?, Error?) -> ()) {
         db.collection("users").addSnapshotListener { (querySnapshot, error) in
             
@@ -350,7 +415,7 @@ class FirebaseFunctions: ObservableObject {
                 let id = data["id"] as? String ?? UIDevice.current.identifierForVendor?.uuidString ?? "<keine ID>"
                 let letztes_erledigt_datum = data["letztes_erledigt_datum"] as? Date ?? Date()
                 let verbliebene_aufgaben = data["verbliebene_aufgaben"] as? [Int] ?? []
-                let vorname = data["vorname"] as? String ?? "<kein Vorname>"
+                let nutzername = data["nutzername"] as? String ?? "<kein Nutzername>"
                 
                 let user = User(
                     abgelehnt: abgelehnt,
@@ -363,7 +428,7 @@ class FirebaseFunctions: ObservableObject {
                     freundes_id: freundes_id,
                     id: id, letztes_erledigt_datum: letztes_erledigt_datum,
                     verbliebene_aufgaben: verbliebene_aufgaben,
-                    vorname: vorname)
+                    nutzername: nutzername)
                 
                 completionHandler(user, nil)
                 return user
