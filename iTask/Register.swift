@@ -2,8 +2,8 @@
 //  Register.swift
 //  iTask
 //
-//  Created by Julian Hermanspahn on 08.06.20.
-//  Copyright © 2020 Julian Hermanspahn. All rights reserved.
+//  Created by Julian Hermanspahn, Lewe Lorenzen & Thomas Raab on 08.06.20.
+//  Copyright © 2020 DoDay. All rights reserved.
 //
 
 import SwiftUI
@@ -12,7 +12,7 @@ struct Register: View {
     
     @EnvironmentObject var firebaseFunctions: FirebaseFunctions
     @EnvironmentObject var einstellungen: Einstellungen
-    @State private var vorname: String = ""
+    @State private var nutzername: String = ""
     let uuid = UIDevice.current.identifierForVendor?.uuidString ?? "<keine ID>"
     @State var datenschutzAkzeptiert: Bool = false
     @State var showingDatenschutz = false
@@ -21,8 +21,8 @@ struct Register: View {
         NavigationView {
             VStack() {
                 Form {
-                    Section(header: Text("WIE HEISST DU?")) {
-                        TextField("Dein Vorname", text: $vorname)
+                    Section(header: Text("WIE SOLLEN WIR DICH NENNEN?")) {
+                        TextField("Dein Nutzername", text: $nutzername)
                     }
                     HStack {
                       Image(systemName: datenschutzAkzeptiert ? "checkmark.circle.fill" : "circle")
@@ -40,12 +40,12 @@ struct Register: View {
                         }
                     }
                 
-                    if datenschutzAkzeptiert && vorname.count > 1 {
+                    if datenschutzAkzeptiert && nutzername.count > 1 {
                         Section() {
                             HStack {
                                 Spacer()
                                 Button(action: {
-                                    self.firebaseFunctions.registerUser(id: self.uuid, vorname: self.vorname)
+                                    self.firebaseFunctions.registerUser(id: self.uuid, nutzername: self.nutzername)
                                 }) {
                                     Text("Jetzt registrieren")
                                         .foregroundColor(.green)

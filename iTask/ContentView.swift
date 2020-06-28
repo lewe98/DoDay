@@ -2,8 +2,8 @@
 //  ContentView.swift
 //  iTask
 //
-//  Created by Julian Hermanspahn on 27.05.20.
-//  Copyright © 2020 Julian Hermanspahn. All rights reserved.
+//  Created by Julian Hermanspahn, Lewe Lorenzen & Thomas Raab on 27.05.20.
+//  Copyright © 2020 DoDay. All rights reserved.
 //
 
 import SwiftUI
@@ -273,7 +273,7 @@ struct ContentView: View {
         entity.id = user.id
         entity.letztes_erledigt_datum = user.letztes_erledigt_datum
         entity.verbliebene_aufgaben = user.verbliebene_aufgaben as NSObject
-        entity.vorname = user.vorname
+        entity.nutzername = user.nutzername
         
         try? self.managedObjectContext.save()
         completionHandler(entity, nil)
@@ -295,7 +295,7 @@ struct ContentView: View {
         entity.id = user.id
         entity.letztes_erledigt_datum = user.letztes_erledigt_datum
         entity.verbliebene_aufgaben = user.verbliebene_aufgaben as NSObject
-        entity.vorname = user.vorname
+        entity.nutzername = user.nutzername
         
         try? self.managedObjectContext.save()
         completionHandler(entity, nil)

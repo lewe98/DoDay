@@ -2,12 +2,13 @@
 //  UserModel.swift
 //  iTask
 //
-//  Created by Julian Hermanspahn on 04.06.20.
-//  Copyright © 2020 Julian Hermanspahn. All rights reserved.
+//  Created by Julian Hermanspahn, Lewe Lorenzen & Thomas Raab on 04.06.20.
+//  Copyright © 2020 DoDay. All rights reserved.
 //
 
 import Foundation
 
+/// Dieses Struct enthält die Attribute, um ein User-Objekt anzulegen.
 struct User: Identifiable, Hashable {
     var abgelehnt: [Int]
     var aktueller_streak: Int
@@ -20,8 +21,12 @@ struct User: Identifiable, Hashable {
     var id: String
     var letztes_erledigt_datum: Date
     var verbliebene_aufgaben: [Int]
-    var vorname: String
+    var nutzername: String
     
+    /// Nimmt ein Userobjekt aus Core Data entgegen (Users) und konvertiert dieses zum Typ User.
+    ///
+    /// - Parameter value: user - user aus Core Data
+    /// - Returns: konvertierter User
     static func initUserFromDatabase(user: Users) -> User {
         return User(
             abgelehnt: user.abgelehnt as! [Int],
@@ -35,9 +40,13 @@ struct User: Identifiable, Hashable {
             id: user.id ?? "<keine ID>",
             letztes_erledigt_datum: user.letztes_erledigt_datum ?? Date(),
             verbliebene_aufgaben: user.verbliebene_aufgaben as! [Int],
-            vorname: user.vorname ?? "<kein Vorname>")
+            nutzername: user.nutzername ?? "<kein Nutzername>")
     }
     
+    /// Nimmt ein Userobjekt aus Core Data entgegen (CurUser) und konvertiert dieses zum Typ User.
+    ///
+    /// - Parameter value: user - user aus Core Data
+    /// - Returns: konvertierter User
     static func initCurUserFromDatabase(user: CurUser) -> User {
         return User(
             abgelehnt: user.abgelehnt as! [Int],
@@ -51,6 +60,6 @@ struct User: Identifiable, Hashable {
             id: user.id ?? "<keine ID>",
             letztes_erledigt_datum: user.letztes_erledigt_datum ?? Date(),
             verbliebene_aufgaben: user.verbliebene_aufgaben as! [Int],
-            vorname: user.vorname ?? "<kein Vorname>")
+            nutzername: user.nutzername ?? "<kein Nutzername>")
     }
 }

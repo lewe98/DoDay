@@ -30,8 +30,8 @@
 		B9543EE72488FA5B006F75BD /* CoreDataFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9543EE62488FA5B006F75BD /* CoreDataFunctions.swift */; };
 		B9543EEA2488FAE0006F75BD /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9543EE92488FAE0006F75BD /* UserModel.swift */; };
 		B9543EEE2488FB23006F75BD /* Aufgaben_zuletzt_bearbeitet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9543EED2488FB23006F75BD /* Aufgaben_zuletzt_bearbeitet.swift */; };
-		B9543EF02488FDE1006F75BD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B9543EEF2488FDE0006F75BD /* GoogleService-Info.plist */; };
 		B9568C2D24892464005E6DD8 /* AufgabeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9568C2C24892464005E6DD8 /* AufgabeModel.swift */; };
+		B96E0B5724A9004D00FE93C7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B96E0B5624A9004D00FE93C7 /* GoogleService-Info.plist */; };
 		B984C1712490046B00147A71 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = B984C1702490046B00147A71 /* Register.swift */; };
 		B9A720E8249C202C00488233 /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A720E7249C202C00488233 /* Loading.swift */; };
 		E9475409248038380039B853 /* HeuteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9475408248038380039B853 /* HeuteView.swift */; };
@@ -93,8 +93,8 @@
 		B9543EE62488FA5B006F75BD /* CoreDataFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFunctions.swift; sourceTree = "<group>"; };
 		B9543EE92488FAE0006F75BD /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		B9543EED2488FB23006F75BD /* Aufgaben_zuletzt_bearbeitet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aufgaben_zuletzt_bearbeitet.swift; sourceTree = "<group>"; };
-		B9543EEF2488FDE0006F75BD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B9568C2C24892464005E6DD8 /* AufgabeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AufgabeModel.swift; sourceTree = "<group>"; };
+		B96E0B5624A9004D00FE93C7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B984C1702490046B00147A71 /* Register.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		B9A720E7249C202C00488233 /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
 		E9475408248038380039B853 /* HeuteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeuteView.swift; sourceTree = "<group>"; };
@@ -206,6 +206,7 @@
 				A145AEEB24813C15005047D4 /* BodyViews */,
 				B90A8840247DD7D600B59892 /* AppDelegate.swift */,
 				B90A8847247DD7D600B59892 /* ContentView.swift */,
+				B96E0B5624A9004D00FE93C7 /* GoogleService-Info.plist */,
 				E9475408248038380039B853 /* HeuteView.swift */,
 				E947540A2480384D0039B853 /* UebersichtView.swift */,
 				E947540C248038610039B853 /* FreundeView.swift */,
@@ -215,7 +216,6 @@
 				B984C1702490046B00147A71 /* Register.swift */,
 				B9A720E7249C202C00488233 /* Loading.swift */,
 				B90A884E247DD7D800B59892 /* LaunchScreen.storyboard */,
-				B9543EEF2488FDE0006F75BD /* GoogleService-Info.plist */,
 				B90A8851247DD7D800B59892 /* Info.plist */,
 				B90A8844247DD7D600B59892 /* iTask.xcdatamodeld */,
 				E98953222483B753008093D0 /* Einstellungen.swift */,
@@ -394,7 +394,7 @@
 			files = (
 				B91275E024890AF200C5FF6F /* .gitignore in Resources */,
 				B90A8850247DD7D800B59892 /* LaunchScreen.storyboard in Resources */,
-				B9543EF02488FDE1006F75BD /* GoogleService-Info.plist in Resources */,
+				B96E0B5724A9004D00FE93C7 /* GoogleService-Info.plist in Resources */,
 				B90A884D247DD7D800B59892 /* Preview Assets.xcassets in Resources */,
 				B90A884A247DD7D800B59892 /* Assets.xcassets in Resources */,
 			);
@@ -665,7 +665,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.lewe-lorenzen.iTask";
+				PRODUCT_BUNDLE_IDENTIFIER = de.doday.app;
 				PRODUCT_NAME = DoDay;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -687,7 +687,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.lewe-lorenzen.iTask";
+				PRODUCT_BUNDLE_IDENTIFIER = de.doday.app;
 				PRODUCT_NAME = DoDay;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

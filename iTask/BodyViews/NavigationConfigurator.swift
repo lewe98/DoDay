@@ -2,8 +2,8 @@
 //  NavigationConfigurator.swift
 //  iTask
 //
-//  Created by Lewe Lorenzen on 10.06.20.
-//  Copyright © 2020 Julian Hermanspahn. All rights reserved.
+//  Created by Julian Hermanspahn, Lewe Lorenzen & Thomas Raab on 10.06.20.
+//  Copyright © 2020 DoDay. All rights reserved.
 //
 // if use: https://stackoverflow.com/questions/56505528/swiftui-update-navigation-bar-title-color
 /*

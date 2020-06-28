@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>496692310694-serdq8ll9fi1mnaprdh2kr95navpoq00.apps.googleusercontent.com</string>
+	<string>496692310694-5b5n98vvor0fjfp00b76d67ck6p0fcau.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.496692310694-serdq8ll9fi1mnaprdh2kr95navpoq00</string>
+	<string>com.googleusercontent.apps.496692310694-5b5n98vvor0fjfp00b76d67ck6p0fcau</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBHJAzitZdyi0nKePjBARmc-w432wl86H0</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>de.lewe-lorenzen.iTask</string>
+	<string>de.doday.app</string>
 	<key>PROJECT_ID</key>
 	<string>itask-211b8</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:496692310694:ios:b82d565c68fdec80e3fa67</string>
+	<string>1:496692310694:ios:624fb379d7f33c4ee3fa67</string>
 	<key>DATABASE_URL</key>
 	<string>https://itask-211b8.firebaseio.com</string>
 </dict>
