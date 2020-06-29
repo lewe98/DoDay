@@ -13,6 +13,9 @@ class GlobalFunctions: ObservableObject {
     @Published var isLoading: Bool = true
     
     func load() {
+        
+        //TODO: - Core Data Funktionen aufrufen
+        
         isLoading = true
         isLoading = false
     }
