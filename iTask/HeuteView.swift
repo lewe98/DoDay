@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-// hey
 
 struct HeuteView: View {
     init() {
@@ -20,21 +19,24 @@ struct HeuteView: View {
     var aufgabeInArbeit = true
     var body: some View {
         switch aufgabeInArbeit {
+            
         case true:
             return AnyView(
                 NavigationView {
-                   AktuellFirstView(Aufgabe1: "Sprich mit einer dir fremden Person", Aufgabe2: "Gehe 10.000 Schritte Zu Fuß")
+                   AktuellFirstView(
+                    Aufgabe1: "Sprich mit einer dir fremden Person",
+                    Aufgabe2: "Gehe 10.000 Schritte Zu Fuß")
                     .navigationBarTitle(Text("Aktuell")).navigationBarHidden(false)
                 }
             )
+            
         case false:
             return
                 AnyView(
                 NavigationView {
                    AktuellSecondView(Aufgabe: "Sprich mit einer dir fremden Person")
                     .navigationBarTitle(Text("Aktuell"))
-                }
-                    .background(Color(UIColor .systemGroupedBackground))
+                }.background(Color(UIColor .systemGroupedBackground))
             )
             
         }

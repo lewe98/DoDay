@@ -20,13 +20,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
-        // Get the managed object context from the shared persistent container.
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
-        // Firebase
-        FirebaseApp.configure()
         
-        // Notifications
+        /// Firebase wird instanziiert.
+        FirebaseApp.configure()
+        /// Der managed object context wird aus dem shared persistent container aus AppDelegate.swift ausgelesen.
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        
+        /// User wird beim App-Start gefragtt, ob er Benachrichtigungen zulassen möchte,
         UNUserNotificationCenter.current().delegate = self
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound,. badge]) { (granted, error) in
             if granted {
@@ -36,30 +37,33 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
             }
         }
         
+        
+        ///Instanziieren der Klassen (EnvironmentObjects).
         let einstellungen = Einstellungen()
-    
+        let firebaseFunctions = FirebaseFunctions(einstellungen: einstellungen)
+        let coreDataFunctions = CoreDataFunctions(
+            firebase: firebaseFunctions,
+            context: context)
+        let globalFunctions = GlobalFunctions()
         
-        let firebaseFunctions = FirebaseFunctions(
-            einstellungen: einstellungen)
-        //,
-            //coreDataFunctions: coreDataFunctions)
         
-        let coreDataFunctions = CoreDataFunctions(firebase: firebaseFunctions)
-    
-        // hinzufügen von environmentObjects in der Root View (ContentView())
+        /// Hinzufügen von environmentObjects in der Root View (ContentView()).
         let contentView = ContentView()
             .environment(\.managedObjectContext, context)
             .environmentObject(firebaseFunctions)
             .environmentObject(coreDataFunctions)
-
-       // Check if registered
-       let uuid = UIDevice.current.identifierForVendor?.uuidString
-       firebaseFunctions.checkUUID(id: uuid!)
+            .environmentObject(globalFunctions)
+        
+        
+        /// Prüft, ob der User bereits registriert ist oder nicht.
+        let uuid = UIDevice.current.identifierForVendor?.uuidString
+        firebaseFunctions.checkUUID(id: uuid!)
+        
         
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            // contentView wird als rootView definiert
+            /// contentView wird als rootView definiert.
             window.rootViewController = UIHostingController(rootView: contentView)
             self.window = window
             window.makeKeyAndVisible()

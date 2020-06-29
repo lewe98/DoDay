@@ -21,6 +21,16 @@ struct FreundeView: View {
     @State var showingFreundeHinzufuegen = false
     @State var freundesListe: [Freund] = []
     
+    
+    let firebaseFunctions: FirebaseFunctions
+    let coreDataFunctions: CoreDataFunctions
+    
+    init(fb: FirebaseFunctions, cd: CoreDataFunctions) {
+        self.firebaseFunctions = fb
+        self.coreDataFunctions = cd
+    }
+    
+    
     let loadingUser: User = User(
     abgelehnt: [3, 5],
     aktueller_streak: 5,
@@ -36,11 +46,13 @@ struct FreundeView: View {
     nutzername: "loading")
     
     //MARK: Muss irgendwo anders definiert werden
+    /*
     @Binding var curUser: [User]
     @Binding var alleAufgaben: [Aufgabe]
     @Binding var allUsers: [User]
     @Binding var curAufgabe: Aufgabe
     @EnvironmentObject var firebaseFunctions: FirebaseFunctions
+    */
     
     var body: some View {
         NavigationView {
@@ -48,10 +60,12 @@ struct FreundeView: View {
                 Section(header: Text("DEIN FREUNDESCODE")) {
                     HStack {
                         // TODO: Korrekte Variable dynamisch ausgeben
-                        Text(curUser.count > 0 ? curUser[0].freundes_id : loadingUser.freundes_id)
+                        //Text(curUser.count > 0 ? curUser[0].freundes_id : loadingUser.freundes_id)
+                        Text(coreDataFunctions.curUserResult.freundes_id)
                         Spacer()
                         Button(action: {
-                            self.kopiereId()
+                            //self.kopiereId()
+                            print("kopieren...")
                         }) {
                             Text(kopierenText)
                         }
@@ -59,7 +73,8 @@ struct FreundeView: View {
                     HStack{
                         Spacer()
                         Button(action: {
-                            self.showingFreundeHinzufuegen.toggle()
+                            //self.showingFreundeHinzufuegen.toggle()
+                            print("freund hinzufügen...")
                         }) {
                             Text("Freunde hinzufügen")
                         }
@@ -96,7 +111,8 @@ struct FreundeView: View {
                     HStack {
                         Spacer()
                         Button(action: {
-                            self.freundeHerausfordern()
+                            //self.freundeHerausfordern()
+                            print("freunde herausfordern...")
                         }) {
                             Text("Fordere deine Freunde heraus")
                         }
@@ -105,10 +121,10 @@ struct FreundeView: View {
                 }
             }
             .navigationBarTitle(Text("Freunde"))
-            .onAppear{self.updateFreundesListe()}
+            //.onAppear{self.updateFreundesListe()}
         }
     }
-    
+    /*
     func updateFreundesListe() {
         print("\n\n\n\n curUser.count ist: \(curUser.count) bzw. der curUser: \n \(curUser)\n\n\n")
         if curUser.count > 0 {
@@ -164,6 +180,7 @@ struct FreundeView: View {
 
         UIApplication.shared.windows.first?.rootViewController?.present(activityViewController, animated: true, completion: nil)
     }
+ */
 }
 
 /*struct FreundeView_Previews: PreviewProvider {

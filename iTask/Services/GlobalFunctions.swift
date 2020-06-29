@@ -7,3 +7,13 @@
 //
 
 import Foundation
+
+class GlobalFunctions: ObservableObject {
+    
+    @Published var isLoading: Bool = true
+    
+    func load() {
+        isLoading = true
+        isLoading = false
+    }
+}
