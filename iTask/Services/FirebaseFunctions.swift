@@ -16,15 +16,10 @@ class FirebaseFunctions: ObservableObject {
     
     
     
-    // MARK: - VARIABLES
-    
-    
-    
+// MARK: - VARIABLES
     /// Die Einstellungen des Users.
     let einstellungen: Einstellungen
     
-    /// Die Core Data Funktionen.
-    let coreDataFunctions: CoreDataFunctions
     
     /// Die Firebase Datenbank (Firestore).
     let db = Firestore.firestore()
@@ -59,29 +54,24 @@ class FirebaseFunctions: ObservableObject {
     
     
     
-    //MARK: - INITIALIZER
-    
-    
-    
+//MARK: - INITIALIZER
     /// Der Initializer übernimmt die Instanzen der Einstellungen- und der CoreDataFunctions-Klasse.
     /// Außerdem wird die registered-Variable auf ihren Status geprüft.
-    init(einstellungen: Einstellungen, coreDataFunctions: CoreDataFunctions) {
+    init(einstellungen: Einstellungen)
+    //, coreDataFunctions: CoreDataFunctions)
+    {
         self.einstellungen = einstellungen
-        self.coreDataFunctions = coreDataFunctions
+       // self.coreDataFunctions = coreDataFunctions
         self.registered = UserDefaults.standard.object(forKey: "registered") as? Bool ?? false
     }
     
     
     
-    //MARK: - FUNCTIONS
-    
-    
-    
+//MARK: - FUNCTIONS
     /// Prüft, ob ein Nutzer bereits registriert ist.
     ///
     /// - Parameter id: ID des aktuellen Nutzers
     func checkUUID(id: String) {
-        print("wir sind in checkUUID")
         db.collection("users").whereField("id", isEqualTo: id)
             .getDocuments() { (querySnapshot, err) in
                 if (querySnapshot?.documents.count == 0) {

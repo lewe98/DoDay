@@ -30,39 +30,52 @@ struct UebersichtView: View {
                         }
                         Spacer()
                         Text(String(erfolgreicheAufgabeFolge))
-                        Image(systemName: "checkmark").foregroundColor(.blue)
+                        Image(systemName: "checkmark")
+                            .foregroundColor(.blue)
                     }
                     HStack {
                         Text("Insgesamt erledigte")
                         Spacer()
                         Text(String(erledigteAufgaben))
-                        Image(systemName: "checkmark").foregroundColor(.blue)
+                        Image(systemName: "checkmark")
+                            .foregroundColor(.blue)
                     }
                 }
-                Section (header: Text("Aufgaben Statistik")){
+                Section (header: Text("Aufgaben Statistik")) {
+                    
                     VStack (alignment: .leading){
-                        Additives_diagramm(erledigteA: 10, nichtErledigteA: 5, aufgeschobeneA: 1)
+                        Additives_diagramm(
+                            erledigteA: 10,
+                            nichtErledigteA: 5,
+                            aufgeschobeneA: 1)
                             .frame(minHeight: 24, maxHeight: 24)
+                        
                         HStack {
                             Circle()
                                 .frame(maxWidth: 12, maxHeight: 12)
                                 .foregroundColor(.green)
                             Text("Erledigt").font(.footnote)
+                            
                             Spacer()
+                            
                             Circle()
                                 .frame(maxWidth: 12, maxHeight: 12)
                                 .foregroundColor(.red)
+                            
                             Text("nicht Erledigt").font(.footnote)
+                            
                             Spacer()
+                            
                             Circle()
                                 .frame(maxWidth: 12, maxHeight: 12)
                                 .foregroundColor(.yellow)
+                            
                             Text("Aufgeschoben").font(.footnote)
                             
-                        }
-                        .padding(.horizontal)
+                        }.padding(.horizontal)
                     }
                 }
+                
                 Section (header: Text("Vergangene Aufgaben")){
                     ForEach(vergangeneAufgaben , id: \VergangeneAufgabe.aufgabe) { vergangeneAufgabe in
                         
@@ -73,23 +86,35 @@ struct UebersichtView: View {
                         }
                         
                     }
-                    
                 }
-                Section (header: Text("Vergangene Aufgaben")){
+                
+                Section (header: Text("Vergangene Aufgaben")) {
                 
                     PieChartRow(data: [8,23,54], backgroundColor: Color(UIColor.lightGray), accentColor: .green)
                         .foregroundColor(.red)
                         .frame(width: 100, height: 100)
                         .padding()
                 }
-            }
-            .navigationBarTitle(Text("Übersicht"))
+                
+            }.navigationBarTitle(Text("Übersicht"))
         }
     }
 }
 
 struct UebersichtView_Previews: PreviewProvider {
     static var previews: some View {
-        UebersichtView(erfolgreicheAufgabeFolge: 5, erledigteAufgaben: 2, vergangeneAufgaben: [VergangeneAufgabe(aufgabe: "Laufen", erledigt: true),VergangeneAufgabe(aufgabe: "Treppen", erledigt: false)])
+        UebersichtView(
+            erfolgreicheAufgabeFolge: 5,
+            
+            erledigteAufgaben: 2,
+            
+            vergangeneAufgaben: [
+                VergangeneAufgabe(
+                    aufgabe: "Laufen",
+                    erledigt: true),
+                
+                VergangeneAufgabe(
+                    aufgabe: "Treppen",
+                    erledigt: false)])
     }
 }
