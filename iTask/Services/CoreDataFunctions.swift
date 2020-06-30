@@ -63,6 +63,7 @@ class CoreDataFunctions: ObservableObject {
         self.firebaseFunctions.getCurrUser { (u, err) in
             if let user = u {
                 
+                // self.deleteAllData(entity: "CurUser")
                 self.insertNewCurrentUserIntoCoreData(user: user)
                 self.fetchCDCurUser()
                 
@@ -88,6 +89,8 @@ class CoreDataFunctions: ObservableObject {
         newCurrentUser.setValue(user.letztes_erledigt_datum, forKey: "letztes_erledigt_datum")
         newCurrentUser.setValue(user.verbliebene_aufgaben, forKey: "verbliebene_aufgaben")
         newCurrentUser.setValue(user.nutzername, forKey: "nutzername")
+        
+        print("INSERT CURRENT USER: ", newCurrentUser)
         
         saveCoreData()
     }
@@ -117,7 +120,7 @@ class CoreDataFunctions: ObservableObject {
                 curUserResult.nutzername = data.value(forKey: "nutzername") as! String
             }
             
-            print("ICH HEULE: ", curUserResult)
+            print("GET CURRENT USER: ", curUserResult)
         } catch {
             print("Failed")
         }
@@ -129,6 +132,7 @@ class CoreDataFunctions: ObservableObject {
         self.firebaseFunctions.fetchUsers { (userFB, error) in
             if let user = userFB {
                 
+                // self.deleteAllData(entity: "Users")
                 self.insertUserIntoCoreData(user: user)
                 self.fetchCDUsers()
                 
@@ -168,8 +172,37 @@ class CoreDataFunctions: ObservableObject {
         do {
             let result = try context.fetch(getUsers)
             for data in result as! [NSManagedObject] {
-                print("USERS AUS CORE DATA: ", data.value(forKey: "nutzername") as! String)
+                
+                var user: User = User(
+                abgelehnt: [],
+                aktueller_streak: 0,
+                anzahl_benachrichtigungen: 0,
+                aufgabe: 0, aufgeschoben: [],
+                erledigt: [],
+                freunde: [],
+                freundes_id: "",
+                id: "",
+                letztes_erledigt_datum: Date(),
+                verbliebene_aufgaben: [],
+                nutzername: "")
+                
+                user.abgelehnt = data.value(forKey: "abgelehnt") as! [Int]
+                user.aktueller_streak = data.value(forKey: "aktueller_streak") as! Int
+                user.anzahl_benachrichtigungen = data.value(forKey: "anzahl_benachrichtigungen") as! Int
+                user.aufgabe = data.value(forKey: "aufgabe") as! Int
+                user.aufgeschoben = data.value(forKey: "aufgeschoben") as! [Int]
+                user.erledigt = data.value(forKey: "erledigt") as! [Int]
+                user.freunde = data.value(forKey: "freunde") as! [String]
+                user.freundes_id = data.value(forKey: "freundes_id") as! String
+                user.id = data.value(forKey: "id") as! String
+                user.letztes_erledigt_datum = data.value(forKey: "letztes_erledigt_datum") as! Date
+                user.verbliebene_aufgaben = data.value(forKey: "verbliebene_aufgaben") as! [Int]
+                user.nutzername = data.value(forKey: "nutzername") as! String
+                
+                self.allCDUsers.append(user)
             }
+            
+            print("GET ALL USERS: ", allCDUsers)
             
         } catch {
             print("Failed")
@@ -182,6 +215,7 @@ class CoreDataFunctions: ObservableObject {
         self.firebaseFunctions.fetchTasks { (aufgabeModel, error) in
             if let aufgabe = aufgabeModel {
                 
+                // self.deleteAllData(entity: "Aufgaben")
                 self.insertAufgabeIntoCoreData(aufgabe: aufgabe)
                 self.fetchCDAufgaben()
                 
@@ -213,14 +247,41 @@ class CoreDataFunctions: ObservableObject {
     
     
     func fetchCDAufgaben(){
-        let getUsers = NSFetchRequest<NSFetchRequestResult>(entityName: "Aufgaben")
+        let getAufgaben = NSFetchRequest<NSFetchRequestResult>(entityName: "Aufgaben")
         //request.predicate = NSPredicate(format: "age = %@", "12")
-        getUsers.returnsObjectsAsFaults = false
+        getAufgaben.returnsObjectsAsFaults = false
+        
         do {
-            let result = try context.fetch(getUsers)
+            let result = try context.fetch(getAufgaben)
             for data in result as! [NSManagedObject] {
-                print(data.value(forKey: "text") as! String)
+                
+                var aufgabe: Aufgabe = Aufgabe(
+                abgelehnt: 0,
+                aufgeschoben: 0,
+                ausgespielt: 0,
+                autor: "DoDay",
+                erledigt: 0,
+                id: 0,
+                kategorie: "",
+                text: "",
+                text_detail: "",
+                text_dp: "")
+                
+                aufgabe.abgelehnt = data.value(forKey: "abgelehnt") as! Int
+                aufgabe.aufgeschoben = data.value(forKey: "aufgeschoben") as! Int
+                aufgabe.ausgespielt = data.value(forKey: "ausgespielt") as! Int
+                aufgabe.autor = data.value(forKey: "autor") as! String
+                aufgabe.erledigt = data.value(forKey: "erledigt") as! Int
+                aufgabe.id = data.value(forKey: "id") as! Int
+                aufgabe.kategorie = data.value(forKey: "kategorie") as! String
+                aufgabe.text = data.value(forKey: "text") as! String
+                aufgabe.text_detail = data.value(forKey: "text_detail") as! String
+                aufgabe.text_dp = data.value(forKey: "text_dp") as! String
+                
+                self.allCDAufgaben.append(aufgabe)
             }
+            
+            print("GET ALL AUFGABEN: ", allCDAufgaben)
             
         } catch {
             print("Failed")
@@ -239,4 +300,24 @@ class CoreDataFunctions: ObservableObject {
     
     
     
+    func deleteAllData(entity: String) {
+        //, completionHandler: @escaping (Bool?, Error?) -> ()) {
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+        fetchRequest.returnsObjectsAsFaults = false
+        
+        do {
+            let results = try context.fetch(fetchRequest)
+            for managedObject in results
+            {
+                let managedObjectData: NSManagedObject = managedObject as! NSManagedObject
+                context.delete(managedObjectData)
+            }
+            //completionHandler(true, nil)
+        } catch let error as NSError {
+            //completionHandler(nil, error)
+            print("Delete all data in \(entity) error : \(error) \(error.userInfo)")
+        }
+    }
+
 }

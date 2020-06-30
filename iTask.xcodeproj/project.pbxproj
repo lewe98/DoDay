@@ -29,7 +29,6 @@
 		B9543EE52488FA49006F75BD /* FirebaseFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9543EE42488FA49006F75BD /* FirebaseFunctions.swift */; };
 		B9543EE72488FA5B006F75BD /* CoreDataFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9543EE62488FA5B006F75BD /* CoreDataFunctions.swift */; };
 		B9543EEA2488FAE0006F75BD /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9543EE92488FAE0006F75BD /* UserModel.swift */; };
-		B9543EEE2488FB23006F75BD /* Aufgaben_zuletzt_bearbeitet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9543EED2488FB23006F75BD /* Aufgaben_zuletzt_bearbeitet.swift */; };
 		B9568C2D24892464005E6DD8 /* AufgabeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9568C2C24892464005E6DD8 /* AufgabeModel.swift */; };
 		B96E0B5724A9004D00FE93C7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B96E0B5624A9004D00FE93C7 /* GoogleService-Info.plist */; };
 		B984C1712490046B00147A71 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = B984C1702490046B00147A71 /* Register.swift */; };
@@ -93,7 +92,6 @@
 		B9543EE42488FA49006F75BD /* FirebaseFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFunctions.swift; sourceTree = "<group>"; };
 		B9543EE62488FA5B006F75BD /* CoreDataFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFunctions.swift; sourceTree = "<group>"; };
 		B9543EE92488FAE0006F75BD /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
-		B9543EED2488FB23006F75BD /* Aufgaben_zuletzt_bearbeitet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aufgaben_zuletzt_bearbeitet.swift; sourceTree = "<group>"; };
 		B9568C2C24892464005E6DD8 /* AufgabeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AufgabeModel.swift; sourceTree = "<group>"; };
 		B96E0B5624A9004D00FE93C7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B984C1702490046B00147A71 /* Register.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
@@ -201,28 +199,23 @@
 		B90A883F247DD7D600B59892 /* iTask */ = {
 			isa = PBXGroup;
 			children = (
+				B979A0A524AB5EFC00862A20 /* InitViews */,
+				B979A0A424AB5E9A00862A20 /* TabBar */,
 				E9DA9B42248BC76A00D5C0F8 /* EinstellungenViews */,
 				B9543EE82488FAC7006F75BD /* Models */,
 				B9543EE32488F9E2006F75BD /* Services */,
 				A1959E1D2484047800B6B12E /* PieChart */,
 				A145AEEB24813C15005047D4 /* BodyViews */,
 				B90A8840247DD7D600B59892 /* AppDelegate.swift */,
-				B90A8847247DD7D600B59892 /* ContentView.swift */,
-				B96E0B5624A9004D00FE93C7 /* GoogleService-Info.plist */,
-				E9475408248038380039B853 /* HeuteView.swift */,
-				E947540A2480384D0039B853 /* UebersichtView.swift */,
-				E947540C248038610039B853 /* FreundeView.swift */,
-				E947540E2480386F0039B853 /* EinstellungenView.swift */,
 				B90A8842247DD7D600B59892 /* SceneDelegate.swift */,
-				B90A8849247DD7D800B59892 /* Assets.xcassets */,
-				B984C1702490046B00147A71 /* Register.swift */,
-				B9A720E7249C202C00488233 /* Loading.swift */,
 				B90A884E247DD7D800B59892 /* LaunchScreen.storyboard */,
-				B90A8851247DD7D800B59892 /* Info.plist */,
-				B90A8844247DD7D600B59892 /* iTask.xcdatamodeld */,
-				E98953222483B753008093D0 /* Einstellungen.swift */,
-				B90A884B247DD7D800B59892 /* Preview Content */,
 				E9DA9B49248F8CC800D5C0F8 /* FreundeHinzufuegenView.swift */,
+				E98953222483B753008093D0 /* Einstellungen.swift */,
+				B90A8851247DD7D800B59892 /* Info.plist */,
+				B96E0B5624A9004D00FE93C7 /* GoogleService-Info.plist */,
+				B90A8844247DD7D600B59892 /* iTask.xcdatamodeld */,
+				B90A8849247DD7D800B59892 /* Assets.xcassets */,
+				B90A884B247DD7D800B59892 /* Preview Content */,
 			);
 			path = iTask;
 			sourceTree = "<group>";
@@ -268,9 +261,29 @@
 			children = (
 				B9543EE92488FAE0006F75BD /* UserModel.swift */,
 				B9568C2C24892464005E6DD8 /* AufgabeModel.swift */,
-				B9543EED2488FB23006F75BD /* Aufgaben_zuletzt_bearbeitet.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		B979A0A424AB5E9A00862A20 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				E9475408248038380039B853 /* HeuteView.swift */,
+				E947540A2480384D0039B853 /* UebersichtView.swift */,
+				E947540C248038610039B853 /* FreundeView.swift */,
+				E947540E2480386F0039B853 /* EinstellungenView.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		B979A0A524AB5EFC00862A20 /* InitViews */ = {
+			isa = PBXGroup;
+			children = (
+				B90A8847247DD7D600B59892 /* ContentView.swift */,
+				B984C1702490046B00147A71 /* Register.swift */,
+				B9A720E7249C202C00488233 /* Loading.swift */,
+			);
+			path = InitViews;
 			sourceTree = "<group>";
 		};
 		E9DA9B42248BC76A00D5C0F8 /* EinstellungenViews */ = {
@@ -487,7 +500,6 @@
 				E947540F2480386F0039B853 /* EinstellungenView.swift in Sources */,
 				B90A8841247DD7D600B59892 /* AppDelegate.swift in Sources */,
 				E947540D248038610039B853 /* FreundeView.swift in Sources */,
-				B9543EEE2488FB23006F75BD /* Aufgaben_zuletzt_bearbeitet.swift in Sources */,
 				B90A8848247DD7D600B59892 /* ContentView.swift in Sources */,
 				B9543EE52488FA49006F75BD /* FirebaseFunctions.swift in Sources */,
 				B9543EE72488FA5B006F75BD /* CoreDataFunctions.swift in Sources */,

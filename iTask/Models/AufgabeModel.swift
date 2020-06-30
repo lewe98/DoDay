@@ -20,23 +20,5 @@ struct Aufgabe: Identifiable, Hashable {
     var text: String
     var text_detail: String
     var text_dp: String
-    
-    /// Nimmt ein Userobjekt aus Core Data entgegen (Aufgaben) und konvertiert dieses zum Typ Aufgabe.
-    ///
-    /// - Parameter value: aufgabe - aufgabe aus Core Data
-    /// - Returns: konvertierte Aufgabe
-    static func initAufgabeFromDatabase(aufgabe: Aufgaben) -> Aufgabe {
-        return Aufgabe(
-            abgelehnt: Int(aufgabe.abgelehnt),
-            aufgeschoben: Int(aufgabe.aufgeschoben),
-            ausgespielt: Int(aufgabe.ausgespielt),
-            autor: aufgabe.autor ?? "iTask",
-            erledigt: Int(aufgabe.erledigt),
-            id: Int(aufgabe.id),
-            kategorie: aufgabe.kategorie ?? "Sonstiges",
-            text: aufgabe.text ?? "Ooops...",
-            text_detail: aufgabe.text_detail ?? "Ooops...",
-            text_dp: aufgabe.text_dp ?? "Ooops..."
-        )
-    }
 }
+

@@ -72,7 +72,6 @@ class FirebaseFunctions: ObservableObject {
     ///
     /// - Parameter id: ID des aktuellen Nutzers
     func checkUUID(id: String) {
-        print("wir sind in checkUUID")
         db.collection("users").whereField("id", isEqualTo: id)
             .getDocuments() { (querySnapshot, err) in
                 if (querySnapshot?.documents.count == 0) {

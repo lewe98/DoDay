@@ -29,8 +29,7 @@ struct ContentView: View {
         else if self.firebaseFunctions.registered {
             TabView {
                 
-                
-                HeuteView()
+                HeuteView(curUser: self.coreDataFunctions.curUserResult)
                     .tabItem {
                         VStack {
                             Image(systemName: "flag")
@@ -73,8 +72,8 @@ struct ContentView: View {
                 
             }.onAppear{
                 self.coreDataFunctions.getCurUserFromFirebase()
-                // self.coreDataFunctions.getUsersFromFirebase()
-                // self.coreDataFunctions.getAufgabenFromFirebase()
+                self.coreDataFunctions.getUsersFromFirebase()
+                self.coreDataFunctions.getAufgabenFromFirebase()
             }
         } else {
             Register().onDisappear{}
