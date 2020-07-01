@@ -161,37 +161,26 @@ class FirebaseFunctions: ObservableObject {
     ///
     /// - Parameter completionHandler:completionHandler
     func getCurrUser(completionHandler: @escaping (User?, Error?) -> ()) {
-        let id: String = UIDevice.current.identifierForVendor?.uuidString ?? "<keine ID>"
+        
+        let id: String = UIDevice.current.identifierForVendor!.uuidString
+        
         db.collection("users").document(id).getDocument { (document, error) in
             if let document = document, document.exists {
                 
                 let data = document.data()!
                 
-                let abgelehnt = data["abgelehnt"] as? [Int] ?? []
-                let aktueller_streak = data["aktueller_streak"] as? Int ?? 0
-                let anzahl_benachrichtigungen = data["anzahl_benachrichtigungen"] as? Int ?? 0
-                let aufgabe = data["aufgabe"] as? Int ?? 0
-                let aufgeschoben = data["aufgeschoben"] as? [Int] ?? []
-                let erledigt = data["erledigt"] as? [Int] ?? []
-                let freunde = data["freunde"] as? [String] ?? []
-                let freundes_id = data["freundes_id"] as? String ?? "kein Freundes-ID"
-                let id = data["id"] as? String ?? UIDevice.current.identifierForVendor?.uuidString ?? "<keine ID>"
-                let letztes_erledigt_datum = data["letztes_erledigt_datum"] as? Date ?? Date()
-                let verbliebene_aufgaben = data["verbliebene_aufgaben"] as? [Int] ?? []
-                let nutzername = data["nutzername"] as? String ?? "<kein Nutzername>"
-                
-                self.curUser.abgelehnt = abgelehnt
-                self.curUser.aktueller_streak = aktueller_streak
-                self.curUser.anzahl_benachrichtigungen = anzahl_benachrichtigungen
-                self.curUser.aufgabe = aufgabe
-                self.curUser.aufgeschoben = aufgeschoben
-                self.curUser.erledigt = erledigt
-                self.curUser.freunde = freunde
-                self.curUser.freundes_id = freundes_id
-                self.curUser.id = id
-                self.curUser.letztes_erledigt_datum = letztes_erledigt_datum
-                self.curUser.verbliebene_aufgaben = verbliebene_aufgaben
-                self.curUser.nutzername = nutzername
+                self.curUser.abgelehnt = data["abgelehnt"] as? [Int] ?? []
+                self.curUser.aktueller_streak = data["aktueller_streak"] as? Int ?? 0
+                self.curUser.anzahl_benachrichtigungen = data["anzahl_benachrichtigungen"] as? Int ?? 0
+                self.curUser.aufgabe = data["aufgabe"] as? Int ?? 0
+                self.curUser.aufgeschoben = data["aufgeschoben"] as? [Int] ?? []
+                self.curUser.erledigt = data["erledigt"] as? [Int] ?? []
+                self.curUser.freunde = data["freunde"] as? [String] ?? []
+                self.curUser.freundes_id = data["freundes_id"] as? String ?? "kein Freundes-ID"
+                self.curUser.id = data["id"] as? String ?? id
+                self.curUser.letztes_erledigt_datum = data["letztes_erledigt_datum"] as? Date ?? Date()
+                self.curUser.verbliebene_aufgaben = data["verbliebene_aufgaben"] as? [Int] ?? []
+                self.curUser.nutzername = data["nutzername"] as? String ?? "<kein Nutzername>"
                 
                 self.registered = true
                 
@@ -332,8 +321,9 @@ class FirebaseFunctions: ObservableObject {
     /// Funktion, um alle verfügbaren Aufgaben zu erhalten.
     ///
     /// - Parameter completionHandler: completionHandler
-    func fetchTasks(completionHandler: @escaping (Aufgabe?, Error?) -> ()) {
+    func fetchTasks(completionHandler: @escaping ([Aufgabe]?, Error?) -> ()) {
         db.collection("aufgaben").addSnapshotListener { (querySnapshot, error) in
+            
             guard let documents = querySnapshot?.documents else {
                 print("Error: \(String(describing: error))")
                 completionHandler(nil, error)
@@ -344,33 +334,21 @@ class FirebaseFunctions: ObservableObject {
                 
                 let data = queryDocumentSnapshot.data()
                 
-                let abgelehnt = data["abgelehnt"] as? Int ?? 0
-                let aufgeschoben = data["aufgeschoben"] as? Int ?? 0
-                let ausgespielt = data["ausgespielt"] as? Int ?? 0
-                let autor = data["autor"] as? String ?? "DoDay"
-                let erledigt = data["erledigt"] as? Int ?? 0
-                let id = data["id"] as? Int ?? self.aufgaben.count
-                let kategorie = data["kategorie"] as? String ?? "Sonstiges"
-                let text = data["text"] as? String ?? "Ooops..."
-                let text_detail = data["text_detail"] as? String ?? "Ooops..."
-                let text_dp = data["text_dp"] as? String ?? "Ooops..."
-                
-                let aufgabe = Aufgabe(
-                    abgelehnt: abgelehnt,
-                    aufgeschoben: aufgeschoben,
-                    ausgespielt: ausgespielt,
-                    autor: autor,
-                    erledigt: erledigt,
-                    id: id,
-                    kategorie: kategorie,
-                    text: text,
-                    text_detail: text_detail,
-                    text_dp: text_dp
+                return Aufgabe(
+                    abgelehnt: data["abgelehnt"] as? Int ?? 0,
+                    aufgeschoben: data["aufgeschoben"] as? Int ?? 0,
+                    ausgespielt: data["ausgespielt"] as? Int ?? 0,
+                    autor: data["autor"] as? String ?? "DoDay",
+                    erledigt: data["erledigt"] as? Int ?? 0,
+                    id: data["id"] as? Int ?? self.aufgaben.count,
+                    kategorie: data["kategorie"] as? String ?? "Sonstiges",
+                    text: data["text"] as? String ?? "Ooops...",
+                    text_detail: data["text_detail"] as? String ?? "Ooops...",
+                    text_dp: data["text_dp"] as? String ?? "Ooops..."
                 )
-                
-                completionHandler(aufgabe, nil)
-                return aufgabe
+            
             }
+            completionHandler(self.aufgaben, nil)
         }
     }
     
@@ -392,34 +370,20 @@ class FirebaseFunctions: ObservableObject {
                 
                 let data = queryDocumentSnapshot.data()
                 
-                let abgelehnt = data["abgelehnt"] as? [Int] ?? []
-                let aktueller_streak = data["aktueller_streak"] as? Int ?? 0
-                let anzahl_benachrichtigungen = data["anzahl_benachrichtigungen"] as? Int ?? 0
-                let aufgabe = data["aufgabe"] as? Int ?? 0
-                let aufgeschoben = data["aufgeschoben"] as? [Int] ?? []
-                let erledigt = data["erledigt"] as? [Int] ?? []
-                let freunde = data["freunde"] as? [String] ?? []
-                let freundes_id = data["freundes_id"] as? String ?? "kein Freundes-ID"
-                let id = data["id"] as? String ?? UIDevice.current.identifierForVendor?.uuidString ?? "<keine ID>"
-                let letztes_erledigt_datum = data["letztes_erledigt_datum"] as? Date ?? Date()
-                let verbliebene_aufgaben = data["verbliebene_aufgaben"] as? [Int] ?? []
-                let nutzername = data["nutzername"] as? String ?? "<kein Nutzername>"
+                return User(
+                    abgelehnt: data["abgelehnt"] as? [Int] ?? [],
+                    aktueller_streak: data["aktueller_streak"] as? Int ?? 0,
+                    anzahl_benachrichtigungen: data["anzahl_benachrichtigungen"] as? Int ?? 0,
+                    aufgabe: data["aufgabe"] as? Int ?? 0,
+                    aufgeschoben: data["aufgeschoben"] as? [Int] ?? [],
+                    erledigt: data["erledigt"] as? [Int] ?? [],
+                    freunde: data["freunde"] as? [String] ?? [],
+                    freundes_id: data["freundes_id"] as? String ?? "kein Freundes-ID",
+                    id: data["id"] as? String ?? "<keine ID>",
+                    letztes_erledigt_datum: data["letztes_erledigt_datum"] as? Date ?? Date(),
+                    nutzername: data["nutzername"] as? String ?? "<kein Nutzername>",
+                    verbliebene_aufgaben: data["verbliebene_aufgaben"] as? [Int] ?? [])
                 
-                let user = User(
-                    abgelehnt: abgelehnt,
-                    aktueller_streak: aktueller_streak,
-                    anzahl_benachrichtigungen: anzahl_benachrichtigungen,
-                    aufgabe: aufgabe,
-                    aufgeschoben: aufgeschoben,
-                    erledigt: erledigt,
-                    freunde: freunde,
-                    freundes_id: freundes_id,
-                    id: id, letztes_erledigt_datum: letztes_erledigt_datum,
-                    nutzername: nutzername,
-                    verbliebene_aufgaben: verbliebene_aufgaben)
-                
-                
-                return user
             }
             completionHandler(self.users, nil)
         }

@@ -56,29 +56,20 @@ class CoreDataFunctions: ObservableObject {
     
     func getUsersFromFirebase() {
         
-        
-        
         self.firebaseRequest { result in
             
             do {
-                self.delete()
-                self.allCDUsers = []
+                self.delete(entity: "Users")
                 self.allCDUsers = try result.get()
-                
-                print(self.allCDUsers.count)
-                self.allCDUsers.forEach {
-                    print("USER: ", $0)
-                }
                 
                 self.allCDUsers.forEach { user in
                     self.insertUserIntoCoreData(user: user)
                 }
-            }
                 
+            }
             catch {
                 self.fetchCDUsers()
             }
-            
         }
     }
     
@@ -86,24 +77,18 @@ class CoreDataFunctions: ObservableObject {
     
     func firebaseRequest(completionHandler: @escaping (Result<[User], Error>) -> Void) {
         
-       // var tempFirebaseUsers = [User]()
+        self.firebaseFunctions.fetchUsers { (usersFB, error) in
             
-            self.firebaseFunctions.fetchUsers { (usersFB, error) in
+            if let users = usersFB {
+                completionHandler(.success(users))
                 
-                if let users = usersFB {
-                
-                    // tempFirebaseUsers.append(user)
-                    completionHandler(.success(users))
-                    
-                } else if let error = error{
-                    completionHandler(.failure(error))
-                    return
-                }
-                
+            } else if let error = error{
+                completionHandler(.failure(error))
+                return
             }
-
-            return
         }
+        return
+    }
     
     
 
@@ -140,6 +125,7 @@ class CoreDataFunctions: ObservableObject {
         getUsers.returnsObjectsAsFaults = false
         
         do {
+            self.allCDUsers = []
             let result = try context.fetch(getUsers)
             
             for data in result as! [NSManagedObject] {
@@ -169,15 +155,14 @@ class CoreDataFunctions: ObservableObject {
     
     
     
-    func delete(){
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Users")
+    func delete(entity: String){
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
         
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         
         do {
             try context.execute(batchDeleteRequest)
             try context.save()
-            print("gelöscht")
         } catch let error {
             print(error.localizedDescription)
         }
