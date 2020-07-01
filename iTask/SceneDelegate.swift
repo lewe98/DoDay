@@ -51,7 +51,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
             context: context,
             id: id)
         
-        let globalFunctions = GlobalFunctions()
+        let globalFunctions = GlobalFunctions(
+            firebase: firebaseFunctions,
+            coreData: coreDataFunctions)
         
         
         /// Prüft, ob der User bereits registriert ist oder nicht.

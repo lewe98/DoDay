@@ -1,6 +1,6 @@
 //
 //  CoreDataFunctions.swift
-//  iTask
+//  DoDay
 //
 //  Created by Julian Hermanspahn, Lewe Lorenzen & Thomas Raab on 04.06.20.
 //  Copyright © 2020 DoDay. All rights reserved.
@@ -10,8 +10,10 @@ import Foundation
 import SwiftUI
 import CoreData
 
+/// Diese Klasse enthält sämtliche Funktionen zur Kommunikation mit Core Data.
 class CoreDataFunctions: ObservableObject {
     
+    // MARK: - VARIABLES
     /// Core Data
     let context: NSManagedObjectContext
     
@@ -49,6 +51,8 @@ class CoreDataFunctions: ObservableObject {
     let id: String
     
     
+    
+    //MARK: - INITIALIZER
     init(firebase: FirebaseFunctions, context: NSManagedObjectContext, id: String) {
         
         self.firebaseFunctions = firebase
@@ -306,7 +310,7 @@ class CoreDataFunctions: ObservableObject {
         }
         
     }
-
+    
     
     
 }

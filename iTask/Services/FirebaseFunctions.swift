@@ -1,6 +1,6 @@
 //
 //  FirebaseFunctions.swift
-//  iTask
+//  DoDay
 //
 //  Created by Julian Hermanspahn, Lewe Lorenzen & Thomas Raab on 04.06.20.
 //  Copyright © 2020 DoDay. All rights reserved.
@@ -14,12 +14,9 @@ import SwiftUI
 /// Diese Klasse enthält sämtliche Funktionen zur Kommunikation mit dem Firebase Backend.
 class FirebaseFunctions: ObservableObject {
     
-    
-    
-// MARK: - VARIABLES
+    // MARK: - VARIABLES
     /// Die Einstellungen des Users.
     let einstellungen: Einstellungen
-    
     
     /// Die Firebase Datenbank (Firestore).
     let db = Firestore.firestore()
@@ -41,7 +38,8 @@ class FirebaseFunctions: ObservableObject {
     let id: String
     
     
-//MARK: - INITIALIZER
+    
+    //MARK: - INITIALIZER
     /// Der Initializer übernimmt die Instanzen der Einstellungen- und der CoreDataFunctions-Klasse.
     /// Außerdem wird die registered-Variable auf ihren Status geprüft.
     init(einstellungen: Einstellungen, id: String)
@@ -148,123 +146,10 @@ class FirebaseFunctions: ObservableObject {
     /// Generiert eine zufällige Zeichenkette. Anzahl der Symbole wird durch den Parameter bestimmt.
     ///
     /// - Parameter length: Anzahl der Symbole.
-    /// - Returns: Zeichenkette als String.
+    /// - Returns: Zeichenkette als String
     func generateRandomID(length: Int) -> String {
         let letters = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ123456789"
         return String((0..<length).map{ _ in letters.randomElement()! })
-    }
-    
-    
-    /*
-    /// Fügt eine Person der eigenen Freundesliste hinzu.
-    ///
-    /// - Parameter freundID: ID des zu hinzuzufügenden Freundes.
-    func addFriend(freundID: String) {
-        print("ADDFRIEND WIRD ERFOLGREICH AUSGELOEST. freundID: \(freundID)")
-        var success: Bool = false
-        /*db.collection("users").getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting users: \(err)")
-            } else {
-                for user in querySnapshot!.documents {
-                    if user.freundes_id == freundID {
-                        success = true
-                        break
-                    }
-                }
-                if success == true {*/
-                    var newFriendList = curUser.freunde
-                    newFriendList.append(freundID)
-                    
-                    db.collection("users").document(curUser.id).updateData([
-                        "freunde": newFriendList
-                    ]) { err in
-                        if let err = err {
-                            print("Error updating document: \(err)")
-                        } else {
-                            print("Document successfully updated")
-                            
-                            //MARK: - TODO: In Core Data speichern
-                        }
-                    }
-                }
-         //   }
-       // }
-    
-   // }
-    */
-    
-    
-       /// Ermittelt die Anzahl aller verfügbaren Aufgaben.
-       ///
-       /// - Returns: Anzahl aller Aufgaben als Integer.
-    func getAufgabenCollectionSize() -> Int {
-        var count: Int = 0
-        
-        db.collection("aufgaben").getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    
-                    let id = document.data()["id"] as? Int ?? 0
-                    
-                    if id > count {
-                        count = id
-                    }
-                }
-            }
-        }
-        return count
-    }
-    
-    
-    
-    /// Fügt der Datenbank eine neue Aufgabe hinzu.
-    ///
-    /// - Parameter text: Kurztext
-    /// - Parameter text_detail: Detaillierter Text
-    /// - Parameter text_dp: Text aus der dritten Person
-    /// - Parameter kategorie: Kategorie der Aufgabe
-    func addNewAufgabe(text: String, text_detail: String, text_dp: String, kategorie: String){
-        let aufgabe = Aufgabe(
-            abgelehnt: 0,
-            aufgeschoben: 0,
-            ausgespielt: 0,
-            autor: "DoDay",
-            erledigt: 0,
-            id: getAufgabenCollectionSize() + 1,
-            kategorie: kategorie,
-            text: text,
-            text_detail: text_detail,
-            text_dp: text_dp)
-        
-        db.collection("aufgaben").document(String(aufgabe.id)).setData([
-            "abgelehnt": aufgabe.abgelehnt
-        ]) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                print("Document successfully written!")
-            } 
-        }
-    }
-    
-    
-    
-    /// Inkremetiert die Anzahl der User, die die Aufgabe erledigt haben
-    ///
-    /// - Parameter aufgabe: Aufgabe die bearbeitet wird
-    func incrementErledigt(aufgabe: Aufgabe){
-        db.collection("aufgaben").document(String(aufgabe.id)).updateData([
-            "erledigt": aufgabe.erledigt + 1
-        ]) { err in
-            if let err = err {
-                print("Error updating document: \(err)")
-            } else {
-                print("Document successfully updated")
-            }
-        }
     }
     
     
@@ -337,6 +222,105 @@ class FirebaseFunctions: ObservableObject {
                 
             }
             completionHandler(self.users, nil)
+        }
+    }
+    
+    
+    
+    
+    /// Fügt eine Person der eigenen Freundesliste hinzu.
+    ///
+    /// - Parameter curUser: der aktuelle User
+    /// - Parameter freundID: ID des Freundes
+    func addFriend(curUser: User, freundID: String) {
+        
+        var newFriendList = curUser.freunde
+        newFriendList.append(freundID)
+        
+        db.collection("users").document(curUser.id).updateData([
+            "freunde": newFriendList
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+                
+                //MARK: - TODO: In Core Data speichern
+            }
+        }
+    }
+  
+    
+    
+       /// Ermittelt die Anzahl aller verfügbaren Aufgaben.
+       ///
+       /// - Returns: Anzahl aller Aufgaben als Integer.
+    func getAufgabenHighestID() -> Int {
+        var count: Int = 0
+        
+        db.collection("aufgaben").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    
+                    let id = document.data()["id"] as? Int ?? 0
+                    
+                    if id > count {
+                        count = id
+                    }
+                }
+            }
+        }
+        return count
+    }
+    
+    
+    
+    /// Fügt der Datenbank eine neue Aufgabe hinzu.
+    ///
+    /// - Parameter text: Kurztext
+    /// - Parameter text_detail: Detaillierter Text
+    /// - Parameter text_dp: Text aus der dritten Person
+    /// - Parameter kategorie: Kategorie der Aufgabe
+    func addNewAufgabe(text: String, text_detail: String, text_dp: String, kategorie: String){
+        let aufgabe = Aufgabe(
+            abgelehnt: 0,
+            aufgeschoben: 0,
+            ausgespielt: 0,
+            autor: "DoDay",
+            erledigt: 0,
+            id: getAufgabenHighestID() + 1,
+            kategorie: kategorie,
+            text: text,
+            text_detail: text_detail,
+            text_dp: text_dp)
+        
+        db.collection("aufgaben").document(String(aufgabe.id)).setData([
+            "abgelehnt": aufgabe.abgelehnt
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            } 
+        }
+    }
+    
+    
+    
+    /// Inkremetiert die Anzahl der User, die die Aufgabe erledigt haben
+    ///
+    /// - Parameter aufgabe: Aufgabe die bearbeitet wird
+    func incrementErledigt(aufgabe: Aufgabe){
+        db.collection("aufgaben").document(String(aufgabe.id)).updateData([
+            "erledigt": aufgabe.erledigt + 1
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+            }
         }
     }
     
