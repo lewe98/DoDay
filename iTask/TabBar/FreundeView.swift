@@ -61,7 +61,7 @@ struct FreundeView: View {
                     HStack {
                         // TODO: Korrekte Variable dynamisch ausgeben
                         //Text(curUser.count > 0 ? curUser[0].freundes_id : loadingUser.freundes_id)
-                        Text(coreDataFunctions.curUserResult.freundes_id)
+                        Text(coreDataFunctions.curUser.freundes_id)
                         Spacer()
                         Button(action: {
                             //self.kopiereId()

@@ -37,28 +37,16 @@ class FirebaseFunctions: ObservableObject {
     /// leeres User-Array
     @Published var users = [User]()
     
-    /// vordefiniertes User-Objekt, um den aktiven Nutzer zu speichern
-    @Published var curUser: User = User(
-        abgelehnt: [],
-        aktueller_streak: 0,
-        anzahl_benachrichtigungen: 0,
-        aufgabe: 0,
-        aufgeschoben: [],
-        erledigt: [],
-        freunde: [],
-        freundes_id: "loading...",
-        id: "loading...",
-        letztes_erledigt_datum: Date(),
-        nutzername: "loading...",
-        verbliebene_aufgaben: [])
-    
+    /// Vendor-ID des Users
+    let id: String
     
     
 //MARK: - INITIALIZER
     /// Der Initializer übernimmt die Instanzen der Einstellungen- und der CoreDataFunctions-Klasse.
     /// Außerdem wird die registered-Variable auf ihren Status geprüft.
-    init(einstellungen: Einstellungen)
+    init(einstellungen: Einstellungen, id: String)
     {
+        self.id = id
         self.einstellungen = einstellungen
         self.registered = UserDefaults.standard.object(forKey: "registered") as? Bool ?? false
     }
@@ -69,8 +57,8 @@ class FirebaseFunctions: ObservableObject {
     /// Prüft, ob ein Nutzer bereits registriert ist.
     ///
     /// - Parameter id: ID des aktuellen Nutzers
-    func checkUUID(id: String) {
-        db.collection("users").whereField("id", isEqualTo: id)
+    func checkUUID() {
+        db.collection("users").whereField("id", isEqualTo: self.id)
             .getDocuments() { (querySnapshot, err) in
                 if (querySnapshot?.documents.count == 0) {
                     print("Error getting documents!")
@@ -148,51 +136,14 @@ class FirebaseFunctions: ObservableObject {
                 print("Error writing document: \(err)")
             } else {
                 print("Document successfully written!")
-                self.getCurrUser { (u, err) in
-                    if u != nil {}
-                }
+                //self.getCurrUser { (u, err) in
+                   // if u != nil {}
+               // }
             }
         }
     }
     
-    
-    
-    /// Funktion, um die Attribute des aktuellen Nutzers zu erhalten
-    ///
-    /// - Parameter completionHandler:completionHandler
-    func getCurrUser(completionHandler: @escaping (User?, Error?) -> ()) {
-        
-        let id: String = UIDevice.current.identifierForVendor!.uuidString
-        
-        db.collection("users").document(id).getDocument { (document, error) in
-            if let document = document, document.exists {
-                
-                let data = document.data()!
-                
-                self.curUser.abgelehnt = data["abgelehnt"] as? [Int] ?? []
-                self.curUser.aktueller_streak = data["aktueller_streak"] as? Int ?? 0
-                self.curUser.anzahl_benachrichtigungen = data["anzahl_benachrichtigungen"] as? Int ?? 0
-                self.curUser.aufgabe = data["aufgabe"] as? Int ?? 0
-                self.curUser.aufgeschoben = data["aufgeschoben"] as? [Int] ?? []
-                self.curUser.erledigt = data["erledigt"] as? [Int] ?? []
-                self.curUser.freunde = data["freunde"] as? [String] ?? []
-                self.curUser.freundes_id = data["freundes_id"] as? String ?? "kein Freundes-ID"
-                self.curUser.id = data["id"] as? String ?? id
-                self.curUser.letztes_erledigt_datum = data["letztes_erledigt_datum"] as? Date ?? Date()
-                self.curUser.verbliebene_aufgaben = data["verbliebene_aufgaben"] as? [Int] ?? []
-                self.curUser.nutzername = data["nutzername"] as? String ?? "<kein Nutzername>"
-                
-                self.registered = true
-                
-                completionHandler(self.curUser, nil)
-                
-            } else {
-                print("Document does not exist")
-            }
-        }
-    }
-    
-    
+
     
     /// Generiert eine zufällige Zeichenkette. Anzahl der Symbole wird durch den Parameter bestimmt.
     ///
@@ -204,7 +155,7 @@ class FirebaseFunctions: ObservableObject {
     }
     
     
-    
+    /*
     /// Fügt eine Person der eigenen Freundesliste hinzu.
     ///
     /// - Parameter freundID: ID des zu hinzuzufügenden Freundes.
@@ -241,7 +192,7 @@ class FirebaseFunctions: ObservableObject {
        // }
     
    // }
-    
+    */
     
     
        /// Ermittelt die Anzahl aller verfügbaren Aufgaben.

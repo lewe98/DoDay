@@ -26,7 +26,7 @@ struct FreundeHinzufuegenView: View {
                             Button(action: {
                                 // TODO: Funktion einfuegen
                                 
-                                self.firebaseFunctions.addFriend(freundID: self.freundesCode)
+                              //  self.firebaseFunctions.addFriend(freundID: self.freundesCode)
                             }) {
                                 Text("Abschicken")
                                     .foregroundColor(.green)

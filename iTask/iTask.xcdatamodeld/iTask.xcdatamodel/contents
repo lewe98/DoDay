@@ -12,20 +12,6 @@
         <attribute name="text_detail" optional="YES" attributeType="String"/>
         <attribute name="text_dp" optional="YES" attributeType="String"/>
     </entity>
-    <entity name="CurUser" representedClassName="CurUser" syncable="YES" codeGenerationType="class">
-        <attribute name="abgelehnt" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData"/>
-        <attribute name="aktueller_streak" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="anzahl_benachrichtigungen" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="aufgabe" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="aufgeschoben" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData"/>
-        <attribute name="erledigt" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData"/>
-        <attribute name="freunde" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData"/>
-        <attribute name="freundes_id" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="String"/>
-        <attribute name="letztes_erledigt_datum" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="nutzername" optional="YES" attributeType="String"/>
-        <attribute name="verbliebene_aufgaben" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData"/>
-    </entity>
     <entity name="Users" representedClassName="Users" syncable="YES" codeGenerationType="class">
         <attribute name="abgelehnt" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData"/>
         <attribute name="aktueller_streak" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -42,7 +28,6 @@
     </entity>
     <elements>
         <element name="Aufgaben" positionX="-63" positionY="-18" width="128" height="193"/>
-        <element name="CurUser" positionX="-45" positionY="81" width="128" height="223"/>
         <element name="Users" positionX="-54" positionY="-9" width="128" height="223"/>
     </elements>
 </model>
