@@ -51,7 +51,7 @@ class FirebaseFunctions: ObservableObject {
     
     
     
-//MARK: - FUNCTIONS
+    //MARK: - FUNCTIONS
     /// Prüft, ob ein Nutzer bereits registriert ist.
     ///
     /// - Parameter id: ID des aktuellen Nutzers
@@ -59,13 +59,8 @@ class FirebaseFunctions: ObservableObject {
         db.collection("users").whereField("id", isEqualTo: self.id)
             .getDocuments() { (querySnapshot, err) in
                 if (querySnapshot?.documents.count == 0) {
-                    print("Error getting documents!")
                     self.registered = false
                 } else {
-                    for _ in querySnapshot!.documents {
-                        //for document in querySnapshot!.documents {
-                        //print("\(document.documentID) => \(document.data())")
-                    }
                     self.registered = true
                 }
         }
@@ -74,6 +69,7 @@ class FirebaseFunctions: ObservableObject {
     
     
     /// Bereitet ein Nutzerobjekt auf die Registrierung vor und übergibt dieses an die setUser(...) Funktion
+    /// Es wird überprüft, ob eine Freundes-ID bereits vergeben ist. Wenn ja, findet ein rekursiver Funktionaufruf statt.
     ///
     /// - Parameter id: ID des aktuellen Nutzers
     /// - Parameter nutzername: der vom User ausgewählte Nutzername
@@ -92,22 +88,17 @@ class FirebaseFunctions: ObservableObject {
             nutzername: nutzername,
             verbliebene_aufgaben: [])
         
-        setUser(user: user)
         
-        // MARK: - TODO, check if freundes_id is already taken
-        /*
-         db.collection("users").whereField("freundes_id", isEqualTo: user.freundes_id)
-         .getDocuments() { (querySnapshot, err) in
-         if let err = err {
-         print("Error getting documents: \(err)")
-         self.setUser(user: user)
-         } else {
-         for document in querySnapshot!.documents {
-         print("\(document.documentID) => \(document.data())")
-         self.registerUser(id: user.id, nutzername: user.nutzername)
-         }
-         }
-         }*/
+        db.collection("users").whereField("freundes_id", isEqualTo: user.freundes_id)
+            .getDocuments() { (querySnapshot, err) in
+                if (querySnapshot?.documents.count == 0) {
+                    self.setUser(user: user)
+                    
+                } else {
+                    self.registerUser(id: user.id, nutzername: user.nutzername)
+                }
+        }
+        
     }
     
     
@@ -126,17 +117,13 @@ class FirebaseFunctions: ObservableObject {
             "freunde": user.freunde,
             "freundes_id": user.freundes_id,
             "id": user.id,
-            // "letztes_erledigt_datum": Timestamp(date: user.letztes_erledigt_datum),
             "verbliebene_aufgaben": user.verbliebene_aufgaben,
             "nutzername": user.nutzername
         ]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {
-                print("Document successfully written!")
-                //self.getCurrUser { (u, err) in
-                   // if u != nil {}
-               // }
+                self.checkUUID()
             }
         }
     }
@@ -252,9 +239,9 @@ class FirebaseFunctions: ObservableObject {
   
     
     
-       /// Ermittelt die Anzahl aller verfügbaren Aufgaben.
+       /// Ermittelt die höchste Aufgaben-ID.
        ///
-       /// - Returns: Anzahl aller Aufgaben als Integer.
+       /// - Returns: Höchste Aufgaben-ID
     func getAufgabenHighestID() -> Int {
         var count: Int = 0
         
@@ -309,7 +296,7 @@ class FirebaseFunctions: ObservableObject {
     
     
     
-    /// Inkremetiert die Anzahl der User, die die Aufgabe erledigt haben
+    /// Inkremetiert die Anzahl der User, die eine spezifische Aufgabe erledigt haben.
     ///
     /// - Parameter aufgabe: Aufgabe die bearbeitet wird
     func incrementErledigt(aufgabe: Aufgabe){

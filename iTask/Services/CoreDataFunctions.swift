@@ -73,7 +73,9 @@ class CoreDataFunctions: ObservableObject {
     // MARK: - CURRENT USER
     /// Liest die Daten des angemeldeten Nutzers aus.
     func getCurUser() {
-        self.curUser = self.allCDUsers.first(where: {$0.id == self.id})!
+        if self.firebaseFunctions.registered {
+            self.curUser = self.allCDUsers.first(where: {$0.id == self.id})!
+        }
     }
     
     
