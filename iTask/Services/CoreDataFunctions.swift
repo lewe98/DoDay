@@ -17,18 +17,12 @@ class CoreDataFunctions: ObservableObject {
     let firebaseFunctions: FirebaseFunctions
     
     
-   // let curUserEntity: NSEntityDescription
     let userEntity: NSEntityDescription
-    //let aufgabeEntity: NSEntityDescription
-    
-    
-   // let newCurrentUser: NSManagedObject
-    
-   // let newAufgaben: NSManagedObject
+    // let aufgabeEntity: NSEntityDescription
     
     
     @Published var allCDUsers = [User]()
-    //@Published var allCDAufgaben = [Aufgabe]()
+    // @Published var allCDAufgaben = [Aufgabe]()
     
     @Published var curUserResult: User = User(
         abgelehnt: [],
@@ -43,29 +37,153 @@ class CoreDataFunctions: ObservableObject {
         nutzername: "",
         verbliebene_aufgaben: [])
     
-    var tempFirebaseUsers = [User]()
-    
-    var deleted: Bool
     
     init(firebase: FirebaseFunctions, context: NSManagedObjectContext) {
-        self.allCDUsers = []
-        
-        
-        
         self.firebaseFunctions = firebase
         self.context = context
-        self.deleted = false
         
         
-       // self.curUserEntity = NSEntityDescription.entity(forEntityName: "CurUser", in: context)!
+        self.allCDUsers = []
+        // self.allCDAufgaben = []
+        
+        
         self.userEntity = NSEntityDescription.entity(forEntityName: "Users", in: context)!
-//        self.aufgabeEntity = NSEntityDescription.entity(forEntityName: "Aufgaben", in: context)!
-        
-//        self.newCurrentUser = NSManagedObject(entity: curUserEntity, insertInto: context)
-        
-//        self.newAufgaben = NSManagedObject(entity: aufgabeEntity, insertInto: context)
+        // self.aufgabeEntity = NSEntityDescription.entity(forEntityName: "Aufgaben", in: context)!
+        // self.curUserEntity = NSEntityDescription.entity(forEntityName: "CurUser", in: context)!
     }
     
+    
+    
+    func getUsersFromFirebase() {
+        
+        
+        
+        self.firebaseRequest { result in
+            
+            do {
+                self.delete()
+                self.allCDUsers = []
+                self.allCDUsers = try result.get()
+                
+                print(self.allCDUsers.count)
+                self.allCDUsers.forEach {
+                    print("USER: ", $0)
+                }
+                
+                self.allCDUsers.forEach { user in
+                    self.insertUserIntoCoreData(user: user)
+                }
+            }
+                
+            catch {
+                self.fetchCDUsers()
+            }
+            
+        }
+    }
+    
+    
+    
+    func firebaseRequest(completionHandler: @escaping (Result<[User], Error>) -> Void) {
+        
+       // var tempFirebaseUsers = [User]()
+            
+            self.firebaseFunctions.fetchUsers { (usersFB, error) in
+                
+                if let users = usersFB {
+                
+                    // tempFirebaseUsers.append(user)
+                    completionHandler(.success(users))
+                    
+                } else if let error = error{
+                    completionHandler(.failure(error))
+                    return
+                }
+                
+            }
+
+            return
+        }
+    
+    
+
+    func insertUserIntoCoreData(user: User) {
+        
+        do {
+            let newUser: NSManagedObject = NSManagedObject(entity: userEntity, insertInto: context)
+            
+            newUser.setValue(user.abgelehnt, forKey: "abgelehnt")
+            newUser.setValue(user.aktueller_streak, forKey: "aktueller_streak")
+            newUser.setValue(user.anzahl_benachrichtigungen, forKey: "anzahl_benachrichtigungen")
+            newUser.setValue(user.aufgabe, forKey: "aufgabe")
+            newUser.setValue(user.aufgeschoben, forKey: "aufgeschoben")
+            newUser.setValue(user.erledigt, forKey: "erledigt")
+            newUser.setValue(user.freunde, forKey: "freunde")
+            newUser.setValue(user.freundes_id, forKey: "freundes_id")
+            newUser.setValue(user.id, forKey: "id")
+            newUser.setValue(user.letztes_erledigt_datum, forKey: "letztes_erledigt_datum")
+            newUser.setValue(user.verbliebene_aufgaben, forKey: "verbliebene_aufgaben")
+            newUser.setValue(user.nutzername, forKey: "nutzername")
+            
+            try context.save()
+            
+        } catch let error {
+            print("Could not save user: ", error)
+        }
+    }
+    
+    
+    
+    func fetchCDUsers() {
+        
+        let getUsers = NSFetchRequest<NSFetchRequestResult>(entityName: "Users")
+        getUsers.returnsObjectsAsFaults = false
+        
+        do {
+            let result = try context.fetch(getUsers)
+            
+            for data in result as! [NSManagedObject] {
+                
+                self.allCDUsers.append(
+                    User(
+                        abgelehnt: data.value(forKey: "abgelehnt") as! [Int],
+                        aktueller_streak: data.value(forKey: "aktueller_streak") as! Int,
+                        anzahl_benachrichtigungen: data.value(forKey: "anzahl_benachrichtigungen") as! Int,
+                        aufgabe: data.value(forKey: "aufgabe") as! Int,
+                        aufgeschoben: data.value(forKey: "aufgeschoben") as! [Int],
+                        erledigt: data.value(forKey: "erledigt") as! [Int],
+                        freunde: data.value(forKey: "freunde") as! [String],
+                        freundes_id: data.value(forKey: "freundes_id") as! String,
+                        id: data.value(forKey: "id") as! String,
+                        letztes_erledigt_datum: data.value(forKey: "letztes_erledigt_datum") as! Date,
+                        nutzername: data.value(forKey: "nutzername") as! String,
+                        verbliebene_aufgaben: data.value(forKey: "verbliebene_aufgaben") as! [Int])
+                )
+            }
+            
+        } catch {
+            print("Fehler beim Abrufen der User aus Core Data.")
+        }
+        
+    }
+    
+    
+    
+    func delete(){
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Users")
+        
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            try context.execute(batchDeleteRequest)
+            try context.save()
+            print("gelöscht")
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+}
     
     /*
     func getCurUserFromFirebase() {
@@ -149,218 +267,7 @@ class CoreDataFunctions: ObservableObject {
     }
      */
     
-    
-    
-    
-    func firebaseRequest(completionHandler: @escaping (Result<[User], Error>) -> Void) {
-        
-       self.tempFirebaseUsers.append(User(abgelehnt: [], aktueller_streak: 3443, anzahl_benachrichtigungen: 34324, aufgabe: 567, aufgeschoben: [4, 7], erledigt: [9, 9], freunde: ["dadad"], freundes_id: "pimmelKopf", id: "pppdsds", letztes_erledigt_datum: Date(), nutzername: "nutzerkkskssksk", verbliebene_aufgaben: []))
-        
-        
-        
-        self.firebaseFunctions.fetchUsers { (userFB, error) in
-            
-            if let user = userFB {
-                
-                
-                self.tempFirebaseUsers.append(user)
-                print("FIREBASE USER: ", user)
-            }
-            
-            if let error = error{
-                completionHandler(.failure(error))
-                return
-            }
-            
-            
-            
-        }
-        print("ARRAY MIT FIREBASE USERN: ", tempFirebaseUsers)
-        completionHandler(.success(tempFirebaseUsers))
-        return
-        
-    }
 
-    
-    
-    
-    
-    func getUsersFromFirebase(){
-        
-        self.firebaseRequest { result in
-            
-            do {
-                
-                self.delete()
-                self.allCDUsers = []
-                self.allCDUsers = try result.get()
-                
-                print("RESULT: ", try result.get())
-                
-                print("VORHANDENE INTERNETVERBINDUNG", self.allCDUsers)
-                
-                self.allCDUsers.forEach{ user in
-                    self.insertUserIntoCoreData(user: user)
-                }
-                
-            }
-            catch {
-                self.fetchCDUsers()
-                
-                print("KEINE VERBINDUNG: ", self.allCDUsers)
-                
-            }
-        }
-    }
-               
-                   
-                    
-               
-                    
-                    
-                    
-                
-            
-        
-        
-    
-        
-        
-    
-    
-    /*
-           var tempUserArray = [User]()
-                  
-           if !tempUserArray.isEmpty {
-               self.delete()
-                tempUserArray = self.allCDUsers
-               
-               self.allCDUsers.forEach{ user in
-                   self.insertUserIntoCoreData(user: user)
-               }
-           }*/
-       /*
-        
-                      if self.deleted == false{
-                          self.delete()
-                          self.deleted = true
-                      }
-                      
-                      tempFirebaseUsers.append(user)
-                      //self.insertUserIntoCoreData(user: user)
-                      self.fetchCDUsers()
-                      
-                  } else if let error = error{
-                      print("Error: \(String(describing: error))")
-                  }*/
-    
-    func insertUserIntoCoreData(user: User) {
-        
-        do {
-            let newUser: NSManagedObject = NSManagedObject(entity: userEntity, insertInto: context)
-            
-            newUser.setValue(user.abgelehnt, forKey: "abgelehnt")
-            newUser.setValue(user.aktueller_streak, forKey: "aktueller_streak")
-            newUser.setValue(user.anzahl_benachrichtigungen, forKey: "anzahl_benachrichtigungen")
-            newUser.setValue(user.aufgabe, forKey: "aufgabe")
-            newUser.setValue(user.aufgeschoben, forKey: "aufgeschoben")
-            newUser.setValue(user.erledigt, forKey: "erledigt")
-            newUser.setValue(user.freunde, forKey: "freunde")
-            newUser.setValue(user.freundes_id, forKey: "freundes_id")
-            newUser.setValue(user.id, forKey: "id")
-            newUser.setValue(user.letztes_erledigt_datum, forKey: "letztes_erledigt_datum")
-            newUser.setValue(user.verbliebene_aufgaben, forKey: "verbliebene_aufgaben")
-            newUser.setValue(user.nutzername, forKey: "nutzername")
-            
-            try context.save()
-            
-        } catch let error {
-            print("Could not save user: ", error)
-        }
-    }
-    
-    
-    
-    func fetchCDUsers() {
-        
-       
-        let getUsers = NSFetchRequest<NSFetchRequestResult>(entityName: "Users")
-        getUsers.returnsObjectsAsFaults = false
-        
-        do {
-            self.allCDUsers = []
-            
-            let result = try context.fetch(getUsers)
-            
-            for data in result as! [NSManagedObject] {
-                
-                var user: User = User(
-                abgelehnt: [],
-                aktueller_streak: 0,
-                anzahl_benachrichtigungen: 0,
-                aufgabe: 0, aufgeschoben: [],
-                erledigt: [],
-                freunde: [],
-                freundes_id: "",
-                id: "",
-                letztes_erledigt_datum: Date(),
-                nutzername: "",
-                verbliebene_aufgaben: [])
-                
-                user.abgelehnt = data.value(forKey: "abgelehnt") as! [Int]
-                user.aktueller_streak = data.value(forKey: "aktueller_streak") as! Int
-                user.anzahl_benachrichtigungen = data.value(forKey: "anzahl_benachrichtigungen") as! Int
-                user.aufgabe = data.value(forKey: "aufgabe") as! Int
-                user.aufgeschoben = data.value(forKey: "aufgeschoben") as! [Int]
-                user.erledigt = data.value(forKey: "erledigt") as! [Int]
-                user.freunde = data.value(forKey: "freunde") as! [String]
-                user.freundes_id = data.value(forKey: "freundes_id") as! String
-                user.id = data.value(forKey: "id") as! String
-                user.letztes_erledigt_datum = data.value(forKey: "letztes_erledigt_datum") as! Date
-                user.verbliebene_aufgaben = data.value(forKey: "verbliebene_aufgaben") as! [Int]
-                user.nutzername = data.value(forKey: "nutzername") as! String
-                
-                self.allCDUsers.append(user)
-            }
-           
-        } catch {
-            print("Fehler beim Abrufen der User aus Core Data.")
-        }
-        
-    }
-    
-    
-    
-    func delete(){
-        // Create Fetch Request
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Users")
-        
-        // Create Batch Delete Request
-        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        
-        do {
-            try context.execute(batchDeleteRequest)
-            try context.save()
-            
-            print("deleting works")
-        } catch let error {
-            
-            print(error.localizedDescription)
-        }
-    }
-    
-   /*
-    func saveCoreData(){
-        do {
-            try context.save()
-        } catch {
-            print("Failed saving.")
-        }
-    }
-    */
-    
-    
-    
     
     /*
     func delete2(){
@@ -535,4 +442,4 @@ class CoreDataFunctions: ObservableObject {
            }
     }
 */
-}
+

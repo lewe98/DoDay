@@ -46,10 +46,10 @@ class FirebaseFunctions: ObservableObject {
         aufgeschoben: [],
         erledigt: [],
         freunde: [],
-        freundes_id: "x",
-        id: "x",
+        freundes_id: "loading...",
+        id: "loading...",
         letztes_erledigt_datum: Date(),
-        nutzername: "x",
+        nutzername: "loading...",
         verbliebene_aufgaben: [])
     
     
@@ -58,10 +58,8 @@ class FirebaseFunctions: ObservableObject {
     /// Der Initializer übernimmt die Instanzen der Einstellungen- und der CoreDataFunctions-Klasse.
     /// Außerdem wird die registered-Variable auf ihren Status geprüft.
     init(einstellungen: Einstellungen)
-    //, coreDataFunctions: CoreDataFunctions)
     {
         self.einstellungen = einstellungen
-       // self.coreDataFunctions = coreDataFunctions
         self.registered = UserDefaults.standard.object(forKey: "registered") as? Bool ?? false
     }
     
@@ -381,7 +379,7 @@ class FirebaseFunctions: ObservableObject {
     /// Funktion, um alle verfügbaren User zu erhalten.
     ///
     /// - Parameter completionHandler: completionHandler
-    func fetchUsers(completionHandler: @escaping (User?, Error?) -> ()) {
+    func fetchUsers(completionHandler: @escaping ([User]?, Error?) -> ()) {
         db.collection("users").addSnapshotListener { (querySnapshot, error) in
             
             guard let documents = querySnapshot?.documents else {
@@ -420,9 +418,10 @@ class FirebaseFunctions: ObservableObject {
                     nutzername: nutzername,
                     verbliebene_aufgaben: verbliebene_aufgaben)
                 
-                completionHandler(user, nil)
+                
                 return user
             }
+            completionHandler(self.users, nil)
         }
     }
     
