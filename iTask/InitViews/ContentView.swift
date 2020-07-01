@@ -71,9 +71,9 @@ struct ContentView: View {
                 
                 
             }.onAppear{
-                self.coreDataFunctions.getCurUserFromFirebase()
-                self.coreDataFunctions.getUsersFromFirebase()
-                self.coreDataFunctions.getAufgabenFromFirebase()
+                //self.coreDataFunctions.getCurUserFromFirebase()
+               self.coreDataFunctions.getUsersFromFirebase()
+               // self.coreDataFunctions.getAufgabenFromFirebase()
             }
         } else {
             Register().onDisappear{}

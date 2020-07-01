@@ -20,6 +20,6 @@ struct User: Identifiable, Hashable {
     var freundes_id: String
     var id: String
     var letztes_erledigt_datum: Date
-    var verbliebene_aufgaben: [Int]
     var nutzername: String
+    var verbliebene_aufgaben: [Int]
 }

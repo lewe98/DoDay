@@ -49,8 +49,8 @@ class FirebaseFunctions: ObservableObject {
         freundes_id: "x",
         id: "x",
         letztes_erledigt_datum: Date(),
-        verbliebene_aufgaben: [],
-        nutzername: "x")
+        nutzername: "x",
+        verbliebene_aufgaben: [])
     
     
     
@@ -105,8 +105,8 @@ class FirebaseFunctions: ObservableObject {
             freundes_id: generateRandomID(length: 8),
             id: id,
             letztes_erledigt_datum: Date(),
-            verbliebene_aufgaben: [],
-            nutzername: nutzername)
+            nutzername: nutzername,
+            verbliebene_aufgaben: [])
         
         setUser(user: user)
         
@@ -417,8 +417,8 @@ class FirebaseFunctions: ObservableObject {
                     freunde: freunde,
                     freundes_id: freundes_id,
                     id: id, letztes_erledigt_datum: letztes_erledigt_datum,
-                    verbliebene_aufgaben: verbliebene_aufgaben,
-                    nutzername: nutzername)
+                    nutzername: nutzername,
+                    verbliebene_aufgaben: verbliebene_aufgaben)
                 
                 completionHandler(user, nil)
                 return user

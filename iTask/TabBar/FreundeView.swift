@@ -42,8 +42,8 @@ struct FreundeView: View {
     freundes_id: "loading",
     id: "loading",
     letztes_erledigt_datum: Date(),
-    verbliebene_aufgaben: [9, 1],
-    nutzername: "loading")
+    nutzername: "loading",
+    verbliebene_aufgaben: [9, 1])
     
     //MARK: Muss irgendwo anders definiert werden
     /*
