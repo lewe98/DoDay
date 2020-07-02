@@ -16,16 +16,22 @@ struct Freund: Hashable {
 
 
 struct FreundeView: View {
+    
+    
+    
+    // MARK: - VARIABLES
     @State var kopierenText = "Kopieren"
     @State var showingFreundeHerausfordern = false
     @State var showingFreundeHinzufuegen = false
     @State var freundesListe: [Freund] = []
     
-    
     let firebaseFunctions: FirebaseFunctions
     let coreDataFunctions: CoreDataFunctions
     let globalFunctions: GlobalFunctions
     
+    
+    
+    // MARK: - INITIALIZER
     init(fb: FirebaseFunctions, cd: CoreDataFunctions, gf: GlobalFunctions) {
         self.firebaseFunctions = fb
         self.coreDataFunctions = cd
@@ -33,6 +39,8 @@ struct FreundeView: View {
     }
     
     
+    
+    // MARK: - BODY
     var body: some View {
         NavigationView {
             Form {
@@ -95,33 +103,39 @@ struct FreundeView: View {
                 
                 
             } .navigationBarTitle(Text("Freunde"))
-            //.onAppear{self.updateFreundesListe()}
+            .onAppear {
+                self.updateFreundesListe()
+                
+            }
         }
     }
     
     
-    /*
+    
+    // MARK: - FUNCTIONS
+    /// Lorem Ipsum
     func updateFreundesListe() {
-        print("\n\n\n\n curUser.count ist: \(curUser.count) bzw. der curUser: \n \(curUser)\n\n\n")
-        if curUser.count > 0 {
-            self.freundesListe = []
-            curUser[0].freunde.forEach {freund in // alle Freunde durchgehen (freundes_id)
-                allUsers.forEach { user in // User rausziehen
-                    if user.freundes_id == freund {
-                        alleAufgaben.forEach { aufgabe in // Aufgaben rausziehen
-                            if user.aufgabe == aufgabe.id {
-                                self.freundesListe.append(Freund(nutzername: user.nutzername, erledigt: user.erledigt.count, text_dp: aufgabe.text_dp))
-                            }
+        
+        self.freundesListe = []
+        
+        self.coreDataFunctions.curUser.freunde.forEach { freundID in // alle Freunde durchgehen (freundes_id)
+            self.coreDataFunctions.allCDUsers.forEach { user in // User rausziehen
+                if user.freundes_id == freundID {
+                    self.coreDataFunctions.allCDAufgaben.forEach { aufgabe in // Aufgaben rausziehen
+                        if user.aufgabe == aufgabe.id {
+                            self.freundesListe.append(
+                                Freund(
+                                    nutzername: user.nutzername,
+                                    erledigt: user.erledigt.count,
+                                    text_dp: aufgabe.text_dp))
                         }
-                        
                     }
                 }
             }
-        } else {
-            self.freundesListe = []
-            }
+        }
     }
-    */
+    
+    
     
     
     func kopiereId() -> Void {

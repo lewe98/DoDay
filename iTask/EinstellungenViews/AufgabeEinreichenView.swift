@@ -10,6 +10,9 @@ import SwiftUI
 
 /// Eine View, die es dem Nutzer erlaubt, einen eigenen Aufgabenvorschlag einzureichen.
 struct AufgabeEinreichenView: View {
+    
+    
+    
     @State private var aufgabe: String = ""
     
     var body: some View {
