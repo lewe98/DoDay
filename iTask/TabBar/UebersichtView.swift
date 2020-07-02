@@ -19,18 +19,10 @@ struct UebersichtView: View {
     let zuletztBearbeitet: Aufgabe
     let zuletztBearbeitetErledigt: Bool
     
-    let a: Double
-    let b: Double
-    let c: Double
-    
     init(user: User, zuletztBearbeitet: Aufgabe, zuletztBearbeitetErledigt: Bool) {
         self.user = user
         self.zuletztBearbeitet = zuletztBearbeitet
         self.zuletztBearbeitetErledigt = zuletztBearbeitetErledigt
-        
-        self.a = Double(self.user.erledigt.count)
-        self.b = Double(self.user.abgelehnt.count)
-        self.c = Double(self.user.aufgeschoben.count)
     }
     
     
@@ -60,10 +52,12 @@ struct UebersichtView: View {
                 
                 Section (header: Text("Statistik")) {
                     VStack (alignment: .leading){
+                        
                         Additives_diagramm(
-                            erledigteA: self.a,
-                            nichtErledigteA: self.b,
-                            aufgeschobeneA: self.c)
+                            erledigteA: 1, // self.user.erledigt.count,
+                            nichtErledigteA: 0, // self.user.abgelehnt.count,
+                            aufgeschobeneA: 0) // self.user.aufgeschoben.count)
+                            
                             .frame(minHeight: 24, maxHeight: 24)
                         
                         HStack {
@@ -106,7 +100,10 @@ struct UebersichtView: View {
                 
                 Section (header: Text("Statistik")) {
                     PieChartRow(
-                        data: [self.a, self.b, self.c],
+                        data: [2.5, 3.6, 5.1],
+                            //Double(self.user.erledigt.count),
+                           // Double(self.user.abgelehnt.count),
+                           // Double(self.user.aufgeschoben.count)],
                         backgroundColor: Color(UIColor.lightGray),
                         accentColor: .green)
                         .foregroundColor(.red)
