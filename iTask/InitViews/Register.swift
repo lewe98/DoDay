@@ -45,7 +45,9 @@ struct Register: View {
                             HStack {
                                 Spacer()
                                 Button(action: {
-                                    self.firebaseFunctions.registerUser(id: self.uuid, nutzername: self.nutzername)
+                                    self.firebaseFunctions.registerUser(
+                                        id: self.uuid,
+                                        nutzername: self.nutzername)
                                 }) {
                                     Text("Jetzt registrieren")
                                         .foregroundColor(.green)

@@ -11,25 +11,32 @@ import Foundation
 
 struct ContentView: View {
     
-    
+    // MARK: - VARIABLES
+    /// Firebase
     @EnvironmentObject var firebaseFunctions: FirebaseFunctions
+    
+    /// Core Data
     @EnvironmentObject var coreDataFunctions: CoreDataFunctions
+    
+    /// global Functions
     @EnvironmentObject var globalFunctions: GlobalFunctions
     
     
+    
+    // MARK: - BODY
     @ViewBuilder
     var body: some View {
         
         if globalFunctions.isLoading {
-            Loading().onAppear{
+            Loading().onAppear {
                 self.globalFunctions.load()
             }
         }
             
         else if self.firebaseFunctions.registered {
+            
             TabView {
-                
-                HeuteView(curUser: self.coreDataFunctions.curUserResult)
+                HeuteView(curUser: self.coreDataFunctions.curUser)
                     .tabItem {
                         VStack {
                             Image(systemName: "flag")
@@ -39,9 +46,11 @@ struct ContentView: View {
                 
                 
                 UebersichtView(
-                    erfolgreicheAufgabeFolge: 7,
-                    erledigteAufgaben: 4,
-                    vergangeneAufgaben: [VergangeneAufgabe(aufgabe: "Ich bin unterwegs", erledigt: true)])
+                    user: self.coreDataFunctions.curUser,
+                    zuletztBearbeitet: self.coreDataFunctions.getZuletztErledigt(),
+                    zuletztBearbeitetErledigt: self.coreDataFunctions.checkIfErledigt(
+                        id: self.coreDataFunctions.getZuletztErledigt().id))
+                    
                     .tabItem {
                         VStack {
                             Image(systemName: "square.split.1x2")
@@ -52,7 +61,8 @@ struct ContentView: View {
                 
                 FreundeView(
                     fb: firebaseFunctions,
-                    cd: coreDataFunctions)
+                    cd: coreDataFunctions,
+                    gf: globalFunctions)
                     .tabItem {
                         VStack {
                             Image(systemName: "rectangle.stack.person.crop.fill")
@@ -61,7 +71,7 @@ struct ContentView: View {
                 }.tag(2)
                 
                 
-                EinstellungenView()
+                EinstellungenView(fb: self.firebaseFunctions)
                     .tabItem {
                         VStack {
                             Image(systemName: "slider.horizontal.3")
@@ -70,13 +80,9 @@ struct ContentView: View {
                 }.tag(3)
                 
                 
-            }.onAppear{
-                self.coreDataFunctions.getCurUserFromFirebase()
-                self.coreDataFunctions.getUsersFromFirebase()
-                self.coreDataFunctions.getAufgabenFromFirebase()
             }
         } else {
-            Register().onDisappear{}
+            Register()
         }
         
     }

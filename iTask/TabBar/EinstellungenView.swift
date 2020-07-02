@@ -13,17 +13,29 @@ struct EinstellungenView: View {
     @State var showingImpressum = false
     @State var showingDatenschutz = false
     @State var showingAufgabeEinreichen = false
+    
+    
+    let firebaseFunctions: FirebaseFunctions
+    
+    init(fb: FirebaseFunctions) {
+        self.firebaseFunctions = fb
+    }
 
     var body: some View {
         NavigationView {
             Form {
+                
+                
                 Section(header: Text("NEUE AUFGABEN")) {
                         Toggle(isOn: $einstellungen.erinnerungEigeneAktiviert) {
                             Text("Täglich eine Erinnerung erhalten")
                     }
-                        DatePicker("Uhrzeit wählen", selection: $einstellungen.erinnerungZeitDate, displayedComponents: .hourAndMinute)
+                        DatePicker("Uhrzeit wählen",
+                                   selection: $einstellungen.erinnerungZeitDate,
+                                   displayedComponents: .hourAndMinute)
                 }
 
+                
                 Section {
                     HStack {
                         Spacer()
@@ -33,11 +45,12 @@ struct EinstellungenView: View {
                             Text("Eigene Aufgabe einreichen")
                         }
                         .sheet(isPresented: $showingAufgabeEinreichen) {
-                        AufgabeEinreichenView()
+                            AufgabeEinreichenView(fb: self.firebaseFunctions)
                         }
                         Spacer()
                     }
                 }
+                
                 
                 Section {
                     HStack {
@@ -80,8 +93,10 @@ struct EinstellungenView: View {
     }
 }
 
+/*
 struct EinstellungenView_Previews: PreviewProvider {
     static var previews: some View {
         EinstellungenView()
     }
 }
+*/

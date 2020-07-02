@@ -37,14 +37,28 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
             }
         }
         
+        let id = UIDevice.current.identifierForVendor!.uuidString
         
         ///Instanziieren der Klassen (EnvironmentObjects).
         let einstellungen = Einstellungen()
-        let firebaseFunctions = FirebaseFunctions(einstellungen: einstellungen)
+        
+        let firebaseFunctions = FirebaseFunctions(
+            einstellungen: einstellungen,
+            id: id)
+        
         let coreDataFunctions = CoreDataFunctions(
             firebase: firebaseFunctions,
-            context: context)
-        let globalFunctions = GlobalFunctions()
+            context: context,
+            id: id)
+        
+        let globalFunctions = GlobalFunctions(
+            firebase: firebaseFunctions,
+            coreData: coreDataFunctions)
+        
+        globalFunctions.isLoading = true
+        
+        /// Prüft, ob der User bereits registriert ist oder nicht.
+        firebaseFunctions.checkUUID()
         
         
         /// Hinzufügen von environmentObjects in der Root View (ContentView()).
@@ -55,9 +69,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
             .environmentObject(globalFunctions)
         
         
-        /// Prüft, ob der User bereits registriert ist oder nicht.
-        let uuid = UIDevice.current.identifierForVendor?.uuidString
-        firebaseFunctions.checkUUID(id: uuid!)
+        
         
         
         // Use a UIHostingController as window root view controller.

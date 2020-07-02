@@ -56,6 +56,8 @@ Cocoa Pods installieren:
 > Sobald das Repository geklont wurde, alle aktiven Xcode Fenster schließen. 
 > Im Anschluss mithilfe des Terminals in den Projektordner navigieren und ``pod install`` ausführen.
 > Dadurch werden die in der ``Podfile`` eingetragenen Abhängigkeiten installiert.
+> Diese werden mithilfe des CocoaPods dependency manager geladen. 
+> Sollte CocoaPods noch nicht installiert sein, muss folgender Befehl im Terminal eingegeben werden: ``$ sudo gem install cocoapods``
 
 Das Projekt öffnen:
 > Durch die Installation der Abhängigkeiten wird eine ``.xcworkspace`` Datei generiert.

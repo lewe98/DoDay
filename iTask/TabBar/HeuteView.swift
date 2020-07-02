@@ -67,7 +67,7 @@ struct HeuteView_Previews: PreviewProvider {
                 freundes_id: "abc123",
                 id: "id82",
                 letztes_erledigt_datum: Date(),
-                verbliebene_aufgaben: [],
-                nutzername: "PreviewName"))
+                nutzername: "PreviewName",
+                verbliebene_aufgaben: []))
     }
 }

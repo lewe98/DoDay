@@ -1,6 +1,6 @@
 //
 //  FreundeHinzufuegenView.swift
-//  iTask
+//  DoDay
 //
 //  Created by Julian Hermanspahn, Lewe Lorenzen & Thomas Raab on 09.06.20.
 //  Copyright © 2020 DoDay. All rights reserved.
@@ -9,24 +9,29 @@
 import SwiftUI
 
 struct FreundeHinzufuegenView: View {
-    @EnvironmentObject var firebaseFunctions: FirebaseFunctions
+    
+    let globalFunctions: GlobalFunctions
+    
     @State private var freundesCode: String = ""
+    
+    init(gf: GlobalFunctions) {
+        self.globalFunctions = gf
+    }
     
     var body: some View {
         NavigationView {
             VStack() {
                 Form {
+                    
                     Section(header: Text("FREUNDESCODE EINGEBEN")) {
-                        TextField("BeiSP1eL", text: $freundesCode)
+                        TextField("Freundescode", text: $freundesCode)
                     }
-                
+                    
                     Section() {
                         HStack {
                             Spacer()
                             Button(action: {
-                                // TODO: Funktion einfuegen
-                                
-                                self.firebaseFunctions.addFriend(freundID: self.freundesCode)
+                                self.globalFunctions.callAddFriend(freundID: self.freundesCode)
                             }) {
                                 Text("Abschicken")
                                     .foregroundColor(.green)
@@ -42,8 +47,10 @@ struct FreundeHinzufuegenView: View {
     }
 }
 
+/*
 struct FreundeHinzufuegenView_Previews: PreviewProvider {
     static var previews: some View {
         FreundeHinzufuegenView()
     }
 }
+*/

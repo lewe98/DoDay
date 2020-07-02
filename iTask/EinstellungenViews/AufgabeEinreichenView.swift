@@ -10,22 +10,37 @@ import SwiftUI
 
 /// Eine View, die es dem Nutzer erlaubt, einen eigenen Aufgabenvorschlag einzureichen.
 struct AufgabeEinreichenView: View {
-    @State private var aufgabe: String = ""
+    
+    let firebaseFunctions: FirebaseFunctions
+    
+    init(fb: FirebaseFunctions) {
+        self.firebaseFunctions = fb
+    }
+    
+    @State private var text: String = ""
+    @State private var text_detail: String = ""
+    @State private var text_dp: String = ""
     
     var body: some View {
         NavigationView {
             VStack() {
                 Form {
+                    
                     Section(header: Text("DEINE AUFGABE")) {
-                        TextField("Sprich mit einer dir fremden Person", text: $aufgabe)
+                        TextField("Kurztext", text: $text)
+                        TextField("Detaillierter Text", text: $text_detail)
+                        TextField("Text in dritter Person", text: $text_dp)
                     }
                 
                     Section() {
                         HStack {
                             Spacer()
                             Button(action: {
-                                // TODO: Funktion einfuegen
-                                print(self.aufgabe)
+                                self.firebaseFunctions.addNewAufgabe(
+                                    text: self.text,
+                                    text_detail: self.text_detail,
+                                    text_dp: self.text_dp,
+                                    kategorie: "Eingereicht von User.")
                             }) {
                                 Text("Abschicken")
                                     .foregroundColor(.green)
@@ -41,9 +56,10 @@ struct AufgabeEinreichenView: View {
     }
 }
 
+/*
 struct AufgabeEinreichenView_Previews: PreviewProvider {
     static var previews: some View {
         AufgabeEinreichenView()
     }
 }
-
+*/
