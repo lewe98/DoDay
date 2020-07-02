@@ -9,13 +9,15 @@
 import SwiftUI
 
 struct AktuellSecondView: View {
+    let aufgabenGeladen: Bool
+    
     var Aufgabe: String
     var body: some View {
             VStack {
                 Spacer()
                 Text("Du hast dir für heute folgende Aufgabe ausgesucht.").lineLimit(nil)
                     .multilineTextAlignment(.center).font(.headline).padding(20)
-                AufgabeDetail(Aufgabe: Aufgabe)
+                AufgabeDetail(aufgabenGeladen: aufgabenGeladen, Aufgabe: Aufgabe)
                 Text("Konntest du die Aufgabe erfolgreich erledigen?")
                     .font(.footnote)
                     .padding()
@@ -52,6 +54,6 @@ struct AktuellSecondView: View {
 
 struct AktuellSecondView_Previews: PreviewProvider {
     static var previews: some View {
-        AktuellSecondView(Aufgabe: "Mache das!")
+        AktuellSecondView(aufgabenGeladen: true, Aufgabe: "Mache das!")
     }
 }

@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct AktuellFirstView: View {
+    let aufgabenGeladen: Bool
     var Aufgabe1: String
     var Aufgabe2: String
     
@@ -16,8 +17,9 @@ struct AktuellFirstView: View {
         VStack {
             Spacer()
             Text("Wähle deine heutige Aufgabe").font(.headline)
-            AufgabeDetail(Aufgabe: Aufgabe1)
-            AufgabeDetail(Aufgabe: Aufgabe2)
+            AufgabeDetail(aufgabenGeladen: aufgabenGeladen, Aufgabe: Aufgabe1)
+            AufgabeDetail(aufgabenGeladen: aufgabenGeladen, Aufgabe: Aufgabe2)
+
             Spacer()
         }
         .background(Color(UIColor .systemGroupedBackground))
@@ -26,6 +28,6 @@ struct AktuellFirstView: View {
 
 struct AktuellFirstView_Previews: PreviewProvider {
     static var previews: some View {
-        AktuellFirstView(Aufgabe1: "Laufe 1000 Treppenstufen.", Aufgabe2: "Steht um 12 Uhr Mittags auf und Schreie 2 Mal laut!")
+        AktuellFirstView(aufgabenGeladen: true, Aufgabe1: "Laufe 1000 Treppenstufen.", Aufgabe2: "Steht um 12 Uhr Mittags auf und Schreie 2 Mal laut!")
     }
 }

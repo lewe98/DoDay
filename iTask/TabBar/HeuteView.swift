@@ -9,18 +9,29 @@
 import SwiftUI
 
 struct HeuteView: View {
+    @EnvironmentObject var coreDataFunctions: CoreDataFunctions
+    @State var aufgabenGeladen = false
+    let aufgabenArray: [Aufgabe]
+    var aufgabe1 = ""
+    var aufgabe2 = ""
     
+
     var aufgabeInArbeit = true
     let user: User
     let greeting: String
     
-    init(curUser: User) {
+    init(curUser: User, aufgabenArray: [Aufgabe]) {
         // UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.red]
         // UINavigationBar.appearance().titleTextAttributes = [.strokeColor: UIColor .systemGroupedBackground]
         user = curUser
         greeting = "Hey, " + user.nutzername + "!"
+        self.aufgabenArray = aufgabenArray
         UINavigationBar.appearance().backgroundColor =  UIColor.systemGroupedBackground
-        
+        aufgabeInArbeit = true
+        if self.aufgabenArray.count > 1 {
+            self.aufgabe1 = self.aufgabenArray[0].text
+            self.aufgabe2 = self.aufgabenArray[0].text
+        }
     }
     
     
@@ -32,26 +43,35 @@ struct HeuteView: View {
         case true:
             return AnyView(
                 NavigationView {
-                   AktuellFirstView(
-                    Aufgabe1: "Sprich mit einer dir fremden Person",
-                    Aufgabe2: "Gehe 10.000 Schritte Zu Fuß")
+                   AktuellFirstView(aufgabenGeladen: self.aufgabenGeladen,
+                   Aufgabe1: self.aufgabe1,
+                   Aufgabe2: self.aufgabe2)
                     .navigationBarTitle(Text(greeting))
                     .navigationBarHidden(false)
                 }
-            )
+            ).onAppear{
+                self.reload()
+            }
             
         case false:
             return
                 AnyView(
                 NavigationView {
-                   AktuellSecondView(Aufgabe: "Sprich mit einer dir fremden Person")
+                    AktuellSecondView(aufgabenGeladen: aufgabenGeladen, Aufgabe: "Sprich mit einer dir fremden Person")
                     .navigationBarTitle(Text("Aktuell"))
                 }.background(Color(UIColor .systemGroupedBackground))
-            )
+            ).onAppear{
+                self.reload()
+            }
             
         }
     }
+    func reload(){
+            self.aufgabenGeladen = true
+    }
 }
+
+
 
 struct HeuteView_Previews: PreviewProvider {
     static var previews: some View {
@@ -68,6 +88,7 @@ struct HeuteView_Previews: PreviewProvider {
                 id: "id82",
                 letztes_erledigt_datum: Date(),
                 nutzername: "PreviewName",
-                verbliebene_aufgaben: []))
+                verbliebene_aufgaben: []),
+                aufgabenArray: [])
     }
 }

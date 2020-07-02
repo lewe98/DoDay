@@ -12,8 +12,8 @@
 		A145AEED24813C31005047D4 /* AktuellFirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A145AEEC24813C31005047D4 /* AktuellFirstView.swift */; };
 		A145AEEF2481428D005047D4 /* AufgabeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A145AEEE2481428D005047D4 /* AufgabeDetail.swift */; };
 		A145AEF1248144C9005047D4 /* AktuellSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A145AEF0248144C9005047D4 /* AktuellSecondView.swift */; };
+		A18260E724AE5BC60027C027 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = A18260E624AE5BC60027C027 /* SwiftUIX */; };
 		A1959E0E2483F21F00B6B12E /* Additives_diagramm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1959E0D2483F21F00B6B12E /* Additives_diagramm.swift */; };
-		A1959E1C2484003500B6B12E /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = A1959E1B2484003500B6B12E /* SwiftUICharts */; };
 		A1959E1F248404A600B6B12E /* PieSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1959E1E248404A600B6B12E /* PieSlice.swift */; };
 		A1959E21248404EE00B6B12E /* PieChartRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1959E20248404EE00B6B12E /* PieChartRow.swift */; };
 		B90A8841247DD7D600B59892 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90A8840247DD7D600B59892 /* AppDelegate.swift */; };
@@ -113,8 +113,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1959E1C2484003500B6B12E /* SwiftUICharts in Frameworks */,
 				409252862156C2DED3A66D95 /* Pods_iTask.framework in Frameworks */,
+				A18260E724AE5BC60027C027 /* SwiftUIX in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,7 +315,7 @@
 			);
 			name = iTask;
 			packageProductDependencies = (
-				A1959E1B2484003500B6B12E /* SwiftUICharts */,
+				A18260E624AE5BC60027C027 /* SwiftUIX */,
 			);
 			productName = iTask;
 			productReference = B90A883D247DD7D600B59892 /* DoDay.app */;
@@ -390,7 +390,7 @@
 			);
 			mainGroup = B90A8834247DD7D600B59892;
 			packageReferences = (
-				A1959E1A2484003500B6B12E /* XCRemoteSwiftPackageReference "ChartView" */,
+				A18260E524AE5BC60027C027 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 			);
 			productRefGroup = B90A883E247DD7D600B59892 /* Products */;
 			projectDirPath = "";
@@ -842,21 +842,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		A1959E1A2484003500B6B12E /* XCRemoteSwiftPackageReference "ChartView" */ = {
+		A18260E524AE5BC60027C027 /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AppPear/ChartView.git";
+			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.5.0;
+				branch = master;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A1959E1B2484003500B6B12E /* SwiftUICharts */ = {
+		A18260E624AE5BC60027C027 /* SwiftUIX */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A1959E1A2484003500B6B12E /* XCRemoteSwiftPackageReference "ChartView" */;
-			productName = SwiftUICharts;
+			package = A18260E524AE5BC60027C027 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
+			productName = SwiftUIX;
 		};
 /* End XCSwiftPackageProductDependency section */
 

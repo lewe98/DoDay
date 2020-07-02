@@ -7,8 +7,10 @@
 //
 
 import SwiftUI
+import SwiftUIX
 
 struct AufgabeDetail: View {
+    let aufgabenGeladen: Bool
     var Aufgabe: String
     var body: some View {
         ZStack {
@@ -18,17 +20,22 @@ struct AufgabeDetail: View {
                 .foregroundColor(.white)
                 
                 //.foregroundColor(Color(UIColor .secondarySystemFill))
-            Text(Aufgabe).lineLimit(nil)
-            .multilineTextAlignment(.center)
-                .foregroundColor(.blue).font(.title)
-                .padding(30)
+            if (aufgabenGeladen) {
+                Text(Aufgabe).lineLimit(nil)
+                .multilineTextAlignment(.center)
+                    .foregroundColor(.blue).font(.title)
+                    .padding(30)
+            } else {
+                ActivityIndicator()
+            }
             }.frame(height: 150)
             .padding()
+
     }
 }
 
 struct AufgabeDetail_Previews: PreviewProvider {
     static var previews: some View {
-        AufgabeDetail(Aufgabe: "Gib Jemandem ein Kompliment.")
+        AufgabeDetail(aufgabenGeladen: true, Aufgabe: "Gib Jemandem ein Kompliment.")
     }
 }
