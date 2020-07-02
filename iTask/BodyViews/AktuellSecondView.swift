@@ -11,7 +11,7 @@ import SwiftUI
 struct AktuellSecondView: View {
     let aufgabenGeladen: Bool
     
-    var Aufgabe: String
+    var Aufgabe: Aufgabe
     var body: some View {
             VStack {
                 Spacer()
@@ -52,8 +52,11 @@ struct AktuellSecondView: View {
     }
 }
 
+/*
+
 struct AktuellSecondView_Previews: PreviewProvider {
     static var previews: some View {
         AktuellSecondView(aufgabenGeladen: true, Aufgabe: "Mache das!")
     }
 }
+*/

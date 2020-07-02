@@ -11,7 +11,7 @@ import SwiftUIX
 
 struct AufgabeDetail: View {
     let aufgabenGeladen: Bool
-    var Aufgabe: String
+    let Aufgabe: Aufgabe
     var body: some View {
         ZStack {
             
@@ -21,7 +21,7 @@ struct AufgabeDetail: View {
                 
                 //.foregroundColor(Color(UIColor .secondarySystemFill))
             if (aufgabenGeladen) {
-                Text(Aufgabe).lineLimit(nil)
+                Text(Aufgabe.text).lineLimit(nil)
                 .multilineTextAlignment(.center)
                     .foregroundColor(.blue).font(.title)
                     .padding(30)
@@ -34,8 +34,10 @@ struct AufgabeDetail: View {
     }
 }
 
+/*
 struct AufgabeDetail_Previews: PreviewProvider {
     static var previews: some View {
         AufgabeDetail(aufgabenGeladen: true, Aufgabe: "Gib Jemandem ein Kompliment.")
     }
 }
+*/

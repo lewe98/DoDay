@@ -72,7 +72,7 @@ class FirebaseFunctions: ObservableObject {
             abgelehnt: [],
             aktueller_streak: 0,
             anzahl_benachrichtigungen: 0,
-            aufgabe: 0,
+            aufgabe: -1,
             aufgeschoben: [],
             erledigt: [],
             freunde: [],

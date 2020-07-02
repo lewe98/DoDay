@@ -10,8 +10,8 @@ import SwiftUI
 
 struct AktuellFirstView: View {
     let aufgabenGeladen: Bool
-    var Aufgabe1: String
-    var Aufgabe2: String
+    let Aufgabe1: Aufgabe
+    let Aufgabe2: Aufgabe
     
     var body: some View {
         VStack {
@@ -26,8 +26,9 @@ struct AktuellFirstView: View {
     }
 }
 
-struct AktuellFirstView_Previews: PreviewProvider {
+/* struct AktuellFirstView_Previews: PreviewProvider {
     static var previews: some View {
         AktuellFirstView(aufgabenGeladen: true, Aufgabe1: "Laufe 1000 Treppenstufen.", Aufgabe2: "Steht um 12 Uhr Mittags auf und Schreie 2 Mal laut!")
     }
 }
+*/

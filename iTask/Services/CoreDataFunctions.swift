@@ -37,7 +37,7 @@ class CoreDataFunctions: ObservableObject {
         abgelehnt: [],
         aktueller_streak: 0,
         anzahl_benachrichtigungen: 0,
-        aufgabe: 0,
+        aufgabe: -1,
         aufgeschoben: [],
         erledigt: [],
         freunde: [],
@@ -47,6 +47,7 @@ class CoreDataFunctions: ObservableObject {
         nutzername: "loading...",
         verbliebene_aufgaben: [])
     
+    @Published var curCDAufgabeIDLocal = -1
     /// Vendor-ID des Users
     let id: String
     
@@ -78,7 +79,80 @@ class CoreDataFunctions: ObservableObject {
         }
     }
     
+    func getAufgabeByID(id: Int) -> Aufgabe? {
+        return self.allCDAufgaben.filter({ (aufgabe) -> Bool in
+            aufgabe.id == id
+            }).first
+    }
     
+    func curUserVerbliebeneAufgabenUpdaten() {
+        var tmpArray = self.curUser.erledigt
+        tmpArray.append(contentsOf: self.curUser.aufgeschoben)
+        tmpArray.append(contentsOf: self.curUser.abgelehnt)
+        self.curUser.verbliebene_aufgaben =
+            //allCDAufgaben.map{ (aufgaben: Aufgabe) -> Aufgabe{}
+        tmpArray.filter{
+            (aufgabeCD) -> Bool in
+            var ruckgabe = true
+                let bool = tmpArray.map { tmpAufgabe -> Bool in
+                    if (tmpAufgabe == aufgabeCD) {
+                        return false
+                    } else {
+                        return true
+                    }
+                }
+            bool.forEach { boolItem in
+                if (boolItem == false) {
+                    ruckgabe = false
+                }
+            }
+            return ruckgabe
+        }
+    }
+    
+    func verbliebeneAufgabenAnzeigen() -> [Aufgabe?] {
+        var verbliebeneAufgaben = self.curUser.verbliebene_aufgaben
+        verbliebeneAufgaben.append(contentsOf: self.curUser.aufgeschoben)
+        var randomNumber = Int.random(in: 0..<(verbliebeneAufgaben.count - 1))
+        let aufgabe1 = self.getAufgabeByID(id: verbliebeneAufgaben[randomNumber])
+        verbliebeneAufgaben.remove(at: randomNumber)
+        randomNumber = Int.random(in: 0..<(verbliebeneAufgaben.count - 1))
+        let aufgabe2 = self.getAufgabeByID(id: verbliebeneAufgaben[randomNumber])
+        return [aufgabe1, aufgabe2]
+    }
+    
+    func aktuelleAufgabeAuswaehlen(id: Int) {
+        self.curUser.aufgabe = id
+        let index = self.curUser.verbliebene_aufgaben.firstIndex(of: id)
+        if (index != nil) {
+            self.curUser.verbliebene_aufgaben.remove(at: index!)
+        } else {
+            print("choseAufgabe(): Aufgabe not found!")
+        }
+        updateCurUser()
+    }
+    
+    func aufgabeErledigt() {
+        self.curUser.erledigt.append(self.curUser.aufgabe)
+        self.curUser.aufgabe = -1
+        updateCurUser()
+    }
+    
+    func aufgabeAufschieben() {
+        self.curUser.aufgeschoben.append(self.curUser.aufgabe)
+        self.curUser.aufgabe = -1
+        updateCurUser()
+    }
+    
+    func aufgabeAblehnen() {
+        self.curUser.abgelehnt.append(self.curUser.aufgabe)
+        self.curUser.aufgabe = -1
+        updateCurUser()
+    }
+    
+    func updateCurUser() {
+        // TODO:// User in CoreData und Firebase Updaten
+    }
     
     func getCurAufgabe() -> Aufgabe{
         return self.allCDAufgaben.first(where: {$0.id == self.curUser.aufgabe})!
