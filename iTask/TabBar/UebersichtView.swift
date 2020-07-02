@@ -19,16 +19,25 @@ struct UebersichtView: View {
     let zuletztBearbeitet: Aufgabe
     let zuletztBearbeitetErledigt: Bool
     
+    let a: Double
+    let b: Double
+    let c: Double
+    
     init(user: User, zuletztBearbeitet: Aufgabe, zuletztBearbeitetErledigt: Bool) {
         self.user = user
         self.zuletztBearbeitet = zuletztBearbeitet
         self.zuletztBearbeitetErledigt = zuletztBearbeitetErledigt
+        
+        self.a = Double(self.user.erledigt.count)
+        self.b = Double(self.user.abgelehnt.count)
+        self.c = Double(self.user.aufgeschoben.count)
     }
     
     
     var body: some View {
         NavigationView {
             Form {
+                
                 Section {
                     HStack {
                         VStack (alignment: .leading) {
@@ -47,13 +56,14 @@ struct UebersichtView: View {
                             .foregroundColor(.blue)
                     }
                 }
+                
+                
                 Section (header: Text("Statistik")) {
-                    
                     VStack (alignment: .leading){
                         Additives_diagramm(
-                            erledigteA: self.user.erledigt.count,
-                            nichtErledigteA: self.user.abgelehnt.count,
-                            aufgeschobeneA: self.user.aufgeschoben.count)
+                            erledigteA: self.a,
+                            nichtErledigteA: self.b,
+                            aufgeschobeneA: self.c)
                             .frame(minHeight: 24, maxHeight: 24)
                         
                         HStack {
@@ -82,11 +92,10 @@ struct UebersichtView: View {
                     }
                 }
                 
+                
                 Section (header: Text("Zuletzt erledigt:")){
-                    
-                        
                         HStack {
-                            Text(self.zuletztBearbeitet)
+                            Text(self.zuletztBearbeitet.text)
                             Spacer()
                             Image(systemName: zuletztBearbeitetErledigt ? "checkmark.circle" : "xmark.circle")
                         }
@@ -94,20 +103,17 @@ struct UebersichtView: View {
                     
                 }
                 
-                Section (header: Text("Statistik")) {
                 
+                Section (header: Text("Statistik")) {
                     PieChartRow(
-                        data: [
-                            self.user.erledigt.count as Double,
-                            self.user.abgelehnt.count as Double,
-                            self.user.aufgeschoben.count as Double],
+                        data: [self.a, self.b, self.c],
                         backgroundColor: Color(UIColor.lightGray),
                         accentColor: .green)
                         .foregroundColor(.red)
                         .frame(width: 100, height: 100)
                         .padding()
                 }
-                
+            
             }.navigationBarTitle(Text("Übersicht"))
         }
     }

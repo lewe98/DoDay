@@ -48,7 +48,7 @@ class GlobalFunctions: ObservableObject {
     /// Fügt eine Person der eigenen Freundesliste hinzu.
     ///
     /// - Parameter freundID: ID des Freundes
-    func friendAdd(freundID: String){
+    func callAddFriend(freundID: String){
         self.firebaseFunctions.addFriend(
             curUser: self.coreDataFunctions.curUser,
             freundID: freundID)

@@ -28,12 +28,6 @@ class FirebaseFunctions: ObservableObject {
         }
     }
     
-    /// leeres Aufgaben-Array
-    @Published var aufgaben = [Aufgabe]()
-    
-    /// leeres User-Array
-    @Published var users = [User]()
-    
     /// Vendor-ID des Users
     let id: String
     
@@ -153,7 +147,8 @@ class FirebaseFunctions: ObservableObject {
                 return
             }
             
-            self.aufgaben = documents.map { queryDocumentSnapshot -> Aufgabe in
+            var aufgaben = [Aufgabe]()
+            aufgaben = documents.map { queryDocumentSnapshot -> Aufgabe in
                 
                 let data = queryDocumentSnapshot.data()
                 
@@ -163,7 +158,7 @@ class FirebaseFunctions: ObservableObject {
                     ausgespielt: data["ausgespielt"] as? Int ?? 0,
                     autor: data["autor"] as? String ?? "DoDay",
                     erledigt: data["erledigt"] as? Int ?? 0,
-                    id: data["id"] as? Int ?? self.aufgaben.count,
+                    id: data["id"] as? Int ?? aufgaben.count + 1,
                     kategorie: data["kategorie"] as? String ?? "Sonstiges",
                     text: data["text"] as? String ?? "Ooops...",
                     text_detail: data["text_detail"] as? String ?? "Ooops...",
@@ -171,7 +166,7 @@ class FirebaseFunctions: ObservableObject {
                 )
             
             }
-            completionHandler(self.aufgaben, nil)
+            completionHandler(aufgaben, nil)
         }
     }
     
@@ -189,7 +184,8 @@ class FirebaseFunctions: ObservableObject {
                 return
             }
             
-            self.users = documents.map { queryDocumentSnapshot -> User in
+            var users = [User]()
+            users = documents.map { queryDocumentSnapshot -> User in
                 
                 let data = queryDocumentSnapshot.data()
                 
@@ -208,7 +204,7 @@ class FirebaseFunctions: ObservableObject {
                     verbliebene_aufgaben: data["verbliebene_aufgaben"] as? [Int] ?? [])
                 
             }
-            completionHandler(self.users, nil)
+            completionHandler(users, nil)
         }
     }
     
