@@ -245,29 +245,17 @@ class FirebaseFunctions: ObservableObject {
     
     
        /// Ermittelt die höchste Aufgaben-ID.
-       ///
-       /// - Returns: Höchste Aufgaben-ID
-    func getAufgabenHighestID() -> Int {
-        var count: Int = 0
-        
+    func getAufgabenHighestID(completionHandler: @escaping (Result<Int, Error>) -> Void) {
         db.collection("aufgaben").getDocuments() { (querySnapshot, err) in
             if let err = err {
-                print("Error getting documents: \(err)")
+                completionHandler(.failure(err))
             } else {
-                for _ in querySnapshot!.documents {
-                    
-                    //let id = document.data()["id"] as? Int ?? 0
-                    
-                    //if id > count {
-                    //    count = id
-                   // }
-                    
-                    count = count + 1
-                }
+                completionHandler(.success(querySnapshot!.count))
             }
         }
-        return count
     }
+        
+    
     
     
     
@@ -277,24 +265,33 @@ class FirebaseFunctions: ObservableObject {
     /// - Parameter text_detail: Detaillierter Text
     /// - Parameter text_dp: Text aus der dritten Person
     /// - Parameter kategorie: Kategorie der Aufgabe
-    func addNewAufgabe(text: String, text_detail: String, text_dp: String, kategorie: String){
-      
-        db.collection("aufgaben").document(String(getAufgabenHighestID() + 1)).setData([
-            "abgelehnt": 0,
-            "aufgeschoben": 0,
-            "ausgespielt": 0,
-            "autor": "DoDay",
-            "erledigt": 0,
-            "id": getAufgabenHighestID() + 1,
-            "kategorie": kategorie,
-            "text": text,
-            "text_detail": text_detail,
-            "text_dp": text_dp]) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                print("Document successfully written!")
-            } 
+    func addNewAufgabe(text: String, text_detail: String, text_dp: String, kategorie: String) {
+        
+        self.getAufgabenHighestID { result in
+            do {
+                let num = try result.get()
+                
+                self.db.collection("aufgaben").document(String(num)).setData([
+                    "abgelehnt": 0,
+                    "aufgeschoben": 0,
+                    "ausgespielt": 0,
+                    "autor": "DoDay",
+                    "erledigt": 0,
+                    "id": num,
+                    "kategorie": kategorie,
+                    "text": text,
+                    "text_detail": text_detail,
+                    "text_dp": text_dp]) { err in
+                        if let err = err {
+                            print("Error writing document: \(err)")
+                        } else {
+                            print("Document successfully written!")
+                        }
+                }
+            }
+            catch {
+                print("error")
+            }
         }
     }
     
