@@ -71,7 +71,7 @@ struct ContentView: View {
                 }.tag(2)
                 
                 
-                EinstellungenView()
+                EinstellungenView(fb: self.firebaseFunctions)
                     .tabItem {
                         VStack {
                             Image(systemName: "slider.horizontal.3")

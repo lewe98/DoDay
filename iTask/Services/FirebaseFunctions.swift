@@ -254,13 +254,15 @@ class FirebaseFunctions: ObservableObject {
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
-                for document in querySnapshot!.documents {
+                for _ in querySnapshot!.documents {
                     
-                    let id = document.data()["id"] as? Int ?? 0
+                    //let id = document.data()["id"] as? Int ?? 0
                     
-                    if id > count {
-                        count = id
-                    }
+                    //if id > count {
+                    //    count = id
+                   // }
+                    
+                    count = count + 1
                 }
             }
         }
@@ -276,21 +278,18 @@ class FirebaseFunctions: ObservableObject {
     /// - Parameter text_dp: Text aus der dritten Person
     /// - Parameter kategorie: Kategorie der Aufgabe
     func addNewAufgabe(text: String, text_detail: String, text_dp: String, kategorie: String){
-        let aufgabe = Aufgabe(
-            abgelehnt: 0,
-            aufgeschoben: 0,
-            ausgespielt: 0,
-            autor: "DoDay",
-            erledigt: 0,
-            id: getAufgabenHighestID() + 1,
-            kategorie: kategorie,
-            text: text,
-            text_detail: text_detail,
-            text_dp: text_dp)
-        
-        db.collection("aufgaben").document(String(aufgabe.id)).setData([
-            "abgelehnt": aufgabe.abgelehnt
-        ]) { err in
+      
+        db.collection("aufgaben").document(String(getAufgabenHighestID() + 1)).setData([
+            "abgelehnt": 0,
+            "aufgeschoben": 0,
+            "ausgespielt": 0,
+            "autor": "DoDay",
+            "erledigt": 0,
+            "id": getAufgabenHighestID() + 1,
+            "kategorie": kategorie,
+            "text": text,
+            "text_detail": text_detail,
+            "text_dp": text_dp]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {
