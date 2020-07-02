@@ -61,7 +61,8 @@ struct ContentView: View {
                 
                 FreundeView(
                     fb: firebaseFunctions,
-                    cd: coreDataFunctions)
+                    cd: coreDataFunctions,
+                    gf: globalFunctions)
                     .tabItem {
                         VStack {
                             Image(systemName: "rectangle.stack.person.crop.fill")

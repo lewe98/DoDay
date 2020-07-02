@@ -87,7 +87,7 @@ struct UebersichtView: View {
                 }
                 
                 
-                Section (header: Text("Zuletzt erledigt:")){
+                Section (header: Text("Zuletzt erledigt")){
                         HStack {
                             Text(self.zuletztBearbeitet.text)
                             Spacer()

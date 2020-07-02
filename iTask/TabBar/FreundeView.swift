@@ -24,48 +24,24 @@ struct FreundeView: View {
     
     let firebaseFunctions: FirebaseFunctions
     let coreDataFunctions: CoreDataFunctions
+    let globalFunctions: GlobalFunctions
     
-    init(fb: FirebaseFunctions, cd: CoreDataFunctions) {
+    init(fb: FirebaseFunctions, cd: CoreDataFunctions, gf: GlobalFunctions) {
         self.firebaseFunctions = fb
         self.coreDataFunctions = cd
+        self.globalFunctions = gf
     }
     
-    
-    let loadingUser: User = User(
-    abgelehnt: [3, 5],
-    aktueller_streak: 5,
-    anzahl_benachrichtigungen: 1,
-    aufgabe: 17,
-    aufgeschoben: [8],
-    erledigt: [9, 28],
-    freunde: [],
-    freundes_id: "loading",
-    id: "loading",
-    letztes_erledigt_datum: Date(),
-    nutzername: "loading",
-    verbliebene_aufgaben: [9, 1])
-    
-    //MARK: Muss irgendwo anders definiert werden
-    /*
-    @Binding var curUser: [User]
-    @Binding var alleAufgaben: [Aufgabe]
-    @Binding var allUsers: [User]
-    @Binding var curAufgabe: Aufgabe
-    @EnvironmentObject var firebaseFunctions: FirebaseFunctions
-    */
     
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("DEIN FREUNDESCODE")) {
                     HStack {
-                        // TODO: Korrekte Variable dynamisch ausgeben
-                        //Text(curUser.count > 0 ? curUser[0].freundes_id : loadingUser.freundes_id)
                         Text(coreDataFunctions.curUser.freundes_id)
                         Spacer()
                         Button(action: {
-                            //self.kopiereId()
-                            print("kopieren...")
+                            self.kopiereId()
                         }) {
                             Text(kopierenText)
                         }
@@ -73,13 +49,12 @@ struct FreundeView: View {
                     HStack{
                         Spacer()
                         Button(action: {
-                            //self.showingFreundeHinzufuegen.toggle()
-                            print("freund hinzufügen...")
+                            self.showingFreundeHinzufuegen.toggle()
                         }) {
                             Text("Freunde hinzufügen")
                         }
                         .sheet(isPresented: $showingFreundeHinzufuegen) {
-                        FreundeHinzufuegenView()
+                            FreundeHinzufuegenView(gf: self.globalFunctions)
                             .environmentObject(self.firebaseFunctions)
                             /*.onDisappear(ContentView.reload { error in
                             if let error = error{
@@ -145,10 +120,10 @@ struct FreundeView: View {
             self.freundesListe = []
             }
     }
-    
+    */
     func kopiereId() -> Void {
         // TODO: Richtige Variable kopieren
-        UIPasteboard.general.string = curUser.count > 0 ? self.curUser[0].freundes_id : self.loadingUser.freundes_id
+        UIPasteboard.general.string = self.coreDataFunctions.curUser.freundes_id
         withAnimation(.linear(duration: 0.25), {
             self.kopierenText = "erfolgreich kopiert!"
         })
@@ -159,7 +134,7 @@ struct FreundeView: View {
             })
         }
     }
-    
+    /*
     func freundeHerausfordern() -> Void {
         showingFreundeHerausfordern.toggle()
         let teilenText = "Könntest du meine heutige DoDay-Aufgabe schaffen?\n\"\(curAufgabe.text)\""
