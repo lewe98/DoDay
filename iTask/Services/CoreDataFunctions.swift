@@ -78,6 +78,14 @@ class CoreDataFunctions: ObservableObject {
         }
     }
     
+    
+    
+    func getCurAufgabe() -> Aufgabe{
+        return self.allCDAufgaben.first(where: {$0.id == self.curUser.aufgabe})!
+    }
+    
+    
+    
     func getZuletztErledigt() -> Aufgabe {
         
         //var returnString: String = "Noch keine Aufgabe erledigt."

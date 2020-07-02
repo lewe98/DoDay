@@ -36,6 +36,8 @@ struct FreundeView: View {
     var body: some View {
         NavigationView {
             Form {
+                
+                
                 Section(header: Text("DEIN FREUNDESCODE")) {
                     HStack {
                         Text(coreDataFunctions.curUser.freundes_id)
@@ -56,17 +58,13 @@ struct FreundeView: View {
                         .sheet(isPresented: $showingFreundeHinzufuegen) {
                             FreundeHinzufuegenView(gf: self.globalFunctions)
                             .environmentObject(self.firebaseFunctions)
-                            /*.onDisappear(ContentView.reload { error in
-                            if let error = error{
-                                print(error)
-                            })*/
                         }
                         Spacer()
                     }
                 }
                 
+                
                 Section(header: HStack {Text("FREUNDE"); Spacer(); Text("ERLEDIGTE AUFGABEN")}) {
-
                     List(self.freundesListe, id: \.self) {
                         freund in
                         HStack {
@@ -82,23 +80,26 @@ struct FreundeView: View {
                     }
                 }
                 
+                
                 Section {
                     HStack {
                         Spacer()
                         Button(action: {
-                            //self.freundeHerausfordern()
-                            print("freunde herausfordern...")
+                            self.freundeHerausfordern()
                         }) {
                             Text("Fordere deine Freunde heraus")
                         }
                         Spacer()
                     }
                 }
-            }
-            .navigationBarTitle(Text("Freunde"))
+                
+                
+            } .navigationBarTitle(Text("Freunde"))
             //.onAppear{self.updateFreundesListe()}
         }
     }
+    
+    
     /*
     func updateFreundesListe() {
         print("\n\n\n\n curUser.count ist: \(curUser.count) bzw. der curUser: \n \(curUser)\n\n\n")
@@ -121,6 +122,8 @@ struct FreundeView: View {
             }
     }
     */
+    
+    
     func kopiereId() -> Void {
         // TODO: Richtige Variable kopieren
         UIPasteboard.general.string = self.coreDataFunctions.curUser.freundes_id
@@ -134,13 +137,16 @@ struct FreundeView: View {
             })
         }
     }
-    /*
+    
+    
+    
     func freundeHerausfordern() -> Void {
         showingFreundeHerausfordern.toggle()
-        let teilenText = "Könntest du meine heutige DoDay-Aufgabe schaffen?\n\"\(curAufgabe.text)\""
+        let teilenText = "Könntest du meine heutige DoDay-Aufgabe schaffen?\n\"\(self.coreDataFunctions.getCurAufgabe().text)\""
+        
         let activityViewController : UIActivityViewController = UIActivityViewController(
             activityItems: [teilenText], applicationActivities: nil)
-
+        
         // Entfernte Teilen-Buttons
         activityViewController.excludedActivityTypes = [
             UIActivity.ActivityType.postToWeibo,
@@ -152,27 +158,16 @@ struct FreundeView: View {
             UIActivity.ActivityType.postToVimeo,
             UIActivity.ActivityType.postToTencentWeibo
         ]
-
+        
         UIApplication.shared.windows.first?.rootViewController?.present(activityViewController, animated: true, completion: nil)
+    }
+ 
+/*
+
+    struct FreundeView_Previews: PreviewProvider {
+        static var previews: some View {
+            FreundeView()
+        }
     }
  */
 }
-
-/*struct FreundeView_Previews: PreviewProvider {
-    static var previews: some View {
-        FreundeView(curUser: User(
-        abgelehnt: [3, 5],
-        aktueller_streak: 5,
-        anzahl_benachrichtigungen: 1,
-        aufgabe: 17,
-        aufgeschoben: [8],
-        erledigt: [9, 28],
-        freunde: ["fkr93k", "fsl93"],
-        freundes_id: "kd93k",
-        id: "fkd90wlödlf9",
-        letztes_erledigt_datum: Date(),
-        verbliebene_aufgaben: [9, 1],
-        nutzername: "Thomas"),
-        alleAufgaben: [Aufgabe(abgelehnt: 22, aufgeschoben: 23, ausgespielt: 24, autor: "iTask", erledigt: 8, id: 12, kategorie: "Social", text: "Sprich mit einer fremden Person", text_detail: "Fördere deine Sozialkompetenz, indem du mit einer Person sprichst, mit der du vorher noch nie gesprochen hast. Zum Beispiel dein Postbote, jemand beim Einkaufen usw.", text_dp: "Spricht mit einer fremden Person")])
-    }
-}*/
