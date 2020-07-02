@@ -78,6 +78,41 @@ class CoreDataFunctions: ObservableObject {
         }
     }
     
+    func getZuletztErledigt() -> Aufgabe {
+        
+        //var returnString: String = "Noch keine Aufgabe erledigt."
+        
+        if self.curUser.erledigt.count > 0 {
+            let tempAufgabe = self.allCDAufgaben.first(where: {
+                $0.id == self.curUser.erledigt[self.curUser.erledigt.count - 1]
+            })!
+            return tempAufgabe
+            //returnString = tempAufgabe.text
+        }
+        
+        return Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "DoDay", erledigt: 0, id: 0, kategorie: "", text: "Noch keine Aufgabe erledigt.", text_detail: "Noch keine Aufgabe erledigt.", text_dp: "Noch keine Aufgabe erledigt.")
+    }
+    
+    
+    func checkIfErledigt(id: Int) -> Bool {
+        
+        var test = 0
+        
+        self.curUser.erledigt.forEach { aufgabe in
+            if aufgabe == id {
+                test = 1
+            }
+            
+        }
+        
+        if test == 1 {
+            return true
+        }
+        return false
+
+    }
+    
+    
     
     // MARK: - DELETE
     /// Löscht alle Objekte einer spezifizierten Entity in Core Data.

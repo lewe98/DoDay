@@ -34,9 +34,12 @@ class GlobalFunctions: ObservableObject {
     /// Funktion, um beim Starten der App alle Daten zu aktualisieren
     func load() {
         
-        //TODO: - Core Data Funktionen aufrufen
         
         isLoading = true
+        
+        self.coreDataFunctions.getUsersFromFirebase()
+        self.coreDataFunctions.getAufgabenFromFirebase()
+        
         isLoading = false
     }
     

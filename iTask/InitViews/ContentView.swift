@@ -11,23 +11,31 @@ import Foundation
 
 struct ContentView: View {
     
-    
+    // MARK: - VARIABLES
+    /// Firebase
     @EnvironmentObject var firebaseFunctions: FirebaseFunctions
+    
+    /// Core Data
     @EnvironmentObject var coreDataFunctions: CoreDataFunctions
+    
+    /// global Functions
     @EnvironmentObject var globalFunctions: GlobalFunctions
     
+    
+    
+    // MARK: - BODY
     @ViewBuilder
     var body: some View {
         
         if globalFunctions.isLoading {
-            Loading().onAppear{
+            Loading().onAppear {
                 self.globalFunctions.load()
             }
         }
             
         else if self.firebaseFunctions.registered {
+            
             TabView {
-                
                 HeuteView(curUser: self.coreDataFunctions.curUser)
                     .tabItem {
                         VStack {
@@ -38,9 +46,11 @@ struct ContentView: View {
                 
                 
                 UebersichtView(
-                    erfolgreicheAufgabeFolge: 7,
-                    erledigteAufgaben: 4,
-                    vergangeneAufgaben: [VergangeneAufgabe(aufgabe: "Ich bin unterwegs", erledigt: true)])
+                    user: self.coreDataFunctions.curUser,
+                    zuletztBearbeitet: self.coreDataFunctions.getZuletztErledigt(),
+                    zuletztBearbeitetErledigt: self.coreDataFunctions.checkIfErledigt(
+                        id: self.coreDataFunctions.getZuletztErledigt().id))
+                    
                     .tabItem {
                         VStack {
                             Image(systemName: "square.split.1x2")
@@ -69,15 +79,9 @@ struct ContentView: View {
                 }.tag(3)
                 
                 
-            }.onAppear{
-                //self.coreDataFunctions.getCurUserFromFirebase()
-               self.coreDataFunctions.getUsersFromFirebase()
-               // self.coreDataFunctions.getAufgabenFromFirebase()
-                
-                
             }
         } else {
-            Register().onDisappear{}
+            Register()
         }
         
     }

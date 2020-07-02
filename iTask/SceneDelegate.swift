@@ -55,6 +55,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
             firebase: firebaseFunctions,
             coreData: coreDataFunctions)
         
+        globalFunctions.isLoading = true
         
         /// Prüft, ob der User bereits registriert ist oder nicht.
         firebaseFunctions.checkUUID()

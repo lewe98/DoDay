@@ -15,9 +15,16 @@ struct VergangeneAufgabe {
 }
 
 struct UebersichtView: View {
-    var erfolgreicheAufgabeFolge: Int
-    var erledigteAufgaben: Int
-    var vergangeneAufgaben: [VergangeneAufgabe]
+    let user: User
+    let zuletztBearbeitet: Aufgabe
+    let zuletztBearbeitetErledigt: Bool
+    
+    init(user: User, zuletztBearbeitet: Aufgabe, zuletztBearbeitetErledigt: Bool) {
+        self.user = user
+        self.zuletztBearbeitet = zuletztBearbeitet
+        self.zuletztBearbeitetErledigt = zuletztBearbeitetErledigt
+    }
+    
     
     var body: some View {
         NavigationView {
@@ -25,36 +32,35 @@ struct UebersichtView: View {
                 Section {
                     HStack {
                         VStack (alignment: .leading) {
-                            Text("Erfolgreich erledigte")
-                            Text("Aufgabe in Folge")
+                            Text("Deine Streak:")
                         }
                         Spacer()
-                        Text(String(erfolgreicheAufgabeFolge))
+                        Text(String(self.user.aktueller_streak))
                         Image(systemName: "checkmark")
                             .foregroundColor(.blue)
                     }
                     HStack {
-                        Text("Insgesamt erledigte")
+                        Text("Insgesamt erledigt:")
                         Spacer()
-                        Text(String(erledigteAufgaben))
+                        Text(String(self.user.erledigt.count))
                         Image(systemName: "checkmark")
                             .foregroundColor(.blue)
                     }
                 }
-                Section (header: Text("Aufgaben Statistik")) {
+                Section (header: Text("Statistik")) {
                     
                     VStack (alignment: .leading){
                         Additives_diagramm(
-                            erledigteA: 10,
-                            nichtErledigteA: 5,
-                            aufgeschobeneA: 1)
+                            erledigteA: self.user.erledigt.count,
+                            nichtErledigteA: self.user.abgelehnt.count,
+                            aufgeschobeneA: self.user.aufgeschoben.count)
                             .frame(minHeight: 24, maxHeight: 24)
                         
                         HStack {
                             Circle()
                                 .frame(maxWidth: 12, maxHeight: 12)
                                 .foregroundColor(.green)
-                            Text("Erledigt").font(.footnote)
+                            Text("erledigt").font(.footnote)
                             
                             Spacer()
                             
@@ -62,7 +68,7 @@ struct UebersichtView: View {
                                 .frame(maxWidth: 12, maxHeight: 12)
                                 .foregroundColor(.red)
                             
-                            Text("nicht Erledigt").font(.footnote)
+                            Text("nicht erledigt").font(.footnote)
                             
                             Spacer()
                             
@@ -70,27 +76,33 @@ struct UebersichtView: View {
                                 .frame(maxWidth: 12, maxHeight: 12)
                                 .foregroundColor(.yellow)
                             
-                            Text("Aufgeschoben").font(.footnote)
+                            Text("aufgeschoben").font(.footnote)
                             
                         }.padding(.horizontal)
                     }
                 }
                 
-                Section (header: Text("Vergangene Aufgaben")){
-                    ForEach(vergangeneAufgaben , id: \VergangeneAufgabe.aufgabe) { vergangeneAufgabe in
+                Section (header: Text("Zuletzt erledigt:")){
+                    
                         
                         HStack {
-                            Text(vergangeneAufgabe.aufgabe)
+                            Text(self.zuletztBearbeitet)
                             Spacer()
-                            Image(systemName: vergangeneAufgabe.erledigt ? "checkmark.circle" : "xmark.circle")
+                            Image(systemName: zuletztBearbeitetErledigt ? "checkmark.circle" : "xmark.circle")
                         }
                         
-                    }
+                    
                 }
                 
-                Section (header: Text("Vergangene Aufgaben")) {
+                Section (header: Text("Statistik")) {
                 
-                    PieChartRow(data: [8,23,54], backgroundColor: Color(UIColor.lightGray), accentColor: .green)
+                    PieChartRow(
+                        data: [
+                            self.user.erledigt.count as Double,
+                            self.user.abgelehnt.count as Double,
+                            self.user.aufgeschoben.count as Double],
+                        backgroundColor: Color(UIColor.lightGray),
+                        accentColor: .green)
                         .foregroundColor(.red)
                         .frame(width: 100, height: 100)
                         .padding()
@@ -103,18 +115,6 @@ struct UebersichtView: View {
 
 struct UebersichtView_Previews: PreviewProvider {
     static var previews: some View {
-        UebersichtView(
-            erfolgreicheAufgabeFolge: 5,
-            
-            erledigteAufgaben: 2,
-            
-            vergangeneAufgaben: [
-                VergangeneAufgabe(
-                    aufgabe: "Laufen",
-                    erledigt: true),
-                
-                VergangeneAufgabe(
-                    aufgabe: "Treppen",
-                    erledigt: false)])
+        UebersichtView(user: User(abgelehnt: [], aktueller_streak: 0, anzahl_benachrichtigungen: 0, aufgabe: 0, aufgeschoben: [], erledigt: [], freunde: [], freundes_id: "test", id: "test", letztes_erledigt_datum: Date(), nutzername: "test", verbliebene_aufgaben: []), zuletztBearbeitet: Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "DoDay", erledigt: 0, id: 0, kategorie: "test", text: "test", text_detail: "test", text_dp: "test"), zuletztBearbeitetErledigt: true)
     }
 }
