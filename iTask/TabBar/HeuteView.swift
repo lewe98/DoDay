@@ -7,67 +7,85 @@
 //
 
 import SwiftUI
+import SwiftUIX
 
 struct HeuteView: View {
+    @EnvironmentObject var coreDataFunctions: CoreDataFunctions
     
-    var aufgabeInArbeit = true
-    let user: User
-    let greeting: String
+    @State var aufgabenGeladen = false
     
-    init(curUser: User) {
+    init() {
         // UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.red]
         // UINavigationBar.appearance().titleTextAttributes = [.strokeColor: UIColor .systemGroupedBackground]
-        user = curUser
-        greeting = "Hey, " + user.nutzername + "!"
         UINavigationBar.appearance().backgroundColor =  UIColor.systemGroupedBackground
         
     }
     
-    
-    
-    
     var body: some View {
-        switch aufgabeInArbeit {
+        switch coreDataFunctions.aufgabenView {
             
-        case true:
+        case 1:
             return AnyView(
                 NavigationView {
-                   AktuellFirstView(
-                    Aufgabe1: "Sprich mit einer dir fremden Person",
-                    Aufgabe2: "Gehe 10.000 Schritte Zu Fuß")
-                    .navigationBarTitle(Text(greeting))
+                    AktuellFirstView()
+                    .navigationBarTitle(Text("Hey " + self.coreDataFunctions.curUser.nutzername + "!" ))
                     .navigationBarHidden(false)
                 }
             )
+            .onAppear{
+                // self.setAufgabeForView()
+                self.reload()
+            }
             
-        case false:
+        case 2:
             return
                 AnyView(
                 NavigationView {
-                   AktuellSecondView(Aufgabe: "Sprich mit einer dir fremden Person")
+                    AktuellSecondView()
                     .navigationBarTitle(Text("Aktuell"))
                 }.background(Color(UIColor .systemGroupedBackground))
-            )
-            
+            ).onAppear{
+                // self.setAufgabeForView()
+                self.reload()
+            }
+        case 3:
+            return
+                AnyView(
+                NavigationView {
+                    Text("Nicht genügend Aufgaben in der Datenbank!")
+                    .navigationBarTitle(Text("Aktuell"))
+                }.background(Color(UIColor .systemGroupedBackground))
+            ).onAppear{
+                // self.setAufgabeForView()
+                self.reload()
+            }
+        default:
+            return
+                AnyView(
+                    ActivityIndicator()
+                ).onAppear{
+                    // self.setAufgabeForView()
+            }
         }
     }
+    func reload(){
+            self.aufgabenGeladen = true
+    }
+    
+    /*func setAufgabeForView() {
+        if (self.coreDataFunctions.curUser.aufgabe >= 0) {
+            self.coreDataFunctions.aufgabenView = 2
+        } else {
+            self.coreDataFunctions.aufgabenView = 1
+        }
+        print("AufgabenView Aufgabe: ", self.coreDataFunctions.curUser.aufgabe)
+    }*/
 }
+
+
 
 struct HeuteView_Previews: PreviewProvider {
     static var previews: some View {
-        HeuteView(
-            curUser: User(
-                abgelehnt: [],
-                aktueller_streak: 0,
-                anzahl_benachrichtigungen: 0,
-                aufgabe: 0,
-                aufgeschoben: [],
-                erledigt: [],
-                freunde: [],
-                freundes_id: "abc123",
-                id: "id82",
-                letztes_erledigt_datum: Date(),
-                nutzername: "PreviewName",
-                verbliebene_aufgaben: []))
+        HeuteView()
     }
 }

@@ -72,7 +72,7 @@ class FirebaseFunctions: ObservableObject {
             abgelehnt: [],
             aktueller_streak: 0,
             anzahl_benachrichtigungen: 0,
-            aufgabe: 0,
+            aufgabe: -1,
             aufgeschoben: [],
             erledigt: [],
             freunde: [],
@@ -300,13 +300,46 @@ class FirebaseFunctions: ObservableObject {
     /// Inkremetiert die Anzahl der User, die eine spezifische Aufgabe erledigt haben.
     ///
     /// - Parameter aufgabe: Aufgabe die bearbeitet wird
-    func incrementErledigt(aufgabe: Aufgabe){
+    func updateAufgabe(aufgabe: Aufgabe, done: @escaping (Result<String, Error>) -> Void){
         db.collection("aufgaben").document(String(aufgabe.id)).updateData([
-            "erledigt": aufgabe.erledigt + 1
-        ]) { err in
+            "abgelehnt": aufgabe.abgelehnt,
+            "aufgeschoben": aufgabe.aufgeschoben,
+            "ausgespielt": aufgabe.ausgespielt,
+            "autor": aufgabe.autor,
+            "erledigt": aufgabe.erledigt,
+            "kategorie": aufgabe.kategorie,
+            "text": aufgabe.text,
+            "text_detail": aufgabe.text_detail,
+            "text_dp": aufgabe.text_dp])
+        { err in
             if let err = err {
+                done(.failure(err))
                 print("Error updating document: \(err)")
             } else {
+                done(.success("Document successfully updated"))
+                print("Document successfully updated")
+            }
+        }
+    }
+    
+    func updateUser(user: User, done: @escaping (Result<String, Error>) -> Void){
+        db.collection("users").document(user.id).updateData([
+            "abgelehnt": user.abgelehnt,
+            "aktueller_streak": user.aktueller_streak,
+            "anzahl_benachrichtigungen": user.anzahl_benachrichtigungen,
+            "aufgabe": user.aufgabe,
+            "aufgeschoben": user.aufgeschoben,
+            "erledigt": user.erledigt,
+            "freunde": user.freunde,
+            "freundes_id": user.freundes_id,
+            "verbliebene_aufgaben": user.verbliebene_aufgaben,
+            "nutzername": user.nutzername
+        ]) { err in
+            if let err = err {
+                done(.failure(err))
+                print("Error updating document: \(err)")
+            } else {
+                done(.success("Document successfully updated"))
                 print("Document successfully updated")
             }
         }

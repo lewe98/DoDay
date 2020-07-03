@@ -36,7 +36,7 @@ struct ContentView: View {
         else if self.firebaseFunctions.registered {
             
             TabView {
-                HeuteView(curUser: self.coreDataFunctions.curUser)
+                HeuteView()
                     .tabItem {
                         VStack {
                             Image(systemName: "flag")
