@@ -10,34 +10,25 @@ import SwiftUI
 import SwiftUIX
 
 struct HeuteView: View {
-    let curUser: User
-    let aufgabenArray: [Aufgabe]
-    
     @EnvironmentObject var coreDataFunctions: CoreDataFunctions
+    @State var aufgabenView = -1
+    
     @State var aufgabenGeladen = false
-    @State var aufgabe1: Aufgabe = Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "", erledigt: 0, id: 0, kategorie: "", text: "loading...", text_detail: "loading...", text_dp: "")
-    @State var aufgabe2: Aufgabe = Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "", erledigt: 0, id: 0, kategorie: "", text: "loading...", text_detail: "loading...", text_dp: "")
-    @State var curAufgabe: Aufgabe = Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "", erledigt: 0, id: 0, kategorie: "", text: "loading...", text_detail: "loading...", text_dp: "")
-    @State var aufgabeInArbeit = 0
     
-    
-    init(curUser: User, aufgabenArray: [Aufgabe]) {
-        self.curUser = curUser
-        self.aufgabenArray = aufgabenArray
+    init() {
         // UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.red]
         // UINavigationBar.appearance().titleTextAttributes = [.strokeColor: UIColor .systemGroupedBackground]
         UINavigationBar.appearance().backgroundColor =  UIColor.systemGroupedBackground
+        
     }
     
     var body: some View {
-        switch aufgabeInArbeit {
+        switch aufgabenView {
             
         case 1:
             return AnyView(
                 NavigationView {
-                   AktuellFirstView(aufgabenGeladen: self.aufgabenGeladen,
-                                    Aufgabe1: self.aufgabe1,
-                   Aufgabe2: self.aufgabe2)
+                    AktuellFirstView()
                     .navigationBarTitle(Text("Hey " + self.coreDataFunctions.curUser.nutzername + "!" ))
                     .navigationBarHidden(false)
                 }
@@ -45,21 +36,16 @@ struct HeuteView: View {
             .onAppear{
                 self.reload()
             }
-            .onTapGesture {
-                self.setAufgabeInArbeit()
-            }
             
         case 2:
             return
                 AnyView(
                 NavigationView {
-                    AktuellSecondView(aufgabenGeladen: aufgabenGeladen, Aufgabe: curAufgabe)
+                    AktuellSecondView()
                     .navigationBarTitle(Text("Aktuell"))
                 }.background(Color(UIColor .systemGroupedBackground))
             ).onAppear{
                 self.reload()
-            }.onTapGesture {
-                self.aufgabeInArbeit = 1
             }
         case 3:
             return
@@ -70,8 +56,6 @@ struct HeuteView: View {
                 }.background(Color(UIColor .systemGroupedBackground))
             ).onAppear{
                 self.reload()
-            }.onTapGesture {
-                
             }
         default:
             return
@@ -79,7 +63,6 @@ struct HeuteView: View {
                     ActivityIndicator()
                 ).onAppear{
                     self.SetAufgabeForView()
-            }.onTapGesture {
             }
         }
     }
@@ -88,25 +71,13 @@ struct HeuteView: View {
     }
     
     func SetAufgabeForView() {
-        print("SetAufgabenView: ", self.curUser)
-        let aufgabeID = self.curUser.aufgabe
-        if (aufgabeID >= 0) {
-            self.aufgabeInArbeit = 2
-            self.curAufgabe = self.coreDataFunctions.getAufgabeByID(id: aufgabeID) ?? Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "", erledigt: 0, id: 0, kategorie: "", text: "loading...", text_detail: "loading...", text_dp: "")
+        if (self.coreDataFunctions.curUser.aufgabe >= 0) {
+            self.aufgabenView = 2
         } else {
-            self.aufgabeInArbeit = 1
-            if self.aufgabenArray.count > 0 {
-                let maxRage = self.aufgabenArray.count - 1
-                self.aufgabe1 = self.aufgabenArray[Int.random(in: 0..<maxRage)]
-                self.aufgabe2 = self.aufgabenArray[Int.random(in: 0..<maxRage)]
-            }
+            self.aufgabenView = 1
         }
-        print("SetAufgabenView: ", self.aufgabeInArbeit)
+        print("SetAufgabenView: ", self.aufgabenView)
 
-    }
-    
-    func setAufgabeInArbeit() {
-        self.aufgabeInArbeit = 2
     }
 }
 
@@ -114,20 +85,6 @@ struct HeuteView: View {
 
 struct HeuteView_Previews: PreviewProvider {
     static var previews: some View {
-        HeuteView(
-            curUser: User(
-                abgelehnt: [],
-                aktueller_streak: 0,
-                anzahl_benachrichtigungen: 0,
-                aufgabe: 0,
-                aufgeschoben: [],
-                erledigt: [],
-                freunde: [],
-                freundes_id: "abc123",
-                id: "id82",
-                letztes_erledigt_datum: Date(),
-                nutzername: "PreviewName",
-                verbliebene_aufgaben: []),
-                aufgabenArray: [])
+        HeuteView()
     }
 }
