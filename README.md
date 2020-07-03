@@ -40,10 +40,8 @@ Technologie | Verwendungszweck
 [SwiftUIX](https://github.com/SwiftUIX/SwiftUIX) | Frontend Development
 [Firebase](https://firebase.google.com/docs/firestore) | Datenbank mit Cloud Firestore
 [Local Notifications](https://developer.apple.com/documentation/usernotifications) | Benachrichtigungen
-[User Defaults](https://developer.apple.com/documentation/foundation/userdefaults) | Persistierung der Einstellungen des Nutzers
+[UserDefaults](https://developer.apple.com/documentation/foundation/userdefaults) | Persistierung der Einstellungen des Nutzers
 [Core Data](https://developer.apple.com/documentation/coredata) | Datensicherung für offline Nutzung
-[Swift UI Animations]() | 
-[Working with sound]() | 
 
 
 
