@@ -250,7 +250,17 @@ class FirebaseFunctions: ObservableObject {
             if let err = err {
                 completionHandler(.failure(err))
             } else {
-                completionHandler(.success(querySnapshot!.count))
+                guard let documents = querySnapshot?.documents else {
+                   print("Error fetching documents: \(err!)")
+                   return
+                }
+                for i in 0 ..< documents.count {
+                    let documentID = Int(documents[i].documentID) ?? 0
+                    if (i == (documents.count - 1)) {
+                        completionHandler(.success(documentID + 1))
+                    }
+                }
+                
             }
         }
     }

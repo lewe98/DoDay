@@ -126,6 +126,10 @@ class CoreDataFunctions: ObservableObject {
         self.curUserVerbliebeneAufgabenUpdaten()
         var verbliebeneAufgaben = self.curUser.verbliebene_aufgaben
         verbliebeneAufgaben.append(contentsOf: self.curUser.aufgeschoben)
+        if (verbliebeneAufgaben.count < 3) {
+            self.aufgabenView = 3
+            return [Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "", erledigt: 0, id: 0, kategorie: "", text: "", text_detail: "", text_dp: ""),Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "", erledigt: 0, id: 0, kategorie: "", text: "", text_detail: "", text_dp: "")]
+        }
         var randomNumber = Int.random(in: 0..<(verbliebeneAufgaben.count - 1))
         let aufgabe1 = self.getAufgabeByID(id: verbliebeneAufgaben[randomNumber])
         verbliebeneAufgaben.remove(at: randomNumber)
