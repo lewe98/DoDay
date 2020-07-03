@@ -387,7 +387,7 @@ class CoreDataFunctions: ObservableObject {
                 self.allCDAufgaben.forEach { aufgabe in
                     self.insertAufgabeIntoCoreData(aufgabe: aufgabe)
                 }
-                
+                self.setHeuteView()
             }
             catch {
                 self.fetchCDAufgaben()
