@@ -9,8 +9,21 @@
 import SwiftUI
 
 struct AktuellSecondView: View {
+    
     @EnvironmentObject var coreDataFunctions: CoreDataFunctions
-    @State var aufgabe = Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "", erledigt: 0, id: 0, kategorie: "", text: "load...", text_detail: "", text_dp: "")
+    
+    @State var aufgabe = Aufgabe(
+        abgelehnt: 0,
+        aufgeschoben: 0,
+        ausgespielt: 0,
+        autor: "",
+        erledigt: 0,
+        id: 0,
+        kategorie: "",
+        text: "loading...",
+        text_detail: "loading...",
+        text_dp: "loading...")
+    
     @State var aufgabenGeladen = false
     
     var body: some View {
@@ -18,10 +31,14 @@ struct AktuellSecondView: View {
                 Spacer()
                 Text("Du hast dir für heute folgende Aufgabe ausgesucht.").lineLimit(nil)
                     .multilineTextAlignment(.center).font(.headline).padding(20)
-                AufgabeDetail(aufgabenGeladen: aufgabenGeladen, Aufgabe: aufgabe).onAppear{
-                    self.aufgabe = self.coreDataFunctions.getAufgabeByID(id: self.coreDataFunctions.curUser.aufgabe)!
-                    self.aufgabenGeladen = true
+                AufgabeDetail(
+                    aufgabenGeladen: aufgabenGeladen,
+                    Aufgabe: aufgabe).onAppear {
+                        self.aufgabe = self.coreDataFunctions.getAufgabeByID(
+                            id: self.coreDataFunctions.curUser.aufgabe)!
+                        self.aufgabenGeladen = true
                 }
+                
                 Text("Konntest du die Aufgabe erfolgreich erledigen?")
                     .font(.footnote)
                     .padding()

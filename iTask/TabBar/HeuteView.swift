@@ -10,25 +10,33 @@ import SwiftUI
 import SwiftUIX
 
 struct HeuteView: View {
+    
+    
+    
     @EnvironmentObject var coreDataFunctions: CoreDataFunctions
+    @EnvironmentObject var globalFunctions: GlobalFunctions
     
     @State var aufgabenGeladen = false
+    
+    
     
     init() {
         // UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.red]
         // UINavigationBar.appearance().titleTextAttributes = [.strokeColor: UIColor .systemGroupedBackground]
         UINavigationBar.appearance().backgroundColor =  UIColor.systemGroupedBackground
-        
     }
+    
+    
     
     var body: some View {
         switch coreDataFunctions.aufgabenView {
+            
             
         case 1:
             return AnyView(
                 NavigationView {
                     AktuellFirstView()
-                    .navigationBarTitle(Text("Hey " + self.coreDataFunctions.curUser.nutzername + "!" ))
+                        .navigationBarTitle(Text("Hey " + self.coreDataFunctions.curUser.nutzername + "!" ))
                     .navigationBarHidden(false)
                 }
             )
@@ -36,6 +44,8 @@ struct HeuteView: View {
                 // self.setAufgabeForView()
                 self.reload()
             }
+          
+            
             
         case 2:
             return
@@ -48,6 +58,9 @@ struct HeuteView: View {
                 // self.setAufgabeForView()
                 self.reload()
             }
+               
+            
+            
         case 3:
             return
                 AnyView(
@@ -59,17 +72,22 @@ struct HeuteView: View {
                 // self.setAufgabeForView()
                 self.reload()
             }
+              
+            
         default:
             return
                 AnyView(
                     ActivityIndicator()
                 ).onAppear{
+                    self.coreDataFunctions.setHeuteView()
                     // self.setAufgabeForView()
-            }
+                }
         }
     }
-    func reload(){
-            self.aufgabenGeladen = true
+    
+    
+    func reload() {
+        self.aufgabenGeladen = true
     }
     
     /*func setAufgabeForView() {
@@ -83,9 +101,10 @@ struct HeuteView: View {
 }
 
 
-
+/*
 struct HeuteView_Previews: PreviewProvider {
     static var previews: some View {
         HeuteView()
     }
 }
+ */

@@ -81,18 +81,27 @@ class CoreDataFunctions: ObservableObject {
     }
     
     func setHeuteView() {
-        if (self.curUser.aufgabe >= 0) {
+        if (self.curUser.aufgabe == 0){
+            self.aufgabenView = 3
+        } else if (self.curUser.aufgabe > 0) {
             self.aufgabenView = 2
         } else {
             self.aufgabenView = 1
         }
     }
     
+    
+    
     func getAufgabeByID(id: Int) -> Aufgabe? {
+        if id == -1 {
+            return Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "DoDay", erledigt: 0, id: 0, kategorie: "", text: "loading...", text_detail: "loading...", text_dp: "loading...")
+        }
         return self.allCDAufgaben.filter({ (aufgabe) -> Bool in
             aufgabe.id == id
-            }).first
+        }).first
     }
+    
+    
     
     func curUserVerbliebeneAufgabenUpdaten() {
         var fertigeAufgaben = self.curUser.erledigt
@@ -122,23 +131,35 @@ class CoreDataFunctions: ObservableObject {
         }
     }
     
+    
+    
     func verbliebeneAufgabenAnzeigen() -> [Aufgabe?] {
         self.curUserVerbliebeneAufgabenUpdaten()
         var verbliebeneAufgaben = self.curUser.verbliebene_aufgaben
         verbliebeneAufgaben.append(contentsOf: self.curUser.aufgeschoben)
         if (verbliebeneAufgaben.count < 3) {
+            
             self.aufgabenView = 3
+            self.curUser.aufgabe = 0
+            
             return [Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "", erledigt: 0, id: 0, kategorie: "", text: "", text_detail: "", text_dp: ""),Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "", erledigt: 0, id: 0, kategorie: "", text: "", text_detail: "", text_dp: "")]
         }
+        
         var randomNumber = Int.random(in: 0..<(verbliebeneAufgaben.count - 1))
+        
         let aufgabe1 = self.getAufgabeByID(id: verbliebeneAufgaben[randomNumber])
+        
         verbliebeneAufgaben.remove(at: randomNumber)
+        
         randomNumber = Int.random(in: 0..<(verbliebeneAufgaben.count - 1))
+        
         let aufgabe2 = self.getAufgabeByID(id: verbliebeneAufgaben[randomNumber])
         // Zeigt den FirstHeuteView an
         self.aufgabenView = 1
         return [aufgabe1, aufgabe2]
     }
+    
+    
     
     func aktuelleAufgabeAuswaehlen(aufgabe: Aufgabe) {
         self.curUser.aufgabe = aufgabe.id

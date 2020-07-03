@@ -35,13 +35,17 @@ struct ContentView: View {
             
         else if self.firebaseFunctions.registered {
             
+            
             TabView {
-                HeuteView()
-                    .tabItem {
-                        VStack {
-                            Image(systemName: "flag")
-                            Text("Heute")
-                        }
+                HeuteView().onAppear {
+                    self.globalFunctions.load()
+                    
+                }
+                .tabItem {
+                    VStack {
+                        Image(systemName: "flag")
+                        Text("Heute")
+                    }
                 }.tag(0)
                 
                 

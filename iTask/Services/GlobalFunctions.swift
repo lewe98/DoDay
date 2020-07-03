@@ -34,11 +34,11 @@ class GlobalFunctions: ObservableObject {
     /// Funktion, um beim Starten der App alle Daten zu aktualisieren
     func load() {
         
-        
         isLoading = true
         
         self.coreDataFunctions.getUsersFromFirebase()
         self.coreDataFunctions.getAufgabenFromFirebase()
+        
         
         isLoading = false
     }

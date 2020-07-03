@@ -37,7 +37,7 @@ Technologie | Verwendungszweck
 ---------------------|----------
 [Xcode 11.5](https://developer.apple.com/xcode/) | Entwicklungsumgebung
 [Swift 4](https://www.apple.com/de/swift/) | Programmiersprache
-[SwiftUICharts 1.5.0](https://github.com/AppPear/ChartView) | Frontend Development
+[SwiftUIX](https://github.com/SwiftUIX/SwiftUIX) | Frontend Development
 [Firebase](https://firebase.google.com/docs/firestore) | Datenbank mit Cloud Firestore
 [Local Notifications](https://developer.apple.com/documentation/usernotifications) | Benachrichtigungen
 [User Defaults](https://developer.apple.com/documentation/foundation/userdefaults) | Persistierung der Einstellungen des Nutzers
