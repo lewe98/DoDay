@@ -1,6 +1,7 @@
 # CS2365 Swift-Programmierung unter iOS
 ## DoDay
 
+> Do it. Today.
 > Lorem Ipsum, kurzer Text über die App
 
 
