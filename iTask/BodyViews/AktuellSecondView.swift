@@ -20,14 +20,15 @@ struct AktuellSecondView: View {
                     .multilineTextAlignment(.center).font(.headline).padding(20)
                 AufgabeDetail(aufgabenGeladen: aufgabenGeladen, Aufgabe: aufgabe).onAppear{
                     self.aufgabe = self.coreDataFunctions.getAufgabeByID(id: self.coreDataFunctions.curUser.aufgabe)!
-                    self.coreDataFunctions.aktuelleAufgabeAuswaehlen(aufgabe: self.aufgabe)
                     self.aufgabenGeladen = true
                 }
                 Text("Konntest du die Aufgabe erfolgreich erledigen?")
                     .font(.footnote)
                     .padding()
             
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                Button(action: {
+                    self.coreDataFunctions.aufgabeErledigt()
+                }) {
                     Text("Ja")
                         .frame(maxWidth: .infinity, minHeight: 44)
                 }
@@ -35,7 +36,9 @@ struct AktuellSecondView: View {
                 .border(Color.gray, width: 0.2)
                 .padding(.top)
                 
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                Button(action: {
+                    self.coreDataFunctions.aufgabeAblehnen()
+                }) {
                     Text("Nein")
                         .frame(maxWidth: .infinity, minHeight: 44)
                 }
@@ -44,8 +47,10 @@ struct AktuellSecondView: View {
                 .border(Color.gray, width: 0.2)
                 .padding(.top)
                 
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                    Text("Ich brauche mehr Zeit")
+                Button(action: {
+                    self.coreDataFunctions.aufgabeAufschieben()
+                }) {
+                    Text("Ich verschiebe die Aufgabe")
                         .frame(maxWidth: .infinity, minHeight: 44)
                 }
                 .background(Color(.tertiarySystemBackground))

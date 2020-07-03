@@ -11,7 +11,6 @@ import SwiftUIX
 
 struct HeuteView: View {
     @EnvironmentObject var coreDataFunctions: CoreDataFunctions
-    @State var aufgabenView = -1
     
     @State var aufgabenGeladen = false
     
@@ -23,7 +22,7 @@ struct HeuteView: View {
     }
     
     var body: some View {
-        switch aufgabenView {
+        switch coreDataFunctions.aufgabenView {
             
         case 1:
             return AnyView(
@@ -34,6 +33,7 @@ struct HeuteView: View {
                 }
             )
             .onAppear{
+                // self.setAufgabeForView()
                 self.reload()
             }
             
@@ -45,6 +45,7 @@ struct HeuteView: View {
                     .navigationBarTitle(Text("Aktuell"))
                 }.background(Color(UIColor .systemGroupedBackground))
             ).onAppear{
+                // self.setAufgabeForView()
                 self.reload()
             }
         case 3:
@@ -55,6 +56,7 @@ struct HeuteView: View {
                     .navigationBarTitle(Text("Aktuell"))
                 }.background(Color(UIColor .systemGroupedBackground))
             ).onAppear{
+                // self.setAufgabeForView()
                 self.reload()
             }
         default:
@@ -62,7 +64,7 @@ struct HeuteView: View {
                 AnyView(
                     ActivityIndicator()
                 ).onAppear{
-                    self.SetAufgabeForView()
+                    // self.setAufgabeForView()
             }
         }
     }
@@ -70,15 +72,14 @@ struct HeuteView: View {
             self.aufgabenGeladen = true
     }
     
-    func SetAufgabeForView() {
+    /*func setAufgabeForView() {
         if (self.coreDataFunctions.curUser.aufgabe >= 0) {
-            self.aufgabenView = 2
+            self.coreDataFunctions.aufgabenView = 2
         } else {
-            self.aufgabenView = 1
+            self.coreDataFunctions.aufgabenView = 1
         }
-        print("SetAufgabenView: ", self.aufgabenView)
-
-    }
+        print("AufgabenView Aufgabe: ", self.coreDataFunctions.curUser.aufgabe)
+    }*/
 }
 
 

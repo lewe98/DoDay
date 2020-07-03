@@ -47,7 +47,7 @@ class CoreDataFunctions: ObservableObject {
         nutzername: "loading...",
         verbliebene_aufgaben: [])
     
-    @Published var curCDAufgabeIDLocal = -1
+    @Published var aufgabenView = -1
     /// Vendor-ID des Users
     let id: String
     
@@ -76,6 +76,15 @@ class CoreDataFunctions: ObservableObject {
     func getCurUser() {
         if self.firebaseFunctions.registered {
             self.curUser = self.allCDUsers.first(where: {$0.id == self.id})!
+            self.setHeuteView()
+        }
+    }
+    
+    func setHeuteView() {
+        if (self.curUser.aufgabe >= 0) {
+            self.aufgabenView = 2
+        } else {
+            self.aufgabenView = 1
         }
     }
     
@@ -122,6 +131,8 @@ class CoreDataFunctions: ObservableObject {
         verbliebeneAufgaben.remove(at: randomNumber)
         randomNumber = Int.random(in: 0..<(verbliebeneAufgaben.count - 1))
         let aufgabe2 = self.getAufgabeByID(id: verbliebeneAufgaben[randomNumber])
+        // Zeigt den FirstHeuteView an
+        self.aufgabenView = 1
         return [aufgabe1, aufgabe2]
     }
     
@@ -134,29 +145,38 @@ class CoreDataFunctions: ObservableObject {
             print("choseAufgabe(): Aufgabe not found!")
         }
         self.updateCurUser()
+        // Zeigt den SecondHeuteView an
+        self.aufgabenView = 2
         // TODO: Aufgabe Ausgespielt +1
     }
     
     func aufgabeErledigt() {
+        let id = self.curUser.aufgabe
         self.curUser.erledigt.append(self.curUser.aufgabe)
         self.curUser.aufgabe = -1
+        self.aufgabenView = 1
+        
         self.updateCurUser()
-        self.updateAufgabe(aufgabe: self.getAufgabeByID(id: self.curUser.aufgabe)!)
         // TODO: Aufgabe Erledigt +1
+        self.updateAufgabe(aufgabe: self.getAufgabeByID(id: id)!)
     }
     
     func aufgabeAufschieben() {
+        let id = self.curUser.aufgabe
         self.curUser.aufgeschoben.append(self.curUser.aufgabe)
         self.curUser.aufgabe = -1
         self.updateCurUser()
         // TODO: Aufgabe Aufgeschoben +1
+        self.updateAufgabe(aufgabe: self.getAufgabeByID(id: id)!)
     }
     
     func aufgabeAblehnen() {
+        let id = self.curUser.aufgabe
         self.curUser.abgelehnt.append(self.curUser.aufgabe)
         self.curUser.aufgabe = -1
         self.updateCurUser()
         // TODO: Aufgabe Abgelehnt +1
+        self.updateAufgabe(aufgabe: self.getAufgabeByID(id: id)!)
     }
     
     func updateCurUser() {
