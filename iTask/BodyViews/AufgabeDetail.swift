@@ -12,6 +12,9 @@ import SwiftUIX
 struct AufgabeDetail: View {
     let aufgabenGeladen: Bool
     let Aufgabe: Aufgabe
+    @State private var scale: CGFloat = 0.8
+    @State private var showDetail = false
+    @State private var wobble = true
     var body: some View {
         ZStack {
             
@@ -30,6 +33,15 @@ struct AufgabeDetail: View {
             }
             }.frame(height: 150)
             .padding()
+            .scaleEffect(scale)
+            //.rotationEffect(.degrees(showDetail ? 90 : 0))
+            //.scaleEffect(showDetail ? 1.5 : 1)
+            
+            
+            .animation(Animation.default.repeatCount(1))
+            .onAppear() {
+                self.scale += 0.2
+        }
 
     }
 }

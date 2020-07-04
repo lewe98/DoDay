@@ -28,10 +28,20 @@ struct AktuellFirstView: View {
             }
         .background(Color(UIColor .systemGroupedBackground))
         .onAppear{
-            let aufgabenArray = self.coreDataFunctions.verbliebeneAufgabenAnzeigen()
-            self.aufgabe1 = aufgabenArray[0]!
-            self.aufgabe2 = aufgabenArray[1]!
-            self.aufgabenGeladen = true
+            self.coreDataFunctions.verbliebeneAufgabenAnzeigen() {
+                result in
+                    do {
+                        let aufgabenArray = try result.get()
+                        self.aufgabe1 = aufgabenArray[0]!
+                        self.aufgabe2 = aufgabenArray[1]!
+                        // Zeigt den FirstHeuteView an
+                        self.coreDataFunctions.aufgabenView = 1
+                        self.aufgabenGeladen = true
+                    } catch {
+                        self.coreDataFunctions.aufgabenView = 3
+                        self.coreDataFunctions.curUser.aufgabe = 0
+                }
+            }
         }
     }
 }
