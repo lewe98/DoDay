@@ -259,10 +259,14 @@ class FirebaseFunctions: ObservableObject {
                    print("Error fetching documents: \(err!)")
                    return
                 }
+                var highest = 0
                 for i in 0 ..< documents.count {
                     let documentID = Int(documents[i].documentID) ?? 0
+                    if (highest < documentID) {
+                        highest = documentID
+                    }
                     if (i == (documents.count - 1)) {
-                        completionHandler(.success(documentID + 1))
+                        completionHandler(.success(highest + 1))
                     }
                 }
                 
