@@ -65,7 +65,6 @@ struct FreundeView: View {
                         }
                         .sheet(isPresented: $showingFreundeHinzufuegen) {
                             FreundeHinzufuegenView(gf: self.globalFunctions)
-                            .environmentObject(self.firebaseFunctions)
                         }
                         Spacer()
                     }
