@@ -156,24 +156,27 @@ struct FreundeView: View {
     
     func freundeHerausfordern() -> Void {
         showingFreundeHerausfordern.toggle()
-        let teilenText = "Könntest du meine heutige DoDay-Aufgabe schaffen?\n\"\(self.coreDataFunctions.getCurAufgabe().text)\""
         
-        let activityViewController : UIActivityViewController = UIActivityViewController(
-            activityItems: [teilenText], applicationActivities: nil)
-        
-        // Entfernte Teilen-Buttons
-        activityViewController.excludedActivityTypes = [
-            UIActivity.ActivityType.postToWeibo,
-            UIActivity.ActivityType.print,
-            UIActivity.ActivityType.assignToContact,
-            UIActivity.ActivityType.saveToCameraRoll,
-            UIActivity.ActivityType.addToReadingList,
-            UIActivity.ActivityType.postToFlickr,
-            UIActivity.ActivityType.postToVimeo,
-            UIActivity.ActivityType.postToTencentWeibo
-        ]
-        
-        UIApplication.shared.windows.first?.rootViewController?.present(activityViewController, animated: true, completion: nil)
+        if self.coreDataFunctions.curUser.aufgabe != 0 {
+            let teilenText = "Könntest du meine heutige DoDay-Aufgabe schaffen?\n\"\(self.coreDataFunctions.getCurAufgabe().text)\""
+            
+            let activityViewController : UIActivityViewController = UIActivityViewController(
+                activityItems: [teilenText], applicationActivities: nil)
+            
+            // Entfernte Teilen-Buttons
+            activityViewController.excludedActivityTypes = [
+                UIActivity.ActivityType.postToWeibo,
+                UIActivity.ActivityType.print,
+                UIActivity.ActivityType.assignToContact,
+                UIActivity.ActivityType.saveToCameraRoll,
+                UIActivity.ActivityType.addToReadingList,
+                UIActivity.ActivityType.postToFlickr,
+                UIActivity.ActivityType.postToVimeo,
+                UIActivity.ActivityType.postToTencentWeibo
+            ]
+            
+            UIApplication.shared.windows.first?.rootViewController?.present(activityViewController, animated: true, completion: nil)
+        }
     }
  
 /*

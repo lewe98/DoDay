@@ -228,8 +228,11 @@ class CoreDataFunctions: ObservableObject {
         })
     }
     
-    func getCurAufgabe() -> Aufgabe{
-        return self.allCDAufgaben.first(where: {$0.id == self.curUser.aufgabe})!
+    func getCurAufgabe() -> Aufgabe {
+        if self.curUser.aufgabe > 0 {
+            return self.allCDAufgaben.first(where: {$0.id == self.curUser.aufgabe})!
+        }
+        return Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "DoDay", erledigt: 0, id: 0, kategorie: "", text: "Keine Aufgabe verfügbar.", text_detail: "Keine Aufgabe verfügbar.", text_dp: "Keine Aufgabe verfügbar.")
     }
     
     
