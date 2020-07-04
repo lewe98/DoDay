@@ -228,6 +228,8 @@ class CoreDataFunctions: ObservableObject {
         })
     }
     
+    
+    
     func getCurAufgabe() -> Aufgabe {
         if self.curUser.aufgabe > 0 {
             return self.allCDAufgaben.first(where: {$0.id == self.curUser.aufgabe})!

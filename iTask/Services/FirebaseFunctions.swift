@@ -217,12 +217,17 @@ class FirebaseFunctions: ObservableObject {
     /// - Parameter freundID: ID des Freundes
     func addFriend(curUser: User, freundID: String) {
         
+        if curUser.freundes_id == freundID {
+             print("Die eigene ID kann nicht hinzugefügt werden.")
+            return
+        }
+        
         db.collection("users").whereField("freundes_id", isEqualTo: freundID)
             .getDocuments() { (querySnapshot, err) in
                 
                 if (querySnapshot?.documents.count == 0) {
                     print("User konnte nicht gefunden werden.")
-                    
+                    return
                 } else {
                     var newFriendList = curUser.freunde
                     newFriendList.append(freundID)
