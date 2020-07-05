@@ -60,7 +60,14 @@ struct AktuellSecondView: View {
                     .padding()
             
                 Button(action: {
-                    self.coreDataFunctions.aufgabeErledigt()
+                    playSound(sound: "applause", type: "mp3")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                        self.scale = 0
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                        self.coreDataFunctions.aufgabeErledigt()
+                    }
+                    
                 }) {
                     Text("Ja")
                         .frame(maxWidth: .infinity, minHeight: 44)

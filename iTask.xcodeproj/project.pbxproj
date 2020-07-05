@@ -14,6 +14,8 @@
 		A145AEF1248144C9005047D4 /* AktuellSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A145AEF0248144C9005047D4 /* AktuellSecondView.swift */; };
 		A1532E4924B13F9C0004D400 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1532E4824B13F9C0004D400 /* GoogleService-Info.plist */; };
 		A18260E724AE5BC60027C027 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = A18260E624AE5BC60027C027 /* SwiftUIX */; };
+		A191207C24B1FF9400B8A073 /* PlaySound.swift in Sources */ = {isa = PBXBuildFile; fileRef = A191207B24B1FF9400B8A073 /* PlaySound.swift */; };
+		A191207E24B1FFE300B8A073 /* applause.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A191207D24B1FFE300B8A073 /* applause.mp3 */; };
 		A1959E0E2483F21F00B6B12E /* Additives_diagramm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1959E0D2483F21F00B6B12E /* Additives_diagramm.swift */; };
 		A1959E1F248404A600B6B12E /* PieSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1959E1E248404A600B6B12E /* PieSlice.swift */; };
 		A1959E21248404EE00B6B12E /* PieChartRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1959E20248404EE00B6B12E /* PieChartRow.swift */; };
@@ -72,6 +74,8 @@
 		A145AEEE2481428D005047D4 /* AufgabeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AufgabeDetail.swift; sourceTree = "<group>"; };
 		A145AEF0248144C9005047D4 /* AktuellSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AktuellSecondView.swift; sourceTree = "<group>"; };
 		A1532E4824B13F9C0004D400 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A191207B24B1FF9400B8A073 /* PlaySound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySound.swift; sourceTree = "<group>"; };
+		A191207D24B1FFE300B8A073 /* applause.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = applause.mp3; sourceTree = "<group>"; };
 		A1959E0D2483F21F00B6B12E /* Additives_diagramm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Additives_diagramm.swift; sourceTree = "<group>"; };
 		A1959E1E248404A600B6B12E /* PieSlice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieSlice.swift; sourceTree = "<group>"; };
 		A1959E20248404EE00B6B12E /* PieChartRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartRow.swift; sourceTree = "<group>"; };
@@ -157,6 +161,15 @@
 			path = BodyViews;
 			sourceTree = "<group>";
 		};
+		A191207A24B1FF7000B8A073 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				A191207D24B1FFE300B8A073 /* applause.mp3 */,
+				A191207B24B1FF9400B8A073 /* PlaySound.swift */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
 		A1959E1D2484047800B6B12E /* PieChart */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +214,7 @@
 		B90A883F247DD7D600B59892 /* iTask */ = {
 			isa = PBXGroup;
 			children = (
+				A191207A24B1FF7000B8A073 /* Sound */,
 				B979A0A524AB5EFC00862A20 /* InitViews */,
 				B979A0A424AB5E9A00862A20 /* TabBar */,
 				E9DA9B42248BC76A00D5C0F8 /* EinstellungenViews */,
@@ -417,6 +431,7 @@
 				B90A884D247DD7D800B59892 /* Preview Assets.xcassets in Resources */,
 				B90A884A247DD7D800B59892 /* Assets.xcassets in Resources */,
 				A1532E4924B13F9C0004D400 /* GoogleService-Info.plist in Resources */,
+				A191207E24B1FFE300B8A073 /* applause.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,6 +499,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A145AEF1248144C9005047D4 /* AktuellSecondView.swift in Sources */,
+				A191207C24B1FF9400B8A073 /* PlaySound.swift in Sources */,
 				A145AEEF2481428D005047D4 /* AufgabeDetail.swift in Sources */,
 				B9CC722C24AA386000608C07 /* GlobalFunctions.swift in Sources */,
 				A1959E1F248404A600B6B12E /* PieSlice.swift in Sources */,
