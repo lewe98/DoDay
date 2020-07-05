@@ -7,50 +7,87 @@
 //
 
 import SwiftUI
+import SwiftUIX
 
 struct Additives_diagramm: View {
-    var erledigteA: Int
-    var nichtErledigteA: Int
-    var aufgeschobeneA: Int
-    
+    var erledigteA = 0
+    var nichtErledigteA = 0
+    var aufgeschobeneA = 0
+    private let screenWidth = Float(UIScreen.main.bounds.width)
+    @State var erledigteAFloat = CGFloat(0)
+    @State var nichtErledigteAFloat = CGFloat(0)
+    @State var aufgeschobeneAFloat = CGFloat(0)
+    @State var nurNichtErledigt = CGFloat(0)
     var body: some View {
-        ZStack(alignment: .leading){
-           
-
-            RoundedRectangle(cornerRadius: 15, style: .continuous)
-                .fill(Color(UIColor .secondarySystemFill))
-                .frame(maxWidth: 400, maxHeight: 24)
-                //.overlay(RoundedRectangle(cornerRadius: 15, style: .continuous).stroke( lineWidth: 2))
-            HStack {
-                RoundedRectangle(cornerRadius: 10, style: .continuous)
-                    .fill(Color.green)
-                .frame(maxWidth: CGFloat(getErledigteA()), maxHeight: 16)
-                    .padding(.leading, 4)
-                RoundedRectangle(cornerRadius: 10, style: .continuous)
-                    .fill(Color.red)
-                .frame(maxWidth: CGFloat((getNichtErledigtA())), maxHeight: 16)
-                    .padding( .horizontal, -4)
-                
-                RoundedRectangle(cornerRadius: 10, style: .continuous)
-                    .fill(Color.yellow)
-                .frame(maxWidth: CGFloat(getAufgeschobeneA()), maxHeight: 16)
-                    .padding(.trailing ,4)
-            }
+        switch (erledigteA + nichtErledigteA + aufgeschobeneA) {
+        case 0:
+            return
+                AnyView(
+                    HStack {
+                        Spacer()
+                        Text("Es ist noch keine Statistik verfügbar")
+                        ActivityIndicator()
+                        Spacer()
+                    })
+        default:
+            return
+                AnyView(
+                ZStack(alignment: .leading){
+                    RoundedRectangle(cornerRadius: 15, style: .continuous)
+                        .fill(Color(UIColor .secondarySystemFill))
+                        .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: 24)
+                        //.overlay(RoundedRectangle(cornerRadius: 15, style: .continuous).stroke( lineWidth: 2))
+                    HStack {
+                        if erledigteA != 0 {
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            .fill(Color.green)
+                            .frame(maxWidth: erledigteAFloat, maxHeight: 16)
+                            .animation(Animation.easeInOut(duration: 1).delay(1))
+                            .padding(.leading, 4)
+                        }
+                        if nichtErledigteA != 0 {
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            .fill(Color.red)
+                            .frame(maxWidth: nichtErledigteAFloat, maxHeight: 16)
+                            .animation(Animation.easeInOut(duration: 1).delay(1.5))
+                            .padding( .horizontal, (-4 * nurNichtErledigt))
+                        }
+                        if aufgeschobeneA != 0 {
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            .fill(Color.yellow)
+                            .frame(maxWidth: aufgeschobeneAFloat, maxHeight: 16)
+                            .animation(Animation.easeInOut(duration: 1).delay(2))
+                            .padding(.trailing, 4)
+                        }
+                    }
+                }.onAppear{
+                    if (self.erledigteA == 0 || self.aufgeschobeneA == 0) {
+                        self.nurNichtErledigt = CGFloat(-1)
+                    }
+                    self.getErledigteA()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        self.getNichtErledigtA()
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                        self.getAufgeschobeneA()
+                    }
+                }
+            )
         }
     }
     
     func sumAufgaben() -> Float {
         return Float(self.erledigteA + self.aufgeschobeneA + self.nichtErledigteA)
     }
-    func getErledigteA() -> Float {
-        return (Float(self.erledigteA)/sumAufgaben()*400)
+    func getErledigteA() {
+        self.erledigteAFloat = CGFloat(Float(self.erledigteA)/sumAufgaben()*screenWidth)
         
     }
-    func getAufgeschobeneA() -> Float {
-        return (Float(self.aufgeschobeneA)/sumAufgaben()*400)
+    func getAufgeschobeneA() {
+        self.aufgeschobeneAFloat = CGFloat(Float(self.aufgeschobeneA)/sumAufgaben()*screenWidth)
     }
-    func getNichtErledigtA() -> Float {
-        return (Float(self.nichtErledigteA)/sumAufgaben()*400)
+    func getNichtErledigtA() {
+        self.nichtErledigteAFloat = CGFloat(Float(self.nichtErledigteA)/sumAufgaben()*screenWidth)
     }
 }
 

@@ -53,9 +53,9 @@ struct UebersichtView: View {
                     VStack (alignment: .leading){
                         
                         Additives_diagramm(
-                            erledigteA: 1, // self.user.erledigt.count,
-                            nichtErledigteA: 0, // self.user.abgelehnt.count,
-                            aufgeschobeneA: 0) // self.user.aufgeschoben.count)
+                            erledigteA: self.user.erledigt.count,
+                            nichtErledigteA: self.user.abgelehnt.count,
+                            aufgeschobeneA: self.user.aufgeschoben.count)
                             
                             .frame(minHeight: 24, maxHeight: 24)
                         
