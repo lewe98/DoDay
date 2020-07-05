@@ -41,7 +41,7 @@ struct AktuellSecondView: View {
                     .animation(Animation.easeInOut(duration: 0.2))
                     .onAppear {
                         self.aufgabe = self.coreDataFunctions.getAufgabeByID(
-                            id: self.coreDataFunctions.curUser.aufgabe)!
+                            id: self.coreDataFunctions.curUser.aufgabe) ?? Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "", erledigt: 0, id: 0, kategorie: "", text: "Datenbank fehler", text_detail: "", text_dp: "")
                         self.aufgabenGeladen = true
                         self.scale = 1.05
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {

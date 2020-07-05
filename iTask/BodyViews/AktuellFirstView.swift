@@ -17,8 +17,8 @@ struct AktuellFirstView: View {
     @State private var scale2: CGFloat = 0
     var body: some View {
         VStack {
+            Text("Wähle deine heutige Aufgabe").fontWeight(.bold).font(.system(.title, design: .rounded)).multilineTextAlignment(.leading)
             Spacer()
-            Text("Wähle deine heutige Aufgabe").font(.headline).multilineTextAlignment(.center)
             AufgabeDetail(aufgabenGeladen: aufgabenGeladen, Aufgabe: self.aufgabe1).onTapGesture {
                 self.scale1 = 0
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {

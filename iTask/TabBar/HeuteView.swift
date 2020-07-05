@@ -65,7 +65,14 @@ struct HeuteView: View {
             return
                 AnyView(
                 NavigationView {
-                    Text("Datenbankfehler: Wahrscheinlich nicht genügend Aufgaben in der Datenbank!")
+                    Text("""
+Datenbankfehler:
+Melde dich bei einem Admin.
+Grund 1:
+    Aufgabe in Firebase auf 0 gesetzt.
+Grund 2:
+Nicht genügend Aufgaben in der Datenbank.
+""")
                     .navigationBarTitle(Text("Hey " + self.coreDataFunctions.curUser.nutzername + "!"))
                 }.background(Color(UIColor .systemGroupedBackground))
             ).onAppear{
