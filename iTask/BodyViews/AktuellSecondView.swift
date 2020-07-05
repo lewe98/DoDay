@@ -25,18 +25,34 @@ struct AktuellSecondView: View {
         text_dp: "loading...")
     
     @State var aufgabenGeladen = false
-    
+    @State private var scale: CGFloat = 0
     var body: some View {
             VStack {
                 Spacer()
-                Text("Du hast dir für heute folgende Aufgabe ausgesucht.").lineLimit(nil)
-                    .multilineTextAlignment(.center).font(.headline).padding(20)
+                Text("Du hast dir für heute folgende Aufgabe ausgesucht.")
+                    .font(.headline)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(2)
+                    .padding(20)
                 AufgabeDetail(
                     aufgabenGeladen: aufgabenGeladen,
-                    Aufgabe: aufgabe).onAppear {
+                    Aufgabe: aufgabe)
+                    .scaleEffect(scale)
+                    .animation(Animation.easeInOut(duration: 0.2))
+                    .onAppear {
                         self.aufgabe = self.coreDataFunctions.getAufgabeByID(
                             id: self.coreDataFunctions.curUser.aufgabe)!
                         self.aufgabenGeladen = true
+                        self.scale = 1.05
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                            self.scale = 0.95
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                            self.scale = 1.02
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                            self.scale = 1
+                        }
                 }
                 
                 Text("Konntest du die Aufgabe erfolgreich erledigen?")
