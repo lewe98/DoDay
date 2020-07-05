@@ -74,8 +74,8 @@ struct AktuellFirstView: View {
                 result in
                     do {
                         let aufgabenArray = try result.get()
-                        self.aufgabe1 = aufgabenArray[0]!
-                        self.aufgabe2 = aufgabenArray[1]!
+                        self.aufgabe1 = aufgabenArray[0] ?? Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "", erledigt: 0, id: 0, kategorie: "", text: "", text_detail: "", text_dp: "")
+                        self.aufgabe2 = aufgabenArray[1] ?? Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "", erledigt: 0, id: 0, kategorie: "", text: "", text_detail: "", text_dp: "")
                         // Zeigt den FirstHeuteView an
                         self.coreDataFunctions.aufgabenView = 1
                         self.aufgabenGeladen = true

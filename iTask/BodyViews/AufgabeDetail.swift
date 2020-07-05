@@ -36,18 +36,44 @@ struct AufgabeDetail: View {
                         .foregroundColor(.blue)
                         // .font(.system(size: 25))
                         .padding(10).opacity(flipped ? 0.0 : 1.0)
-                Text(Aufgabe.text_detail).opacity(flipped ? 1.0 : 0.0)
+                    Text(Aufgabe.text_detail)
+                        .fontWeight(.bold)
+                        .font(.system(.footnote, design: .rounded))
+                        .lineLimit(nil)
+                        .multilineTextAlignment(.center)
+                        .opacity(flipped ? 1.0 : 0.0)
+                        .padding(15)
+                    HStack {
+                        Spacer()
+                        VStack {
+                            ZStack {
+                                Circle()
+                                    .fill(Color.blue)
+                                    
+                                Image(systemName: "info")
+                                    .font(.system(size: 20.0))
+                                    .foregroundColor(.white)
+                                    .opacity(flipped ? 0.0 : 1.0)
+                                Image(systemName: "xmark")
+                                    .font(.system(size: 20.0))
+                                .foregroundColor(.white)
+                                    .opacity(flipped ? 1.0 : 0.0)
+                            }
+                                .frame(width: 30, height: 30)
+                                .onTapGesture {
+                                    withAnimation(Animation.linear(duration: 0.8)) {
+                                        self.animate3d.toggle()
+                                    }
+                                }
+                            Spacer()
+                        }
+                    }
+                    
                 }
             } else {
                 ActivityIndicator()
             }
-            Image(systemName: "info").backgroundColor(.blue)
-                .position(x: .infinity, y: .infinity)
-                .onTapGesture {
-                  withAnimation(Animation.linear(duration: 0.8)) {
-                        self.animate3d.toggle()
-                  }
-            }
+            
             }.frame(height: 150)
             .padding()
             .animation(.default)
@@ -61,6 +87,7 @@ struct AufgabeDetail: View {
 
     }
 }
+
 struct FlipEffect: GeometryEffect {
 
       var animatableData: Double {
