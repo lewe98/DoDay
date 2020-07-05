@@ -16,6 +16,8 @@
 		A18260E724AE5BC60027C027 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = A18260E624AE5BC60027C027 /* SwiftUIX */; };
 		A191207C24B1FF9400B8A073 /* PlaySound.swift in Sources */ = {isa = PBXBuildFile; fileRef = A191207B24B1FF9400B8A073 /* PlaySound.swift */; };
 		A191207E24B1FFE300B8A073 /* applause.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A191207D24B1FFE300B8A073 /* applause.mp3 */; };
+		A191208324B20C9800B8A073 /* Confetti.swift in Sources */ = {isa = PBXBuildFile; fileRef = A191208224B20C9800B8A073 /* Confetti.swift */; };
+		A191208724B20E1100B8A073 /* ParticlesEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A191208624B20E1100B8A073 /* ParticlesEmitter.swift */; };
 		A1959E0E2483F21F00B6B12E /* Additives_diagramm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1959E0D2483F21F00B6B12E /* Additives_diagramm.swift */; };
 		A1959E1F248404A600B6B12E /* PieSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1959E1E248404A600B6B12E /* PieSlice.swift */; };
 		A1959E21248404EE00B6B12E /* PieChartRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1959E20248404EE00B6B12E /* PieChartRow.swift */; };
@@ -76,6 +78,8 @@
 		A1532E4824B13F9C0004D400 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A191207B24B1FF9400B8A073 /* PlaySound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySound.swift; sourceTree = "<group>"; };
 		A191207D24B1FFE300B8A073 /* applause.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = applause.mp3; sourceTree = "<group>"; };
+		A191208224B20C9800B8A073 /* Confetti.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Confetti.swift; sourceTree = "<group>"; };
+		A191208624B20E1100B8A073 /* ParticlesEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticlesEmitter.swift; sourceTree = "<group>"; };
 		A1959E0D2483F21F00B6B12E /* Additives_diagramm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Additives_diagramm.swift; sourceTree = "<group>"; };
 		A1959E1E248404A600B6B12E /* PieSlice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieSlice.swift; sourceTree = "<group>"; };
 		A1959E20248404EE00B6B12E /* PieChartRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartRow.swift; sourceTree = "<group>"; };
@@ -170,6 +174,15 @@
 			path = Sound;
 			sourceTree = "<group>";
 		};
+		A191208124B20C7800B8A073 /* Confetti */ = {
+			isa = PBXGroup;
+			children = (
+				A191208624B20E1100B8A073 /* ParticlesEmitter.swift */,
+				A191208224B20C9800B8A073 /* Confetti.swift */,
+			);
+			path = Confetti;
+			sourceTree = "<group>";
+		};
 		A1959E1D2484047800B6B12E /* PieChart */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,6 +227,7 @@
 		B90A883F247DD7D600B59892 /* iTask */ = {
 			isa = PBXGroup;
 			children = (
+				A191208124B20C7800B8A073 /* Confetti */,
 				A191207A24B1FF7000B8A073 /* Sound */,
 				B979A0A524AB5EFC00862A20 /* InitViews */,
 				B979A0A424AB5E9A00862A20 /* TabBar */,
@@ -500,6 +514,7 @@
 			files = (
 				A145AEF1248144C9005047D4 /* AktuellSecondView.swift in Sources */,
 				A191207C24B1FF9400B8A073 /* PlaySound.swift in Sources */,
+				A191208724B20E1100B8A073 /* ParticlesEmitter.swift in Sources */,
 				A145AEEF2481428D005047D4 /* AufgabeDetail.swift in Sources */,
 				B9CC722C24AA386000608C07 /* GlobalFunctions.swift in Sources */,
 				A1959E1F248404A600B6B12E /* PieSlice.swift in Sources */,
@@ -511,6 +526,7 @@
 				E98953232483B754008093D0 /* Einstellungen.swift in Sources */,
 				E9DA9B46248BC7A700D5C0F8 /* DatenschutzWebview.swift in Sources */,
 				B9A720E8249C202C00488233 /* Loading.swift in Sources */,
+				A191208324B20C9800B8A073 /* Confetti.swift in Sources */,
 				B90A8846247DD7D600B59892 /* iTask.xcdatamodeld in Sources */,
 				A145AEED24813C31005047D4 /* AktuellFirstView.swift in Sources */,
 				A1108F4924913FAA00066826 /* NavigationConfigurator.swift in Sources */,

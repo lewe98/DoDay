@@ -9,6 +9,10 @@
 import SwiftUI
 
 struct AktuellSecondView: View {
+    struct Constants {
+        static let height: CGFloat = 230.0
+        static let width: CGFloat = UIScreen.main.bounds.width
+    }
     
     @EnvironmentObject var coreDataFunctions: CoreDataFunctions
     
@@ -25,8 +29,16 @@ struct AktuellSecondView: View {
         text_dp: "loading...")
     
     @State var aufgabenGeladen = false
+    @State var aufgabeErledigt = false
     @State private var scale: CGFloat = 0
+    var config = EmitterConfig(emitter: Emitters.snow,
+    size: CGSize(width: Constants.width, height: 1),
+    shape: .line,
+    position: CGPoint(x: Constants.width / 2, y: 0),
+    name: "Snow",
+    backgroundColor: .blue)
     var body: some View {
+        ZStack {
             VStack {
                 Spacer()
                 Text("Du hast dir für heute folgende Aufgabe ausgesucht.")
@@ -61,6 +73,7 @@ struct AktuellSecondView: View {
             
                 Button(action: {
                     playSound(sound: "applause", type: "mp3")
+                    self.aufgabeErledigt = true
                     DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                         self.scale = 0
                     }
@@ -98,6 +111,23 @@ struct AktuellSecondView: View {
                 .padding(.top)
                 Spacer()
             }
+            if self.aufgabeErledigt {
+                VStack(alignment: .leading) {
+                    config.emitter
+                        .emitterSize(config.size)
+                        .emitterShape(config.shape)
+                        .emitterPosition(config.position)
+                        .frame(minWidth: 0,
+                               maxWidth: .infinity,
+                               minHeight: Confetti.Constants.height,
+                               maxHeight: .infinity,
+                               alignment: Alignment.topLeading)
+                }
+                //.scaleEffect(self.aufgabeErledigt ? 1 : 0)
+                //.opacity(self.aufgabeErledigt ? 1.0 : 0.0)
+                //.animation(.easeIn(duration: 1))
+            }
+        }
             .background(Color(UIColor .systemGroupedBackground))
     }
 }
