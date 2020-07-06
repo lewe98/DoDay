@@ -13,7 +13,7 @@ struct EinstellungenView: View {
     @State var showingImpressum = false
     @State var showingDatenschutz = false
     @State var showingAufgabeEinreichen = false
-    
+    @State var aufgabeEingereicht = false
     
     let firebaseFunctions: FirebaseFunctions
     
@@ -44,9 +44,7 @@ struct EinstellungenView: View {
                         }) {
                             Text("Eigene Aufgabe einreichen")
                         }
-                        .sheet(isPresented: $showingAufgabeEinreichen, onDismiss: {
-                                   
-                               }) {
+                        .sheet(isPresented: $showingAufgabeEinreichen, onDismiss: {}) {
                             AufgabeEinreichenView(fb: self.firebaseFunctions)
                         }
                         Spacer()

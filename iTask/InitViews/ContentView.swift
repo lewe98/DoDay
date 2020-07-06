@@ -53,7 +53,7 @@ struct ContentView: View {
                     user: self.coreDataFunctions.curUser,
                     zuletztBearbeitet: self.coreDataFunctions.getZuletztErledigt(),
                     zuletztBearbeitetErledigt: self.coreDataFunctions.checkIfErledigt(
-                        id: self.coreDataFunctions.getZuletztErledigt().id))
+                        id: self.coreDataFunctions.getZuletztErledigt().id), letzteAufgaben: [Aufgabe]())
                     
                     .tabItem {
                         VStack {

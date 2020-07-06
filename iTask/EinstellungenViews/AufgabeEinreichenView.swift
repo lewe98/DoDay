@@ -14,6 +14,8 @@ struct AufgabeEinreichenView: View {
     
     let firebaseFunctions: FirebaseFunctions
     @Environment(\.presentationMode) var presentation
+    @State private var showingAlert = false
+    @State private var aufgabeEingereicht = false
     
     init(fb: FirebaseFunctions) {
         self.firebaseFunctions = fb
@@ -35,7 +37,7 @@ struct AufgabeEinreichenView: View {
                         TextField("Detaillierter Text", text: $text_detail)
                         TextField("Text in dritter Person", text: $text_dp)
                         Picker(selection: $kategoriePicker, label: Text("Kategorie")) {
-                            ForEach(0 ..< kategorie.count) {
+                            ForEach(0 ..< kategorie.count, id: \.self) {
                                 Text(self.kategorie[$0])
                             }
                         }
@@ -46,22 +48,32 @@ struct AufgabeEinreichenView: View {
                             Spacer()
                             Button(action: {
                                 if (self.text != "" && self.text_detail != "" && self.text_dp != "") {
-                                    self.presentation.dismiss()
                                      self.firebaseFunctions.addNewAufgabe(
                                      text: self.text,
                                      text_detail: self.text_detail,
                                      text_dp: self.text_dp,
                                      kategorie: self.kategorie[self.kategoriePicker])
+                                    self.aufgabeEingereicht = true
                                 } else {
-                                    //TODO: Leere Felder
+                                    self.showingAlert = true
                                 }
                             }) {
                                 Text("Abschicken")
                                     .foregroundColor(.green)
                             }
+                            .alert(isPresented: $showingAlert) {
+                                Alert(title: Text("Leeres Feld!"), message: Text("Bitte alle Felder ausfüllen."), dismissButton: .default(Text("Okay")))
+                            }
                             Spacer()
                         }
                     }
+                }.alert(isPresented: $aufgabeEingereicht) {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        self.aufgabeEingereicht = false
+                        self.presentation.dismiss()
+                    }
+                    return Alert(title: Text("Aufgabe gespeichert!"))
                 }
             }
             .background(Color(UIColor.secondarySystemBackground))
