@@ -27,7 +27,7 @@ struct FreundeView: View {
     
     let firebaseFunctions: FirebaseFunctions
     let coreDataFunctions: CoreDataFunctions
-    let globalFunctions: GlobalFunctions
+    @ObservedObject var globalFunctions: GlobalFunctions
     
     
     
@@ -56,23 +56,27 @@ struct FreundeView: View {
                             Text(kopierenText)
                         }
                     }
+
                     HStack{
                         Spacer()
                         Button(action: {
                             self.showingFreundeHinzufuegen.toggle()
                         }) {
                             Text("Freunde hinzufügen")
-                        }
-                        .sheet(isPresented: $showingFreundeHinzufuegen) {
+                            }
+                        .sheet(isPresented: $showingFreundeHinzufuegen, onDismiss: {
+                        print("Code executed when the sheet dismisses")
+                        self.globalFunctions.updateFreundesListe()
+                        }) {
                             FreundeHinzufuegenView(gf: self.globalFunctions)
-                        }
+                            }
                         Spacer()
                     }
                 }
                 
                 
                 Section(header: HStack {Text("FREUNDE"); Spacer(); Text("ERLEDIGTE AUFGABEN")}) {
-                    List(self.freundesListe, id: \.self) {
+                    List(self.globalFunctions.freundesListe, id: \.self) {
                         freund in
                         HStack {
                             VStack(alignment: .leading) {
@@ -103,7 +107,7 @@ struct FreundeView: View {
                 
             } .navigationBarTitle(Text("Freunde"))
             .onAppear {
-                self.updateFreundesListe()
+                self.globalFunctions.updateFreundesListe()
                 
             }
         }
@@ -113,26 +117,29 @@ struct FreundeView: View {
     
     // MARK: - FUNCTIONS
     /// Lorem Ipsum
-    func updateFreundesListe() {
+    /*func updateFreundesListe() {
         
         self.freundesListe = []
         
         self.coreDataFunctions.curUser.freunde.forEach { freundID in // alle Freunde durchgehen (freundes_id)
             self.coreDataFunctions.allCDUsers.forEach { user in // User rausziehen
                 if user.freundes_id == freundID {
+                    var text = "Keine Aufgabe ausgewählt"
                     self.coreDataFunctions.allCDAufgaben.forEach { aufgabe in // Aufgaben rausziehen
                         if user.aufgabe == aufgabe.id {
-                            self.freundesListe.append(
-                                Freund(
-                                    nutzername: user.nutzername,
-                                    erledigt: user.erledigt.count,
-                                    text_dp: aufgabe.text_dp))
+                            text = aufgabe.text_dp
                         }
                     }
+                    self.freundesListe.append(
+                        Freund(
+                            nutzername: user.nutzername,
+                            erledigt: user.erledigt.count,
+                            text_dp: text))
                 }
             }
         }
-    }
+        print("\n\nUPDATEFREUNDESLISTE: ", self.freundesListe)
+    }*/
     
     
     

@@ -14,6 +14,9 @@ class GlobalFunctions: ObservableObject {
     /// Ladestatus
     @Published var isLoading: Bool = true
     
+    /// Freundesliste fuer FreundeView
+    @Published var freundesListe: [Freund] = []
+    
     /// Firebase
     let firebaseFunctions: FirebaseFunctions
     
@@ -52,6 +55,32 @@ class GlobalFunctions: ObservableObject {
         self.firebaseFunctions.addFriend(
             curUser: self.coreDataFunctions.curUser,
             freundID: freundID)
+    }
+    
+    
+    // Aktualisiert die Freundesliste, die im FreundeView angezeigt wird.
+    func updateFreundesListe() {
+        
+        self.freundesListe = []
+        
+        self.coreDataFunctions.curUser.freunde.forEach { freundID in // alle Freunde durchgehen (freundes_id)
+            self.coreDataFunctions.allCDUsers.forEach { user in // User rausziehen
+                if user.freundes_id == freundID {
+                    var text = "Keine Aufgabe ausgewählt"
+                    self.coreDataFunctions.allCDAufgaben.forEach { aufgabe in // Aufgaben rausziehen
+                        if user.aufgabe == aufgabe.id {
+                            text = aufgabe.text_dp
+                        }
+                    }
+                    self.freundesListe.append(
+                        Freund(
+                            nutzername: user.nutzername,
+                            erledigt: user.erledigt.count,
+                            text_dp: text))
+                }
+            }
+        }
+        print("\n\nUPDATEFREUNDESLISTE: ", self.freundesListe)
     }
     
 }
