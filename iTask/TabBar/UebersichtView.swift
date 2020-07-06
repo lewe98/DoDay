@@ -16,11 +16,13 @@ struct VergangeneAufgabe {
 struct UebersichtView: View {
     let user: User
     let zuletztBearbeitet: Aufgabe
+    let letzteAufgaben: [Aufgabe]
     let zuletztBearbeitetErledigt: Bool
     
-    init(user: User, zuletztBearbeitet: Aufgabe, zuletztBearbeitetErledigt: Bool) {
+    init(user: User, zuletztBearbeitet: Aufgabe, zuletztBearbeitetErledigt: Bool, letzteAufgaben: [Aufgabe]) {
         self.user = user
         self.zuletztBearbeitet = zuletztBearbeitet
+        self.letzteAufgaben = letzteAufgaben
         self.zuletztBearbeitetErledigt = zuletztBearbeitetErledigt
     }
     
@@ -96,18 +98,19 @@ struct UebersichtView: View {
                     
                 }
                 
-                
-                Section (header: Text("Statistik")) {
-                    PieChartRow(
-                        data: [2.5, 3.6, 5.1],
-                            //Double(self.user.erledigt.count),
-                           // Double(self.user.abgelehnt.count),
-                           // Double(self.user.aufgeschoben.count)],
-                        backgroundColor: Color(UIColor.lightGray),
-                        accentColor: .green)
-                        .foregroundColor(.red)
-                        .frame(width: 100, height: 100)
-                        .padding()
+                Section (header: Text("Aufgaben Verlauf")){
+                    Text("Aufgabe")
+                    /*
+                    ForEach(0 ..< self.letzteAufgaben.count, id: \.self) {
+                        Text(self.letzteAufgaben[$0])
+                    
+                        HStack {
+                            Text(self.zuletztBearbeitet.text)
+                            Spacer()
+                            Image(systemName: zuletztBearbeitetErledigt ? "checkmark.circle" : "xmark.circle")
+                        }
+                    }
+                    */
                 }
             
             }.navigationBarTitle(Text("Übersicht"))
@@ -115,8 +118,10 @@ struct UebersichtView: View {
     }
 }
 
+/*
 struct UebersichtView_Previews: PreviewProvider {
     static var previews: some View {
         UebersichtView(user: User(abgelehnt: [], aktueller_streak: 0, anzahl_benachrichtigungen: 0, aufgabe: 0, aufgeschoben: [], erledigt: [], freunde: [], freundes_id: "test", id: "test", letztes_erledigt_datum: Date(), nutzername: "test", verbliebene_aufgaben: []), zuletztBearbeitet: Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "DoDay", erledigt: 0, id: 0, kategorie: "test", text: "test", text_detail: "test", text_dp: "test"), zuletztBearbeitetErledigt: true)
     }
 }
+ */

@@ -84,7 +84,7 @@ struct AktuellSecondView: View {
                 }) {
                     Text("Ja")
                         .frame(maxWidth: .infinity, minHeight: 44)
-                }
+                }.disabled(self.aufgabeErledigt)
                 .background(Color(.tertiarySystemBackground))
                 .border(Color.gray, width: 0.2)
                 .padding(.top)
@@ -95,6 +95,7 @@ struct AktuellSecondView: View {
                     Text("Nein")
                         .frame(maxWidth: .infinity, minHeight: 44)
                 }
+                .disabled(self.aufgabeErledigt)
                 .foregroundColor(.red)
                 .background(Color(.tertiarySystemBackground))
                 .border(Color.gray, width: 0.2)
@@ -106,6 +107,7 @@ struct AktuellSecondView: View {
                     Text("Ich verschiebe die Aufgabe")
                         .frame(maxWidth: .infinity, minHeight: 44)
                 }
+                .disabled(self.aufgabeErledigt)
                 .background(Color(.tertiarySystemBackground))
                 .border(Color.gray, width: 0.2)
                 .padding(.top)

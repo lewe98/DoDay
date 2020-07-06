@@ -285,31 +285,32 @@ class FirebaseFunctions: ObservableObject {
     /// - Parameter text_dp: Text aus der dritten Person
     /// - Parameter kategorie: Kategorie der Aufgabe
     func addNewAufgabe(text: String, text_detail: String, text_dp: String, kategorie: String) {
-        
-        self.getAufgabenHighestID { result in
-            do {
-                let num = try result.get()
-                
-                self.db.collection("aufgaben").document(String(num)).setData([
-                    "abgelehnt": 0,
-                    "aufgeschoben": 0,
-                    "ausgespielt": 0,
-                    "autor": "DoDay",
-                    "erledigt": 0,
-                    "id": num,
-                    "kategorie": kategorie,
-                    "text": text,
-                    "text_detail": text_detail,
-                    "text_dp": text_dp]) { err in
-                        if let err = err {
-                            print("Error writing document: \(err)")
-                        } else {
-                            print("Document successfully written!")
-                        }
+        if (text != "" && text_detail != "" && text_dp != "" && kategorie != "") {
+            self.getAufgabenHighestID { result in
+                do {
+                    let num = try result.get()
+                    
+                    self.db.collection("aufgaben").document(String(num)).setData([
+                        "abgelehnt": 0,
+                        "aufgeschoben": 0,
+                        "ausgespielt": 0,
+                        "autor": "DoDay",
+                        "erledigt": 0,
+                        "id": num,
+                        "kategorie": kategorie,
+                        "text": text,
+                        "text_detail": text_detail,
+                        "text_dp": text_dp]) { err in
+                            if let err = err {
+                                print("Error writing document: \(err)")
+                            } else {
+                                print("Document successfully written!")
+                            }
+                    }
                 }
-            }
-            catch {
-                print("error")
+                catch {
+                    print("error")
+                }
             }
         }
     }
