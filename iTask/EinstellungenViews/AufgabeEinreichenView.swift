@@ -7,11 +7,13 @@
 //
 
 import SwiftUI
+import Combine
 
 /// Eine View, die es dem Nutzer erlaubt, einen eigenen Aufgabenvorschlag einzureichen.
 struct AufgabeEinreichenView: View {
     
     let firebaseFunctions: FirebaseFunctions
+    @Environment(\.presentationMode) var presentation
     
     init(fb: FirebaseFunctions) {
         self.firebaseFunctions = fb
@@ -36,6 +38,7 @@ struct AufgabeEinreichenView: View {
                         HStack {
                             Spacer()
                             Button(action: {
+                                self.presentation.dismiss()
                                 self.firebaseFunctions.addNewAufgabe(
                                     text: self.text,
                                     text_detail: self.text_detail,

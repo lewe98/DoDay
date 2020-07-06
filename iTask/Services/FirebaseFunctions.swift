@@ -285,6 +285,10 @@ class FirebaseFunctions: ObservableObject {
     /// - Parameter text_dp: Text aus der dritten Person
     /// - Parameter kategorie: Kategorie der Aufgabe
     func addNewAufgabe(text: String, text_detail: String, text_dp: String, kategorie: String) {
+        if (text == "" && text_detail == "" && text_dp == "" && kategorie == "") {
+             print("Die eigene ID kann nicht hinzugefügt werden.")
+            return
+        }
         
         self.getAufgabenHighestID { result in
             do {

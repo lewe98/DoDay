@@ -18,8 +18,6 @@
 		A191208324B20C9800B8A073 /* Confetti.swift in Sources */ = {isa = PBXBuildFile; fileRef = A191208224B20C9800B8A073 /* Confetti.swift */; };
 		A191208724B20E1100B8A073 /* ParticlesEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A191208624B20E1100B8A073 /* ParticlesEmitter.swift */; };
 		A1959E0E2483F21F00B6B12E /* Additives_diagramm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1959E0D2483F21F00B6B12E /* Additives_diagramm.swift */; };
-		A1959E1F248404A600B6B12E /* PieSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1959E1E248404A600B6B12E /* PieSlice.swift */; };
-		A1959E21248404EE00B6B12E /* PieChartRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1959E20248404EE00B6B12E /* PieChartRow.swift */; };
 		B90A8841247DD7D600B59892 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90A8840247DD7D600B59892 /* AppDelegate.swift */; };
 		B90A8843247DD7D600B59892 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90A8842247DD7D600B59892 /* SceneDelegate.swift */; };
 		B90A8846247DD7D600B59892 /* iTask.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B90A8844247DD7D600B59892 /* iTask.xcdatamodeld */; };
@@ -79,8 +77,6 @@
 		A191208224B20C9800B8A073 /* Confetti.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Confetti.swift; sourceTree = "<group>"; };
 		A191208624B20E1100B8A073 /* ParticlesEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticlesEmitter.swift; sourceTree = "<group>"; };
 		A1959E0D2483F21F00B6B12E /* Additives_diagramm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Additives_diagramm.swift; sourceTree = "<group>"; };
-		A1959E1E248404A600B6B12E /* PieSlice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieSlice.swift; sourceTree = "<group>"; };
-		A1959E20248404EE00B6B12E /* PieChartRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartRow.swift; sourceTree = "<group>"; };
 		B90A883D247DD7D600B59892 /* DoDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B90A8840247DD7D600B59892 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B90A8842247DD7D600B59892 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -181,15 +177,6 @@
 			path = Confetti;
 			sourceTree = "<group>";
 		};
-		A1959E1D2484047800B6B12E /* PieChart */ = {
-			isa = PBXGroup;
-			children = (
-				A1959E1E248404A600B6B12E /* PieSlice.swift */,
-				A1959E20248404EE00B6B12E /* PieChartRow.swift */,
-			);
-			path = PieChart;
-			sourceTree = "<group>";
-		};
 		A3FC41A0A0E8A7F0209BE954 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -232,7 +219,6 @@
 				E9DA9B42248BC76A00D5C0F8 /* EinstellungenViews */,
 				B9543EE82488FAC7006F75BD /* Models */,
 				B9543EE32488F9E2006F75BD /* Services */,
-				A1959E1D2484047800B6B12E /* PieChart */,
 				A145AEEB24813C15005047D4 /* BodyViews */,
 				B90A8840247DD7D600B59892 /* AppDelegate.swift */,
 				B90A8842247DD7D600B59892 /* SceneDelegate.swift */,
@@ -513,7 +499,6 @@
 				A191208724B20E1100B8A073 /* ParticlesEmitter.swift in Sources */,
 				A145AEEF2481428D005047D4 /* AufgabeDetail.swift in Sources */,
 				B9CC722C24AA386000608C07 /* GlobalFunctions.swift in Sources */,
-				A1959E1F248404A600B6B12E /* PieSlice.swift in Sources */,
 				E9DA9B4A248F8CC900D5C0F8 /* FreundeHinzufuegenView.swift in Sources */,
 				B9568C2D24892464005E6DD8 /* AufgabeModel.swift in Sources */,
 				E9475409248038380039B853 /* HeuteView.swift in Sources */,
@@ -527,7 +512,6 @@
 				A145AEED24813C31005047D4 /* AktuellFirstView.swift in Sources */,
 				A1108F4924913FAA00066826 /* NavigationConfigurator.swift in Sources */,
 				E9DA9B48248BC7BE00D5C0F8 /* AufgabeEinreichenView.swift in Sources */,
-				A1959E21248404EE00B6B12E /* PieChartRow.swift in Sources */,
 				A1959E0E2483F21F00B6B12E /* Additives_diagramm.swift in Sources */,
 				E947540F2480386F0039B853 /* EinstellungenView.swift in Sources */,
 				B90A8841247DD7D600B59892 /* AppDelegate.swift in Sources */,

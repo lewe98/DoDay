@@ -95,20 +95,7 @@ struct UebersichtView: View {
                         
                     
                 }
-                
-                
-                Section (header: Text("Statistik")) {
-                    PieChartRow(
-                        data: [2.5, 3.6, 5.1],
-                            //Double(self.user.erledigt.count),
-                           // Double(self.user.abgelehnt.count),
-                           // Double(self.user.aufgeschoben.count)],
-                        backgroundColor: Color(UIColor.lightGray),
-                        accentColor: .green)
-                        .foregroundColor(.red)
-                        .frame(width: 100, height: 100)
-                        .padding()
-                }
+                // TODO Aufgabenliste
             
             }.navigationBarTitle(Text("Übersicht"))
         }
