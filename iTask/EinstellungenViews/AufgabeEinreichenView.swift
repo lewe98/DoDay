@@ -22,6 +22,8 @@ struct AufgabeEinreichenView: View {
     @State private var text: String = ""
     @State private var text_detail: String = ""
     @State private var text_dp: String = ""
+    let kategorie = ["Social","Fitness","Geist","Divers","Kultur","Haushalt"]
+    @State private var kategoriePicker = 0
     
     var body: some View {
         NavigationView {
@@ -32,18 +34,27 @@ struct AufgabeEinreichenView: View {
                         TextField("Kurztext", text: $text)
                         TextField("Detaillierter Text", text: $text_detail)
                         TextField("Text in dritter Person", text: $text_dp)
+                        Picker(selection: $kategoriePicker, label: Text("Kategorie")) {
+                            ForEach(0 ..< kategorie.count) {
+                                Text(self.kategorie[$0])
+                            }
+                        }
                     }
                 
                     Section() {
                         HStack {
                             Spacer()
                             Button(action: {
-                                self.presentation.dismiss()
-                                self.firebaseFunctions.addNewAufgabe(
-                                    text: self.text,
-                                    text_detail: self.text_detail,
-                                    text_dp: self.text_dp,
-                                    kategorie: "Eingereicht von User.")
+                                if (self.text != "" && self.text_detail != "" && self.text_dp != "") {
+                                    self.presentation.dismiss()
+                                     self.firebaseFunctions.addNewAufgabe(
+                                     text: self.text,
+                                     text_detail: self.text_detail,
+                                     text_dp: self.text_dp,
+                                     kategorie: self.kategorie[self.kategoriePicker])
+                                } else {
+                                    //TODO: Leere Felder
+                                }
                             }) {
                                 Text("Abschicken")
                                     .foregroundColor(.green)
