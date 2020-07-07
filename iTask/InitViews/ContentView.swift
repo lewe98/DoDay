@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  iTask
+//  DoDay
 //
 //  Created by Julian Hermanspahn, Lewe Lorenzen & Thomas Raab on 27.05.20.
 //  Copyright © 2020 DoDay. All rights reserved.
@@ -53,7 +53,7 @@ struct ContentView: View {
                     user: self.coreDataFunctions.curUser,
                     zuletztBearbeitet: self.coreDataFunctions.getZuletztErledigt(),
                     zuletztBearbeitetErledigt: self.coreDataFunctions.checkIfErledigt(
-                        id: self.coreDataFunctions.getZuletztErledigt().id), letzteAufgaben: [Aufgabe]())
+                        id: self.coreDataFunctions.getZuletztErledigt().id), alleAufgaben: self.coreDataFunctions.allCDAufgaben)
                     
                     .tabItem {
                         VStack {
@@ -84,6 +84,8 @@ struct ContentView: View {
                 }.tag(3)
                 
                 
+            }.onAppear{
+                self.globalFunctions.load()
             }
         } else {
             Register()

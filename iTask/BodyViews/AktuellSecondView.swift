@@ -41,11 +41,11 @@ struct AktuellSecondView: View {
         ZStack {
             VStack {
                 Spacer()
-                Text("Du hast dir für heute folgende Aufgabe ausgesucht.")
-                    .font(.headline)
-                    .multilineTextAlignment(.center)
-                    .lineLimit(2)
-                    .padding(20)
+                Text("Deine heutige Aufgabe:")
+                    .fontWeight(.bold)
+                    .font(.system(.title, design: .rounded))
+                    .multilineTextAlignment(.leading)
+                    .padding(.top)
                 AufgabeDetail(
                     aufgabenGeladen: aufgabenGeladen,
                     Aufgabe: aufgabe)
@@ -67,9 +67,9 @@ struct AktuellSecondView: View {
                         }
                 }
                 
-                Text("Konntest du die Aufgabe erfolgreich erledigen?")
-                    .font(.footnote)
-                    .padding()
+                Text("Warst du erfolgreich?")
+                    .font(.system(.headline, design: .rounded))
+                    .padding(.top)
             
                 Button(action: {
                     playSound(sound: "applause", type: "mp3")
@@ -82,35 +82,56 @@ struct AktuellSecondView: View {
                     }
                     
                 }) {
-                    Text("Ja")
-                        .frame(maxWidth: .infinity, minHeight: 44)
+                    Text("Aufgabe geschafft")
+                        .frame(maxWidth: 240, minHeight: 15)
+                        .font(.system(.headline, design: .rounded))
+                        .padding()
+                        .background(self.aufgabeErledigt ? .gray : Color.blue)
+                        .cornerRadius(40)
+                            .foregroundColor(.white)
+                        .padding(3)
                 }.disabled(self.aufgabeErledigt)
-                .background(Color(.tertiarySystemBackground))
-                .border(Color.gray, width: 0.2)
+                    
+                //.background(Color(.tertiarySystemBackground))
+                // .border(Color.gray, width: 0.2)
                 .padding(.top)
                 
                 Button(action: {
                     self.coreDataFunctions.aufgabeAblehnen()
                 }) {
-                    Text("Nein")
-                        .frame(maxWidth: .infinity, minHeight: 44)
+                    Text("Aufgabe ablehnen")
+                        //.frame(maxWidth: .infinity, minHeight: 44)
+                        .frame(maxWidth: 240, minHeight: 15)
+                        .font(.system(.headline, design: .rounded))
+                        .padding()
+                            .background(self.aufgabeErledigt ? .gray : Color.systemRed)
+                        .cornerRadius(40)
+                            .foregroundColor(.black)
+                        .padding(3)
+                    
                 }
                 .disabled(self.aufgabeErledigt)
-                .foregroundColor(.red)
-                .background(Color(.tertiarySystemBackground))
-                .border(Color.gray, width: 0.2)
-                .padding(.top)
+                //.foregroundColor(Color(.systemRed))
+                //.background(Color(.tertiarySystemBackground))
+                //.border(Color.gray, width: 0.2)
+                //.padding(.top)
                 
                 Button(action: {
                     self.coreDataFunctions.aufgabeAufschieben()
                 }) {
                     Text("Ich verschiebe die Aufgabe")
-                        .frame(maxWidth: .infinity, minHeight: 44)
+                    .frame(maxWidth: 240, minHeight: 15)
+                    .font(.system(.headline, design: .rounded))
+                    .padding()
+                        .background(self.aufgabeErledigt ? .gray : Color.systemYellow)
+                    .cornerRadius(40)
+                        .foregroundColor(.black)
+                    .padding(3)
                 }
                 .disabled(self.aufgabeErledigt)
-                .background(Color(.tertiarySystemBackground))
-                .border(Color.gray, width: 0.2)
-                .padding(.top)
+                //.background(Color(.systemYellow))
+                //.border(Color.gray, width: 0.2)
+                //.padding(.top)
                 Spacer()
             }
             if self.aufgabeErledigt {

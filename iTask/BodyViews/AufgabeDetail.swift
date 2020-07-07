@@ -24,7 +24,7 @@ struct AufgabeDetail: View {
             
             RoundedRectangle(cornerRadius: 40)
                 .shadow(color: .gray, radius: 20, x: 0, y: 5)
-                .foregroundColor(Color(.tertiarySystemBackground))
+                .foregroundColor(Color(.lightText))
             
                 
                 //.foregroundColor(Color(UIColor .secondarySystemFill))
@@ -33,6 +33,7 @@ struct AufgabeDetail: View {
                     VStack {
                         Text(self.Aufgabe.kategorie)
                             .font(.system(.footnote, design: .rounded))
+                            .foregroundColor(.black)
                             .padding(.bottom, 4)
                         Text(Aufgabe.text)
                             .fontWeight(.bold)
@@ -57,27 +58,34 @@ struct AufgabeDetail: View {
                             erledigteA: self.Aufgabe.erledigt,
                             nichtErledigteA: self.Aufgabe.abgelehnt,
                             aufgeschobeneA: self.Aufgabe.aufgeschoben)
-                            .frame(minHeight: 24, maxHeight: 24)
-                        HStack {
-                            Circle()
-                                .frame(maxWidth: 12, maxHeight: 12)
-                                .foregroundColor(.green)
-                            Text("erledigt").font(.footnote)
-                            Spacer()
-                            Circle()
-                                .frame(maxWidth: 12, maxHeight: 12)
-                                .foregroundColor(.red)
-                            Text("nicht erledigt").font(.footnote)
-                            Spacer()
-                            Circle()
-                                .frame(maxWidth: 12, maxHeight: 12)
-                                .foregroundColor(.yellow)
-                            Text("aufgeschoben").font(.footnote)
-                        }
                     }
                     .padding(.horizontal)
                     .opacity(statistik ? 1.0 : 0.0)
                     HStack {
+                        VStack {
+                            if (!detailText) {
+                                ZStack {
+                                    Circle()
+                                        .fill(Color.blue)
+                                        
+                                    Image(systemName: "chart.bar")
+                                        .font(.system(size: 15.0))
+                                        .foregroundColor(.white)
+                                        .opacity(statistik ? 0.0 : 1.0)
+                                    Image(systemName: "xmark")
+                                    .font(.system(size: 20.0))
+                                    .foregroundColor(.white)
+                                    .opacity(statistik ? 1.0 : 0.0)
+                                }
+                                .frame(width: 30, height: 30)
+                                .onTapGesture {
+                                    withAnimation(Animation.linear(duration: 0.8)) {
+                                        self.animateStatistik.toggle()
+                                    }
+                                }
+                            }
+                            Spacer()
+                        }
                         Spacer()
                         VStack {
                             if (!statistik) {
@@ -102,28 +110,6 @@ struct AufgabeDetail: View {
                                 }
                             }
                             Spacer()
-                            if (!detailText) {
-                                ZStack {
-                                    Circle()
-                                        .fill(Color.blue)
-                                        
-                                    Image(systemName: "chart.bar")
-                                        .font(.system(size: 15.0))
-                                        .foregroundColor(.white)
-                                        .opacity(statistik ? 0.0 : 1.0)
-                                    Image(systemName: "xmark")
-                                    .font(.system(size: 20.0))
-                                    .foregroundColor(.white)
-                                    .opacity(statistik ? 1.0 : 0.0)
-                                }
-                                .frame(width: 30, height: 30)
-                                .onTapGesture {
-                                    withAnimation(Animation.linear(duration: 0.8)) {
-                                        self.animateStatistik.toggle()
-                                    }
-                                }
-                            }
-                            
                         }
                     }
                     

@@ -1,6 +1,6 @@
 //
 //  HeuteView.swift
-//  iTask
+//  DoDay
 //
 //  Created by Julian Hermanspahn, Lewe Lorenzen & Thomas Raab on 28.05.20.
 //  Copyright © 2020 DoDay. All rights reserved.
@@ -86,6 +86,7 @@ Nicht genügend Aufgaben in der Datenbank.
                 AnyView(
                     ActivityIndicator()
                 ).onAppear{
+                    
                     self.coreDataFunctions.setHeuteView()
                     // self.setAufgabeForView()
                 }

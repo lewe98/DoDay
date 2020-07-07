@@ -1,6 +1,6 @@
 //
 //  UebersichtView.swift
-//  iTask
+//  DoDay
 //
 //  Created by Julian Hermanspahn, Lewe Lorenzen & Thomas Raab on 28.05.20.
 //  Copyright © 2020 DoDay. All rights reserved.
@@ -16,13 +16,15 @@ struct VergangeneAufgabe {
 struct UebersichtView: View {
     let user: User
     let zuletztBearbeitet: Aufgabe
-    let letzteAufgaben: [Aufgabe]
+    let alleAufgaben: [Aufgabe]
     let zuletztBearbeitetErledigt: Bool
+    @State var erledigte = [Aufgabe]()
+    @State var abgelehnt = [Aufgabe]()
     
-    init(user: User, zuletztBearbeitet: Aufgabe, zuletztBearbeitetErledigt: Bool, letzteAufgaben: [Aufgabe]) {
+    init(user: User, zuletztBearbeitet: Aufgabe, zuletztBearbeitetErledigt: Bool, alleAufgaben: [Aufgabe]) {
         self.user = user
         self.zuletztBearbeitet = zuletztBearbeitet
-        self.letzteAufgaben = letzteAufgaben
+        self.alleAufgaben = alleAufgaben
         self.zuletztBearbeitetErledigt = zuletztBearbeitetErledigt
     }
     
@@ -53,66 +55,67 @@ struct UebersichtView: View {
                 
                 Section (header: Text("Statistik")) {
                     VStack (alignment: .leading){
-                        
                         Additives_diagramm(
                             erledigteA: self.user.erledigt.count,
                             nichtErledigteA: self.user.abgelehnt.count,
                             aufgeschobeneA: self.user.aufgeschoben.count)
-                            
-                            .frame(minHeight: 24, maxHeight: 24)
-                        
-                        HStack {
-                            Circle()
-                                .frame(maxWidth: 12, maxHeight: 12)
-                                .foregroundColor(.green)
-                            Text("erledigt").font(.footnote)
-                            
-                            Spacer()
-                            
-                            Circle()
-                                .frame(maxWidth: 12, maxHeight: 12)
-                                .foregroundColor(.red)
-                            
-                            Text("nicht erledigt").font(.footnote)
-                            
-                            Spacer()
-                            
-                            Circle()
-                                .frame(maxWidth: 12, maxHeight: 12)
-                                .foregroundColor(.yellow)
-                            
-                            Text("aufgeschoben").font(.footnote)
-                            
-                        }.padding(.horizontal)
                     }
                 }
                 
                 
+                if user.erledigt.count > 0 {
                 Section (header: Text("Zuletzt erledigt")){
                         HStack {
                             Text(self.zuletztBearbeitet.text)
                             Spacer()
                             Image(systemName: zuletztBearbeitetErledigt ? "checkmark.circle" : "xmark.circle")
                         }
-                        
-                    
+                    }
                 }
                 
-                Section (header: Text("Aufgaben Verlauf")){
-                    Text("Aufgabe")
-                    /*
-                    ForEach(0 ..< self.letzteAufgaben.count, id: \.self) {
-                        Text(self.letzteAufgaben[$0])
-                    
-                        HStack {
-                            Text(self.zuletztBearbeitet.text)
-                            Spacer()
-                            Image(systemName: zuletztBearbeitetErledigt ? "checkmark.circle" : "xmark.circle")
+                
+                if user.erledigt.count > 0 {
+                    Section (header: Text("Erledigte Aufgaben")){
+                        ForEach(self.erledigte, id: \.self) { aufgabe in
+                            HStack {
+                                Text(aufgabe.text)
+                                Spacer()
+                                Image(systemName: "checkmark.circle")
+                            }
+                        }
+                    }.onAppear{
+                        self.erledigte = self.alleAufgaben.filter{ aufgabe -> Bool in
+                            if self.user.erledigt.contains(aufgabe.id){
+                                return true
+                            } else {
+                                return false
+                            }
                         }
                     }
-                    */
                 }
-            
+                
+                
+                if user.abgelehnt.count > 0{
+                    Section (header: Text("Abgelehnte Aufgaben")){
+                        ForEach(self.abgelehnt, id: \.self) { aufgabe in
+                            HStack {
+                                Text(aufgabe.text)
+                                Spacer()
+                                Image(systemName: "xmark.circle")
+                            }
+                        }
+                    }.onAppear{
+                        self.abgelehnt = self.alleAufgaben.filter{ aufgabe -> Bool in
+                            if self.user.abgelehnt.contains(aufgabe.id){
+                                return true
+                            } else {
+                                return false
+                            }
+                        }
+                    }
+                }
+                
+                
             }.navigationBarTitle(Text("Übersicht"))
         }
     }

@@ -169,12 +169,13 @@ class CoreDataFunctions: ObservableObject {
     
     
     func aktuelleAufgabeAuswaehlen(aufgabe: Aufgabe) {
+        var aufgabeTmp = aufgabe
         self.curUser.aufgabe = aufgabe.id
         let index = self.curUser.verbliebene_aufgaben.firstIndex(of: aufgabe.id)
         if (index != nil) {
             self.curUser.verbliebene_aufgaben.remove(at: index!)
         } else {
-            print("choseAufgabe(): Aufgabe not found!")
+            print("chooseAufgabe(): Aufgabe not found!")
         }
         self.updateCurUser() { result in
             do {
@@ -185,8 +186,8 @@ class CoreDataFunctions: ObservableObject {
                 // Zeigt Datenbankfehler an
                 self.aufgabenView = 3
             }
-        
-        // TODO: Aufgabe Ausgespielt +1
+        aufgabeTmp.ausgespielt += 1
+        self.updateAufgabe(aufgabe: aufgabeTmp)
         }
     }
     
@@ -206,11 +207,11 @@ class CoreDataFunctions: ObservableObject {
                 // Zeigt Datenbankfehler an
                 self.aufgabenView = 3
             }
-        
-        
         }
-        // TODO: Aufgabe Erledigt +1
-        self.updateAufgabe(aufgabe: self.getAufgabeByID(id: id)!)
+        if var aufgabe = self.getAufgabeByID(id: id) {
+        aufgabe.erledigt += 1
+        self.updateAufgabe(aufgabe: aufgabe)
+        }
     }
     
     func aufgabeAufschieben() {
@@ -229,8 +230,10 @@ class CoreDataFunctions: ObservableObject {
                 self.aufgabenView = 3
             }
         }
-        // TODO: Aufgabe Aufgeschoben +1
-        self.updateAufgabe(aufgabe: self.getAufgabeByID(id: id)!)
+        if var aufgabe = self.getAufgabeByID(id: id) {
+        aufgabe.aufgeschoben += 1
+        self.updateAufgabe(aufgabe: aufgabe)
+        }
     }
     
     func aufgabeAblehnen() {
@@ -250,8 +253,10 @@ class CoreDataFunctions: ObservableObject {
                 self.aufgabenView = 3
             }
         }
-        // TODO: Aufgabe Abgelehnt +1
-        self.updateAufgabe(aufgabe: self.getAufgabeByID(id: id)!)
+        if var aufgabe = self.getAufgabeByID(id: id) {
+        aufgabe.abgelehnt += 1
+        self.updateAufgabe(aufgabe: aufgabe)
+        }
     }
     
     func updateCurUser(done: @escaping (Result<String, Error>) -> Void) {
