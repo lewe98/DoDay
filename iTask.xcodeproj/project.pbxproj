@@ -25,8 +25,6 @@
 		B90A884A247DD7D800B59892 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B90A8849247DD7D800B59892 /* Assets.xcassets */; };
 		B90A884D247DD7D800B59892 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B90A884C247DD7D800B59892 /* Preview Assets.xcassets */; };
 		B90A8850247DD7D800B59892 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B90A884E247DD7D800B59892 /* LaunchScreen.storyboard */; };
-		B90A885B247DD7D800B59892 /* iTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90A885A247DD7D800B59892 /* iTaskTests.swift */; };
-		B90A8866247DD7D800B59892 /* iTaskUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90A8865247DD7D800B59892 /* iTaskUITests.swift */; };
 		B91275E024890AF200C5FF6F /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = B91275DF24890AF200C5FF6F /* .gitignore */; };
 		B9543EE52488FA49006F75BD /* FirebaseFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9543EE42488FA49006F75BD /* FirebaseFunctions.swift */; };
 		B9543EE72488FA5B006F75BD /* CoreDataFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9543EE62488FA5B006F75BD /* CoreDataFunctions.swift */; };
@@ -87,11 +85,7 @@
 		B90A884F247DD7D800B59892 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B90A8851247DD7D800B59892 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B90A8856247DD7D800B59892 /* iTaskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iTaskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B90A885A247DD7D800B59892 /* iTaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTaskTests.swift; sourceTree = "<group>"; };
-		B90A885C247DD7D800B59892 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B90A8861247DD7D800B59892 /* iTaskUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iTaskUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B90A8865247DD7D800B59892 /* iTaskUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTaskUITests.swift; sourceTree = "<group>"; };
-		B90A8867247DD7D800B59892 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B91275DF24890AF200C5FF6F /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		B9543EE42488FA49006F75BD /* FirebaseFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFunctions.swift; sourceTree = "<group>"; };
 		B9543EE62488FA5B006F75BD /* CoreDataFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFunctions.swift; sourceTree = "<group>"; };
@@ -191,8 +185,6 @@
 			children = (
 				B91275DF24890AF200C5FF6F /* .gitignore */,
 				B90A883F247DD7D600B59892 /* iTask */,
-				B90A8859247DD7D800B59892 /* iTaskTests */,
-				B90A8864247DD7D800B59892 /* iTaskUITests */,
 				B90A883E247DD7D600B59892 /* Products */,
 				A3FC41A0A0E8A7F0209BE954 /* Pods */,
 				92B75B3DBA96B695FCB8C00B /* Frameworks */,
@@ -240,24 +232,6 @@
 				B90A884C247DD7D800B59892 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		B90A8859247DD7D800B59892 /* iTaskTests */ = {
-			isa = PBXGroup;
-			children = (
-				B90A885A247DD7D800B59892 /* iTaskTests.swift */,
-				B90A885C247DD7D800B59892 /* Info.plist */,
-			);
-			path = iTaskTests;
-			sourceTree = "<group>";
-		};
-		B90A8864247DD7D800B59892 /* iTaskUITests */ = {
-			isa = PBXGroup;
-			children = (
-				B90A8865247DD7D800B59892 /* iTaskUITests.swift */,
-				B90A8867247DD7D800B59892 /* Info.plist */,
-			);
-			path = iTaskUITests;
 			sourceTree = "<group>";
 		};
 		B9543EE32488F9E2006F75BD /* Services */ = {
@@ -529,7 +503,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B90A885B247DD7D800B59892 /* iTaskTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -537,7 +510,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B90A8866247DD7D800B59892 /* iTaskUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
