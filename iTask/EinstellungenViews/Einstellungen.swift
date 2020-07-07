@@ -62,7 +62,7 @@ func erinnerungEigene() -> Void {
     if Einstellungen().erinnerungEigeneAktiviert == true {
         let content = UNMutableNotificationContent()
         content.title = "Neuer Tag, neues Glück"; content.subtitle = "Wähle deine neue Aufgabe!"; content.sound = UNNotificationSound.default
-        content.body = "Guten Morgen, es stehen wieder zwei Aufgaben für dich bereit, zwischen denen du dich entscheiden kannst. Viel Spaß dabei!"
+        content.body = "Es stehen wieder zwei Aufgaben für dich bereit, zwischen denen du dich entscheiden kannst. Viel Spaß dabei!"
 
         let trigger = UNCalendarNotificationTrigger(dateMatching: Einstellungen().erinnerungZeit, repeats: true)
         let request = UNNotificationRequest(identifier: "ErinnerungEigene", content: content, trigger: trigger)

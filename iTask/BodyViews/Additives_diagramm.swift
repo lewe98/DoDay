@@ -1,6 +1,6 @@
 //
 //  additives_diagramm.swift
-//  iTask
+//  DoDay
 //
 //  Created by Julian Hermanspahn, Lewe Lorenzen & Thomas Raab on 30.05.20.
 //  Copyright © 2020 DoDay. All rights reserved.
@@ -37,7 +37,7 @@ struct Additives_diagramm: View {
                             RoundedRectangle(cornerRadius: 15, style: .continuous)
                                 .fill(Color(UIColor .secondarySystemFill))
                                 .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: 24)
-                                //.overlay(RoundedRectangle(cornerRadius: 15, style: .continuous).stroke( lineWidth: 2))
+                            
                             HStack {
                                 if erledigteA != 0 {
                                 RoundedRectangle(cornerRadius: 10, style: .continuous)

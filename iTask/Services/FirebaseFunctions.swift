@@ -67,7 +67,7 @@ class FirebaseFunctions: ObservableObject {
     ///
     /// - Parameter id: ID des aktuellen Nutzers
     /// - Parameter nutzername: der vom User ausgewählte Nutzername
-    func registerUser(id: String, nutzername: String){
+    func registerUser(nutzername: String){
         let user = User(
             abgelehnt: [],
             aktueller_streak: 0,
@@ -77,7 +77,7 @@ class FirebaseFunctions: ObservableObject {
             erledigt: [],
             freunde: [],
             freundes_id: generateRandomID(length: 8),
-            id: id,
+            id: self.id,
             letztes_erledigt_datum: Date(),
             nutzername: nutzername,
             verbliebene_aufgaben: [])
@@ -89,7 +89,7 @@ class FirebaseFunctions: ObservableObject {
                     self.setUser(user: user)
                     
                 } else {
-                    self.registerUser(id: user.id, nutzername: user.nutzername)
+                    self.registerUser(nutzername: user.nutzername)
                 }
         }
         
@@ -309,7 +309,7 @@ class FirebaseFunctions: ObservableObject {
     
     
     
-    /// Inkremetiert die Anzahl der User, die eine spezifische Aufgabe erledigt haben.
+    /// Bearbeitet eine Aufgabe.
     ///
     /// - Parameter aufgabe: Aufgabe die bearbeitet wird
     func updateAufgabe(aufgabe: Aufgabe, done: @escaping (Result<String, Error>) -> Void){
@@ -334,6 +334,11 @@ class FirebaseFunctions: ObservableObject {
         }
     }
     
+    
+    
+    /// Bearbeitet einen User.
+    ///
+    /// - Parameter user: User die bearbeitet wird
     func updateUser(user: User, done: @escaping (Result<String, Error>) -> Void){
         db.collection("users").document(user.id).updateData([
             "abgelehnt": user.abgelehnt,

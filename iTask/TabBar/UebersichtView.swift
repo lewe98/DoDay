@@ -18,6 +18,7 @@ struct UebersichtView: View {
     let zuletztBearbeitet: Aufgabe
     let alleAufgaben: [Aufgabe]
     let zuletztBearbeitetErledigt: Bool
+    
     @State var erledigte = [Aufgabe]()
     @State var abgelehnt = [Aufgabe]()
     
@@ -124,7 +125,7 @@ struct UebersichtView: View {
 /*
 struct UebersichtView_Previews: PreviewProvider {
     static var previews: some View {
-        UebersichtView(user: User(abgelehnt: [], aktueller_streak: 0, anzahl_benachrichtigungen: 0, aufgabe: 0, aufgeschoben: [], erledigt: [], freunde: [], freundes_id: "test", id: "test", letztes_erledigt_datum: Date(), nutzername: "test", verbliebene_aufgaben: []), zuletztBearbeitet: Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "DoDay", erledigt: 0, id: 0, kategorie: "test", text: "test", text_detail: "test", text_dp: "test"), zuletztBearbeitetErledigt: true)
+        UebersichtView()
     }
 }
  */

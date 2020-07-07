@@ -80,6 +80,8 @@ class CoreDataFunctions: ObservableObject {
         }
     }
     
+    
+    
     func setHeuteView() {
         if (self.curUser.aufgabe == 0){
             self.aufgabenView = 3
@@ -191,6 +193,8 @@ class CoreDataFunctions: ObservableObject {
         }
     }
     
+    
+    
     func aufgabeErledigt() {
         let id = self.curUser.aufgabe
         if let index = self.curUser.aufgeschoben.firstIndex(of: id) {
@@ -214,6 +218,8 @@ class CoreDataFunctions: ObservableObject {
         }
     }
     
+    
+    
     func aufgabeAufschieben() {
         let id = self.curUser.aufgabe
         if (!self.curUser.aufgeschoben.contains(id)) {
@@ -235,6 +241,8 @@ class CoreDataFunctions: ObservableObject {
         self.updateAufgabe(aufgabe: aufgabe)
         }
     }
+    
+    
     
     func aufgabeAblehnen() {
         let id = self.curUser.aufgabe
@@ -259,6 +267,8 @@ class CoreDataFunctions: ObservableObject {
         }
     }
     
+    
+    
     func updateCurUser(done: @escaping (Result<String, Error>) -> Void) {
         self.firebaseFunctions.updateUser(user: self.curUser, done: { result in
             do {
@@ -270,6 +280,8 @@ class CoreDataFunctions: ObservableObject {
             }
         })
     }
+    
+    
     
     func updateAufgabe(aufgabe: Aufgabe) {
         self.firebaseFunctions.updateAufgabe(aufgabe: aufgabe, done: { result in
@@ -295,14 +307,11 @@ class CoreDataFunctions: ObservableObject {
     
     func getZuletztErledigt() -> Aufgabe {
         
-        //var returnString: String = "Noch keine Aufgabe erledigt."
-        
         if self.curUser.erledigt.count > 0 {
             let tempAufgabe = self.allCDAufgaben.first(where: {
                 $0.id == self.curUser.erledigt[self.curUser.erledigt.count - 1]
             })!
             return tempAufgabe
-            //returnString = tempAufgabe.text
         }
         
         return Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "DoDay", erledigt: 0, id: 0, kategorie: "", text: "Noch keine Aufgabe erledigt.", text_detail: "Noch keine Aufgabe erledigt.", text_dp: "Noch keine Aufgabe erledigt.")
