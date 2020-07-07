@@ -63,55 +63,59 @@ struct UebersichtView: View {
                 }
                 
                 
+                if user.erledigt.count > 0 {
                 Section (header: Text("Zuletzt erledigt")){
                         HStack {
                             Text(self.zuletztBearbeitet.text)
                             Spacer()
                             Image(systemName: zuletztBearbeitetErledigt ? "checkmark.circle" : "xmark.circle")
                         }
-                        
-                    
+                    }
                 }
                 
-                Section (header: Text("Erledigte Aufgaben")){
-                    ForEach(self.erledigte, id: \.self) { aufgabe in
-                        HStack {
-                            Text(aufgabe.text)
-                            Spacer()
-                            Image(systemName: "checkmark.circle")
+                
+                if user.erledigt.count > 0 {
+                    Section (header: Text("Erledigte Aufgaben")){
+                        ForEach(self.erledigte, id: \.self) { aufgabe in
+                            HStack {
+                                Text(aufgabe.text)
+                                Spacer()
+                                Image(systemName: "checkmark.circle")
+                            }
+                        }
+                    }.onAppear{
+                        self.erledigte = self.alleAufgaben.filter{ aufgabe -> Bool in
+                            if self.user.erledigt.contains(aufgabe.id){
+                                return true
+                            } else {
+                                return false
+                            }
                         }
                     }
-                }.onAppear{
-                    self.erledigte = self.alleAufgaben.filter{ aufgabe -> Bool in
-                        if self.user.erledigt.contains(aufgabe.id){
-                            return true
-                        } else {
-                            return false
-                        }
-                    }
-                    
-                    
                 }
-                Section (header: Text("Abgelehnte Aufgaben")){
-                    ForEach(self.abgelehnt, id: \.self) { aufgabe in
-                        HStack {
-                            Text(aufgabe.text)
-                            Spacer()
-                            Image(systemName: "xmark.circle")
+                
+                
+                if user.abgelehnt.count > 0{
+                    Section (header: Text("Abgelehnte Aufgaben")){
+                        ForEach(self.abgelehnt, id: \.self) { aufgabe in
+                            HStack {
+                                Text(aufgabe.text)
+                                Spacer()
+                                Image(systemName: "xmark.circle")
+                            }
+                        }
+                    }.onAppear{
+                        self.abgelehnt = self.alleAufgaben.filter{ aufgabe -> Bool in
+                            if self.user.abgelehnt.contains(aufgabe.id){
+                                return true
+                            } else {
+                                return false
+                            }
                         }
                     }
-                }.onAppear{
-                    self.abgelehnt = self.alleAufgaben.filter{ aufgabe -> Bool in
-                        if self.user.abgelehnt.contains(aufgabe.id){
-                            return true
-                        } else {
-                            return false
-                        }
-                    }
-                    
-                    
                 }
-            
+                
+                
             }.navigationBarTitle(Text("Übersicht"))
         }
     }

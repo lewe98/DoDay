@@ -86,6 +86,7 @@ Nicht genügend Aufgaben in der Datenbank.
                 AnyView(
                     ActivityIndicator()
                 ).onAppear{
+                    
                     self.coreDataFunctions.setHeuteView()
                     // self.setAufgabeForView()
                 }
