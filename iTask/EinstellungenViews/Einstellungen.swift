@@ -12,6 +12,8 @@ import Combine
 
 class Einstellungen: ObservableObject {
     
+    
+    
     // taegliche Erinnerung morgens
     @Published var erinnerungEigeneAktiviert: Bool {
         didSet {
@@ -36,6 +38,8 @@ class Einstellungen: ObservableObject {
             erinnerungEigene()
         }
     }
+    
+    
     
     init() {
         // Fuer die taegliche Erinnerung
