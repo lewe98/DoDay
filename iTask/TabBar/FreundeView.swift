@@ -65,7 +65,6 @@ struct FreundeView: View {
                             Text("Freunde hinzufügen")
                             }
                         .sheet(isPresented: $showingFreundeHinzufuegen, onDismiss: {
-                        print("Code executed when the sheet dismisses")
                         self.globalFunctions.updateFreundesListe()
                         }) {
                             FreundeHinzufuegenView(gf: self.globalFunctions)
