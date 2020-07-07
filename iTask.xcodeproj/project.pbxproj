@@ -12,7 +12,7 @@
 		A145AEED24813C31005047D4 /* AktuellFirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A145AEEC24813C31005047D4 /* AktuellFirstView.swift */; };
 		A145AEEF2481428D005047D4 /* AufgabeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A145AEEE2481428D005047D4 /* AufgabeDetail.swift */; };
 		A145AEF1248144C9005047D4 /* AktuellSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A145AEF0248144C9005047D4 /* AktuellSecondView.swift */; };
-		A18260E724AE5BC60027C027 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = A18260E624AE5BC60027C027 /* SwiftPackageProductDependency */; };
+		A18260E724AE5BC60027C027 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = A18260E624AE5BC60027C027 /* SwiftUIX */; };
 		A191207C24B1FF9400B8A073 /* PlaySound.swift in Sources */ = {isa = PBXBuildFile; fileRef = A191207B24B1FF9400B8A073 /* PlaySound.swift */; };
 		A191207E24B1FFE300B8A073 /* applause.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A191207D24B1FFE300B8A073 /* applause.mp3 */; };
 		A191208324B20C9800B8A073 /* Confetti.swift in Sources */ = {isa = PBXBuildFile; fileRef = A191208224B20C9800B8A073 /* Confetti.swift */; };
@@ -31,6 +31,7 @@
 		B9543EEA2488FAE0006F75BD /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9543EE92488FAE0006F75BD /* UserModel.swift */; };
 		B9568C2D24892464005E6DD8 /* AufgabeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9568C2C24892464005E6DD8 /* AufgabeModel.swift */; };
 		B96E0B5724A9004D00FE93C7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B96E0B5624A9004D00FE93C7 /* GoogleService-Info.plist */; };
+		B975D09E24B4B50A00F7833F /* plop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B975D09D24B4B50A00F7833F /* plop.mp3 */; };
 		B984C1712490046B00147A71 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = B984C1702490046B00147A71 /* Register.swift */; };
 		B9A720E8249C202C00488233 /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A720E7249C202C00488233 /* Loading.swift */; };
 		B9CC722C24AA386000608C07 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CC722B24AA386000608C07 /* GlobalFunctions.swift */; };
@@ -73,6 +74,7 @@
 		B9543EE92488FAE0006F75BD /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		B9568C2C24892464005E6DD8 /* AufgabeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AufgabeModel.swift; sourceTree = "<group>"; };
 		B96E0B5624A9004D00FE93C7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B975D09D24B4B50A00F7833F /* plop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = plop.mp3; sourceTree = "<group>"; };
 		B984C1702490046B00147A71 /* Register.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		B9A720E7249C202C00488233 /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
 		B9CC722B24AA386000608C07 /* GlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
@@ -92,7 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A18260E724AE5BC60027C027 /* BuildFile in Frameworks */,
+				A18260E724AE5BC60027C027 /* SwiftUIX in Frameworks */,
 				65E538FCB73D33E9127065D0 /* Pods_iTask.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -106,7 +108,6 @@
 				039DB532E2CB9C2B302ABF6A /* Pods-iTask.debug.xcconfig */,
 				1471ECE6FBE9FFD546B40A2E /* Pods-iTask.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -125,6 +126,7 @@
 		A191207A24B1FF7000B8A073 /* Sound */ = {
 			isa = PBXGroup;
 			children = (
+				B975D09D24B4B50A00F7833F /* plop.mp3 */,
 				A191207D24B1FFE300B8A073 /* applause.mp3 */,
 				A191207B24B1FF9400B8A073 /* PlaySound.swift */,
 			);
@@ -269,7 +271,7 @@
 			);
 			name = iTask;
 			packageProductDependencies = (
-				A18260E624AE5BC60027C027 /* SwiftPackageProductDependency */,
+				A18260E624AE5BC60027C027 /* SwiftUIX */,
 			);
 			productName = iTask;
 			productReference = B90A883D247DD7D600B59892 /* DoDay.app */;
@@ -300,7 +302,7 @@
 			);
 			mainGroup = B90A8834247DD7D600B59892;
 			packageReferences = (
-				A18260E524AE5BC60027C027 /* RemoteSwiftPackageReference */,
+				A18260E524AE5BC60027C027 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 			);
 			productRefGroup = B90A883E247DD7D600B59892 /* Products */;
 			projectDirPath = "";
@@ -318,6 +320,7 @@
 			files = (
 				B91275E024890AF200C5FF6F /* .gitignore in Resources */,
 				B90A8850247DD7D800B59892 /* LaunchScreen.storyboard in Resources */,
+				B975D09E24B4B50A00F7833F /* plop.mp3 in Resources */,
 				B96E0B5724A9004D00FE93C7 /* GoogleService-Info.plist in Resources */,
 				B90A884D247DD7D800B59892 /* Preview Assets.xcassets in Resources */,
 				B90A884A247DD7D800B59892 /* Assets.xcassets in Resources */,
@@ -601,7 +604,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		A18260E524AE5BC60027C027 /* RemoteSwiftPackageReference */ = {
+		A18260E524AE5BC60027C027 /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX.git";
 			requirement = {
@@ -612,9 +615,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A18260E624AE5BC60027C027 /* SwiftPackageProductDependency */ = {
+		A18260E624AE5BC60027C027 /* SwiftUIX */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A18260E524AE5BC60027C027 /* RemoteSwiftPackageReference */;
+			package = A18260E524AE5BC60027C027 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
 			productName = SwiftUIX;
 		};
 /* End XCSwiftPackageProductDependency section */

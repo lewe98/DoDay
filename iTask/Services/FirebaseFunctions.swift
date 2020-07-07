@@ -239,7 +239,7 @@ class FirebaseFunctions: ObservableObject {
                             print("Error updating document: \(err)")
                         } else {
                             print("Document successfully updated")
-                            
+                            playSound(sound: "plop", type: "mp3")
                             //MARK: - TODO: In Core Data speichern
                         }
                     }
