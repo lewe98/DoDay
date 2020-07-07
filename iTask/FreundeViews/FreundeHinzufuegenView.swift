@@ -41,23 +41,20 @@ struct FreundeHinzufuegenView: View {
                         HStack {
                             Spacer()
                             Button(action: {
-                                if !self.globalFunctions.coreDataFunctions.curUser.freunde.contains(self.freundesCode) {
-                                    self.globalFunctions.callAddFriend(freundID: self.freundesCode)
-                                }
                                 if self.freundesCode == self.globalFunctions.coreDataFunctions.curUser.freundes_id {
                                     self.alertTitle = "Ungültige ID."
                                     self.alertText = "Die eigene ID kann nicht hinzugefügt werden."
                                     self.showingAlert = true
-                                }
-                                if self.globalFunctions.coreDataFunctions.curUser.freunde.contains(self.freundesCode) {
+                                } else if self.globalFunctions.coreDataFunctions.curUser.freunde.contains(self.freundesCode) {
                                     self.alertTitle = "Ungültige ID."
                                     self.alertText = "ID ist bereits in deiner Freundesliste."
                                     self.showingAlert = true
-                                }
-                                if self.freundesCode == "" {
+                                } else if self.freundesCode == "" {
                                     self.alertTitle = "Leeres Feld."
                                     self.alertText = "Bitte gib einen Freundescode ein."
                                     self.showingAlert = true
+                                } else if !self.globalFunctions.coreDataFunctions.curUser.freunde.contains(self.freundesCode) {
+                                    self.globalFunctions.callAddFriend(freundID: self.freundesCode)
                                 }
                             }) {
                                 Text("Abschicken")
