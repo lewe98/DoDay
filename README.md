@@ -5,7 +5,7 @@
   Ein Social-Feature und diverse Statistiken steigern die Motivation, die gewählten Aufgaben zu bewältigen.
 
 <img src="./dok-files/light-mode.png" alt="light-mode" width="25%" height="25%"/>
-
+![Light Mode](./dok-files/light-mode.png)
 <img src="./dok-files/dark-mode.png" alt="dark-mode" width="25%" height="25%"/>
 
 
@@ -155,6 +155,9 @@ Technologie | Verwendungszweck
 │   │   ├── ImpressumWebview.swift (Webview mit Impressum)
 │   │   ├── DatenschutzWebview.swift (Webview mit Datenschutzangaben)
 │   │   ├── AufgabenEinreichenView.swift (Sheet zum Einreichen von Aufgaben)
+│   │   ├── Einstellungen.swift (Verwaltung sämtlicher persistierter Einstellungen)
+│   ├── FreundeViews
+│   │   ├── FreundeHinzufuegenView.swift (Sheet zum Hinzufuegen von Freunden)
 │   ├── Models
 │   │   ├── UserModel.swift (Model des Users)
 │   │   ├── AufgabenModel.swift (Model der Aufgaben)
@@ -170,9 +173,7 @@ Technologie | Verwendungszweck
 │   │   ├── NavigationConfigurator.swift (ViewController für das Heute-Tab)
 │   ├── AppDelegate.swift
 │   ├── SceneDelegate.swift
-│   ├── FreundeHinzufuegenView.swift (Sheet zum Hinzufuegen von Freunden)
 │   ├── LaunchScreen.storyboard
-│   ├── Einstellungen.swift (Verwaltung sämtlicher persistierter Einstellungen)
 │   ├── info.plist
 │   ├── GoogleService-info.plist
 │   ├── iTask.xcdatamodeld

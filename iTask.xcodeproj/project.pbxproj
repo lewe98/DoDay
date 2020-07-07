@@ -177,14 +177,13 @@
 				B979A0A524AB5EFC00862A20 /* InitViews */,
 				B979A0A424AB5E9A00862A20 /* TabBar */,
 				E9DA9B42248BC76A00D5C0F8 /* EinstellungenViews */,
+				B927ED4924B4D2010038F2A8 /* FreundeViews */,
 				B9543EE82488FAC7006F75BD /* Models */,
 				B9543EE32488F9E2006F75BD /* Services */,
 				A145AEEB24813C15005047D4 /* BodyViews */,
 				B90A8840247DD7D600B59892 /* AppDelegate.swift */,
 				B90A8842247DD7D600B59892 /* SceneDelegate.swift */,
-				E9DA9B49248F8CC800D5C0F8 /* FreundeHinzufuegenView.swift */,
 				B90A884E247DD7D800B59892 /* LaunchScreen.storyboard */,
-				E98953222483B753008093D0 /* Einstellungen.swift */,
 				B90A8851247DD7D800B59892 /* Info.plist */,
 				B96E0B5624A9004D00FE93C7 /* GoogleService-Info.plist */,
 				B90A8844247DD7D600B59892 /* iTask.xcdatamodeld */,
@@ -200,6 +199,14 @@
 				B90A884C247DD7D800B59892 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		B927ED4924B4D2010038F2A8 /* FreundeViews */ = {
+			isa = PBXGroup;
+			children = (
+				E9DA9B49248F8CC800D5C0F8 /* FreundeHinzufuegenView.swift */,
+			);
+			path = FreundeViews;
 			sourceTree = "<group>";
 		};
 		B9543EE32488F9E2006F75BD /* Services */ = {
@@ -248,6 +255,7 @@
 				E9DA9B43248BC79500D5C0F8 /* ImpressumWebview.swift */,
 				E9DA9B45248BC7A700D5C0F8 /* DatenschutzWebview.swift */,
 				E9DA9B47248BC7BE00D5C0F8 /* AufgabeEinreichenView.swift */,
+				E98953222483B753008093D0 /* Einstellungen.swift */,
 			);
 			path = EinstellungenViews;
 			sourceTree = "<group>";
