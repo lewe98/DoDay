@@ -105,9 +105,8 @@ struct FreundeView: View {
                 
             } .navigationBarTitle(Text("Freunde"))
             .onAppear {
+                self.coreDataFunctions.getCurUser()
                 self.updateFreundesListe()
-                coreDataFunctions.getCurUser()
-                
             }
         }
     }

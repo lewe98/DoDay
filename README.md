@@ -179,16 +179,8 @@ Technologie | Verwendungszweck
 │   ├── Assets.xcassets
 │   ├── Preview Content
 │   │   ├── Preview Assets.xcassets
-├── iTaskTests
-│   ├── iTaskTests.swift (Test-File)
-│   ├── info.plist
-├── iTaskUITests
-│   ├── iTaskUITests.swift (UI-Test-File)
-│   ├── info.plist
 ├── Products
-│   ├── DoDay.app (eigentliche App)
-│   ├── iTaskTests.xctest
-│   ├── iTaskUITests.xctest
+│   ├── DoDay.app
 ├── Pods
 ├── Frameworks
 ```
