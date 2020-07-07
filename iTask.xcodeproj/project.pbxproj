@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		409252862156C2DED3A66D95 /* Pods_iTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B746D01E53C4081687C032 /* Pods_iTask.framework */; };
 		A1108F4924913FAA00066826 /* NavigationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1108F4824913FAA00066826 /* NavigationConfigurator.swift */; };
 		A145AEED24813C31005047D4 /* AktuellFirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A145AEEC24813C31005047D4 /* AktuellFirstView.swift */; };
 		A145AEEF2481428D005047D4 /* AufgabeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A145AEEE2481428D005047D4 /* AufgabeDetail.swift */; };
@@ -46,9 +45,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		14B746D01E53C4081687C032 /* Pods_iTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7FF8A4C279B3964146712DA4 /* Pods-iTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iTask.release.xcconfig"; path = "Target Support Files/Pods-iTask/Pods-iTask.release.xcconfig"; sourceTree = "<group>"; };
-		81D03BC2F2E86E0F336E2233 /* Pods-iTask.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iTask.debug.xcconfig"; path = "Target Support Files/Pods-iTask/Pods-iTask.debug.xcconfig"; sourceTree = "<group>"; };
 		A1108F4824913FAA00066826 /* NavigationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConfigurator.swift; sourceTree = "<group>"; };
 		A145AEEC24813C31005047D4 /* AktuellFirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AktuellFirstView.swift; sourceTree = "<group>"; };
 		A145AEEE2481428D005047D4 /* AufgabeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AufgabeDetail.swift; sourceTree = "<group>"; };
@@ -92,7 +88,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				409252862156C2DED3A66D95 /* Pods_iTask.framework in Frameworks */,
 				A18260E724AE5BC60027C027 /* SwiftUIX in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -100,14 +95,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		92B75B3DBA96B695FCB8C00B /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				14B746D01E53C4081687C032 /* Pods_iTask.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		A145AEEB24813C15005047D4 /* BodyViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,23 +125,12 @@
 			path = Confetti;
 			sourceTree = "<group>";
 		};
-		A3FC41A0A0E8A7F0209BE954 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				81D03BC2F2E86E0F336E2233 /* Pods-iTask.debug.xcconfig */,
-				7FF8A4C279B3964146712DA4 /* Pods-iTask.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		B90A8834247DD7D600B59892 = {
 			isa = PBXGroup;
 			children = (
 				B91275DF24890AF200C5FF6F /* .gitignore */,
 				B90A883F247DD7D600B59892 /* iTask */,
 				B90A883E247DD7D600B59892 /* Products */,
-				A3FC41A0A0E8A7F0209BE954 /* Pods */,
-				92B75B3DBA96B695FCB8C00B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -534,7 +510,6 @@
 		};
 		B90A886B247DD7D800B59892 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 81D03BC2F2E86E0F336E2233 /* Pods-iTask.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -556,7 +531,6 @@
 		};
 		B90A886C247DD7D800B59892 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7FF8A4C279B3964146712DA4 /* Pods-iTask.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
