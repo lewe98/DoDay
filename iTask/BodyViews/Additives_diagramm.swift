@@ -32,46 +32,67 @@ struct Additives_diagramm: View {
         default:
             return
                 AnyView(
-                ZStack(alignment: .leading){
-                    RoundedRectangle(cornerRadius: 15, style: .continuous)
-                        .fill(Color(UIColor .secondarySystemFill))
-                        .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: 24)
-                        //.overlay(RoundedRectangle(cornerRadius: 15, style: .continuous).stroke( lineWidth: 2))
-                    HStack {
-                        if erledigteA != 0 {
-                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .fill(Color.green)
-                            .frame(maxWidth: erledigteAFloat, maxHeight: 16)
-                            .animation(Animation.easeInOut(duration: 1).delay(1))
-                            .padding(.leading, 4)
+                    VStack{
+                        ZStack(alignment: .leading){
+                            RoundedRectangle(cornerRadius: 15, style: .continuous)
+                                .fill(Color(UIColor .secondarySystemFill))
+                                .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: 24)
+                                //.overlay(RoundedRectangle(cornerRadius: 15, style: .continuous).stroke( lineWidth: 2))
+                            HStack {
+                                if erledigteA != 0 {
+                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .fill(Color.systemBlue)
+                                    .frame(maxWidth: erledigteAFloat, maxHeight: 16)
+                                    .animation(Animation.easeInOut(duration: 1).delay(1))
+                                    .padding(.leading, 4)
+                                }
+                                if nichtErledigteA != 0 {
+                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .fill(Color.systemRed)
+                                    .frame(maxWidth: nichtErledigteAFloat, maxHeight: 16)
+                                    .animation(Animation.easeInOut(duration: 1).delay(1.5))
+                                    .padding( .horizontal, (-4 * nurNichtErledigt))
+                                }
+                                if aufgeschobeneA != 0 {
+                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .fill(Color.systemYellow)
+                                    .frame(maxWidth: aufgeschobeneAFloat, maxHeight: 16)
+                                    .animation(Animation.easeInOut(duration: 1).delay(2))
+                                    .padding(.trailing, 4)
+                                }
+                            }
                         }
-                        if nichtErledigteA != 0 {
-                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .fill(Color.red)
-                            .frame(maxWidth: nichtErledigteAFloat, maxHeight: 16)
-                            .animation(Animation.easeInOut(duration: 1).delay(1.5))
-                            .padding( .horizontal, (-4 * nurNichtErledigt))
+                        .frame(minHeight: 24, maxHeight: 24)
+                        .onAppear{
+                            if (self.erledigteA == 0 || self.aufgeschobeneA == 0) {
+                                self.nurNichtErledigt = CGFloat(-1)
+                            }
+                            self.getErledigteA()
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                self.getNichtErledigtA()
+                            }
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                                self.getAufgeschobeneA()
+                            }
                         }
-                        if aufgeschobeneA != 0 {
-                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .fill(Color.yellow)
-                            .frame(maxWidth: aufgeschobeneAFloat, maxHeight: 16)
-                            .animation(Animation.easeInOut(duration: 1).delay(2))
-                            .padding(.trailing, 4)
+                        HStack {
+                            Circle()
+                                .frame(maxWidth: 12, maxHeight: 12)
+                                .foregroundColor(Color(.systemBlue))
+                            Text("erledigt").font(.footnote)
+                            Spacer()
+                            Circle()
+                                .frame(maxWidth: 12, maxHeight: 12)
+                                .foregroundColor(Color(.systemRed))
+                            Text("abgelehnt").font(.footnote)
+                            Spacer()
+                            Circle()
+                                .frame(maxWidth: 12, maxHeight: 12)
+                                .foregroundColor(Color(.systemYellow))
+                            Text("aufgeschoben").font(.footnote)
                         }
+                        .padding(.horizontal)
                     }
-                }.onAppear{
-                    if (self.erledigteA == 0 || self.aufgeschobeneA == 0) {
-                        self.nurNichtErledigt = CGFloat(-1)
-                    }
-                    self.getErledigteA()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        self.getNichtErledigtA()
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                        self.getAufgeschobeneA()
-                    }
-                }
             )
         }
     }
