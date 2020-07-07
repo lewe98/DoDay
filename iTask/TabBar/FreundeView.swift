@@ -71,18 +71,20 @@ struct FreundeView: View {
                 }
                 
                 
-                Section(header: HStack {Text("FREUNDE"); Spacer(); Text("ERLEDIGTE AUFGABEN")}) {
-                    List(self.freundesListe, id: \.self) {
-                        freund in
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text(freund.nutzername)
-                                Text(freund.text_dp)
-                                    .font(.callout)
-                                    .foregroundColor(Color.gray)
+                if coreDataFunctions.curUser.freunde.count > 0{
+                    Section(header: HStack {Text("FREUNDE"); Spacer(); Text("ERLEDIGTE AUFGABEN")}) {
+                        List(self.freundesListe, id: \.self) {
+                            freund in
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text(freund.nutzername)
+                                    Text(freund.text_dp)
+                                        .font(.callout)
+                                        .foregroundColor(Color.gray)
+                                }
+                                Spacer()
+                                Text(String(freund.erledigt))
                             }
-                            Spacer()
-                            Text(String(freund.erledigt))
                         }
                     }
                 }
@@ -104,6 +106,7 @@ struct FreundeView: View {
             } .navigationBarTitle(Text("Freunde"))
             .onAppear {
                 self.updateFreundesListe()
+                coreDataFunctions.getCurUser()
                 
             }
         }
