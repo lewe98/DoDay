@@ -12,6 +12,14 @@ struct FreundeHinzufuegenView: View {
     
     let globalFunctions: GlobalFunctions
     
+    @Environment(\.presentationMode) var presentation
+    
+    @State private var showingAlert = false
+    
+    @State private var alertTitle = ""
+    
+    @State private var alertText = ""
+    
     @State private var freundesCode: String = ""
     
     init(gf: GlobalFunctions) {
@@ -23,22 +31,48 @@ struct FreundeHinzufuegenView: View {
             VStack() {
                 Form {
                     
+                    
                     Section(header: Text("FREUNDESCODE EINGEBEN")) {
                         TextField("Freundescode", text: $freundesCode)
                     }
+                    
                     
                     Section() {
                         HStack {
                             Spacer()
                             Button(action: {
-                                self.globalFunctions.callAddFriend(freundID: self.freundesCode)
+                                if !self.globalFunctions.coreDataFunctions.curUser.freunde.contains(self.freundesCode) {
+                                    self.globalFunctions.callAddFriend(freundID: self.freundesCode)
+                                }
+                                if self.freundesCode == self.globalFunctions.coreDataFunctions.curUser.freundes_id {
+                                    self.alertTitle = "Ungültige ID."
+                                    self.alertText = "Die eigene ID kann nicht hinzugefügt werden."
+                                    self.showingAlert = true
+                                }
+                                if self.globalFunctions.coreDataFunctions.curUser.freunde.contains(self.freundesCode) {
+                                    self.alertTitle = "Ungültige ID."
+                                    self.alertText = "ID ist bereits in deiner Freundesliste."
+                                    self.showingAlert = true
+                                }
+                                if self.freundesCode == "" {
+                                    self.alertTitle = "Leeres Feld."
+                                    self.alertText = "Bitte gib einen Freundescode ein."
+                                    self.showingAlert = true
+                                }
                             }) {
                                 Text("Abschicken")
                                     .foregroundColor(.green)
+                            }.alert(isPresented: $showingAlert){
+                                Alert(title: Text(self.alertTitle),
+                                      message: Text(self.alertText),
+                                      dismissButton: .default(Text("OK"))
+                                )
                             }
                             Spacer()
                         }
                     }
+                    
+                    
                 }
             }
             .background(Color(UIColor.secondarySystemBackground))

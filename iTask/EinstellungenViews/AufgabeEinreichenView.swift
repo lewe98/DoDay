@@ -13,19 +13,30 @@ import Combine
 struct AufgabeEinreichenView: View {
     
     let firebaseFunctions: FirebaseFunctions
+    
     @Environment(\.presentationMode) var presentation
+    
     @State private var showingAlert = false
+    
     @State private var aufgabeEingereicht = false
+    
+    @State private var text: String = ""
+    
+    @State private var text_detail: String = ""
+    
+    @State private var text_dp: String = ""
+    
+    let kategorie = ["Social","Fitness","Geist","Divers","Kultur","Haushalt"]
+    
+    @State private var kategoriePicker = 0
+    
+    
     
     init(fb: FirebaseFunctions) {
         self.firebaseFunctions = fb
     }
     
-    @State private var text: String = ""
-    @State private var text_detail: String = ""
-    @State private var text_dp: String = ""
-    let kategorie = ["Social","Fitness","Geist","Divers","Kultur","Haushalt"]
-    @State private var kategoriePicker = 0
+    
     
     var body: some View {
         NavigationView {
@@ -62,7 +73,7 @@ struct AufgabeEinreichenView: View {
                                     .foregroundColor(.green)
                             }
                             .alert(isPresented: $showingAlert) {
-                                Alert(title: Text("Leeres Feld!"), message: Text("Bitte alle Felder ausfüllen."), dismissButton: .default(Text("Okay")))
+                                Alert(title: Text("Leeres Feld!"), message: Text("Bitte alle Felder ausfüllen."), dismissButton: .default(Text("OK")))
                             }
                             Spacer()
                         }

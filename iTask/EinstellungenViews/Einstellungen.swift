@@ -11,6 +11,7 @@ import Foundation
 import Combine
 
 class Einstellungen: ObservableObject {
+    
     // taegliche Erinnerung morgens
     @Published var erinnerungEigeneAktiviert: Bool {
         didSet {
@@ -18,8 +19,10 @@ class Einstellungen: ObservableObject {
             erinnerungEigene()
         }
     }
+    
     // Timepicker fuer taegliche Erinnerung morgens
     var erinnerungZeit = DateComponents()
+    
     @Published var erinnerungZeitDate = UserDefaults.standard.object(forKey: "erinnerungZeitDate") as? Date ?? Date() {
         didSet {
             // Wenn Datum geaendert wurde (Date-Format), ziehe DateComponents raus, speichere sie ab und call die Funktion zum Erinnerung setzen.
@@ -37,10 +40,15 @@ class Einstellungen: ObservableObject {
     init() {
         // Fuer die taegliche Erinnerung
         var dateComponentsInit = DateComponents()
+        
         dateComponentsInit.hour = 8
+        
         dateComponentsInit.minute = 00
+        
         self.erinnerungEigeneAktiviert = UserDefaults.standard.object(forKey: "erinnerungEigeneAktiviert") as? Bool ?? false
+        
         self.erinnerungZeit.hour = UserDefaults.standard.object(forKey: "erinnerungZeitHour") as? Int ?? dateComponentsInit.hour
+        
         self.erinnerungZeit.minute = UserDefaults.standard.object(forKey: "erinnerungZeitMinute") as? Int ?? dateComponentsInit.minute
     }
 }
