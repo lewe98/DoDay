@@ -84,6 +84,8 @@ struct ContentView: View {
                 }.tag(3)
                 
                 
+            }.onAppear{
+                self.globalFunctions.load()
             }
         } else {
             Register()
