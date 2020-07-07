@@ -61,6 +61,8 @@ class GlobalFunctions: ObservableObject {
     // Aktualisiert die Freundesliste, die im FreundeView angezeigt wird.
     func updateFreundesListe() {
         
+        self.coreDataFunctions.getUsersFromFirebase()
+        
         self.freundesListe = []
         
         self.coreDataFunctions.curUser.freunde.forEach { freundID in // alle Freunde durchgehen (freundes_id)
@@ -75,12 +77,12 @@ class GlobalFunctions: ObservableObject {
                     self.freundesListe.append(
                         Freund(
                             nutzername: user.nutzername,
+                            freundes_id: user.freundes_id,
                             erledigt: user.erledigt.count,
                             text_dp: text))
                 }
             }
         }
-        print("\n\nUPDATEFREUNDESLISTE: ", self.freundesListe)
     }
     
 }

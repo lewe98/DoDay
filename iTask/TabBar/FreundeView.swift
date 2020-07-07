@@ -10,6 +10,7 @@ import SwiftUI
 
 struct Freund: Hashable {
     var nutzername: String
+    var freundes_id: String
     var erledigt: Int
     var text_dp: String
 }
@@ -24,6 +25,10 @@ struct FreundeView: View {
     @State var showingFreundeHerausfordern = false
     @State var showingFreundeHinzufuegen = false
     @State var freundesListe: [Freund] = []
+    
+    @Environment(\.presentationMode) var presentation
+    
+    @State private var showingAlert = false
     
     let firebaseFunctions: FirebaseFunctions
     let coreDataFunctions: CoreDataFunctions
@@ -75,19 +80,51 @@ struct FreundeView: View {
                 }
                 
                 
-                if coreDataFunctions.curUser.freunde.count > 0{
+                if coreDataFunctions.curUser.freunde.count > 0 {
                     Section(header: HStack {Text("FREUNDE"); Spacer(); Text("ERLEDIGTE AUFGABEN")}) {
                         List(self.globalFunctions.freundesListe, id: \.self) {
                             freund in
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    Text(freund.nutzername)
-                                    Text(freund.text_dp)
-                                        .font(.callout)
-                                        .foregroundColor(Color.gray)
+                            Button(action: {
+                                self.showingAlert = true
+                            }){
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        Text(freund.nutzername)
+                                        Text(freund.text_dp)
+                                            .font(.callout)
+                                            .foregroundColor(Color.gray)
+                                    }.alert(isPresented: self.$showingAlert) {
+                                        Alert(title: Text("Möchtest du diesen Freund entfernen?"),
+                                              message: Text("Du kannst \(freund.nutzername) später erneut hinzufügen."),
+                                              primaryButton: .destructive(Text("Löschen")) {
+                                                
+                                                var tempList = [String]()
+                                                
+                                                self.coreDataFunctions.curUser.freunde.forEach{ u in
+                                                    if u != freund.freundes_id{
+                                                        tempList.append(u)
+                                                    }
+                                                }
+                                                
+                                                self.coreDataFunctions.curUser.freunde = tempList
+                                                
+                                                self.coreDataFunctions.updateCurUser() { result in
+                                                    do {
+                                                        let _ = try result.get()
+                                                        print("Freund entfernt.")
+                                                    } catch {
+                                                        print("Fehler beim Entfernen des Freundes.")
+                                                    }
+                                                    
+                                                }
+                                                
+                                            }, secondaryButton: .cancel(Text("Abbrechen"))
+                                        )
+                                    }
+                                    
+                                    Spacer()
+                                    Text(String(freund.erledigt))
                                 }
-                                Spacer()
-                                Text(String(freund.erledigt))
                             }
                         }
                     }
@@ -119,33 +156,6 @@ struct FreundeView: View {
     
     // MARK: - FUNCTIONS
     /// Lorem Ipsum
-    /*func updateFreundesListe() {
-        
-        self.freundesListe = []
-        
-        self.coreDataFunctions.curUser.freunde.forEach { freundID in // alle Freunde durchgehen (freundes_id)
-            self.coreDataFunctions.allCDUsers.forEach { user in // User rausziehen
-                if user.freundes_id == freundID {
-                    var text = "Keine Aufgabe ausgewählt"
-                    self.coreDataFunctions.allCDAufgaben.forEach { aufgabe in // Aufgaben rausziehen
-                        if user.aufgabe == aufgabe.id {
-                            text = aufgabe.text_dp
-                        }
-                    }
-                    self.freundesListe.append(
-                        Freund(
-                            nutzername: user.nutzername,
-                            erledigt: user.erledigt.count,
-                            text_dp: text))
-                }
-            }
-        }
-        print("\n\nUPDATEFREUNDESLISTE: ", self.freundesListe)
-    }*/
-    
-    
-    
-    
     func kopiereId() -> Void {
         // TODO: Richtige Variable kopieren
         UIPasteboard.general.string = self.coreDataFunctions.curUser.freundes_id
