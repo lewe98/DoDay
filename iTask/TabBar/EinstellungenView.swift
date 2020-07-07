@@ -15,10 +15,16 @@ struct EinstellungenView: View {
     @State var showingAufgabeEinreichen = false
     @State var aufgabeEingereicht = false
     
-    let firebaseFunctions: FirebaseFunctions
+    @Environment(\.presentationMode) var presentation
+       
+    @State private var showingAlert = false
     
-    init(fb: FirebaseFunctions) {
+    let firebaseFunctions: FirebaseFunctions
+    let coreDataFunctions: CoreDataFunctions
+    
+    init(fb: FirebaseFunctions, cd: CoreDataFunctions) {
         self.firebaseFunctions = fb
+        self.coreDataFunctions = cd
     }
 
     var body: some View {
@@ -56,12 +62,34 @@ struct EinstellungenView: View {
                     HStack {
                         Spacer()
                         Button(action: {
-                            // TODO: Funktion einfuegen
-                            print("Statistik zurücksetzen tapped")
+                            self.showingAlert = true
                         }) {
-                            Text("Statistik zurücksetzen")
+                            Text("Fortschritt zurücksetzen")
                                 .foregroundColor(.red)
+                        }.alert(isPresented: self.$showingAlert) {
+                            Alert(title: Text("Gesamten Fortschritt zurücksetzen?"),
+                                  message: Text("Dieser Vorgang kann nicht rückgängig gemacht werden."),
+                                  primaryButton: .destructive(Text("Zurücksetzen")) {
+                                    
+                                    self.coreDataFunctions.curUser.abgelehnt = []
+                                    self.coreDataFunctions.curUser.aufgeschoben = []
+                                    self.coreDataFunctions.curUser.erledigt = []
+                                    self.coreDataFunctions.curUser.aktueller_streak = 0
+                                    
+                                    self.coreDataFunctions.updateCurUser() { result in
+                                        do {
+                                            let _ = try result.get()
+                                            print("Statistiken zurückgesetzt.")
+                                        } catch {
+                                            print("Fehler beim Zurücksetzen der Statistiken.")
+                                        }
+                                        
+                                    }
+                                    
+                                }, secondaryButton: .cancel(Text("Abbrechen"))
+                            )
                         }
+                        
                         Spacer()
                     }
                 }
