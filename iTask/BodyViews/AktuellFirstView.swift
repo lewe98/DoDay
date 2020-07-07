@@ -17,6 +17,7 @@ struct AktuellFirstView: View {
     @State private var scale2: CGFloat = 0
     var body: some View {
         VStack {
+            Spacer()
             Text("Deine heutige Aufgabe:").fontWeight(.bold).font(.system(.title, design: .rounded)).multilineTextAlignment(.leading)
             Spacer()
             AufgabeDetail(aufgabenGeladen: aufgabenGeladen, Aufgabe: self.aufgabe1).onTapGesture {
