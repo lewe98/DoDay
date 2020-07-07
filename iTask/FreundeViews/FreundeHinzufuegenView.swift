@@ -55,6 +55,10 @@ struct FreundeHinzufuegenView: View {
                                     self.showingAlert = true
                                 } else if !self.globalFunctions.coreDataFunctions.curUser.freunde.contains(self.freundesCode) {
                                     self.globalFunctions.callAddFriend(freundID: self.freundesCode)
+                                    
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                        self.presentation.dismiss()
+                                    }
                                 }
                             }) {
                                 Text("Abschicken")
