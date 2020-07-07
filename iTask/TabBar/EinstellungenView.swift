@@ -76,6 +76,14 @@ struct EinstellungenView: View {
                                     self.coreDataFunctions.curUser.erledigt = []
                                     self.coreDataFunctions.curUser.aktueller_streak = 0
                                     
+                                    var aufgabenIDs = [Int]()
+                                    
+                                    self.coreDataFunctions.allCDAufgaben.forEach{ elem in
+                                        aufgabenIDs.append(elem.id)
+                                    }
+                                    
+                                    self.coreDataFunctions.curUser.verbliebene_aufgaben = aufgabenIDs
+                                    
                                     self.coreDataFunctions.updateCurUser() { result in
                                         do {
                                             let _ = try result.get()
