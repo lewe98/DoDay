@@ -1,6 +1,6 @@
 //
 //  AktuellFirstView.swift
-//  iTask
+//  DoDay
 //
 //  Created by Julian Hermanspahn, Lewe Lorenzen & Thomas Raab on 29.05.20.
 //  Copyright © 2020 DoDay. All rights reserved.

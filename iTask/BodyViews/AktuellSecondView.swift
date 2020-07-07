@@ -1,6 +1,6 @@
 //
 //  AktuellSecondView.swift
-//  iTask
+//  DoDay
 //
 //  Created by Julian Hermanspahn, Lewe Lorenzen & Thomas Raab on 29.05.20.
 //  Copyright © 2020 DoDay. All rights reserved.
@@ -91,10 +91,7 @@ struct AktuellSecondView: View {
                             .foregroundColor(.white)
                         .padding(3)
                 }.disabled(self.aufgabeErledigt)
-                    
-                //.background(Color(.tertiarySystemBackground))
-                // .border(Color.gray, width: 0.2)
-                .padding(.top)
+                 .padding(.top)
                 
                 Button(action: {
                     self.coreDataFunctions.aufgabeAblehnen()
@@ -111,10 +108,6 @@ struct AktuellSecondView: View {
                     
                 }
                 .disabled(self.aufgabeErledigt)
-                //.foregroundColor(Color(.systemRed))
-                //.background(Color(.tertiarySystemBackground))
-                //.border(Color.gray, width: 0.2)
-                //.padding(.top)
                 
                 Button(action: {
                     self.coreDataFunctions.aufgabeAufschieben()
@@ -129,9 +122,7 @@ struct AktuellSecondView: View {
                     .padding(3)
                 }
                 .disabled(self.aufgabeErledigt)
-                //.background(Color(.systemYellow))
-                //.border(Color.gray, width: 0.2)
-                //.padding(.top)
+        
                 Spacer()
             }
             if self.aufgabeErledigt {
@@ -146,9 +137,7 @@ struct AktuellSecondView: View {
                                maxHeight: .infinity,
                                alignment: Alignment.topLeading)
                 }
-                //.scaleEffect(self.aufgabeErledigt ? 1 : 0)
-                //.opacity(self.aufgabeErledigt ? 1.0 : 0.0)
-                //.animation(.easeIn(duration: 1))
+               
             }
         }
             .background(Color(UIColor .systemGroupedBackground))

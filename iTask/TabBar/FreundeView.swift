@@ -155,9 +155,8 @@ struct FreundeView: View {
     
     
     // MARK: - FUNCTIONS
-    /// Lorem Ipsum
+    /// Kopiert die eigene FreundesID in die Zwischenablage.
     func kopiereId() -> Void {
-        // TODO: Richtige Variable kopieren
         UIPasteboard.general.string = self.coreDataFunctions.curUser.freundes_id
         withAnimation(.linear(duration: 0.25), {
             self.kopierenText = "erfolgreich kopiert!"

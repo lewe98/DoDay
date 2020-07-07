@@ -11,18 +11,12 @@ import SwiftUIX
 
 struct HeuteView: View {
     
-    
-    
     @EnvironmentObject var coreDataFunctions: CoreDataFunctions
     @EnvironmentObject var globalFunctions: GlobalFunctions
     
     @State var aufgabenGeladen = false
     
-    
-    
     init() {
-        // UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.red]
-        // UINavigationBar.appearance().titleTextAttributes = [.strokeColor: UIColor .systemGroupedBackground]
         UINavigationBar.appearance().backgroundColor =  UIColor.systemGroupedBackground
     }
     
@@ -41,7 +35,6 @@ struct HeuteView: View {
                 }
             )
             .onAppear{
-                // self.setAufgabeForView()
                 self.reload()
             }
           
@@ -55,7 +48,6 @@ struct HeuteView: View {
                     .navigationBarTitle(Text("Hey " + self.coreDataFunctions.curUser.nutzername + "!"))
                 }.background(Color(UIColor .systemGroupedBackground))
             ).onAppear{
-                // self.setAufgabeForView()
                 self.reload()
             }
                
@@ -76,7 +68,6 @@ Nicht genügend Aufgaben in der Datenbank.
                     .navigationBarTitle(Text("Hey " + self.coreDataFunctions.curUser.nutzername + "!"))
                 }.background(Color(UIColor .systemGroupedBackground))
             ).onAppear{
-                // self.setAufgabeForView()
                 self.reload()
             }
               
@@ -88,7 +79,6 @@ Nicht genügend Aufgaben in der Datenbank.
                 ).onAppear{
                     
                     self.coreDataFunctions.setHeuteView()
-                    // self.setAufgabeForView()
                 }
         }
     }
@@ -97,15 +87,6 @@ Nicht genügend Aufgaben in der Datenbank.
     func reload() {
         self.aufgabenGeladen = true
     }
-    
-    /*func setAufgabeForView() {
-        if (self.coreDataFunctions.curUser.aufgabe >= 0) {
-            self.coreDataFunctions.aufgabenView = 2
-        } else {
-            self.coreDataFunctions.aufgabenView = 1
-        }
-        print("AufgabenView Aufgabe: ", self.coreDataFunctions.curUser.aufgabe)
-    }*/
 }
 
 
