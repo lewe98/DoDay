@@ -45,23 +45,6 @@
 		E9DA9B4A248F8CC900D5C0F8 /* FreundeHinzufuegenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA9B49248F8CC800D5C0F8 /* FreundeHinzufuegenView.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		B90A8857247DD7D800B59892 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B90A8835247DD7D600B59892 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B90A883C247DD7D600B59892;
-			remoteInfo = iTask;
-		};
-		B90A8862247DD7D800B59892 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B90A8835247DD7D600B59892 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B90A883C247DD7D600B59892;
-			remoteInfo = iTask;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		14B746D01E53C4081687C032 /* Pods_iTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FF8A4C279B3964146712DA4 /* Pods-iTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iTask.release.xcconfig"; path = "Target Support Files/Pods-iTask/Pods-iTask.release.xcconfig"; sourceTree = "<group>"; };
@@ -84,8 +67,6 @@
 		B90A884C247DD7D800B59892 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B90A884F247DD7D800B59892 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B90A8851247DD7D800B59892 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B90A8856247DD7D800B59892 /* iTaskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iTaskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B90A8861247DD7D800B59892 /* iTaskUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iTaskUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B91275DF24890AF200C5FF6F /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		B9543EE42488FA49006F75BD /* FirebaseFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFunctions.swift; sourceTree = "<group>"; };
 		B9543EE62488FA5B006F75BD /* CoreDataFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFunctions.swift; sourceTree = "<group>"; };
@@ -113,20 +94,6 @@
 			files = (
 				409252862156C2DED3A66D95 /* Pods_iTask.framework in Frameworks */,
 				A18260E724AE5BC60027C027 /* SwiftUIX in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B90A8853247DD7D800B59892 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B90A885E247DD7D800B59892 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,8 +162,6 @@
 			isa = PBXGroup;
 			children = (
 				B90A883D247DD7D600B59892 /* DoDay.app */,
-				B90A8856247DD7D800B59892 /* iTaskTests.xctest */,
-				B90A8861247DD7D800B59892 /* iTaskUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -309,42 +274,6 @@
 			productReference = B90A883D247DD7D600B59892 /* DoDay.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B90A8855247DD7D800B59892 /* iTaskTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B90A886D247DD7D800B59892 /* Build configuration list for PBXNativeTarget "iTaskTests" */;
-			buildPhases = (
-				B90A8852247DD7D800B59892 /* Sources */,
-				B90A8853247DD7D800B59892 /* Frameworks */,
-				B90A8854247DD7D800B59892 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B90A8858247DD7D800B59892 /* PBXTargetDependency */,
-			);
-			name = iTaskTests;
-			productName = iTaskTests;
-			productReference = B90A8856247DD7D800B59892 /* iTaskTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		B90A8860247DD7D800B59892 /* iTaskUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B90A8870247DD7D800B59892 /* Build configuration list for PBXNativeTarget "iTaskUITests" */;
-			buildPhases = (
-				B90A885D247DD7D800B59892 /* Sources */,
-				B90A885E247DD7D800B59892 /* Frameworks */,
-				B90A885F247DD7D800B59892 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B90A8863247DD7D800B59892 /* PBXTargetDependency */,
-			);
-			name = iTaskUITests;
-			productName = iTaskUITests;
-			productReference = B90A8861247DD7D800B59892 /* iTaskUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -357,14 +286,6 @@
 				TargetAttributes = {
 					B90A883C247DD7D600B59892 = {
 						CreatedOnToolsVersion = 11.5;
-					};
-					B90A8855247DD7D800B59892 = {
-						CreatedOnToolsVersion = 11.5;
-						TestTargetID = B90A883C247DD7D600B59892;
-					};
-					B90A8860247DD7D800B59892 = {
-						CreatedOnToolsVersion = 11.5;
-						TestTargetID = B90A883C247DD7D600B59892;
 					};
 				};
 			};
@@ -385,8 +306,6 @@
 			projectRoot = "";
 			targets = (
 				B90A883C247DD7D600B59892 /* iTask */,
-				B90A8855247DD7D800B59892 /* iTaskTests */,
-				B90A8860247DD7D800B59892 /* iTaskUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -402,20 +321,6 @@
 				B90A884D247DD7D800B59892 /* Preview Assets.xcassets in Resources */,
 				B90A884A247DD7D800B59892 /* Assets.xcassets in Resources */,
 				A191207E24B1FFE300B8A073 /* applause.mp3 in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B90A8854247DD7D800B59892 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B90A885F247DD7D800B59892 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,34 +404,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B90A8852247DD7D800B59892 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B90A885D247DD7D800B59892 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		B90A8858247DD7D800B59892 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B90A883C247DD7D600B59892 /* iTask */;
-			targetProxy = B90A8857247DD7D800B59892 /* PBXContainerItemProxy */;
-		};
-		B90A8863247DD7D800B59892 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B90A883C247DD7D600B59892 /* iTask */;
-			targetProxy = B90A8862247DD7D800B59892 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B90A884E247DD7D800B59892 /* LaunchScreen.storyboard */ = {
@@ -669,7 +547,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = de.doday.app.lewe;
+				PRODUCT_BUNDLE_IDENTIFIER = de.doday.app;
 				PRODUCT_NAME = DoDay;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -691,100 +569,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = de.doday.app.lewe;
+				PRODUCT_BUNDLE_IDENTIFIER = de.doday.app;
 				PRODUCT_NAME = DoDay;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Release;
-		};
-		B90A886E247DD7D800B59892 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CCK3QY84MX;
-				INFOPLIST_FILE = iTaskTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.julian-hermanspahn.iTaskTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iTask.app/iTask";
-			};
-			name = Debug;
-		};
-		B90A886F247DD7D800B59892 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CCK3QY84MX;
-				INFOPLIST_FILE = iTaskTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.julian-hermanspahn.iTaskTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iTask.app/iTask";
-			};
-			name = Release;
-		};
-		B90A8871247DD7D800B59892 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CCK3QY84MX;
-				INFOPLIST_FILE = iTaskUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.julian-hermanspahn.iTaskUITests";
-				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = "de.lewe-lorenzen.iTask";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = iTask;
-			};
-			name = Debug;
-		};
-		B90A8872247DD7D800B59892 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CCK3QY84MX;
-				INFOPLIST_FILE = iTaskUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.julian-hermanspahn.iTaskUITests";
-				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = "de.lewe-lorenzen.iTask";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = iTask;
 			};
 			name = Release;
 		};
@@ -805,24 +593,6 @@
 			buildConfigurations = (
 				B90A886B247DD7D800B59892 /* Debug */,
 				B90A886C247DD7D800B59892 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B90A886D247DD7D800B59892 /* Build configuration list for PBXNativeTarget "iTaskTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B90A886E247DD7D800B59892 /* Debug */,
-				B90A886F247DD7D800B59892 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B90A8870247DD7D800B59892 /* Build configuration list for PBXNativeTarget "iTaskUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B90A8871247DD7D800B59892 /* Debug */,
-				B90A8872247DD7D800B59892 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
