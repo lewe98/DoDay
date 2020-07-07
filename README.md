@@ -5,7 +5,7 @@
   Ein Social-Feature und diverse Statistiken steigern die Motivation, die gewählten Aufgaben zu bewältigen.
 
 <img src="./dok-files/light-mode.png" alt="light-mode" width="25%" height="25%"/>
-
+![Light Mode](./dok-files/light-mode.png)
 <img src="./dok-files/dark-mode.png" alt="dark-mode" width="25%" height="25%"/>
 
 
