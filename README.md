@@ -197,7 +197,11 @@ Technologie | Verwendungszweck
 
 ## Fazit
 #### Julian Hermanspahn
-Lorem Ipsum
+Insgesamt hat mir die Veranstaltung sehr gut gefallen. Positiv hervorheben möchte ich, dass wir die gelernten Inhalte direkt umsetzen durften (Wahrzeichen, Core Data, etc.). Auch die Einteilung in Expertengruppen war eine tolle Idee. So hat man sich intensiv mit einem Thema beschäftigt und konnte sich sehr gut darin vertiefen. Allerdings gab es keine "Qualitätssicherung", wodurch man nicht wusste, ob man die Inhalte einer Expertengruppe "bedenkenlos" übernehmen konnte. Ich hätte mir insgesamt mehr Vorlesungen und Unterlagen gewünscht, um aus einer größeren Menge an Vorlagen und Hilfestellungen schöpfen zu können. 
+
+Natürlich ist es nicht möglich, eine komplette Programmiersprache innerhalb weniger Wochen zu vermitteln, daher sind natürlich öfters Probleme bei der Bearbeitung des persönlichen Projekts aufgetreten. Dadurch wurde der Workflow gestört und wir haben uns an gewissen Problemen die Zähne ausgebissen. Ich mir gewünscht, dass z.B. einmal pro Woche eine Sprechstunde mit den Dozenten stattgefunden hätte, um größere "Leerläufe" zu vermeiden. Allerdings wurde man auf diese Weise geschult, sich selbstständig in fremde Sachverhalte einzuarbeiten.
+Außerdem konnte man sich innerhalb des Teams durch eine gute Zusammenarbeit in vielen Bereichen ergänzen und weiterhelfen.
+
 
 #### Lewe Lorenzen
 Lorem Ipsum
