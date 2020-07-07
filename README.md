@@ -155,6 +155,9 @@ Technologie | Verwendungszweck
 │   │   ├── ImpressumWebview.swift (Webview mit Impressum)
 │   │   ├── DatenschutzWebview.swift (Webview mit Datenschutzangaben)
 │   │   ├── AufgabenEinreichenView.swift (Sheet zum Einreichen von Aufgaben)
+│   │   ├── Einstellungen.swift (Verwaltung sämtlicher persistierter Einstellungen)
+│   ├── FreundeViews
+│   │   ├── FreundeHinzufuegenView.swift (Sheet zum Hinzufuegen von Freunden)
 │   ├── Models
 │   │   ├── UserModel.swift (Model des Users)
 │   │   ├── AufgabenModel.swift (Model der Aufgaben)
@@ -170,9 +173,7 @@ Technologie | Verwendungszweck
 │   │   ├── NavigationConfigurator.swift (ViewController für das Heute-Tab)
 │   ├── AppDelegate.swift
 │   ├── SceneDelegate.swift
-│   ├── FreundeHinzufuegenView.swift (Sheet zum Hinzufuegen von Freunden)
 │   ├── LaunchScreen.storyboard
-│   ├── Einstellungen.swift (Verwaltung sämtlicher persistierter Einstellungen)
 │   ├── info.plist
 │   ├── GoogleService-info.plist
 │   ├── iTask.xcdatamodeld
