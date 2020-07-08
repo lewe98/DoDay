@@ -197,7 +197,18 @@ Außerdem konnte man sich innerhalb des Teams durch eine gute Zusammenarbeit in 
 
 
 #### Lewe Lorenzen
-Lorem Ipsum
+Das Team war sehr motiviert ein gutes Ergebnis zu erarbeiten. Die Arbeit mit XCode und der Anbindung an Firebase stellte sich jedoch als Herausforderung raus. Dies kostete anfangs viel Zeit, sodass das Projekt öfter zum stehen kam. Als es jedoch in den letzten Wochen gelöst werden konnte, wurden anschließend noch viele Features hinzugefügt.
+
+Die fehlende Möglichkeit sich für das Projekt zu treffen war eine Herausforderung.
+Durch die Flexibilität des Teams konnten jedoch oft schnell Meetings auf Zoom vereinbart werden. Dies den Vorteil hatte jederzeit kurz Rücksprache zu halten.
+
+Abschließend bin ich mit dem Ergebnis des Projektes sehr zufrieden. Wir konnten unsere Erwartungen erfüllen sowie viele neue Kenntnisse durch das eigene Problem lösen erlangt habe.
+
+Ein Technologie Verständnis wäre bei Folgenden Punkten noch interessant gewesen:
+- Callback bzw. asynchrone Funktionen
+- Die unterschiede der Anwendungsfälle von  @Enviromentalobject/@State/@Binding
+- Debüt mit CoreData-Werten
+
 
 
 #### Thomas Raab
