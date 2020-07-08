@@ -170,7 +170,7 @@ struct FreundeView: View {
     }
     
     
-    
+    /// Ermoeglicht das Teilen der aktuellen Aufgabe mit Klick auf "Freunde herausfordern"
     func freundeHerausfordern() -> Void {
         showingFreundeHerausfordern.toggle()
         
@@ -180,7 +180,7 @@ struct FreundeView: View {
             let activityViewController : UIActivityViewController = UIActivityViewController(
                 activityItems: [teilenText], applicationActivities: nil)
             
-            // Entfernte Teilen-Buttons
+            /// Entfernte Teilen-Buttons
             activityViewController.excludedActivityTypes = [
                 UIActivity.ActivityType.postToWeibo,
                 UIActivity.ActivityType.print,
@@ -195,13 +195,4 @@ struct FreundeView: View {
             UIApplication.shared.windows.first?.rootViewController?.present(activityViewController, animated: true, completion: nil)
         }
     }
- 
-/*
-
-    struct FreundeView_Previews: PreviewProvider {
-        static var previews: some View {
-            FreundeView()
-        }
-    }
- */
 }

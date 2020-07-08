@@ -15,7 +15,7 @@ struct DatenschutzWebview: UIViewRepresentable {
      /// Die URL, die die Datenschutzhinweise beinhaltet.
     var url = "https://info.frag-was-neues.de/datenschutz-doday.html"
     
-       /// Generiert ein Modalfenster, welches den Webcontent der URL (Datenschutzhinweise) in der App einbettet.
+       /// Generiert ein Modalfenster / Sheet, welches den Webcontent der URL (Datenschutzhinweise) in der App einbettet.
        ///
        /// - Parameter value: context
        /// - Returns: WKWebView, die den Inhalt der URL (Datenschutzhinweise) enthält
@@ -30,6 +30,7 @@ struct DatenschutzWebview: UIViewRepresentable {
         return wkWebview
     }
     
+    /// obligatorisch für UIViewRepresentable, hier aber ungenutzt
     func updateUIView(_ uiView: UIViewType, context: Context) {
         
     }

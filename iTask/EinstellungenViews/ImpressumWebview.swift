@@ -15,7 +15,7 @@ struct ImpressumWebview: UIViewRepresentable {
     /// Die URL, die das Impressum beinhaltet.
     var url = "https://info.frag-was-neues.de/impressum.html"
     
-    /// Generiert ein Modalfenster, welches den Webcontent der URL (Impressum) in der App einbettet.
+    /// Generiert ein Modalfenster / Sheet, welches den Webcontent der URL (Impressum) in der App einbettet.
     ///
     /// - Parameter value: context
     /// - Returns: WKWebView, die den Inhalt der URL (Impressum) enthält
@@ -30,6 +30,7 @@ struct ImpressumWebview: UIViewRepresentable {
         return wkWebview
     }
     
+    /// obligatorisch für UIViewRepresentable, hier aber ungenutzt
     func updateUIView(_ uiView: UIViewType, context: Context) {
         
     }

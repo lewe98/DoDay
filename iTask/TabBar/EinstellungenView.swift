@@ -128,11 +128,3 @@ struct EinstellungenView: View {
         }
     }
 }
-
-/*
-struct EinstellungenView_Previews: PreviewProvider {
-    static var previews: some View {
-        EinstellungenView()
-    }
-}
-*/
