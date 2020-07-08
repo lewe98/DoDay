@@ -81,7 +81,10 @@ class CoreDataFunctions: ObservableObject {
     }
     
     
-    
+    /// Setzt die Ansicht der HeuteView.
+    /// Ist die Aufgabe des Nutzers auf 0 gab es einen Datenbankfehler.
+    /// Ist die Aufgabe auf -1 so hat der nutzer keine Aufgabe ausgewählt.
+    /// Alles über 0 ist die ID der Aufagbe die der Nutzer ausgewählt hat.
     func setHeuteView() {
         if (self.curUser.aufgabe == 0){
             self.aufgabenView = 3
@@ -93,7 +96,9 @@ class CoreDataFunctions: ObservableObject {
     }
     
     
-    
+    /// Gibt eine Aufgabe aus `self.allCDAufgaben` gefilternt nach der ID zurück.
+    ///
+    /// - Parameter id: id der Aufgabe
     func getAufgabeByID(id: Int) -> Aufgabe? {
         if id == -1 {
             return Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "DoDay", erledigt: 0, id: 0, kategorie: "", text: "loading...", text_detail: "loading...", text_dp: "loading...")
@@ -104,7 +109,9 @@ class CoreDataFunctions: ObservableObject {
     }
     
     
-    
+    /// Updated die noch zu erledigenden Aufgaben eines Users in Firebase. Gefilter wird dies durch die `self.curUser.aufgeschoben`,  `self.curUser.erledigt` und  `self.curUser.abgelehnt`.
+    ///
+    /// - Parameter done: Ist ein Callback, wenn das Udaten erfolgreich war
     func curUserVerbliebeneAufgabenUpdaten(done: @escaping (Result<String, Error>) -> Void) {
         var fertigeAufgaben = self.curUser.erledigt
         let alleAufgaben = self.allCDAufgaben.map{ aufgabe -> Int in
@@ -142,7 +149,10 @@ class CoreDataFunctions: ObservableObject {
     }
     
     
-    
+    /// Generiert zwei zufällige Aufgaben, die ein Nutzer*in noch erledigen kann.
+    ///
+    /// - Parameter aufgabeDone: Ist ein Callback, wenn das Udaten erfolgreich war.
+    /// - Returns: Ein Callback mit zwei zufällig generierte Aufgaben, die der Nutzer*in noch erledigen muss.
     func verbliebeneAufgabenAnzeigen(aufgabeDone: @escaping (Result<[Aufgabe?], Error>) -> Void) -> Void {
         return self.curUserVerbliebeneAufgabenUpdaten() { result in
             do {
@@ -169,7 +179,11 @@ class CoreDataFunctions: ObservableObject {
     }
     
     
-    
+    /// Setzt dem Nutzer in Firebase eine Aktuelle Aufgabe.
+    /// Ebenso wird die Statistik des Nutzers und der Aufgabe erweitert .
+    /// Abschließend wird `self.aufgabenView` gesetzt. Im Erfolg auf 2, um die ausgewähle Aufgabe angezeigt zu bekommen. Hat etwas nicht geklappt auf 3, da es ein Datenbankfehler gab.
+    ///
+    /// - Parameter aufgabe: Ist die Aufgabe die der/die Nutzer*in auswählt.
     func aktuelleAufgabeAuswaehlen(aufgabe: Aufgabe) {
         var aufgabeTmp = aufgabe
         self.curUser.aufgabe = aufgabe.id
@@ -182,10 +196,10 @@ class CoreDataFunctions: ObservableObject {
         self.updateCurUser() { result in
             do {
                 let _ = try result.get()
-                // Zeigt den SecondHeuteView an
+                /// Zeigt den SecondHeuteView an
                 self.aufgabenView = 2
             } catch {
-                // Zeigt Datenbankfehler an
+                /// Zeigt Datenbankfehler an
                 self.aufgabenView = 3
             }
         aufgabeTmp.ausgespielt += 1
@@ -194,7 +208,11 @@ class CoreDataFunctions: ObservableObject {
     }
     
     
-    
+    /// Setzt dem Nutzer in Firebase und Coredata, dass die Aufgabe erledigt ist.
+    /// Ebenso wird die Statistik des Nutzers und der Aufgabe erweitert .
+    /// Abschließend wird `self.aufgabenView` gesetzt. Im Erfolg auf 1, um neue Aufgaben angezeigt zu bekommen. Hat etwas nicht geklappt auf 3, da es ein Datenbankfehler gab.
+    ///
+    /// - Parameter aufgabe: Ist die Aufgabe die der/die Nutzer*in erledigt hat.
     func aufgabeErledigt() {
         let id = self.curUser.aufgabe
         if let index = self.curUser.aufgeschoben.firstIndex(of: id) {
@@ -219,7 +237,11 @@ class CoreDataFunctions: ObservableObject {
     }
     
     
-    
+    /// Setzt dem Nutzer in Firebase und Coredata, dass die Aufgabe aufgeschoben wurde.
+    /// Ebenso wird die Statistik des Nutzers und der Aufgabe erweitert .
+    /// Abschließend wird `self.aufgabenView` gesetzt. Im Erfolg auf 1, um neue Aufgaben angezeigt zu bekommen. Hat etwas nicht geklappt auf 3, da es ein Datenbankfehler gab.
+    ///
+    /// - Parameter aufgabe: Ist die Aufgabe die der/die Nutzer*in aufschiebt.
     func aufgabeAufschieben() {
         let id = self.curUser.aufgabe
         if (!self.curUser.aufgeschoben.contains(id)) {
@@ -243,7 +265,11 @@ class CoreDataFunctions: ObservableObject {
     }
     
     
-    
+    /// Setzt dem Nutzer in Firebase und Coredata, dass die Aufgabe abgelehnt wurde.
+    /// Ebenso wird die Statistik des Nutzers und der Aufgabe erweitert .
+    /// Abschließend wird `self.aufgabenView` gesetzt. Im Erfolg auf 1, um neue Aufgaben angezeigt zu bekommen. Hat etwas nicht geklappt auf 3, da es ein Datenbankfehler gab.
+    ///
+    /// - Parameter aufgabe: Ist die Aufgabe die der/die Nutzer*in ablehnt.
     func aufgabeAblehnen() {
         let id = self.curUser.aufgabe
         if let index = self.curUser.aufgeschoben.firstIndex(of: id) {
@@ -268,7 +294,9 @@ class CoreDataFunctions: ObservableObject {
     }
     
     
-    
+    /// Updated `self.curUser` in CoreData und Firebase.
+    ///
+    /// - Parameter done:Ist ein Callback, wenn das Updaten erfolgreich war.
     func updateCurUser(done: @escaping (Result<String, Error>) -> Void) {
         self.firebaseFunctions.updateUser(user: self.curUser, done: { result in
             do {
@@ -282,7 +310,9 @@ class CoreDataFunctions: ObservableObject {
     }
     
     
-    
+    /// Updated die ausgewählte Aufgabe des `self.curUser` in CoreData und Firebase.
+    ///
+    /// - Parameter done:Ist ein Callback, wenn das Updaten erfolgreich war.
     func updateAufgabe(aufgabe: Aufgabe) {
         self.firebaseFunctions.updateAufgabe(aufgabe: aufgabe, done: { result in
             do {
@@ -295,7 +325,9 @@ class CoreDataFunctions: ObservableObject {
     }
     
     
-    
+    /// Ist ein Getter für die aktuelle Aufgabe, die ein Nutzer erledigt hat.
+    ///
+    /// - Returns: Die aktuelle Aufgabe des `self.curUser`.
     func getCurAufgabe() -> Aufgabe {
         if self.curUser.aufgabe > 0 {
             return self.allCDAufgaben.first(where: {$0.id == self.curUser.aufgabe})!
@@ -304,7 +336,9 @@ class CoreDataFunctions: ObservableObject {
     }
     
     
-    
+    /// Ist ein Getter für die zuletzt erledigte Aufgabe, die ein Nutzer erledigt hat.
+    ///
+    /// - Returns: Die zuletzt erledigte Aufgabe des `self.curUser`.
     func getZuletztErledigt() -> Aufgabe {
         
         if self.curUser.erledigt.count > 0 {
@@ -317,7 +351,9 @@ class CoreDataFunctions: ObservableObject {
         return Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "DoDay", erledigt: 0, id: 0, kategorie: "", text: "Noch keine Aufgabe erledigt.", text_detail: "Noch keine Aufgabe erledigt.", text_dp: "Noch keine Aufgabe erledigt.")
     }
     
-    
+    /// Überprüft, ob eine Aufgabe erledigt ist.
+    ///
+    /// - Returns: Bool, ob sie erledigt ist. (True ist erledigt)
     func checkIfErledigt(id: Int) -> Bool {
         
         var test = 0
@@ -402,7 +438,7 @@ class CoreDataFunctions: ObservableObject {
     
     /// Fügt einen Nutzer in Core Data hinzu.
     ///
-    /// - user: user, der in Core Data gespeichert wird
+    /// - Parameter user: user, der in Core Data gespeichert wird
     func insertUserIntoCoreData(user: User) {
         
         do {
@@ -571,7 +607,4 @@ class CoreDataFunctions: ObservableObject {
         }
         
     }
-    
-    
-    
 }

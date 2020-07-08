@@ -58,7 +58,7 @@ class GlobalFunctions: ObservableObject {
     }
     
     
-    // Aktualisiert die Freundesliste, die im FreundeView angezeigt wird.
+    /// Aktualisiert die Freundesliste, die im FreundeView angezeigt wird.
     func updateFreundesListe() {
         
         self.coreDataFunctions.getUsersFromFirebase()

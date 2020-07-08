@@ -96,17 +96,28 @@ struct Additives_diagramm: View {
             )
         }
     }
-    
+    /// Summiert alle Aufgaben.
+    ///
+    /// - Returns: Float der Summe der Aufgaben
     func sumAufgaben() -> Float {
         return Float(self.erledigteA + self.aufgeschobeneA + self.nichtErledigteA)
     }
+    /// Errechnet den Anteil der erledigten Aufgaben anhand der Summe der Aufgaben und der Bildschirmbreite.
+    ///
+    /// - Returns: Float der Breite der erledigten Aufgaben
     func getErledigteA() {
         self.erledigteAFloat = CGFloat(Float(self.erledigteA)/sumAufgaben()*screenWidth)
         
     }
+    /// Errechnet den Anteil der aufgebeschobenen Aufgaben anhand der Summe der Aufgaben und der Bildschirmbreite.
+    ///
+    /// - Returns: Float der Breite der aufgeschobenen Aufgaben
     func getAufgeschobeneA() {
         self.aufgeschobeneAFloat = CGFloat(Float(self.aufgeschobeneA)/sumAufgaben()*screenWidth)
     }
+    /// Errechnet den Anteil der abgelehnten Aufgaben anhand der Summe der Aufgaben und der Bildschirmbreite.
+    ///
+    /// - Returns: Float der Breite der abgelehnten Aufgaben
     func getNichtErledigtA() {
         self.nichtErledigteAFloat = CGFloat(Float(self.nichtErledigteA)/sumAufgaben()*screenWidth)
     }
