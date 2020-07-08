@@ -11,7 +11,7 @@
 
 ## Gruppenmitglieder
 * Julian Hermanspahn (Freundescode: Gj1DYJw3)
-* Lewe Lorenzen (Freundescode: YZSoqThN)
+* Lewe Lorenzen (Freundescode: QLu11B8R)
 * Thomas Raab (Freundescode: 9hPjgSEC)
 
 
@@ -45,6 +45,7 @@
 
 
 ## Featureliste
+- über 40 Aufgaben, die erledigt werden können
 - Light Mode & Dark Mode
 - Launch Screen
 - Registrieren
