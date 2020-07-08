@@ -75,7 +75,11 @@ class CoreDataFunctions: ObservableObject {
     /// Liest die Daten des angemeldeten Nutzers aus.
     func getCurUser() {
         if self.firebaseFunctions.registered {
-            self.curUser = self.allCDUsers.first(where: {$0.id == self.id})!
+            guard let guardCurUser = self.allCDUsers.first(where: {$0.id == self.id}) else {
+                self.firebaseFunctions.registered = false
+                return
+            }
+            self.curUser = guardCurUser
             self.setHeuteView()
         }
     }
