@@ -75,7 +75,11 @@ class CoreDataFunctions: ObservableObject {
     /// Liest die Daten des angemeldeten Nutzers aus.
     func getCurUser() {
         if self.firebaseFunctions.registered {
-            self.curUser = self.allCDUsers.first(where: {$0.id == self.id})!
+            guard let guardCurUser = self.allCDUsers.first(where: {$0.id == self.id}) else {
+                self.firebaseFunctions.registered = false
+                return
+            }
+            self.curUser = guardCurUser
             self.setHeuteView()
         }
     }
@@ -219,6 +223,7 @@ class CoreDataFunctions: ObservableObject {
             self.curUser.aufgeschoben.remove(at: index)
         }
         self.curUser.erledigt.append(self.curUser.aufgabe)
+        self.curUser.aktueller_streak = self.curUser.aktueller_streak + 1
         self.curUser.aufgabe = -1
         self.updateCurUser() { result in
             do {
@@ -275,6 +280,7 @@ class CoreDataFunctions: ObservableObject {
         if let index = self.curUser.aufgeschoben.firstIndex(of: id) {
             self.curUser.aufgeschoben.remove(at: index)
         }
+        self.curUser.aktueller_streak = 0
         self.curUser.abgelehnt.append(self.curUser.aufgabe)
         self.curUser.aufgabe = -1
         self.updateCurUser() { result in

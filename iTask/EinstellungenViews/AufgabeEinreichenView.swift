@@ -13,6 +13,7 @@ import Combine
 struct AufgabeEinreichenView: View {
     
     let firebaseFunctions: FirebaseFunctions
+    let coreDataFunctions: CoreDataFunctions
     
     @Environment(\.presentationMode) var presentation
     
@@ -32,8 +33,9 @@ struct AufgabeEinreichenView: View {
     
     
     
-    init(fb: FirebaseFunctions) {
+    init(fb: FirebaseFunctions, cd: CoreDataFunctions) {
         self.firebaseFunctions = fb
+        self.coreDataFunctions = cd
     }
     
     
@@ -60,6 +62,7 @@ struct AufgabeEinreichenView: View {
                             Button(action: {
                                 if (self.text != "" && self.text_detail != "" && self.text_dp != "") {
                                      self.firebaseFunctions.addNewAufgabe(
+                                    autor: self.coreDataFunctions.curUser.nutzername,
                                      text: self.text,
                                      text_detail: self.text_detail,
                                      text_dp: self.text_dp,
