@@ -137,7 +137,11 @@ Technologie | Verwendungszweck
 │   │   ├── ParticlesEmitter.swift (Logik, um Partikeleffekte zu generieren)
 │   │   ├── Confetti.swift (Darstellung der Partikeleffekte)
 │   ├── Sound
-│   │   ├── applause.mp3 (Audio-Datei)
+│   │   ├── success.mp3 (Audio-Datei)
+│   │   ├── failure.mp3 (Audio-Datei)
+│   │   ├── later.mp3 (Audio-Datei)
+│   │   ├── plop.mp3 (Audio-Datei)
+│   │   ├── reset.mp3 (Audio-Datei)
 │   │   ├── PlaySound.swift (Funktion, um sämtliche Sounds abzuspielen)
 │   ├── InitViews
 │   │   ├── ContentView.swift (View für registrierte Nutzer)

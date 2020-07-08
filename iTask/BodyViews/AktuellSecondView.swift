@@ -74,7 +74,7 @@ struct AktuellSecondView: View {
                     .padding(.top)
             
                 Button(action: {
-                    playSound(sound: "applause", type: "mp3")
+                    playSound(sound: "success", type: "mp3")
                     self.aufgabeErledigt = true
                     DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                         self.scale = 0
@@ -96,6 +96,7 @@ struct AktuellSecondView: View {
                  .padding(.top)
                 
                 Button(action: {
+                    playSound(sound: "failure", type: "mp3")
                     self.coreDataFunctions.aufgabeAblehnen()
                 }) {
                     Text("Aufgabe ablehnen")
@@ -112,6 +113,7 @@ struct AktuellSecondView: View {
                 .disabled(self.aufgabeErledigt)
                 
                 Button(action: {
+                    playSound(sound: "later", type: "mp3")
                     self.coreDataFunctions.aufgabeAufschieben()
                 }) {
                     Text("Ich verschiebe die Aufgabe")

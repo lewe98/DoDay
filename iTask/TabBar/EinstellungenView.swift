@@ -71,6 +71,8 @@ struct EinstellungenView: View {
                                   message: Text("Dieser Vorgang kann nicht rückgängig gemacht werden."),
                                   primaryButton: .destructive(Text("Zurücksetzen")) {
                                     
+                                    playSound(sound: "reset", type: "mp3")
+                                    
                                     self.coreDataFunctions.curUser.abgelehnt = []
                                     self.coreDataFunctions.curUser.aufgeschoben = []
                                     self.coreDataFunctions.curUser.erledigt = []
