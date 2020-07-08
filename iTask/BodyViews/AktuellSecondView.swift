@@ -30,7 +30,9 @@ struct AktuellSecondView: View {
     
     @State var aufgabenGeladen = false
     @State var aufgabeErledigt = false
+    /// Animiert die Aufgabe.
     @State private var scale: CGFloat = 0
+    /// sind die Konfigurationen für den Konfettiregen.
     var config = EmitterConfig(emitter: Emitters.snow,
     size: CGSize(width: Constants.width, height: 1),
     shape: .line,
@@ -143,12 +145,3 @@ struct AktuellSecondView: View {
             .background(Color(UIColor .systemGroupedBackground))
     }
 }
-
-/*
-
-struct AktuellSecondView_Previews: PreviewProvider {
-    static var previews: some View {
-        AktuellSecondView(aufgabenGeladen: true, Aufgabe: "Mache das!")
-    }
-}
-*/

@@ -12,11 +12,13 @@ import SwiftUIX
 struct AufgabeDetail: View {
     let aufgabenGeladen: Bool
     let Aufgabe: Aufgabe
-    @State private var scale: CGFloat = 0.8
-    @State private var wobble = true
+    /// Ist ein Bool, ob der Detail Text angezeigt wird.
     @State private var detailText = false
+    /// Ist ein Bool, ob die Statistik angezeigt wird.
     @State private var statistik = false
+    /// Dreht die Aufgabe, wenn der Detail Text angezeigt wird
     @State private var animateDetailText = false
+    /// Dreht die Aufgabe, wenn Statistiken der Aufgabe angezeigt werden
     @State private var animateStatistik = false
     @Environment(\.colorScheme) var colorScheme
 
@@ -123,14 +125,13 @@ struct AufgabeDetail: View {
             .animation(.default)
             .modifier(FlipDetailText(flipped: $detailText, angle: animateDetailText ? 180 : 0, axis: (x: 1, y: 0)))
             .modifier(FlipStatistik(flipped: $statistik, angle: animateStatistik ? 180 : 0, axis: (x: 1, y: 0)))
-            
-            //.scaleEffect(showDetail ? 1.5 : 1)
             .onAppear() {
             }
 
     }
 }
 
+/// Lässt bei dem Detail Text die Aufgabe um 180°  Flippen
 struct FlipDetailText: GeometryEffect {
 
       var animatableData: Double {
@@ -162,6 +163,8 @@ struct FlipDetailText: GeometryEffect {
             return ProjectionTransform(transform3d).concatenating(affineTransform)
       }
 }
+
+/// Lässt bei der Statistik  die Aufgabe um 180°  Flippen
 struct FlipStatistik: GeometryEffect {
 
       var animatableData: Double {
@@ -193,11 +196,3 @@ struct FlipStatistik: GeometryEffect {
             return ProjectionTransform(transform3d).concatenating(affineTransform)
       }
 }
-
-/*
-struct AufgabeDetail_Previews: PreviewProvider {
-    static var previews: some View {
-        AufgabeDetail(aufgabenGeladen: true, Aufgabe: "Gib Jemandem ein Kompliment.")
-    }
-}
-*/

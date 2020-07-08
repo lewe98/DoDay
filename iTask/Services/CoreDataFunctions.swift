@@ -438,7 +438,7 @@ class CoreDataFunctions: ObservableObject {
     
     /// Fügt einen Nutzer in Core Data hinzu.
     ///
-    /// - user: user, der in Core Data gespeichert wird
+    /// - Parameter user: user, der in Core Data gespeichert wird
     func insertUserIntoCoreData(user: User) {
         
         do {
@@ -607,7 +607,4 @@ class CoreDataFunctions: ObservableObject {
         }
         
     }
-    
-    
-    
 }

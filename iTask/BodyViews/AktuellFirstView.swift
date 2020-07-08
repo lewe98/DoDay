@@ -12,8 +12,11 @@ struct AktuellFirstView: View {
     @EnvironmentObject var coreDataFunctions: CoreDataFunctions
     @State var aufgabe1 = Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "", erledigt: 0, id: 0, kategorie: "", text: "load...", text_detail: "", text_dp: "")
     @State var aufgabe2 = Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "", erledigt: 0, id: 0, kategorie: "", text: "load...", text_detail: "", text_dp: "")
+    /// Ist ein Bool, der anziegt, ob die Aufgaben geladen werden konnten.
     @State var aufgabenGeladen = false
+    /// Animiert die 1. Aufgabe.
     @State private var scale1: CGFloat = 0
+    /// Animiert die 2. Aufgabe.
     @State private var scale2: CGFloat = 0
     var body: some View {
         VStack {
@@ -88,10 +91,3 @@ struct AktuellFirstView: View {
         }
     }
 }
-
-/* struct AktuellFirstView_Previews: PreviewProvider {
-    static var previews: some View {
-        AktuellFirstView(aufgabenGeladen: true, Aufgabe1: "Laufe 1000 Treppenstufen.", Aufgabe2: "Steht um 12 Uhr Mittags auf und Schreie 2 Mal laut!")
-    }
-}
-*/

@@ -10,6 +10,11 @@ import Foundation
 import AVFoundation
 
 var audioPlayer: AVAudioPlayer?
+
+/// Spielt einen Sound ab.
+///
+/// - Parameter sound: Name des Sounds.
+/// - Parameter type: Typ des Sounds.
 func playSound(sound: String, type: String) {
     if let path = Bundle.main.path(forResource: sound, ofType: type) {
         do {
