@@ -7,10 +7,12 @@
 ![Light Mode](./dok-files/light-mode.png)
 ![Dark Mode](./dok-files/dark-mode.png)
 
+
+
 ## Gruppenmitglieder
-* Julian Hermanspahn
-* Lewe Lorenzen
-* Thomas Raab
+* Julian Hermanspahn (Freundescode: Gj1DYJw3)
+* Lewe Lorenzen (Freundescode: YZSoqThN)
+* Thomas Raab (Freundescode: 9hPjgSEC)
 
 
 
@@ -26,7 +28,6 @@
 
 
 ## Überblick über die App
-
 - Launch
     - Nach der Darstellung des Launch Screens hat der Nutzer die Möglichkeit sich zu registrieren.
 - Aufgaben
