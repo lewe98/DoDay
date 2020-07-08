@@ -92,11 +92,3 @@ struct AufgabeEinreichenView: View {
         }
     }
 }
-
-/*
-struct AufgabeEinreichenView_Previews: PreviewProvider {
-    static var previews: some View {
-        AufgabeEinreichenView()
-    }
-}
-*/
