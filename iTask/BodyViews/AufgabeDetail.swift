@@ -18,13 +18,14 @@ struct AufgabeDetail: View {
     @State private var statistik = false
     @State private var animateDetailText = false
     @State private var animateStatistik = false
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         ZStack {
             
             RoundedRectangle(cornerRadius: 40)
                 .shadow(color: .gray, radius: 20, x: 0, y: 5)
-                .foregroundColor(Color(.lightText))
+                .foregroundColor(colorScheme == .dark ? Color(.lightText) : Color(.white))
             
                 
             if (aufgabenGeladen) {

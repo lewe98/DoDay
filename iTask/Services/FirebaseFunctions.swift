@@ -272,7 +272,7 @@ class FirebaseFunctions: ObservableObject {
     
     /// Fügt der Datenbank eine neue Aufgabe hinzu.
     ///
-    /// - Parameter text: Kurztext
+    /// - Parameter text: Kurztext der Aufgabe
     /// - Parameter text_detail: Detaillierter Text
     /// - Parameter text_dp: Text aus der dritten Person
     /// - Parameter kategorie: Kategorie der Aufgabe
