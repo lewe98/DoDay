@@ -51,7 +51,7 @@ struct EinstellungenView: View {
                             Text("Eigene Aufgabe einreichen")
                         }
                         .sheet(isPresented: $showingAufgabeEinreichen, onDismiss: {}) {
-                            AufgabeEinreichenView(fb: self.firebaseFunctions)
+                            AufgabeEinreichenView(fb: self.firebaseFunctions, cd: self.coreDataFunctions)
                         }
                         Spacer()
                     }

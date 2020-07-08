@@ -276,7 +276,7 @@ class FirebaseFunctions: ObservableObject {
     /// - Parameter text_detail: Detaillierter Text
     /// - Parameter text_dp: Text aus der dritten Person
     /// - Parameter kategorie: Kategorie der Aufgabe
-    func addNewAufgabe(text: String, text_detail: String, text_dp: String, kategorie: String) {
+    func addNewAufgabe(autor: String, text: String, text_detail: String, text_dp: String, kategorie: String) {
         if (text != "" && text_detail != "" && text_dp != "" && kategorie != "") {
             self.getAufgabenHighestID { result in
                 do {
@@ -286,7 +286,7 @@ class FirebaseFunctions: ObservableObject {
                         "abgelehnt": 0,
                         "aufgeschoben": 0,
                         "ausgespielt": 0,
-                        "autor": "DoDay",
+                        "autor": autor,
                         "erledigt": 0,
                         "id": num,
                         "kategorie": kategorie,

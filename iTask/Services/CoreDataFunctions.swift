@@ -223,6 +223,7 @@ class CoreDataFunctions: ObservableObject {
             self.curUser.aufgeschoben.remove(at: index)
         }
         self.curUser.erledigt.append(self.curUser.aufgabe)
+        self.curUser.aktueller_streak = self.curUser.aktueller_streak + 1
         self.curUser.aufgabe = -1
         self.updateCurUser() { result in
             do {
@@ -279,6 +280,7 @@ class CoreDataFunctions: ObservableObject {
         if let index = self.curUser.aufgeschoben.firstIndex(of: id) {
             self.curUser.aufgeschoben.remove(at: index)
         }
+        self.curUser.aktueller_streak = 0
         self.curUser.abgelehnt.append(self.curUser.aufgabe)
         self.curUser.aufgabe = -1
         self.updateCurUser() { result in
