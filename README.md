@@ -6,6 +6,10 @@
 
 
 
+![Aufgabe](./dok-files/aufgabePic.png)
+
+
+
 ## Gruppenmitglieder
 * Julian Hermanspahn (Freundescode: Gj1DYJw3)
 * Lewe Lorenzen (Freundescode: QLu11B8R)
