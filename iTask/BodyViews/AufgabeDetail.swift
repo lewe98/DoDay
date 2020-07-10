@@ -32,8 +32,9 @@ struct AufgabeDetail: View {
                 
             if (aufgabenGeladen) {
                 ZStack {
-                    VStack {
+                    VStack (alignment: .center){
                         Text(self.Aufgabe.kategorie)
+                            .frame(width: 100)
                             .font(.system(.footnote, design: .rounded))
                             .foregroundColor(.black)
                             .padding(.bottom, 4)

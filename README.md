@@ -6,7 +6,7 @@
 
 
 
-![Aufgabe](./dok-files/aufgabePic.png)
+![Aufgabe](https://info.frag-was-neues.de/dodaydoku/aufgabePic.png)
 
 
 
@@ -134,14 +134,6 @@ Technologie | Verwendungszweck
 
 
 
-## Hinweise zum Testen
-Um die Social-Funktion auszuprobieren, eignen sich unsere Freundescodes:
-- 9hPjgSEC - Thomas
-- Gj1DYJw3 - Julian
-- QLu11B8R - Lewe
-
-
-
 ## Ordnerstruktur
 ```iTask
 ├── iTask
@@ -220,7 +212,7 @@ Abschließend bin ich mit dem Ergebnis des Projektes sehr zufrieden. Wir konnten
 Ein Technologie Verständnis wäre bei Folgenden Punkten noch interessant gewesen:
 - Callback bzw. asynchrone Funktionen
 - Die unterschiede der Anwendungsfälle von  @Enviromentalobject/@State/@Binding
-- Debüt mit CoreData-Werten
+- Debug mit CoreData-Werten
 
 
 
