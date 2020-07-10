@@ -7,6 +7,7 @@
 
 
 ![Aufgabe](./dok-files/aufgabe.png)
+<img src="./dok-files/aufgabe.png"/>
 
 
 
