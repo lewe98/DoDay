@@ -74,19 +74,25 @@ struct AktuellFirstView: View {
                     self.scale2 = 1
                 }
             }
-            self.coreDataFunctions.verbliebeneAufgabenAnzeigen() {
-                result in
-                    do {
-                        let aufgabenArray = try result.get()
-                        self.aufgabe1 = aufgabenArray[0] ?? Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "", erledigt: 0, id: 0, kategorie: "", text: "", text_detail: "", text_dp: "")
-                        self.aufgabe2 = aufgabenArray[1] ?? Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "", erledigt: 0, id: 0, kategorie: "", text: "", text_detail: "", text_dp: "")
-                        // Zeigt den FirstHeuteView an
-                        self.coreDataFunctions.aufgabenView = 1
-                        self.aufgabenGeladen = true
-                    } catch {
-                        self.coreDataFunctions.aufgabenView = 3
-                        self.coreDataFunctions.curUser.aufgabe = 0
-                }
+            self.loadData()
+        }
+    }
+    func loadData() {
+        self.coreDataFunctions.verbliebeneAufgabenAnzeigen() {
+            result in
+                do {
+                    let aufgabenArray = try result.get()
+                    self.aufgabe1 = aufgabenArray[0] ?? Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "", erledigt: 0, id: 0, kategorie: "", text: "", text_detail: "", text_dp: "")
+                    self.aufgabe2 = aufgabenArray[1] ?? Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "", erledigt: 0, id: 0, kategorie: "", text: "", text_detail: "", text_dp: "")
+                    // Zeigt den FirstHeuteView an
+                    self.coreDataFunctions.aufgabenView = 1
+                    self.aufgabenGeladen = true
+                } catch {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                        self.loadData()
+                    }
+                    //self.coreDataFunctions.aufgabenView = 3
+                    //self.coreDataFunctions.curUser.aufgabe = 0
             }
         }
     }

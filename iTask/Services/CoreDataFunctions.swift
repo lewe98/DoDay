@@ -350,7 +350,7 @@ class CoreDataFunctions: ObservableObject {
         if self.curUser.erledigt.count > 0 {
             let tempAufgabe = self.allCDAufgaben.first(where: {
                 $0.id == self.curUser.erledigt[self.curUser.erledigt.count - 1]
-            })!
+            }) ?? Aufgabe(abgelehnt: 0, aufgeschoben: 0, ausgespielt: 0, autor: "", erledigt: 0, id: 0, kategorie: "", text: "Bitte die Seite neu laden.", text_detail: "Bitte die Seite neu laden.", text_dp: "Bitte die Seite neu laden.")
             return tempAufgabe
         }
         
