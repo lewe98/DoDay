@@ -6,9 +6,7 @@
 
 
 
-![Aufgabe](./dok-files/aufgabe1.png)
-![Aufgabe](./dok-files/aufgabe2.png)
-![Aufgabe](./dok-files/aufgabe3.png)
+![Aufgabe](./dok-files/aufgabe.png)
 
 
 
