@@ -134,6 +134,14 @@ Technologie | Verwendungszweck
 
 
 
+## Hinweise zum Testen
+Um die Social-Funktion auszuprobieren, eignen sich unsere Freundescodes:
+- 9hPjgSEC - Thomas
+- Gj1DYJw3 - Julian
+- QLu11B8R - Lewe
+
+
+
 ## Ordnerstruktur
 ```iTask
 ├── iTask
