@@ -22,6 +22,7 @@
 * [Softwareentwicklungsprozess](#softwareentwicklungsprozess)
 * [Technologie-Stack](#technologie-stack)
 * [Installationsanleitung](#installationsanleitung)
+* [Hinweise zum Testen](#hinweise-zum-testen)
 * [Ordnerstruktur](#ordnerstruktur)
 * [Fazit](#fazit)
 
@@ -129,6 +130,14 @@ Technologie | Verwendungszweck
     - Durch die Installation der Abhängigkeiten wird eine ``.xcworkspace`` Datei generiert.
       Diese wird in Zukunft verwendet, um das Projekt zu öffnen.
       ``New Scheme...`` > Target: iTask > Name: iTask
+
+
+
+## Hinweise zum Testen
+Um die Social-Funktion auszuprobieren, eignen sich unsere Freundescodes:
+- 9hPjgSEC - Thomas
+- Gj1DYJw3 - Julian
+- QLu11B8R - Lewe
 
 
 
