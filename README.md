@@ -220,7 +220,7 @@ Abschließend bin ich mit dem Ergebnis des Projektes sehr zufrieden. Wir konnten
 Ein Technologie Verständnis wäre bei Folgenden Punkten noch interessant gewesen:
 - Callback bzw. asynchrone Funktionen
 - Die unterschiede der Anwendungsfälle von  @Enviromentalobject/@State/@Binding
-- Debüt mit CoreData-Werten
+- Debug mit CoreData-Werten
 
 
 

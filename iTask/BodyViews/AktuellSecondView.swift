@@ -76,10 +76,10 @@ struct AktuellSecondView: View {
                 Button(action: {
                     playSound(sound: "success", type: "mp3")
                     self.aufgabeErledigt = true
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                         self.scale = 0
                     }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                         self.coreDataFunctions.aufgabeErledigt()
                     }
                     
