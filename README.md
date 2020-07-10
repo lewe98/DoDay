@@ -4,9 +4,6 @@
 > Die DoDay-App bietet Nutzern täglich neue Aufgaben, die über den Tag bewältigt werden sollen.
   Ein Social-Feature und diverse Statistiken steigern die Motivation, die gewählten Aufgaben zu bewältigen.
 
-![Light Mode](./dok-files/light-mode.png)
-![Dark Mode](./dok-files/dark-mode.png)
-
 
 
 ## Gruppenmitglieder
