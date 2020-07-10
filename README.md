@@ -6,7 +6,7 @@
 
 
 
-![Aufgabe](./dok-files/aufgabePic.png)
+![Aufgabe](https://info.frag-was-neues.de/dodaydoku/aufgabePic.png)
 
 
 
@@ -131,14 +131,6 @@ Technologie | Verwendungszweck
     - Durch die Installation der Abhängigkeiten wird eine ``.xcworkspace`` Datei generiert.
       Diese wird in Zukunft verwendet, um das Projekt zu öffnen.
       ``New Scheme...`` > Target: iTask > Name: iTask
-
-
-
-## Hinweise zum Testen
-Um die Social-Funktion auszuprobieren, eignen sich unsere Freundescodes:
-- 9hPjgSEC - Thomas
-- Gj1DYJw3 - Julian
-- QLu11B8R - Lewe
 
 
 
